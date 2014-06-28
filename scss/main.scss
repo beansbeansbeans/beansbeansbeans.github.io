@@ -58,11 +58,17 @@ nav {
 	}
 }
 
+nav [id$="nav"],
+#view {
+	margin-top: $menu-top-buffer * 2 + $menu-font-size * $menu-line-height;
+}
+
 nav {
 	position: fixed;
 	height: 100%;
 	overflow-y: scroll;
 	top: 0;
+	background: white;
 	-webkit-transform: translate(0, -100%);
 	-webkit-transition: -webkit-transform 250ms;
 	.open-nav & {
@@ -71,7 +77,6 @@ nav {
 	[id$="nav"] {
 		display: none;
 		width: 100%;
-		margin-top: $menu-top-buffer * 2 + $menu-font-size * $menu-line-height;
 		&.active {
 			display: block;
 		}
