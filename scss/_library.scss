@@ -1,0 +1,96 @@
+@font-face {
+    font-family: Brandon;
+    font-weight: 300;
+    font-style: normal;
+    src: url("/fonts/brandon_300.otf");
+}
+
+@font-face {
+    font-family: Brandon;
+    font-weight: 300;
+    font-style: italic;
+    src: url("/fonts/brandon_300_it.otf");
+}
+
+@font-face {
+    font-family: Brandon;
+    font-weight: 400;
+    font-style: normal;
+    src: url("/fonts/brandon_400.otf");
+}
+
+@font-face {
+    font-family: Brandon;
+    font-weight: 400;
+    font-style: italic;
+    src: url("/fonts/brandon_400_it.otf");
+}
+
+@font-face {
+    font-family: Brandon;
+    font-weight: 500;
+    font-style: normal;
+    src: url("/fonts/brandon_500.otf");
+}
+
+@font-face {
+    font-family: Brandon;
+    font-weight: 600;
+    font-style: normal;
+    src: url("/fonts/brandon_600.otf");
+}
+
+@font-face {
+    font-family: Brandon;
+    font-weight: 600;
+    font-style: italic;
+    src: url("/fonts/brandon_600_it.otf");
+}
+
+@font-face {
+    font-family: Brandon;
+    font-weight: 700;
+    font-style: normal;
+    src: url("/fonts/brandon_600.otf");
+}
+
+@font-face {
+    font-family: Brandon;
+    font-weight: 700;
+    font-style: italic;
+    src: url("/fonts/brandon_600_it.otf");
+}
+
+@mixin keyframe ($animation_name) {
+    @-webkit-keyframes $animation_name {
+        @content;
+    }
+ 
+    @-moz-keyframes $animation_name {
+        @content;
+    }
+ 
+    @-o-keyframes $animation_name {
+        @content;
+    }
+ 
+    @keyframes $animation_name {
+        @content;
+    }
+}
+
+@mixin animation($properties) {
+	-webkit-animation: $properties;
+	-moz-animation: $properties;
+	-o-animation: $properties;
+	animation: $properties;
+}
+
+@mixin size($width, $height) {
+	width: $width;
+	height: $height;
+}
+
+@mixin square($side) {
+	@include size($side, $side);
+}
