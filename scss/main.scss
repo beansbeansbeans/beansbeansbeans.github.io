@@ -88,3 +88,36 @@ nav {
 		}
 	}
 }
+
+// face animation
+
+$frame-count: 25;
+$duration: 2.5s;
+$frame-height: 320px;
+
+@include keyframe (face) {
+	from {
+		background-position: 0 -2px;
+	}
+	to {
+		background-position: $frame-count * $frame-height * -1 -2px;
+	}
+}
+
+#face {
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	margin-left: -0.5 * $frame-height;
+	@include size($frame-height, $frame-height - 2px);
+	background-image: url(../images/aging-sprite.png);
+	@include animation(face $duration steps($frame-count) infinite);
+}
+
+
+
+
+
+
+
+

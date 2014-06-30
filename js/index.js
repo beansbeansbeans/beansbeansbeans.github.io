@@ -1,7 +1,18 @@
 require.config({
     paths: {
-      'jquery': 'lib/jquery'
+      'jquery': 'lib/jquery',
+      'd3': 'lib/d3',
+      'fisheye': 'lib/fisheye'
+    },
+    shim: {
+    	'fisheye': {
+    		deps: ['d3.global']
+    	}
     }
+});
+
+define("d3.global", ["d3"], function(_) {
+	d3 = _;
 });
 
 require(['jquery', 'router'], function($, Router) {
@@ -35,6 +46,6 @@ require(['jquery', 'router'], function($, Router) {
 
     window.onhashchange = function() {
         router.applyRoute(window.location.hash.split('#')[1]);
-    }
+    };
     
 });

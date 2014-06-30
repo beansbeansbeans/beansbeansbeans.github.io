@@ -1,7 +1,7 @@
-define([], function() {
+define(['fisheye'], function(fisheye) {
 	var pixels = {
 		initialize: function() {
-			$("#view").html("<div>THIS IS THE PIXEL ART!!!</div>");
+			$("#view").html("<div id='movie'></div>");
 		},
 		teardown: function() {
 
