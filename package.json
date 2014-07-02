@@ -10,6 +10,6 @@
     "grunt-contrib-watch": "~0.6.0",
     "requirejs": "^2.1.11",
     "grunt-contrib-sass": "~0.7.3",
-    "grunt-contrib-handlebars": "~0.8.0"
+    "handlebars": "~2.0.0-alpha.2"
   }
 }

@@ -1,7 +1,11 @@
-define(['fisheye'], function(fisheye) {
+define(['fisheye', 'templates/item'], function(fisheye, item) {
+	var data = {
+		title: "Hello",
+		date: "World"
+	}
 	var pixels = {
 		initialize: function() {
-			$("#view").html("<div id='movie'></div>");
+			$("#view").html(item(data));
 		},
 		teardown: function() {
 

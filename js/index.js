@@ -2,12 +2,16 @@ require.config({
     paths: {
       'jquery': 'lib/jquery',
       'd3': 'lib/d3',
-      'fisheye': 'lib/fisheye'
+      'fisheye': 'lib/fisheye',
+      'handlebars': 'lib/handlebars'
     },
     shim: {
     	'fisheye': {
     		deps: ['d3.global']
-    	}
+    	},
+        'handlebars': {
+            exports: 'Handlebars'
+        }
     }
 });
 
@@ -18,18 +22,8 @@ define("d3.global", ["d3"], function(_) {
 require(['jquery', 'router'], function($, Router) {
 
     $("#menu .link").on("click", function() {
-    	if(!$("body").hasClass("open-nav")) {
-    		$("nav [id$='nav'].active").removeClass("active");
-    		$("nav").find("#" + $(this).attr("id") + "-nav").addClass("active");
-    		$("body").addClass("open-nav");
-    	} else {
-    		if($("nav [id$='nav'].active").attr("id").indexOf($(this).attr("id")) > -1) {
-    			$("body").removeClass("open-nav");
-    		} else {
-    			$("nav [id$='nav'].active").removeClass("active");
-    			$("nav").find("#" + $(this).attr("id") + "-nav").addClass("active");
-    		}
-    	}
+        $("#menu .link").removeClass("active");
+        $(this).addClass("active");
     });
 
     var router = new Router();
