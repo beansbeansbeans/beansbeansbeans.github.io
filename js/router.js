@@ -78,6 +78,14 @@ define([], function() {
     };
 
     Router.prototype.applyRoute = function(route) {
+
+        if(route == undefined) route = "";
+
+        if(route.indexOf("/") == -1) {
+            $("#menu .link").removeClass("active");
+            $("#menu .link[href=#" + route + "]").addClass("active");
+        }
+
     	for(var i=0; i<this.routes.length; i++) {
     		var sRoute = this.routes[i];
     		if (sRoute.matches(route)) {

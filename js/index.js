@@ -21,11 +21,6 @@ define("d3.global", ["d3"], function(_) {
 
 require(['jquery', 'router'], function($, Router) {
 
-    $("#menu .link").on("click", function() {
-        $("#menu .link").removeClass("active");
-        $(this).addClass("active");
-    });
-
     var router = new Router();
 
     router.registerRoute('projects/{projectid}', function(id) {
@@ -34,12 +29,24 @@ require(['jquery', 'router'], function($, Router) {
     	});
     });
 
-    $("nav a").on("click", function() {
-    	$("body").removeClass("open-nav");
+    router.registerRoute('projects', function() {
+        require(["projects"], function(projects) {
+            projects.initialize();
+        });
     });
 
-    window.onhashchange = function() {
+    router.registerRoute('', function() {
+        require(["home"], function(home) {
+            home.initialize();
+        });
+    });
+
+    $(window).on("hashchange", function() {
         router.applyRoute(window.location.hash.split('#')[1]);
-    };
+    })
+
+    $(document).ready(function() {
+        router.applyRoute(window.location.hash.split('#')[1]);
+    })
     
 });
