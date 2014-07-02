@@ -2,7 +2,36 @@
 @import "library";
 @import "vars";
 
-$content-width: 600px;
+@include establish-baseline;
+
+$text-map: (
+	small: (
+		font-size: 11px,
+		lines: 3
+	),
+	medium: (
+		font-size: 16px,
+		lines: 4
+	),
+	medium-large: (
+		font-size: 24px,
+		lines: 7
+	),
+	large: (
+		font-size: 36px,
+		lines: 9
+	),
+	extra-large: (
+		font-size: 54px,
+		lines: 12
+	)
+);
+
+@each $text-size, $text in $text-map {
+	.#{$text-size}-text {
+		@include adjust-font-size-to(map-get(map-get($text-map, $text-size), font-size), map-get(map-get($text-map, $text-size), lines));
+	}
+}
 
 body {
 	font-family: Brandon;
@@ -10,6 +39,8 @@ body {
 	font-weight: 500;
 	padding: 0;
 	margin: 0;
+	@extend .medium-text;
+	color: $dark-blue;
 }
 
 li {
@@ -21,7 +52,9 @@ a {
 }
 
 #menu_wrapper {
-	padding: 30px 0;
+	@include padding-leader(6);
+	@include padding-trailer(6);
+	@include trailer(10);
 	background: $color-background;
 	#menu {
 		text-transform: uppercase;
@@ -29,8 +62,7 @@ a {
 			color: white;
 			display: inline-block;
 			position: relative;
-			font-size: 18px;
-			cursor: pointer;
+			@extend .medium-text;
 			font-weight: 500;
 			&.active {
 				font-weight: 500;
@@ -45,8 +77,28 @@ a {
 				}
 			}
 			&:not(:first-of-type) {
-				margin-left: 1em;
+				margin-left: rhythm($lines: 3, $font-size: map-get(map-get($text-map, medium), font-size));
 			}
+		}
+	}
+}
+
+nav {
+	width: $content-width;
+	margin: 0 auto;
+	li {
+		&:not(:last-of-type) {
+			@include trailer(6);
+		}
+		.title {
+			@extend .large-text;
+			text-transform: uppercase;
+			color: $dark-blue;
+			@include trailer($font-size: map-get(map-get($text-map, large), font-size), $lines: 3)
+		}
+		.description {
+			@extend .medium-text;
+			color: $gray;
 		}
 	}
 }
