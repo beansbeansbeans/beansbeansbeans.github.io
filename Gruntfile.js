@@ -46,6 +46,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['watch']);
 
   grunt.registerMultiTask('handlebars', 'Compile handlebars templates.', function() {
+    grunt.file.delete('./js/templates');
     this.files.forEach(function (file) {
       file.src.forEach(function (src) {
         var template = grunt.file.read(src),

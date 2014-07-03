@@ -81,10 +81,8 @@ define([], function() {
 
         if(route == undefined) route = "";
 
-        if(route.indexOf("/") == -1) {
-            $("#menu .link").removeClass("active");
-            $("#menu .link[href=#" + route + "]").addClass("active");
-        }
+        $("#menu .link").removeClass("active");
+        $("#menu .link[href=#" + route.split("/")[0] + "]").addClass("active");
 
     	for(var i=0; i<this.routes.length; i++) {
     		var sRoute = this.routes[i];

@@ -90,9 +90,9 @@ nav {
 		}
 		.title {
 			@extend .large-text;
+			color: $dark-blue;
 			font-weight: 600;
 			text-transform: uppercase;
-			color: $dark-blue;
 			@include trailer($font-size: map-get(map-get($text-map, large), font-size), $lines: 4)
 		}
 		.description {
@@ -100,6 +100,42 @@ nav {
 			color: $gray;
 		}
 	}
+}
+
+// project detail
+
+.project {
+	.header {
+		.title {
+			@extend .extra-large-text;
+			font-weight: 600;
+			text-transform: uppercase;
+			@include trailer($font-size: map-get(map-get($text-map, extra-large), font-size), $lines: 5);
+		}
+		.blurb {
+			color: $gray;
+			font-style: italic;
+			@extend .medium-text;
+		}
+	}
+
+	.project-contents {
+		@include trailer(20);
+		canvas {
+			height: 500px;
+		}
+		.caption {
+			color: $gray;
+			font-style: italic;
+		}
+	}
+
+	.description {
+		width: $content-width;
+		margin: 0 auto;
+		@extend .medium-text;
+	}
+
 }
 
 // face animation
