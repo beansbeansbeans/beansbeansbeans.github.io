@@ -6,16 +6,12 @@
 
 $text-map: (
 	small: (
-		font-size: 11px,
-		lines: 3
-	),
-	medium: (
 		font-size: 16px,
 		lines: 4
 	),
-	medium-large: (
+	medium: (
 		font-size: 24px,
-		lines: 7
+		lines: 6
 	),
 	large: (
 		font-size: 36px,
@@ -39,7 +35,7 @@ body {
 	font-weight: 500;
 	padding: 0;
 	margin: 0;
-	@extend .medium-text;
+	@extend .small-text;
 	color: $dark-blue;
 }
 
@@ -54,7 +50,7 @@ a {
 #menu_wrapper {
 	@include padding-leader(6);
 	@include padding-trailer(6);
-	@include trailer(10);
+	@include trailer(20);
 	background: $color-background;
 	#menu {
 		text-transform: uppercase;
@@ -62,7 +58,7 @@ a {
 			color: white;
 			display: inline-block;
 			position: relative;
-			@extend .medium-text;
+			@extend .small-text;
 			font-weight: 500;
 			&.active {
 				font-weight: 500;
@@ -72,12 +68,12 @@ a {
 					position: absolute;
 					display: block;
 					@include size(100%, 2px);
-					background: white;
-					bottom: -2px;
+					background: rgba(white, .95);
+					bottom: -3px;
 				}
 			}
 			&:not(:first-of-type) {
-				margin-left: rhythm($lines: 3, $font-size: map-get(map-get($text-map, medium), font-size));
+				margin-left: rhythm($lines: 5, $font-size: map-get(map-get($text-map, small), font-size));
 			}
 		}
 	}
@@ -87,14 +83,17 @@ nav {
 	width: $content-width;
 	margin: 0 auto;
 	li {
+		@include trailer(15);
 		&:not(:last-of-type) {
-			@include trailer(6);
+			border-bottom-color: lighten($gray, 20%);
+			@include trailing-border($lines: 15, $border-style: dotted);
 		}
 		.title {
 			@extend .large-text;
+			font-weight: 600;
 			text-transform: uppercase;
 			color: $dark-blue;
-			@include trailer($font-size: map-get(map-get($text-map, large), font-size), $lines: 3)
+			@include trailer($font-size: map-get(map-get($text-map, large), font-size), $lines: 4)
 		}
 		.description {
 			@extend .medium-text;
