@@ -49,8 +49,7 @@ a {
 }
 
 #menu_wrapper {
-	@include padding-leader(6);
-	@include padding-trailer(6);
+	
 	@include trailer(20);
 	background: $color-background;
 	#menu {
@@ -61,20 +60,14 @@ a {
 			position: relative;
 			@extend .small-text;
 			font-weight: 500;
+			@include padding-leader($lines: 6, $font-size: map-get(map-get($text-map, small), font-size));
+			@include padding-trailer($lines: 6, $font-size: map-get(map-get($text-map, small), font-size));
+			padding-left: rhythm($lines: 3, $font-size: map-get(map-get($text-map, small), font-size));
+			padding-right: rhythm($lines: 3, $font-size: map-get(map-get($text-map, small), font-size));
 			&.active {
 				font-weight: 500;
 				position: relative;
-				&:before {
-					content: "";
-					position: absolute;
-					display: block;
-					@include size(100%, 2px);
-					background: rgba(white, .95);
-					bottom: -3px;
-				}
-			}
-			&:not(:first-of-type) {
-				margin-left: rhythm($lines: 5, $font-size: map-get(map-get($text-map, small), font-size));
+				background: rgba(white, .25);
 			}
 		}
 	}
@@ -106,12 +99,35 @@ nav {
 // project detail
 
 .project {
+
+	@include padding-trailer($lines: 20);
+	
+	.back {
+		font-style: italic;
+		font-weight: 500;
+		color: $gray;
+		display: inline-block;
+		@include trailer($lines: 1);
+		&:before {
+			content: "←";
+			display: inline-block;
+			margin-right: .5em;
+		}
+	}
+	
+	.header,
+	.project-contents .caption,
+	.description {
+		width: $content-width;
+		margin: 0 auto;
+	}
 	.header {
+
 		.title {
 			@extend .extra-large-text;
 			font-weight: 600;
 			text-transform: uppercase;
-			@include trailer($font-size: map-get(map-get($text-map, extra-large), font-size), $lines: 5);
+			@include trailer($font-size: map-get(map-get($text-map, extra-large), font-size), $lines: 8);
 		}
 		.blurb {
 			color: $gray;
@@ -132,8 +148,6 @@ nav {
 	}
 
 	.description {
-		width: $content-width;
-		margin: 0 auto;
 		@extend .medium-text;
 	}
 
