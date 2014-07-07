@@ -1,0 +1,25 @@
+#project-pixels {
+	#border {
+		margin-top: 50px;
+		width: 550px;
+		height: 525px;
+		padding-top: 25px;
+		border: solid 2px #222;
+		border-radius: 5px;
+		margin-bottom: 35px
+	}
+
+	#border, #movie {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	#movie {
+		width: 500px;
+		height: 500px;
+	}
+
+	rect { 
+		pointer-events: all;
+	} 
+}
