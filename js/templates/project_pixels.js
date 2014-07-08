@@ -1,5 +1,0 @@
-define(['handlebars'], function(Handlebars) {
-return Handlebars.template({"compiler":[5,">= 2.0.0"],"main":function(depth0,helpers,partials,data) {
-  return "<div class=\"project\" id=\"project-pixels\">\n	\n	<a href=\"#projects\" class=\"back\">back</a>\n	<div class=\"header\">\n		<div class=\"title\">Hello</div>\n		<div class=\"blurb\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, perspiciatis!</div>\n	</div>\n	<div class=\"project-contents\">\n		<div id=\"border\">\n		  <div id=\"movie\"></div>\n		</div>\n		<div class=\"caption\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, cumque!</div>\n	</div>\n	<div class=\"description\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, veritatis consequatur suscipit labore minima quisquam numquam nemo harum, inventore laboriosam.</div>\n\n</div>";
-  },"useData":true});
-});

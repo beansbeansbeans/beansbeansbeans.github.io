@@ -1,9 +1,16 @@
-define(['fisheye', 'templates/project_pixels'], function(fisheye, pixelsTemplate) {
-	var data = {}, 
-	pixels = {
+define(['fisheye', 'templates/project_detail'], function(fisheye, projectTemplate) {
+	var pixels = {
 		initialize: function() {
 
-			$("#view").html(pixelsTemplate(data));
+			var data = {
+				title: "Pixels",
+				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, perspiciatis!",
+				projectContents: '<div id="border"><div id="movie"></div></div>',
+				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, cumque!",
+				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, veritatis consequatur suscipit labore minima quisquam numquam nemo harum, inventore laboriosam."
+			};
+
+			$("#view").html(projectTemplate(data));
 
 			var data,
 			    svg,

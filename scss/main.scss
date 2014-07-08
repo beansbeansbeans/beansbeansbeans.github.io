@@ -137,15 +137,18 @@ nav {
 	}
 
 	.project-contents {
-		@include trailer(20);
+		
 		canvas {
 			height: 500px;
 		}
-		.caption {
+		
+	}
+	
+	.caption {
 			color: $gray;
 			font-style: italic;
+			@include trailer(20);
 		}
-	}
 
 	.description {
 		@extend .medium-text;
