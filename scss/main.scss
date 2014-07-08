@@ -48,6 +48,10 @@ a {
 	text-decoration: none;
 }
 
+* {
+	@include box-sizing(border-box);
+}
+
 #menu_wrapper {
 	
 	@include trailer(20);
@@ -137,6 +141,9 @@ nav {
 	}
 
 	.project-contents {
+		
+		@include leader(10);
+		@include trailer(10);
 		
 		canvas {
 			height: 500px;

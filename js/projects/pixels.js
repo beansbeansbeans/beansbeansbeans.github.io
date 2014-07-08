@@ -1,8 +1,8 @@
 define(['fisheye', 'templates/project_detail'], function(fisheye, projectTemplate) {
 	var pixels = {
 		initialize: function() {
-
 			var data = {
+				identifier: "pixels",
 				title: "Pixels",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, perspiciatis!",
 				projectContents: '<div id="border"><div id="movie"></div></div>',

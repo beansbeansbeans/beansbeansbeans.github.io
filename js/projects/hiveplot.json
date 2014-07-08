@@ -1,0 +1,1616 @@
+[
+{
+  "name": "$c-black",
+  "pakage": [
+    "color"
+  ]
+},
+{
+  "name": "$c-dark-gray",
+  "pakage": [
+    "color"
+  ]
+},
+{
+  "name": "$c-gray",
+  "pakage": [
+    "color"
+  ]
+},
+{
+  "name": "$c-light-gray",
+  "pakage": [
+    "color"
+  ]
+},
+{
+  "name": "$c-smoke",
+  "pakage": [
+    "color"
+  ]
+},
+{
+  "name": "$c-white",
+  "pakage": [
+    "color"
+  ]
+},
+{
+  "name": "$c-blue",
+  "pakage": [
+    "color"
+  ]
+},
+{
+  "name": "$c-light-blue",
+  "pakage": [
+    "color"
+  ]
+},
+{
+  "name": "$c-dark-blue",
+  "pakage": [
+    "color"
+  ]
+},
+{
+  "name": "$c-light-green",
+  "pakage": [
+    "color"
+  ]
+},
+{
+  "name": "$c-green",
+  "pakage": [
+    "color"
+  ]
+},
+{
+  "name": "$c-orange",
+  "pakage": [
+    "color"
+  ]
+},
+{
+  "name": "$c-gold",
+  "pakage": [
+    "color"
+  ]
+},
+{
+  "name": "$c-red",
+  "pakage": [
+    "color"
+  ]
+},
+{
+  "name": "$c-warm-smoke",
+  "pakage": [
+    "color"
+  ]
+},
+{
+  "name": "$bgc-black",
+  "imports": [
+    "$c-black"
+  ]
+},
+{
+  "name": "$bgc-dark",
+  "imports": [
+    "$c-dark-gray"
+  ]
+},
+{
+  "name": "$bgc-gray",
+  "imports": [
+    "$c-gray"
+  ]
+},
+{
+  "name": "$bgc-smoke",
+  "imports": [
+    "$c-smoke"
+  ]
+},
+{
+  "name": "$bgc-orange",
+  "imports": [
+    "$c-orange"
+  ]
+},
+{
+  "name": "$bgc-green",
+  "imports": [
+    "$c-green"
+  ]
+},
+{
+  "name": "$bgc-blue",
+  "imports": [
+    "$c-blue"
+  ]
+},
+{
+  "name": "$bgc-white",
+  "imports": [
+    "$c-white"
+  ]
+},
+{
+  "name": "$bgc-on-dark-hover",
+  "imports": [
+    "$c-white"
+  ]
+},
+{
+  "name": "$bgc-on-bright-hover",
+  "imports": [
+    "$c-white"
+  ]
+},
+{
+  "name": "$bgc-hover",
+  "imports": [
+    "$bgc-blue"
+  ]
+},
+{
+  "name": "$bdc-gray",
+  "imports": [
+    "$c-light-gray"
+  ]
+},
+{
+  "name": "$bdc-orange",
+  "imports": [
+    "$c-orange"
+  ]
+},
+{
+  "name": "$bdc-on-bright",
+  "imports": [
+    "$c-white"
+  ]
+},
+{
+  "name": "$bdc-on-dark-muted",
+  "imports": [
+    "$c-dark-gray"
+  ]
+},
+{
+  "name": "$bdc-tab-highlight",
+  "imports": [
+    "$c-dark-gray"
+  ]
+},
+{
+  "name": "$bdc-form-underline",
+  "imports": [
+    "$bdc-gray"
+  ]
+},
+{
+  "name": "$tc-dark",
+  "imports": [
+    "$c-dark-gray"
+  ]
+},
+{
+  "name": "$tc-on-dark",
+  "imports": [
+    "$c-light-gray"
+  ]
+},
+{
+  "name": "$tc-white",
+  "imports": [
+    "$c-white"
+  ]
+},
+{
+  "name": "$tc-bright",
+  "imports": [
+    "$c-black"
+  ]
+},
+{
+  "name": "$tc-callout",
+  "imports": [
+    "$c-green"
+  ]
+},
+{
+  "name": "$tc-default",
+  "imports": [
+    "$c-gray"
+  ]
+},
+{
+  "name": "$tc-subdued",
+  "imports": [
+    "$c-gray"
+  ]
+},
+{
+  "name": "$tc-label",
+  "imports": [
+    "$c-dark-blue"
+  ]
+},
+{
+  "name": "$tc-on-bright-important",
+  "imports": [
+    "$tc-white"
+  ]
+},
+{
+  "name": "$tc-on-bright-default",
+  "imports": [
+    "$tc-bright"
+  ]
+},
+{
+  "name": "$tc-on-bright-subdued",
+  "imports": [
+    "$tc-white"
+  ]
+},
+{
+  "name": "$tc-on-bright-p",
+  "imports": [
+    "$tc-bright"
+  ]
+},
+{
+  "name": "$fs-xs",
+  "pakage": [
+    "font-size"
+  ]
+},
+{
+  "name": "$fs-s",
+  "pakage": [
+    "font-size"
+  ]
+},
+{
+  "name": "$fs-default",
+  "pakage": [
+    "font-size"
+  ]
+},
+{
+  "name": "$fs-m",
+  "pakage": [
+    "font-size"
+  ]
+},
+{
+  "name": "$fs-ml",
+  "pakage": [
+    "font-size"
+  ]
+},
+{
+  "name": "$fs-l",
+  "pakage": [
+    "font-size"
+  ]
+},
+{
+  "name": "$fs-xl",
+  "pakage": [
+    "font-size"
+  ]
+},
+{
+  "name": "$fs-xxl",
+  "pakage": [
+    "font-size"
+  ]
+},
+{
+  "name": "$fs-h1",
+  "imports": [
+    "$fs-xl"
+  ]
+},
+{
+  "name": "$fs-h2",
+  "imports": [
+    "$fs-l"
+  ]
+},
+{
+  "name": "$fs-h3",
+  "imports": [
+    "$fs-ml"
+  ]
+},
+{
+  "name": "$fs-h4",
+  "imports": [
+    "$fs-m"
+  ]
+},
+{
+  "name": "$fs-h5",
+  "imports": [
+    "$fs-default"
+  ]
+},
+{
+  "name": "$fs-h6",
+  "imports": [
+    "$fs-s"
+  ]
+},
+{
+  "name": "$fs-p",
+  "imports": [
+    "$fs-s"
+  ]
+},
+{
+  "name": "$fs-hero-text",
+  "imports": [
+    "$fs-l"
+  ]
+},
+{
+  "name": "$base-font-size",
+  "imports": [
+    "$fs-s"
+  ]
+},
+{
+  "name": "$base-line-height",
+  "pakage": [
+    "font-size"
+  ]
+},
+{
+  "name": "%text-emphasized",
+  "pakage": [
+    "font-style"
+  ]
+},
+{
+  "name": "%uppercase",
+  "pakage": [
+    "text-transform"
+  ]
+},
+{
+  "name": "%lowercase",
+  "pakage": [
+    "text-transform"
+  ]
+},
+{
+  "name": "%capitalized",
+  "pakage": [
+    "text-transform"
+  ]
+},
+{
+  "name": "%text-light",
+  "pakage": [
+    "font-weight"
+  ]
+},
+{
+  "name": "%text-medium",
+  "pakage": [
+    "font-weight"
+  ]
+},
+{
+  "name": "%text-heavy",
+  "pakage": [
+    "font-weight"
+  ]
+},
+{
+  "name": "%shadow-box",
+  "imports": [
+    "$c-black"
+  ]
+},
+{
+  "name": "%shadow-box-inset-top",
+  "imports": [
+    "$c-black"
+  ]
+},
+{
+  "name": "%label-important",
+  "imports": [
+    "%text-medium",
+    "%text-light"
+  ]
+},
+{
+  "name": "%hero-text",
+  "imports": [
+    "%uppercase",
+    "%text-light",
+    "$fs-hero-text"
+  ]
+},
+{
+  "name": "%section-title",
+  "imports": [
+    "%uppercase",
+    "%text-heavy",
+    "$tc-dark"
+  ]
+},
+{
+  "name": "%page-title",
+  "imports": [
+    "$fs-l",
+    "$tc-dark"
+  ]
+},
+{
+  "name": "%hint",
+  "imports": [
+    "%text-emphasized",
+    "$tc-subdued",
+    "%text-light"
+  ]
+},
+{
+  "name": "=text-on-bright",
+  "imports": [
+    "$tc-on-bright-default",
+    "$tc-on-bright-subdued",
+    "$tc-on-bright-p",
+    "$tc-on-bright-important"
+  ]
+},
+{
+  "name": "%link-default",
+  "imports": [
+    "$c-blue",
+    "$c-dark-blue"
+  ]
+},
+{
+  "name": "%link-on-dark",
+  "imports": [
+    "$c-light-gray",
+    "$c-white"
+  ]
+},
+{
+  "name": "%link-on-light",
+  "imports": [
+    "$c-gray",
+    "$c-dark-gray"
+  ]
+},
+{
+  "name": "%link-on-bright",
+  "imports": [
+    "$c-white"
+  ]
+},
+{
+  "name": "%link-default-on-dark",
+  "imports": [
+    "$c-light-blue"
+  ]
+},
+{
+  "name": "%link-default-on-blue",
+  "imports": [
+    "$c-blue",
+    "$c-dark-blue"
+  ]
+},
+{
+  "name": "%link",
+  "imports": [
+    "%link-default"
+  ]  
+},
+{
+  "name": "=ol-circled",
+  "pakage": [
+    "pattern"
+  ]
+},
+{
+  "name": "=list-bulleted",
+  "pakage": [
+    "pattern"
+  ]
+},
+{
+  "name": "%double-slash-delimited",
+  "pakage": [
+    "pattern"
+  ]
+},
+{
+  "name": "%bullet-delimited",
+  "pakage": [
+    "pattern"
+  ]
+},
+{
+  "name": "%arrow-right-delimited",
+  "pakage": [
+    "pattern"
+  ]
+},
+{
+  "name": "%pipe-delimited",
+  "pakage": [
+    "pattern"
+  ]
+},
+{
+  "name": "%greater-than-delimited",
+  "pakage": [
+    "pattern"
+  ]
+},
+{
+  "name": "%button-default-color",
+  "imports": [
+    "$c-white",
+    "$c-green"
+  ]
+},
+{
+  "name": "%button-green-color",
+  "imports": [
+    "$c-white",
+    "$c-green"
+  ]
+},
+{
+  "name": "%button-orange-color",
+  "imports": [
+    "$c-white",
+    "$c-orange"
+  ]
+},
+{
+  "name": "%button-blue-color",
+  "imports": [
+    "$c-white",
+    "$c-blue"
+  ]
+},
+{
+  "name": "%button-gray-color",
+  "imports": [
+    "$c-white",
+    "$c-gray"
+  ]
+},
+{
+  "name": "%button-disabled-color",
+  "imports": [
+    "$c-white",
+    "$c-light-gray"
+  ]
+},
+{
+  "name": "%button-cancel-color",
+  "imports": [
+    "$c-white",
+    "$c-gray"
+  ]
+},
+{
+  "name": "%button-white-color",
+  "imports": [
+    "$c-white",
+    "$c-black",
+    "$c-smoke"
+  ]
+},
+{
+  "name": "%button-light-blue-color",
+  "imports": [
+    "$c-white",
+    "$c-light-blue"
+  ]
+},
+{
+  "name": "%button-s-size",
+  "imports": [
+    "$fs-s"
+  ]
+},
+{
+  "name": "%button-default-size",
+  "imports": [
+    "$fs-default"
+  ]
+},
+{
+  "name": "%button-m-size",
+  "imports": [
+    "$fs-m"
+  ]
+},
+{
+  "name": "%button-l-size",
+  "imports": [
+    "$fs-l"
+  ]
+},
+{
+  "name": "%button",
+  "imports": [
+    "%text-medium",
+    "$c-black",
+    "%button-default-color",
+    "%button-default-size"
+  ]
+},
+{
+  "name": "%close-orange-color",
+  "imports": [
+    "$bgc-orange"
+  ]
+},
+{
+  "name": "%close-dark-color",
+  "imports": [
+    "$bgc-dark"
+  ]
+},
+{
+  "name": "%close-default-size",
+  "imports": [
+    "$fs-default"
+  ]
+},
+{
+  "name": "%close",
+  "imports": [
+    "%close-default-size",
+    "$bgc-white"
+  ]
+},
+{
+  "name": "%switch",
+  "imports": [
+    "$fs-s",
+    "$c-light-gray",
+    "$c-green",
+    "%link-on-dark"
+  ]
+},
+{
+  "name": "%container-block",
+  "imports": [
+    "$bdc-gray",
+    "$bgc-white"
+  ] 
+},
+{
+  "name": "%side-panel-default-color",
+  "imports": [
+    "$bgc-blue",
+    "$c-dark-blue"
+  ]
+},
+{
+  "name": "%side-panel",
+  "imports": [
+    "%side-panel-default-color"
+  ]
+},
+{
+  "name": "%input",
+  "imports": [
+    "$bdc-form-underline",
+    "$c-gray",
+    "$c-blue"
+  ]
+},
+{
+  "name": "%input-search-wrapper",
+  "imports": [
+    "$c-light-gray",
+    "$c-gray",
+    "$c-dark-gray",
+    "$c-smoke",
+    "$fs-s",
+    "$fs-default"
+  ]
+},
+{
+  "name": "%textarea-standard",
+  "pakage": [
+    "pattern"
+  ],
+  "imports": [
+    "$bdc-form-underline"
+  ]
+},
+{
+  "name": "%textarea-ruled",
+  "pakage": [
+    "pattern"
+  ],
+  "imports": [
+    "$bdc-form-underline"
+  ]
+},
+{
+  "name": "%control-group-s",
+  "imports": [
+    "$fs-s"
+  ]
+},
+{
+  "name": "%control-group-default",
+  "imports": [
+    "$fs-default"
+  ]
+},
+{
+  "name": "%control-group-m",
+  "imports": [
+    "$fs-m"
+  ]
+},
+{
+  "name": "%control-group-l",
+  "imports": [
+    "$fs-l"
+  ]
+},
+{
+  "name": "=expanding-area",
+  "pakage": [
+    "pattern"
+  ],
+  "imports": []
+},
+{
+  "name": "%carousel-paddle",
+  "pakage": [
+    "pattern"
+  ],
+  "imports": [
+    "$bgc-smoke",
+    "$fs-ml",
+    "$c-gray",
+    "$c-orange"
+  ]
+},
+{
+  "name": "=dropdown-arrow",
+  "pakage": [
+    "pattern"
+  ],
+  "imports": []
+},
+{
+  "name": "%activity-list-on-light",
+  "pakage": [
+    "pattern"
+  ],
+  "imports": [
+    "$bdc-gray",
+    "$bgc-smoke"
+  ]
+},
+{
+  "name": "%activity-list-on-dark",
+  "pakage": [
+    "pattern"
+  ],
+  "imports": [
+    "$bgc-smoke",
+    "$bdc-gray",
+    "$c-white"
+  ]
+},
+{
+  "name": "%nav-s",
+  "pakage": [
+  ],
+  "imports": [
+    "$fs-s"
+  ]
+},
+{
+  "name": "%nav-default",
+  "pakage": [],
+  "imports": [
+    "$fs-default"
+  ]
+},
+{
+  "name": "%nav-m",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "$fs-m"
+  ]
+},
+{
+  "name": "%nav-l",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "$fs-l"
+  ]
+},
+{
+  "name": "%tabs-default-color",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "$c-dark-blue",
+    "$bgc-smoke",
+    "$c-blue",
+    "$c-light-gray",
+    "$bdc-gray",
+    "$c-white"
+  ]
+},
+{
+  "name": "%tabs-dark-color",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "$tc-white",
+    "$c-dark-gray",
+    "$c-light-blue",
+    "%text-light"
+  ]
+},
+{
+  "name": "%nav-link-on-light-color",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "$tc-white",
+    "$c-light-blue",
+    "$bdc-gray",
+    "%text-heavy"
+  ]
+},
+{
+  "name": "%nav-link-on-dark-color",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "$tc-bright",
+    "$tc-subdued",
+    "$bdc-gray"
+  ]
+},
+{
+  "name": "%nav-links",
+  "pakage": [
+    "pattern"
+  ],
+  "imports": [
+    
+  ]
+},
+{
+  "name": "%nav-tabs",
+  "pakage": [
+    "pattern"
+  ],
+  "imports": [
+    "%tabs-default-color"
+  ]
+},
+{
+  "name": "%masthead-nav-default",
+  "imports": [
+    "$bgc-orange"
+  ]
+},
+{
+  "name": "%masthead-nav-gray",
+  "imports": [
+    "$bgc-gray"
+  ]
+},
+{
+  "name": "%masthead-nav-green",
+  "imports": [
+    "$bgc-green"
+  ]
+},
+{
+  "name": "%masthead-nav-orange",
+  "imports": [
+    "$bgc-orange"
+  ]
+},
+{
+  "name": "%masthead-nav",
+  "imports": [
+    "%masthead-nav-default",
+    "=text-on-bright",
+    "%arrow-right-delimited",
+    "%label-important",
+    "%link-on-bright",
+    "$fs-default",
+    "$fs-xl"
+  ]
+},
+{
+  "name": "#user-bar",
+  "imports": [
+    "$bgc-gray",
+    "$tc-on-dark",
+    "$c-black"
+  ]
+},
+{
+  "name": "#authentication-bar",
+  "imports": [
+    "$bgc-gray",
+    "$tc-on-dark",
+    "$c-black"
+  ]
+},
+{
+  "name": "#search",
+  "imports": [
+    "%input-search-wrapper"
+  ]
+},
+{
+  "name": "#content-links",
+  "imports": [
+    "$c-dark-gray",
+    "%link-on-dark",
+    "$fs-default",
+    "$fs-xs",
+    "%uppercase"
+  ]
+},
+{
+  "name": "#mega-menu-contents",
+  "imports": [
+    "$c-black",
+    "$bgc-smoke",
+    "%link-on-light",
+    "$bdc-tab-highlight",
+    "$tc-dark",
+    "$bgc-hover",
+    "%nav-links",
+    "%nav-link-on-light-color",
+    "%uppercase",
+    "$fs-default",
+    "$fs-s",
+    "%link",
+    "%shadow-box-inset-top",
+    "%shadow-box"
+  ]
+},
+{
+  "name": "#header",
+  "imports": [
+    "$bgc-dark",
+    "$fs-s",
+    "$fs-default",
+    "$tc-on-bright-important",
+    "%text-light",
+    "%text-emphasized",
+    "%text-medium"
+  ]
+},
+{
+  "name": "#footer",
+  "imports": [
+    "$bgc-gray",
+    "$tc-on-dark",
+    "%uppercase",
+    "$fs-s",
+    "$fs-m",
+    "%shadow-box-inset-top",
+    "%link-on-dark",
+    "$bgc-smoke"
+  ]
+},
+{
+  "name": "input",
+  "imports": [
+    "$c-gray"
+  ]
+},
+{
+  "name": "body",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "$tc-default"
+  ]
+},
+{
+  "name": "h1",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "%text-medium",
+    "$fs-h1"
+  ]
+},
+{
+  "name": "h2",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "%text-medium",
+    "$fs-h2"
+  ]
+},
+{
+  "name": "h3",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "%text-medium",
+    "$fs-h3"
+  ]
+},
+{
+  "name": "h4",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "%text-medium",
+    "$fs-h4"
+  ]
+},
+{
+  "name": "h5",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "%text-medium",
+    "$fs-h5"
+  ]
+},
+{
+  "name": "h6",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "%text-medium",
+    "$fs-h6"
+  ]
+},
+{
+  "name": "p",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "%text-light",
+    "$fs-p"
+  ]
+},
+{
+  "name": "blockquote",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "$c-light-gray",
+    "%text-emphasized"
+  ]
+},
+{
+  "name": "table",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "$c-light-gray"
+  ]
+},
+{
+  "name": ".error",
+  "imports": [
+    "$c-red"
+  ]
+},
+{
+  "name": ".control-group",
+  "imports": [
+    "$tc-bright",
+    "%text-light",
+    "%label-important"
+  ]
+},
+{
+  "name": ".drag-and-drop-area",
+  "imports": [
+    "$bdc-gray"
+  ]
+},
+{
+  "name": ".select-wrapper",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "%button-light-blue-color",
+    "%button-s-size",
+    "$fs-xs"
+  ]
+},
+{
+  "name": ".modal",
+  "imports": [
+    "$c-black",
+    "$bgc-white",
+    "$bgc-orange",
+    "%close-orange-color",
+    "$tc-white",
+    "%text-light",
+    "$fs-m",
+    "$bdc-gray",
+    "%button-blue-color",
+    "%button-s-size",
+    "%link",
+    "%lowercase"
+  ]
+},
+{
+  "name": ".carousel",
+  "imports": [
+    "$fs-m"
+  ]
+},
+{
+  "name": ".dropdown",
+  "imports": [
+    "$bgc-white",
+    "$bdc-gray",
+    "%shadow-box",
+    "$c-dark-gray",
+    "$c-black",
+    "$fs-default"
+  ]
+},
+{
+  "name": ".activity-list",
+  "imports": [
+    "%activity-list-on-light",
+    "$bdc-gray",
+    "$fs-s",
+    "$fs-l",
+    "$fs-default",
+    "%label-important",
+    "$tc-bright",
+    "$c-light-gray",
+    "$bgc-white",
+    "%link-on-light",
+    "$bgc-smoke",
+    "$fs-m",
+    "$fs-ml",
+    "=expanding-area",
+    "$c-smoke",
+    "$bgc-gray",
+    "%text-medium",
+    "%text-light",
+    "$tc-subdued",
+    "%link",
+    "%bullet-delimited"
+  ]
+},
+{
+  "name": ".spinny",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "$c-gray",
+    "$c-light-gray"
+  ]
+},
+{
+  "name": "#flash",
+  "imports": [
+    "$fs-m",
+    "$tc-white",
+    "%uppercase",
+    "%text-light",
+    "$bdc-gray",
+    "%close-dark-color",
+    "$bgc-dark"
+  ]
+},
+{
+  "name": ".tooltip",
+  "pakage": [
+    
+  ],
+  "imports": [
+    "$fs-s",
+    "$c-black",
+    "$tc-on-dark",
+    "$bgc-black"
+  ]
+},
+{
+  "name": ".thumbnail",
+  "imports": [
+    "$c-light-gray"
+  ]
+},
+{
+  "name": "course .course-title",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course"
+  ],
+  "imports": [
+    "%hero-text",
+    "$tc-white"
+  ]
+},
+{
+  "name": "course .course-description",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course"
+  ],
+  "imports": [
+    "$tc-white",
+    "%text-light",
+    "$fs-default"
+  ]
+},
+{
+  "name": "course .course",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course"
+  ],
+  "imports": [
+    "$bgc-orange",
+    "$bgc-green",
+    "%nav-tabs",
+    "%nav-s",
+    "%link-on-dark"
+  ]
+},
+{
+  "name": "course .collection",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course"
+  ],
+  "imports": [
+    "$bgc-white",
+    "%carousel-paddle"
+  ]
+},
+{
+  "name": "course .sub-collection-list",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course"
+  ],
+  "imports": [
+    "=ol-circled",
+    "$c-blue",
+    "$fs-m",
+    "%text-emphasized",
+    "$fs-s"
+  ]
+},
+{
+  "name": "course .lesson-set-ccid",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course"
+  ],
+  "imports": [
+    "$fs-default",
+    "$c-dark-blue"
+  ]
+},
+{
+  "name": "course .lesson-ccid",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course"
+  ],
+  "imports": [
+    "$fs-s",
+    "$tc-subdued",
+    "%text-emphasized",
+    "%text-light",
+    "$tc-bright"
+  ]
+},
+{
+  "name": "course_edit .edit",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course_edit"
+  ],
+  "imports": [
+    "%capitalized"
+  ]
+},
+{
+  "name": "course_edit .delete",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course_edit"
+  ],
+  "imports": [
+    "%capitalized"
+  ]
+},
+{
+  "name": "course_edit .preview",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course_edit"
+  ],
+  "imports": [
+    "%capitalized"
+  ]
+},
+{
+  "name": "course_edit [data-editable]",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course_edit"
+  ],
+  "imports": [
+    "%text-light"
+  ]
+},
+{
+  "name": "course_edit .lesson-set-search",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course_edit"
+  ],
+  "imports": [
+    "%link"
+  ]
+},
+{
+  "name": "course_edit .tab-pane-mast",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course_edit"
+  ],
+  "imports": [
+    "%link"
+  ]
+},
+{
+  "name": "course_edit .course-title",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course_edit"
+  ],
+  "imports": [
+    "%link",
+    "%hero-text",
+    "%text-light",
+    "$tc-default",
+    "$fs-s"
+  ]
+},
+{
+  "name": "course_edit .course-description",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course_edit"
+  ],
+  "imports": [
+    "%link",
+    "$fs-default"
+  ]
+},
+{
+  "name": "course_edit .lesson-set",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course_edit"
+  ],
+  "imports": [
+    "%text-emphasized",
+    "%text-light",
+    "$bgc-on-dark-hover"
+  ]
+},
+{
+  "name": "course_edit .collection-title",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course_edit"
+  ],
+  "imports": [
+    "$fs-default",
+    "$fs-l",
+    "$c-gray",
+    "$tc-on-bright-p"
+  ]
+},
+{
+  "name": "course_edit #course-edit-nav",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course_edit"
+  ],
+  "imports": [
+    "%masthead-nav",
+    "%masthead-nav-gray",
+    "%button-s-size",
+    "%button-orange-color"
+  ]
+},
+{
+  "name": "course_edit .course",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course_edit"
+  ],
+  "imports": [
+    "$c-light-gray"
+  ]
+},
+{
+  "name": "course_edit .carousel-wrapper",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course_edit"
+  ],
+  "imports": [
+    "%nav-tabs",
+    "%nav-s",
+    "%link-on-dark"
+  ]
+},
+{
+  "name": "course_edit .sub-collection-builder",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course_edit"
+  ],
+  "imports": [
+    "$bgc-gray",
+    "=text-on-bright",
+    "$fs-default"
+  ]
+},
+{
+  "name": "course_edit .sub-collection-list",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course_edit"
+  ],
+  "imports": [
+    "$c-dark-gray",
+    "$bgc-white",
+    "$fs-m",
+    "$fs-default",
+    "$fs-s",
+    "$bdc-on-dark-muted",
+    "%link-on-dark",
+    "$fs-default",
+    "%link-default-on-dark"
+  ]
+},
+{
+  "name": "course_edit .sub-collection-title",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course_edit"
+  ],
+  "imports": [
+    "%text-emphasized",
+    "%text-light",
+    "$fs-m"
+  ]
+},
+{
+  "name": "course_edit .sub-collection-description",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course_edit"
+  ],
+  "imports": [
+    "$fs-s"
+  ]
+},
+{
+  "name": "course_edit .lesson-set-list",
+  "pakage": [
+    
+  ],
+  "page": [
+    "course_edit"
+  ],
+  "imports": [
+    "$fs-default",
+    "$bgc-blue",
+    "$fs-s",
+    "$bdc-on-bright"
+  ]
+}
+]

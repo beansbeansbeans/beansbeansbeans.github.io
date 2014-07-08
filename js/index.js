@@ -3,7 +3,8 @@ require.config({
       'jquery': 'lib/jquery',
       'd3': 'lib/d3',
       'fisheye': 'lib/fisheye',
-      'handlebars': 'lib/handlebars'
+      'handlebars': 'lib/handlebars',
+      'underscore': 'lib/underscore'
     },
     shim: {
     	'fisheye': {
