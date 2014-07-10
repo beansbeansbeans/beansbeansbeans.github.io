@@ -5,27 +5,91 @@ define(['paper', 'underscore', 'templates/project_detail'], function(paper, _, p
 				identifier: "leaves",
 				title: "Leaves",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, perspiciatis!",
-				projectContents: '<button>click</button><div id="scene"><canvas id="canvas_0"></canvas><canvas id="canvas_1"></canvas></div>',
+				projectContents: '<div id="scene"><canvas id="canvas_0"></canvas><canvas id="canvas_1"></canvas><canvas id="canvas_2"></canvas><canvas id="canvas_3"></canvas><canvas id="canvas_4"></canvas><canvas id="canvas_5"></canvas></div>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, cumque!",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, veritatis consequatur suscipit labore minima quisquam numquam nemo harum, inventore laboriosam."
 			};
 
 			$("#view").html(projectTemplate(data));
 
-			$("button").on("click", function() {
-				window.console.log = function() {};
+			var lastPosition,
+			    currentPosition,
+			    startingPosition,
+			    range = 100;
+
+			function move(e) {
+			  if(lastPosition) {
+			    var delta = e.pageY - lastPosition;
+			    if(Math.abs(currentPosition - startingPosition) < range) {
+				    currentPosition += delta;
+				    $(e.target).css("-webkit-transform", "translateY(" + currentPosition + "px)");
+			    }
+			  }
+			  lastPosition = e.pageY;
+			}
+
+			function handleDragStart() {
+				startingPosition = parseInt($(this).attr("data-current-transform"));
+			  	currentPosition = startingPosition;
+				$("body").on("mousemove", move);
+			}
+
+			function handleDragEnd() {
+			  $("body").off("mousemove");
+			  lastPosition = undefined;
+			  $(this).attr("data-current-transform", currentPosition);
+			}
+
+			$("canvas").each(function(i, d) {
+			  $(d).attr("data-current-transform", 0);
+			  $(d).on("mousedown", handleDragStart);
+			  $(d).on("mouseup", handleDragEnd);
 			});
 
 			paper.setup(document.getElementById("canvas_0"));
 
 			window.globals = {
-				viewWidth: 200,
-				viewHeight: 1000,
-				init: function(canvas) {
-					var idx = canvas.view._id.slice(7);
-					canvas.view.viewSize = [this.viewWidth, this.viewHeight];
-				},
+				viewWidth: 100,
+				viewHeight: 500,
 				leaves: [
+				{
+					path: [[300, -100], [800, 100], [100, 500], [800, 850], [0, 900]],
+					animatable: {
+						segments: [
+							{
+								point: [50, 20], 
+								handleIn: [0, 0], 
+								handleOut: [-20, 47.5]
+							},
+							{
+								point: [52.5, 110], 
+								handleIn: [-17.5, -40], 
+								handleOut: [-10, -5]
+							},
+							{
+								point: [32.5, 67.5], 
+								handleIn: [2.5, 22.5], 
+								handleOut: [-20, 40]
+							},
+							{
+								point: [90, 140], 
+								handleIn: [-57.5, -5],
+								handleOut: [-32.5, -17.5]
+							},
+							{
+								point: [47, 55], 
+								handleIn: [85, -10],
+								handleOut: [-5, -10]
+							},
+							{
+								point: [50, 20], 
+								handleIn: [-5, 20], 
+								handleOut: [0, 0]
+							}
+						],
+						strokeColor: "#FAFAFF"
+					}
+				},
 				{
 					path: [[0, 100], [900, 150], [100, 400], [700, 700], [0, 1200]],
 					animatable: {
@@ -61,7 +125,159 @@ define(['paper', 'underscore', 'templates/project_detail'], function(paper, _, p
 								handleOut: [0, 0] 
 							}
 						],
-						strokeColor: '#d8a76c'
+						strokeColor: "#FAFAFF"
+					}
+				},
+				{
+					path: [[1050, -50], [200, 300], [800, 600], [350, 900], [1050, 1100]],
+					animatable: {
+						segments: [
+							{
+								point: [37.5, 20.5],
+								handleIn: [0, 0],
+								handleOut: [41.25, -30]
+							},
+							{
+								point: [146.25, 37.5],
+								handleIn: [-15, -15],
+								handleOut: [-45, 33]
+							},
+							{
+								point: [40, 30],
+								handleIn: [43.75, 51],
+								handleOut: [-15, 0]
+							},
+							{
+								point: [2, 40],
+								handleIn: [18.75, -7.5],
+								handleOut: [48.75, -28]
+							},
+							{
+								point: [114, 24.3],
+								handleIn: [-3.75, -2],
+								handleOut: [-22.5, -11.25]
+							},
+							{
+								point: [37.5, 21],
+								handleIn: [22.5, -7.5],
+								handleOut: [0, 0]
+							}
+						],
+						strokeColor: "#FAFAFF"
+					}
+				},
+				{
+					path: [[-50, 200], [500, 300], [50, 600], [900, 700], [500, 1050]],
+					animatable: {
+						segments: [
+							{
+								point: [70, 2.5],
+								handleIn: [0, 0],
+								handleOut: [-45, 15]
+							},
+							{
+								point: [32.5, 125],
+								handleIn: [-45, -42.5],
+								handleOut: [-2.5, -30]
+							},
+							{
+								point: [52.5, 50],
+								handleIn: [-10, 10],
+								handleOut: [-15, 40]
+							},
+							{
+								point: [67.5, 190],
+								handleIn: [-35, -57.5],
+								handleOut: [-10, -20]
+							},
+							{
+								point: [55, 150],
+								handleIn: [0, 15],
+								handleOut: [150, -12.5]
+							},
+							{
+								point: [70, 2.5],
+								handleIn: [-25, 35],
+								handleOut: [0, 0]
+							}
+						],
+						strokeColor: "#FAFAFF"
+					}
+				},
+				{
+					path: [[600, -100], [100, 200], [700, 300], [100, 600], [550, 700], [100, 900], [1000, 1100]],
+					animatable: {
+						segments: [
+							{
+								point: [64.13, 20.8],
+								handleIn: [0, 0],
+								handleOut: [-67.5, 77.65]
+							},
+							{
+								point: [75.6, 178.75],
+								handleIn: [-78.3, -3.37],
+								handleOut: [-23.62, -27]
+							},
+							{
+								point: [57.37, 107.9],
+								handleIn: [-3.37, 22.5],
+								handleOut: [-2.05, 36.45]
+							},
+							{
+								point: [124.87, 220.6],
+								handleIn: [-35, -30.37],
+								handleOut: [-24.3, -29.7]
+							},
+							{
+								point: [75.6, 145],
+								handleIn: [6.75, 27],
+								handleOut: [94.5, -57.37]
+							},
+							{
+								point: [64.12, 20.8],
+								handleIn: [-13.5, 54],
+								handleOut: [0, 0]
+							}
+						],
+						strokeColor: "#FAFAFF"
+					}
+				},
+				{
+					path: [[1050, 0], [400, 200], [800, 400], [250, 650], [600, 800], [100, 950], [950, 1050]],
+					animatable: {
+						segments: [
+							{
+								point: [78.75, 33],
+								handleIn: [0, 0],
+								handleOut: [6, 47.25]
+							},
+							{
+								point: [61.5, 176.25],
+								handleIn: [-90, -71.25],
+								handleOut: [15, -17.25]
+							},
+							{
+								point: [84, 76.5],
+								handleIn: [1.5, 28.5],
+								handleOut: [1.8, 45]
+							},
+							{
+								point: [49.5, 199.5],
+								handleIn: [47.5, -52.5],
+								handleOut: [15, -6]
+							},
+							{
+								point: [84, 165],
+								handleIn: [-4.5, 7.5],
+								handleOut: [75, 1.5]
+							},
+							{
+								point: [78.75, 33],
+								handleIn: [78, 63],
+								handleOut: [0, 0]
+							}
+						],
+						strokeColor: "#FAFAFF"
 					}
 				}
 				]
@@ -335,22 +551,27 @@ define(['paper', 'underscore', 'templates/project_detail'], function(paper, _, p
 				counter++;
 
 				window.globals.leaves.forEach(function(leaf, leafIdx) {
-					if(leaf.group.canvasGroup && leaf.group.canvasGroup.indexOf(canvases[0].idx) > -1) {
-						canvases[0].selfLeaves[leafIdx].group.visible = true;
-						placeLeaf(canvases[0], leafIdx, false);
-					} else {
-						canvases[0].selfLeaves[leafIdx].group.visible = false;
-					}
 
-					if(leaf.flipGroup.canvasGroup && leaf.flipGroup.canvasGroup.indexOf(scope.idx) > -1) {
-						canvases[0].selfLeaves[leafIdx].flipGroup.visible = true;
-						placeLeaf(canvases[0], leafIdx, true);
-					} else {
-						canvases[0].selfLeaves[leafIdx].flipGroup.visible = false;
+					for(i=0; i<canvasCount; i++) {
+
+						if(leaf.group.canvasGroup && leaf.group.canvasGroup.indexOf(canvases[i].idx) > -1) {
+							canvases[i].selfLeaves[leafIdx].group.visible = true;
+							placeLeaf(canvases[i], leafIdx, false);
+						} else {
+							canvases[i].selfLeaves[leafIdx].group.visible = false;
+						}
+
+						if(leaf.flipGroup.canvasGroup && leaf.flipGroup.canvasGroup.indexOf(canvases[i].idx) > -1) {
+							canvases[i].selfLeaves[leafIdx].flipGroup.visible = true;
+							placeLeaf(canvases[i], leafIdx, true);
+						} else {
+							canvases[i].selfLeaves[leafIdx].flipGroup.visible = false;
+						}
+
+						canvases[i].view.draw();
+
 					}
 				});
-
-				paper.view.draw();
 
 				window.webkitRequestAnimationFrame(animate);
 			}
@@ -362,22 +583,15 @@ define(['paper', 'underscore', 'templates/project_detail'], function(paper, _, p
 			 */
 
 			var canvases = [];
-			canvases[0] = new paper.Project(document.getElementById("canvas_1"));
-			canvases[0].idx = 1;
-			canvases[0].selfLeaves = [];
+			var canvasCount = 5;
 
-			console.log("CANVASES[0]");
-			console.log(canvases[0]);
+			for(i=0; i<canvasCount; i++) {
+				canvases[i] = new paper.Project(document.getElementById("canvas_" + (i+1)));
+				canvases[i].idx = (i + 1);
+				canvases[i].selfLeaves = [];
+				canvases[i].view.viewSize = [window.globals.viewWidth, window.globals.viewHeight];
+			}
 
-			// var scope = paper.setup(document.getElementById("canvas_1"));
-
-			console.log("scope");
-			// console.log(scope);
-			// console.log(scope.project);
-
-			// scope.idx = 1;
-			// scope.selfLeaves = [];
-			
 			placeLeaf = function(scope, leafIdx, flipFlag) {
 				var selfLeaf = scope.selfLeaves[leafIdx][flipFlag ? "flipGroup" : "group"],
 					globalLeaf = window.globals.leaves[leafIdx][flipFlag ? "flipGroup" : "group"];
@@ -395,27 +609,27 @@ define(['paper', 'underscore', 'templates/project_detail'], function(paper, _, p
 
 			window.globals.leaves.forEach(function(leaf, leafIdx) {
 
-				canvases[0].selfLeaves[leafIdx] = {};
-				canvases[0].selfLeaves[leafIdx].group = leaf.group.clone();
-				canvases[0].selfLeaves[leafIdx].group.rotate(leaf.group.currentRotation * -1);
-				canvases[0].selfLeaves[leafIdx].flipGroup = leaf.flipGroup.clone();
-				canvases[0].selfLeaves[leafIdx].flipGroup.rotate(leaf.flipGroup.currentRotation * -1);
-				canvases[0].selfLeaves[leafIdx].mask = leaf.path.mask.clone();
-				canvases[0].selfLeaves[leafIdx].mask.segments = canvases[0].selfLeaves[leafIdx].mask.segments.map(function(d) {
-					return {
-						x: d.point.x - (canvases[0].idx - 1) * window.globals.viewWidth,
-						y: d.point.y
-					}
-				});
+				for(i=0; i<canvasCount; i++) {
+					canvases[i].selfLeaves[leafIdx] = {};
+					canvases[i].selfLeaves[leafIdx].group = leaf.group.clone();
+					canvases[i].selfLeaves[leafIdx].group.rotate(leaf.group.currentRotation * -1);
+					canvases[i].selfLeaves[leafIdx].flipGroup = leaf.flipGroup.clone();
+					canvases[i].selfLeaves[leafIdx].flipGroup.rotate(leaf.flipGroup.currentRotation * -1);
+					canvases[i].selfLeaves[leafIdx].mask = leaf.path.mask.clone();
+					canvases[i].selfLeaves[leafIdx].mask.segments = canvases[i].selfLeaves[leafIdx].mask.segments.map(function(d) {
+						return {
+							x: d.point.x - (canvases[i].idx - 1) * window.globals.viewWidth,
+							y: d.point.y
+						}
+					});
 
-				canvases[0].activeLayer.addChild(new paper.Group({
-					children: [canvases[0].selfLeaves[leafIdx].mask, canvases[0].selfLeaves[leafIdx].group, canvases[0].selfLeaves[leafIdx].flipGroup],
-					clipped: true
-				}));
+					canvases[i].activeLayer.addChild(new paper.Group({
+						children: [canvases[i].selfLeaves[leafIdx].mask, canvases[i].selfLeaves[leafIdx].group, canvases[i].selfLeaves[leafIdx].flipGroup],
+						clipped: true
+					}));
+				}
 
 			})
-
-			window.globals.init(canvases[0]);
 
 		}
 	};

@@ -164,16 +164,30 @@
 	canvas {
 		position: relative;
 		display: inline-block;
-		margin-top: 100px;
-		box-shadow: 0 0 0 2px rgba(0,0,0,0.1),0 2px 4px rgba(0,0,0,0.1);
-		border-radius: 4px;
-		background: rgba(#f8f8f8, .75);
+		box-shadow: 0 0 0 2px rgba(#0ABBB5, .1),0 2px 3px rgba(#0ABBB5, .1);
+		border-radius: 3px;
+		cursor: move;
 		&:not(:last-of-type) {
-			margin-right: 20px;
+			margin-right: 10px;
 		}
 		&[id="canvas_0"] {
 			visibility: hidden;
 			@include size(0px, 0px);
+		}
+		&[id="canvas_1"] {
+			background: rgba(#CAFCFB, .9)
+		}
+		&[id="canvas_2"] {
+			background: rgba(#9AECEA, .9)
+		}
+		&[id="canvas_3"] {
+			background: rgba(#6ADBD9, .9)
+		}
+		&[id="canvas_4"] {
+			background: rgba(#3ACBC6, .9)
+		}
+		&[id="canvas_5"] {
+			background: rgba(#0ABBB5, .9)
 		}
 	}
 }
