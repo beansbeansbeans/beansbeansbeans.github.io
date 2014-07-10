@@ -38,7 +38,7 @@ define(['fisheye', 'templates/project_detail'], function(fisheye, projectTemplat
 			    this.resume();
 			}
 
-			d3.json("/js/projects/movie.json", function(nodes) {
+			d3.json("/js/projects/pixels.json", function(nodes) {
 			  data = nodes;
 
 			  svg = d3.select("#movie").append("svg")

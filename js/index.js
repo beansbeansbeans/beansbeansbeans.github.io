@@ -4,7 +4,8 @@ require.config({
       'd3': 'lib/d3',
       'fisheye': 'lib/fisheye',
       'handlebars': 'lib/handlebars',
-      'underscore': 'lib/underscore'
+      'underscore': 'lib/underscore',
+      'paper': 'lib/paper'
     },
     shim: {
     	'fisheye': {
@@ -12,6 +13,9 @@ require.config({
     	},
         'handlebars': {
             exports: 'Handlebars'
+        },
+        'paper': {
+            exports: 'paper'
         }
     }
 });
@@ -51,3 +55,9 @@ require(['jquery', 'router'], function($, Router) {
     })
     
 });
+
+// TO FADE TRANSITION BETWEEN VIEWS:
+// 
+// 1) Refactor registerRoute stuff above to a single function
+// 2) On hashchange, show the spinner, fade out the current view
+// 3) Within the refactored registerRoute function, before calling initialize, hide the spinner and fade in the new view

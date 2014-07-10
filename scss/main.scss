@@ -147,10 +147,6 @@ nav {
 		@include leader(15);
 		@include trailer(10);
 		
-		canvas {
-			height: 500px;
-		}
-		
 	}
 	
 	.caption {
