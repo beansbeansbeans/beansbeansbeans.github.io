@@ -161,29 +161,30 @@ nav {
 
 }
 
-// face animation
+// top animation
 
-$frame-count: 25;
-$duration: 2.5s;
-$frame-height: 320px;
+$frame-count: 24;
+$duration: 2s;
+$frame-width: 354px;
+$frame-height: 594px;
 
-@include keyframe (face) {
+@include keyframe (top) {
 	from {
-		background-position: 0 -2px;
+		background-position: 0 0;
 	}
 	to {
-		background-position: $frame-count * $frame-height * -1 -2px;
+		background-position: $frame-count * $frame-width * -1 0px;
 	}
 }
 
-#face {
-	position: fixed;
-	bottom: 0;
-	left: 50%;
-	margin-left: -0.5 * $frame-height;
-	@include size($frame-height, $frame-height - 2px);
-	// background-image: url(../images/aging-sprite.png);
-	@include animation(face $duration steps($frame-count) infinite);
+#homepage {
+	text-align: center;
+	#top {
+		margin: 0 auto;
+		@include size($frame-width, $frame-height);
+		background-image: url(../images/top.png);
+		// @include animation(top $duration steps($frame-count) infinite);
+	}
 }
 
 

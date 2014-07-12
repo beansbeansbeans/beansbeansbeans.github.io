@@ -48,7 +48,7 @@ define(['paper', 'underscore', 'templates/project_detail'], function(paper, _, p
 
 			paper.setup(document.getElementById("canvas_0"));
 
-			window.globals = {
+			var settings = {
 				viewWidth: 100,
 				viewHeight: 500,
 				leaves: [
@@ -291,9 +291,9 @@ define(['paper', 'underscore', 'templates/project_detail'], function(paper, _, p
 				var canvasArr = [],
 					xPos = location.x;
 
-				canvasArr.push(Math.ceil(xPos / window.globals.viewWidth));
-				if(Math.ceil(xPos / window.globals.viewWidth) > 1) canvasArr.push(Math.ceil((xPos - (path.bounds.width / 2)) / window.globals.viewWidth));
-				canvasArr.push(Math.ceil((xPos + (path.bounds.width / 2)) / window.globals.viewWidth));
+				canvasArr.push(Math.ceil(xPos / settings.viewWidth));
+				if(Math.ceil(xPos / settings.viewWidth) > 1) canvasArr.push(Math.ceil((xPos - (path.bounds.width / 2)) / settings.viewWidth));
+				canvasArr.push(Math.ceil((xPos + (path.bounds.width / 2)) / settings.viewWidth));
 				canvasArr = _.uniq(canvasArr);
 
 				return canvasArr;
@@ -525,9 +525,9 @@ define(['paper', 'underscore', 'templates/project_detail'], function(paper, _, p
 			}
 
 			function initialize() {
-				constructAnimatables(window.globals.leaves);
-				constructPaths(window.globals.leaves);
-				constructPointers(window.globals.leaves);
+				constructAnimatables(settings.leaves);
+				constructPaths(settings.leaves);
+				constructPointers(settings.leaves);
 			}
 
 			initialize();
@@ -535,7 +535,7 @@ define(['paper', 'underscore', 'templates/project_detail'], function(paper, _, p
 			var counter = 0;
 
 			function animate() {
-				window.globals.leaves.forEach(function(leaf) {
+				settings.leaves.forEach(function(leaf) {
 					if(leaf.forwardPointer.getMove()) {
 						leaf.forwardPointer.moveObject();
 					}
@@ -550,7 +550,7 @@ define(['paper', 'underscore', 'templates/project_detail'], function(paper, _, p
 
 				counter++;
 
-				window.globals.leaves.forEach(function(leaf, leafIdx) {
+				settings.leaves.forEach(function(leaf, leafIdx) {
 
 					for(i=0; i<canvasCount; i++) {
 
@@ -589,14 +589,14 @@ define(['paper', 'underscore', 'templates/project_detail'], function(paper, _, p
 				canvases[i] = new paper.Project(document.getElementById("canvas_" + (i+1)));
 				canvases[i].idx = (i + 1);
 				canvases[i].selfLeaves = [];
-				canvases[i].view.viewSize = [window.globals.viewWidth, window.globals.viewHeight];
+				canvases[i].view.viewSize = [settings.viewWidth, settings.viewHeight];
 			}
 
 			placeLeaf = function(scope, leafIdx, flipFlag) {
 				var selfLeaf = scope.selfLeaves[leafIdx][flipFlag ? "flipGroup" : "group"],
-					globalLeaf = window.globals.leaves[leafIdx][flipFlag ? "flipGroup" : "group"];
+					globalLeaf = settings.leaves[leafIdx][flipFlag ? "flipGroup" : "group"];
 
-				selfLeaf.position = [globalLeaf.position.x - (scope.idx - 1) * window.globals.viewWidth, globalLeaf.position.y];
+				selfLeaf.position = [globalLeaf.position.x - (scope.idx - 1) * settings.viewWidth, globalLeaf.position.y];
 
 				if(selfLeaf.currentRotation != globalLeaf.currentRotation) {
 					if(selfLeaf.currentRotation) {
@@ -607,7 +607,7 @@ define(['paper', 'underscore', 'templates/project_detail'], function(paper, _, p
 				}
 			};
 
-			window.globals.leaves.forEach(function(leaf, leafIdx) {
+			settings.leaves.forEach(function(leaf, leafIdx) {
 
 				for(i=0; i<canvasCount; i++) {
 					canvases[i].selfLeaves[leafIdx] = {};
@@ -618,7 +618,7 @@ define(['paper', 'underscore', 'templates/project_detail'], function(paper, _, p
 					canvases[i].selfLeaves[leafIdx].mask = leaf.path.mask.clone();
 					canvases[i].selfLeaves[leafIdx].mask.segments = canvases[i].selfLeaves[leafIdx].mask.segments.map(function(d) {
 						return {
-							x: d.point.x - (canvases[i].idx - 1) * window.globals.viewWidth,
+							x: d.point.x - (canvases[i].idx - 1) * settings.viewWidth,
 							y: d.point.y
 						}
 					});
