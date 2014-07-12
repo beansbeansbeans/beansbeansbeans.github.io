@@ -44,6 +44,10 @@ require(['jquery', 'router'], function($, Router) {
         require(["home"], function(home) {
             home.initialize();
         });
+    }, function() {
+        require(["home"], function(home) {
+            home.destroy();
+        });
     });
 
     $(window).on("hashchange", function() {

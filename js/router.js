@@ -3,7 +3,8 @@ define([], function() {
     var Route = function() {
     	this.route = arguments[0].route;
     	this.fn = arguments[0].fn;
-    	this.scope = arguments[0].scope ? arguments[0].scope : null;
+        this.destroyFn = arguments[0].destroyFn;
+        this.scope = arguments[0].scope ? arguments[0].scope : null;
     	this.rules = arguments[0].rules ? arguments[0].rules : {};
 
     	this.routeArguments = [];
@@ -64,20 +65,33 @@ define([], function() {
 
     var Router = function() {
     	this.routes = [];
+        this.currentRoute = null;
     };
 
-    Router.prototype.registerRoute = function(route, fn, paramObject) {
+    Router.prototype.registerRoute = function(route, fn, destroyFn) {
 
-    	var scope = paramObject ? paramObject.scope ? paramObject.scope : {} : {};
+    	var scope = {},
+            destroyFn = destroyFn ? destroyFn : function() {};
+
     	return this.routes[this.routes.length] = new Route({
     		route: route,
     		fn: fn,
-    		scope: scope
+    		scope: scope,
+            destroyFn: destroyFn
     	});
 
     };
 
     Router.prototype.applyRoute = function(route) {
+
+        if(this.currentRoute != null) {
+            for(var i=0; i<this.routes.length; i++) {
+                var sRoute = this.routes[i];
+                if (sRoute.matches(this.currentRoute)) {
+                    sRoute.destroyFn.apply(sRoute.scope, sRoute.getArgumentsValues(this.currentRoute));
+                }
+            }
+        }
 
         if(route == undefined) route = "";
 
@@ -88,6 +102,7 @@ define([], function() {
     		var sRoute = this.routes[i];
     		if (sRoute.matches(route)) {
     			sRoute.fn.apply(sRoute.scope, sRoute.getArgumentsValues(route));
+                this.currentRoute = route;
     		}
     	}
     };
