@@ -5,13 +5,14 @@ define([], function() {
 
 			var counter = 0,
 				frameCount = 25,
-				frameWidth = 353.5,
+				frameWidth = 341,
+				frameInterval = 3,
 				self = this;
 
 			function animate(timestamp) {
 
-				if(counter%4 == 0) {
-					var frame = Math.floor(counter / 2) % frameCount;
+				if(counter%frameInterval == 0) {
+					var frame = Math.floor(counter / frameInterval) % frameCount;
 					$("#top").css("background-position", (frame * frameWidth) + "px 0px");
 				}
 				counter++;
