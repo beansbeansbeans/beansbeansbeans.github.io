@@ -1,12 +1,12 @@
 define([], function() {
 	var home = {
 		initialize: function() {
-			$("#view").html("<div id='homepage'><div id='top'></div></div>");
+			$("#view").html("<div id='homepage'><h1>home</h1><div id='top'></div></div>");
 
 			var counter = 0,
 				frameCount = 25,
 				frameWidth = 341,
-				frameInterval = 3,
+				frameInterval = 4,
 				self = this;
 
 			function animate(timestamp) {

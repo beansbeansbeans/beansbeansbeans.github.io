@@ -179,12 +179,31 @@ $frame-height: 559px;
 
 #homepage {
 	text-align: center;
+	h1 {
+		@extend .extra-large-text;
+		font-weight: 600;
+		text-transform: uppercase;
+	}
 	#top {
+		@include transform(scale(0.75, 0.75));
 		margin: 0 auto;
 		@include size($frame-width, $frame-height);
 		background-image: url(../images/top.png);
 		background-size: $frame-count * $frame-width $frame-height;
 		// @include animation(top $duration steps($frame-count) infinite);
+	}
+	position: relative;
+	&:before {
+		content: "";
+		background-image: url(../images/1.JPG);
+		width: 1028px;
+		height: 377px;
+		display: block;
+		position: absolute;
+		z-index: -1;
+		@include transform(scale(0.35, 0.35));
+		left: 630px;
+		top: 350px;
 	}
 }
 
