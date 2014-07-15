@@ -193,17 +193,15 @@ $frame-height: 559px;
 		// @include animation(top $duration steps($frame-count) infinite);
 	}
 	position: relative;
-	&:before {
-		content: "";
-		background-image: url(../images/1.JPG);
-		width: 1028px;
-		height: 377px;
-		display: block;
+	#shadow {
+		background-image: url(../images/shadow.png);
+		width: 400px;
+		height: 114px;
 		position: absolute;
 		z-index: -1;
-		@include transform(scale(0.35, 0.35));
-		left: 630px;
-		top: 350px;
+		left: 50%;
+		top: 480px;
+		margin-left: -20px;
 	}
 }
 
