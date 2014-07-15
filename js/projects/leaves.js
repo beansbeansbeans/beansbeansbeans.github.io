@@ -287,6 +287,10 @@ define(['paper', 'underscore', 'templates/project_detail'], function(paper, _, p
 			UTILITIES
 			 */
 
+			var requestAnimationFrame = window.requestAnimationFrame ||
+										window.webkitRequestAnimationFrame ||
+										window.mozRequestAnimationFrame;
+
 			function whichCanvas(path, location) {
 				var canvasArr = [],
 					xPos = location.x;
@@ -573,10 +577,10 @@ define(['paper', 'underscore', 'templates/project_detail'], function(paper, _, p
 					}
 				});
 
-				window.webkitRequestAnimationFrame(animate);
+				requestAnimationFrame(animate);
 			}
 
-			window.webkitRequestAnimationFrame(animate);
+			requestAnimationFrame(animate);
 
 			/*
 			BEGIN PAPERSCRIPT
