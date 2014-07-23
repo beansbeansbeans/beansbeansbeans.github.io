@@ -20,6 +20,10 @@ require.config({
     }
 });
 
+var requestAnimationFrame = window.requestAnimationFrame ||
+                            window.webkitRequestAnimationFrame ||
+                            window.mozRequestAnimationFrame;
+
 define("d3.global", ["d3"], function(_) {
 	d3 = _;
 });

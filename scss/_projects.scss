@@ -174,19 +174,19 @@
 			visibility: hidden;
 			@include size(0px, 0px);
 		}
-		&[id="canvas_1"] {
-			background: darken(rgba(#CAFCFB, .9), 5%)
+		&[id="canvas_5"] {
+			background: darken(rgba(#CAFCFB, .9), 6%)
 		}
-		&[id="canvas_2"] {
+		&[id="canvas_4"] {
 			background: darken(rgba(#9AECEA, .9), 2%)
 		}
 		&[id="canvas_3"] {
 			background: rgba(#6ADBD9, .9)
 		}
-		&[id="canvas_4"] {
+		&[id="canvas_2"] {
 			background: rgba(#3ACBC6, .9)
 		}
-		&[id="canvas_5"] {
+		&[id="canvas_1"] {
 			background: rgba(#0ABBB5, .9)
 		}
 	}

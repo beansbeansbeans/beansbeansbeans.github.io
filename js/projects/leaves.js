@@ -1,4 +1,4 @@
-define(['paper', 'underscore', 'templates/project_detail'], function(paper, _, projectTemplate) {
+define(['templates/project_detail'], function(projectTemplate) {
 	var leaves = {
 		initialize: function() {
 			var data = {
@@ -46,128 +46,13 @@ define(['paper', 'underscore', 'templates/project_detail'], function(paper, _, p
 			  $(d).on("mouseup", handleDragEnd);
 			});
 
-			paper.setup(document.getElementById("canvas_0"));
-
-			var settings = {
-				viewWidth: 100,
-				viewHeight: 500,
-				leaves: [
+			/*
+			BEGIN ANIMATION CODE
+			 */
+			
+			var leaves = [
 				{
-					path: [[300, -100], [800, 100], [100, 500], [800, 850], [0, 900]],
-					animatable: {
-						segments: [
-							{
-								point: [50, 20], 
-								handleIn: [0, 0], 
-								handleOut: [-20, 47.5]
-							},
-							{
-								point: [52.5, 110], 
-								handleIn: [-17.5, -40], 
-								handleOut: [-10, -5]
-							},
-							{
-								point: [32.5, 67.5], 
-								handleIn: [2.5, 22.5], 
-								handleOut: [-20, 40]
-							},
-							{
-								point: [90, 140], 
-								handleIn: [-57.5, -5],
-								handleOut: [-32.5, -17.5]
-							},
-							{
-								point: [47, 55], 
-								handleIn: [85, -10],
-								handleOut: [-5, -10]
-							},
-							{
-								point: [50, 20], 
-								handleIn: [-5, 20], 
-								handleOut: [0, 0]
-							}
-						],
-						strokeColor: "#FAFAFF"
-					}
-				},
-				{
-					path: [[0, 100], [900, 150], [100, 400], [700, 700], [0, 1200]],
-					animatable: {
-						segments: [
-							{
-								point: [78, 12],
-								handleIn: [0, 0],
-								handleOut: [-60, 24]
-							},
-							{
-								point: [24, 168],
-								handleIn: [-48, -60],
-								handleOut: [-6, -30]
-							},
-							{
-								point: [42, 102],
-								handleIn: [-18, 30],
-								handleOut: [-18, 48]
-							},
-							{
-								point: [69, 208],
-								handleIn: [-62, -50],
-								handleOut: [-6, -12]
-							},
-							{
-								point: [41, 165],
-								handleIn: [3, 26],
-								handleOut: [128, -42]
-							},
-							{
-								point: [78, 12],
-								handleIn: [-12, 72],
-								handleOut: [0, 0] 
-							}
-						],
-						strokeColor: "#FAFAFF"
-					}
-				},
-				{
-					path: [[1050, -50], [200, 300], [800, 600], [350, 900], [1050, 1100]],
-					animatable: {
-						segments: [
-							{
-								point: [37.5, 20.5],
-								handleIn: [0, 0],
-								handleOut: [41.25, -30]
-							},
-							{
-								point: [146.25, 37.5],
-								handleIn: [-15, -15],
-								handleOut: [-45, 33]
-							},
-							{
-								point: [40, 30],
-								handleIn: [43.75, 51],
-								handleOut: [-15, 0]
-							},
-							{
-								point: [2, 40],
-								handleIn: [18.75, -7.5],
-								handleOut: [48.75, -28]
-							},
-							{
-								point: [114, 24.3],
-								handleIn: [-3.75, -2],
-								handleOut: [-22.5, -11.25]
-							},
-							{
-								point: [37.5, 21],
-								handleIn: [22.5, -7.5],
-								handleOut: [0, 0]
-							}
-						],
-						strokeColor: "#FAFAFF"
-					}
-				},
-				{
-					path: [[-50, 200], [500, 300], [50, 600], [900, 700], [500, 1050]],
+					path: [[500, 0], [150, 200], [550, 350], [150, 550], [450, 650]],
 					animatable: {
 						segments: [
 							{
@@ -201,363 +86,490 @@ define(['paper', 'underscore', 'templates/project_detail'], function(paper, _, p
 								handleOut: [0, 0]
 							}
 						],
-						strokeColor: "#FAFAFF"
+						strokeColor: 'red'
+					}
+				},
+				{
+					path: [[-50, -50], [250, 100], [120, 350], [580, 550], [50, 650]],
+					animatable: {
+						segments: [
+							{
+								point: [70, 2.5],
+								handleIn: [0, 0],
+								handleOut: [-45, 15]
+							},
+							{
+								point: [32.5, 125],
+								handleIn: [-45, -42.5],
+								handleOut: [-2.5, -30]
+							},
+							{
+								point: [52.5, 50],
+								handleIn: [-10, 10],
+								handleOut: [-15, 40]
+							},
+							{
+								point: [67.5, 190],
+								handleIn: [-35, -57.5],
+								handleOut: [-10, -20]
+							},
+							{
+								point: [55, 150],
+								handleIn: [0, 15],
+								handleOut: [150, -12.5]
+							},
+							{
+								point: [70, 2.5],
+								handleIn: [-25, 35],
+								handleOut: [0, 0]
+							}
+						],
+						strokeColor: 'pink'
+					}
+				},
+				{
+					path: [[-10, -50], [520, 200], [120, 300], [400, 500], [10, 550]],
+					animatable: {
+						segments: [
+							{
+								point: [64.13, 20.8],
+								handleIn: [0, 0],
+								handleOut: [-67.5, 77.65]
+							},
+							{
+								point: [75.6, 178.75],
+								handleIn: [-78.3, -3.37],
+								handleOut: [-23.62, -27]
+							},
+							{
+								point: [57.37, 107.9],
+								handleIn: [-3.37, 22.5],
+								handleOut: [-2.05, 36.45]
+							},
+							{
+								point: [124.87, 220.6],
+								handleIn: [-35, -30.37],
+								handleOut: [-24.3, -29.7]
+							},
+							{
+								point: [75.6, 145],
+								handleIn: [6.75, 27],
+								handleOut: [94.5, -57.37]
+							},
+							{
+								point: [64.12, 20.8],
+								handleIn: [-13.5, 54],
+								handleOut: [0, 0]
+							}
+						],
+						strokeColor: 'green'
+					}
+				},
+				{
+					path: [[300, -30], [70, 100], [480, 350], [75, 450], [300, 600]],
+					animatable: {
+						segments: [
+							{
+								point: [78.75, 33],
+								handleIn: [0, 0],
+								handleOut: [6, 47.25]
+							},
+							{
+								point: [61.5, 176.25],
+								handleIn: [-90, -71.25],
+								handleOut: [15, -17.25]
+							},
+							{
+								point: [84, 76.5],
+								handleIn: [1.5, 28.5],
+								handleOut: [1.8, 45]
+							},
+							{
+								point: [49.5, 199.5],
+								handleIn: [47.5, -52.5],
+								handleOut: [15, -6]
+							},
+							{
+								point: [84, 165],
+								handleIn: [-4.5, 7.5],
+								handleOut: [75, 1.5]
+							},
+							{
+								point: [78.75, 33],
+								handleIn: [78, 63],
+								handleOut: [0, 0]
+							}
+						],
+						strokeColor: 'blue'
 					}
 				}
-				]
+			];
+
+			function renderBezier(ctx, segments, xMod, yMod) {
+				ctx.beginPath();
+				ctx.strokeStyle = "white";
+				ctx.lineWidth = 3;
+				ctx.moveTo(segments[0].point[0] + xMod, segments[0].point[1] + yMod);
+				segments.forEach(function(point, index) {
+					var nextIndex = (index+1)%segments.length;
+					ctx.bezierCurveTo(
+						point.point[0] + point.handleOut[0] + xMod, 
+						point.point[1] + point.handleOut[1] + yMod, 
+						segments[nextIndex].point[0] + segments[nextIndex].handleIn[0] + xMod, 
+						segments[nextIndex].point[1] + segments[nextIndex].handleIn[1] + yMod, 
+						segments[nextIndex].point[0] + xMod, 
+						segments[nextIndex].point[1] + yMod
+					);
+				});
+				ctx.stroke();
+				ctx.closePath();
 			}
 
-			/*
-			UTILITIES
-			 */
+			function getBoundingBox(ctx, segments) {
+				var alphaThreshold = 15,
+					minX = Infinity,
+					minY = Infinity,
+					maxX = -Infinity,
+					maxY = -Infinity,
+					width = ctx.canvas.width,
+					height = ctx.canvas.height;
+				
+				ctx.save();
+				ctx.strokeStyle = '#000';
+				ctx.lineWidth = 1;
 
-			var requestAnimationFrame = window.requestAnimationFrame ||
-										window.webkitRequestAnimationFrame ||
-										window.mozRequestAnimationFrame;
+				renderBezier(ctx, segments, 0, 0);
+				var data = ctx.getImageData(0, 0, width, height).data;
 
-			function whichCanvas(path, location) {
-				var canvasArr = [],
-					xPos = location.x;
+				for(var x=0; x<width; x++) {
+					for(var y=0; y<height; y++) {
+						var alpha = data[(width*y + x) * 4 + 3];
+						if(alpha > alphaThreshold) {
+							if (x > maxX) maxX = x;
+							if (x < minX) minX = x;
+							if (y > maxY) maxY = y;
+							if (y < minY) minY = y;
+						}
+					}
+				}
 
-				canvasArr.push(Math.ceil(xPos / settings.viewWidth));
-				if(Math.ceil(xPos / settings.viewWidth) > 1) canvasArr.push(Math.ceil((xPos - (path.bounds.width / 2)) / settings.viewWidth));
-				canvasArr.push(Math.ceil((xPos + (path.bounds.width / 2)) / settings.viewWidth));
-				canvasArr = _.uniq(canvasArr);
+				ctx.clearRect(0, 0, width, height);
 
-				return canvasArr;
+				ctx.restore();
+
+				return {
+					x: minX,
+					y: minY,
+					width: maxX - minX,
+					height: maxY - minY
+				}
 			}
 
-			function getBoundingBoxCenter(bounds) {
-				return bounds.x + bounds.width / 2;
+			function drawSprite(ctx, clippingCtx, index, destX, destY, flipFlag) {
+				var path = leaves[index].animatable,
+					sourceX = flipFlag ? (canvasTemp.width - path.boundingBox.width) : 0,
+					sourceY = path.spriteY,
+					sourceWidth = path.boundingBox.width,
+					sourceHeight = path.boundingBox.height;
+
+				ctx.drawImage(clippingCtx.canvas, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, sourceWidth, sourceHeight);
 			}
 
-			function reverseSegments(path) {
-				var centerX = getBoundingBoxCenter(path.bounds);
-				return path.segments.map(function(d) {
-					return new paper.Segment([centerX + (centerX - d.point.x) , d.point.y], [-d.handleIn.x, d.handleIn.y], [-d.handleOut.x, d.handleOut.y]);
+			function drawSegment(segmentObj, debugColor) {
+				canvases.forEach(function(canvas, canvasIdx) {
+					canvas.ctx.save();
+					canvas.ctx.strokeStyle = debugColor;
+					canvas.ctx.beginPath();
+					canvas.ctx.moveTo(segmentObj.startPoint[0] - (canvasIdx * canvasWidth), segmentObj.startPoint[1]);
+					canvas.ctx.lineTo(segmentObj.endPoint[0] - (canvasIdx * canvasWidth), segmentObj.endPoint[1]);
+					canvas.ctx.stroke();
+					canvas.ctx.restore();
+				});
+			}
+
+			function getLocationAt(hypoteneuse, segmentObj) {
+				return {
+					x: segmentObj.startPoint[0] + (hypoteneuse * Math.cos(segmentObj.angle)),
+					y: segmentObj.startPoint[1] + (hypoteneuse * Math.sin(segmentObj.angle))
+				}
+			}
+
+			var canvasWidth = 100,
+				canvasHeight = 500,
+				canvases = [],
+				canvasTemp = document.createElement("canvas"),
+				ctxTemp = canvasTemp.getContext('2d');
+
+			[].forEach.call(document.querySelectorAll("canvas"), function(d) {
+				canvases.push({
+					node: d,
+					ctx: d.getContext('2d')
+				});
+				canvases[canvases.length - 1].node.width = canvasWidth;
+				canvases[canvases.length - 1].node.height = canvasHeight;
+			});
+
+			function createSpritesheet() {
+			 	
+			 	canvasTemp.width = canvasTemp.height = 1000;
+
+				leaves.forEach(function(d) {
+					var boundingBox = getBoundingBox(ctxTemp, d.animatable.segments);
+
+					d.animatable.segments.forEach(function(point) {
+						point.point[0] -= boundingBox.x;
+						point.point[1] -= boundingBox.y;
+					});
+
+					d.animatable.boundingBox = {
+						width: boundingBox.width,
+						height: boundingBox.height
+					}
+				});
+
+				canvasTemp.width = 2 * Math.max.apply(Math, leaves.map(function(d) {
+					return d.animatable.boundingBox.width;
+				}));
+
+				canvasTemp.height = leaves.reduce(function(previous, current) {
+					return previous + current.animatable.boundingBox.height;
+				}, 0);
+
+				var yModAccumulator = 0;
+
+				leaves.forEach(function(d, i) {
+					var yMod = (i > 0) ? yModAccumulator += leaves[i-1].animatable.boundingBox.height : 0;
+
+					leaves[i].animatable.spriteY = yMod;
+
+					renderBezier(ctxTemp, d.animatable.segments, 0, yMod);
+
+					ctxTemp.save();
+					ctxTemp.translate(canvasTemp.width, 0);
+					ctxTemp.scale(-1, 1);
+					renderBezier(ctxTemp, d.animatable.segments, 0, yMod);
+					ctxTemp.restore();
+				});
+
+				// document.body.appendChild(canvasTemp); //DEBUG
+			}
+
+			function createSegmentObjects() {
+				leaves.forEach(function(d, i) {
+					var leafWidth = leaves[i].animatable.boundingBox.width;
+					leaves[i].segments = [];
+					leaves[i].path.forEach(function(point, pointIdx) {
+						if(pointIdx < (leaves[i].path.length - 1)) {
+
+							var startPoint = leaves[i].path[pointIdx],
+								endPoint = leaves[i].path[pointIdx + 1],
+								segmentAngle = Math.atan2(endPoint[1] - startPoint[1], endPoint[0] - startPoint[0]),
+								projectionX = leafWidth * Math.cos(segmentAngle),
+								projectionY = leafWidth * Math.sin(segmentAngle);
+
+							leaves[i].segments.push({
+								tanAngle: Math.atan((endPoint[1] - startPoint[1])/(endPoint[0] - startPoint[0])),
+								angle: segmentAngle,
+								intersectionPoint: [startPoint[0], startPoint[1]],
+								startPoint: [startPoint[0] - projectionX, startPoint[1] - projectionY],
+								endPoint: [endPoint[0] + projectionX, endPoint[1] + projectionY],
+								length: Math.floor(Math.sqrt(Math.pow((endPoint[1] + projectionY) - (startPoint[1] - projectionY), 2) + Math.pow((endPoint[0] + projectionX) - (startPoint[0] - projectionX), 2)))
+							});
+						}
+					});
+				});
+			}
+
+			function drawSegmentObjects() {
+				leaves.forEach(function(d, i) {
+					d.segments.forEach(function(segment, segmentIdx) {
+						drawSegment(segment, d.animatable.strokeColor)
+					});
 				})
 			}
 
-			function reversePath(path) {
-				var segments = path.segments.map(function(d) {
-						return d;
-					}),
-					copy = path.clone();
-				copy.segments = reverseSegments(path);
-				return copy;
-			}
+			function createClippingRegions() {
+				leaves.forEach(function(d, i) {
+					d.clippingRegion = document.createElement("canvas");
+					// document.body.appendChild(d.clippingRegion); // DEBUG
+					d.clippingRegion.width = canvasWidth * canvases.length;
+					d.clippingRegion.height = canvasHeight;
+					d.clippingRegionCtx = d.clippingRegion.getContext('2d');
 
-			function pointer(leaf, oddFlag, flipFlag) {
-				var segmentCounter = oddFlag ? 1 : 0,
-					everyOtherIndexArr = [],
-					leafObj = leaves[leaf],
-					leafGroup = flipFlag ? leaf.flipGroup : leaf.group,
-					realWidth = leaf.group.children[0].bounds.width,
-					mustMove = false,
-					frameCounter = 0,
-					partner,
-					segmentGroup = leaf.path.children;
+					var maskSegments = [];
 
-				for(var i=segmentCounter; i < segmentGroup.length; i+=2) {
-					everyOtherIndexArr.push(i);
-				}
-
-				segmentCounter = 0;
-
-				return {
-					init: function(obj) {
-						partner = obj;
-						var startLocation = segmentGroup[this.getCounter()].getLocationAt(0);
-						leafGroup.position.x = startLocation.point.x; /* saying can't get point of null */
-						leafGroup.position.y = startLocation.point.y;
-					},
-					setMove: function(bool) {
-						mustMove = bool;
-						if(bool) this.setAngle();
-					},
-					getMove: function() {
-						return mustMove;
-					},
-					setFrameCounter: function(val) {
-						frameCounter = val;
-					},
-					getFrameCounter: function() {
-						return frameCounter;
-					},
-					incrementCounter: function() {
-						segmentCounter++;
-					},
-					getCounter: function() {
-						return everyOtherIndexArr[segmentCounter%everyOtherIndexArr.length];
-					},
-					setAngle: function() {
-						leafGroup.rotate(leafGroup.currentRotation * -1);
-						leafGroup.rotate(segmentGroup[this.getCounter()].angle * 57.3);
-						leafGroup.currentRotation = segmentGroup[this.getCounter()].angle * 57.3;
-					},
-					moveObject: function() {
-						var currentSegment = segmentGroup[this.getCounter()],
-							location = currentSegment.getLocationAt(frameCounter % currentSegment.length);
-
-						leafGroup.position.x = location.point.x;
-						leafGroup.position.y = location.point.y;
-						leafGroup.canvasGroup = whichCanvas(leafGroup, leafGroup.position);
-
-						if(Math.abs(leafGroup.position.x - currentSegment.segments[1].point.x) >= 5) {
-							frameCounter++;
-							this.setFrameCounter(frameCounter);
+					d.segments.forEach(function(segment, segmentIdx) {
+						segment.direction = (segment.angle >= (Math.PI / 2)) ? 1 : -1;
+						if(segmentIdx == 0) {
+							segment.abovePoint = [segment.intersectionPoint[0], segment.intersectionPoint[1] - d.animatable.boundingBox.height];
+							segment.belowPoint = [segment.intersectionPoint[0], segment.intersectionPoint[1] + d.animatable.boundingBox.height];
 						} else {
-							this.setMove(false);
-							this.setFrameCounter(0);
-							this.incrementCounter();
+							var angleDiff = Math.abs((Math.abs(segment.tanAngle) - Math.abs(d.segments[segmentIdx - 1].tanAngle))) / 2,
+								multiplier = (Math.abs(segment.tanAngle) > Math.abs(d.segments[segmentIdx - 1].tanAngle)) ? Math.abs(d.segments[segmentIdx - 1].tanAngle) / d.segments[segmentIdx - 1].tanAngle : Math.abs(segment.tanAngle) / segment.tanAngle;
+
+							if(!multiplier) multiplier = 1;
+
+							segment.abovePoint = [segment.intersectionPoint[0] - (Math.sin(angleDiff * multiplier) * d.animatable.boundingBox.width), segment.intersectionPoint[1] - (Math.cos(angleDiff * multiplier) * d.animatable.boundingBox.width)];
+							segment.belowPoint = [segment.intersectionPoint[0] + (Math.sin(angleDiff * multiplier) * d.animatable.boundingBox.width), segment.intersectionPoint[1] + (Math.cos(angleDiff * multiplier) * d.animatable.boundingBox.width)];
 						}
+					});
 
-						if(Math.sqrt(Math.pow(leafGroup.position.x - currentSegment.segments[1].point.x, 2) + Math.pow(leafGroup.position.y - currentSegment.segments[1].point.y, 2)) <= realWidth * 2 && !partner.getMove()) {
-							partner.setMove(true);
-							partner.moveObject();
-						} 
-					}
-				}
-			}
+					var negativeDirectionSegments = d.segments.filter(function(segment) {
+						return segment.direction != d.segments[0].direction;
+					});
 
-			function convertToSegments(points, width) {
+					negativeDirectionSegments.sort(function(a, b) {
+						return a.intersectionPoint[1] - b.intersectionPoint[1];
+					});
 
-				var segments = [],
-					angleDiff = 0,
-					newAngleDiff = 0,
-					multiplier = 0,
-					maskSegments = [];
+					var positiveDirectionSegments = d.segments.filter(function(segment) {
+						return segment.direction == d.segments[0].direction && segment != d.segments[0];
+					});
 
-				for(i=0; i<points.length - 1; i++) {
-
-					var angle = Math.atan((points[i+1][1] - points[i][1])/(points[i+1][0] - points[i][0])),
-						direction = (angle >= 0) ? 1 : -1,
-						xDiff = Math.cos(angle) * width * direction,
-						yDiff = Math.sin(angle) * width * direction,
-						newStart = [points[i][0] - xDiff, points[i][1] - yDiff],
-						newFinish = [points[i+1][0] + xDiff, points[i+1][1] + yDiff];
-
-					segments.push(new paper.Path({
-						segments: [newStart, newFinish]
-					}));
-
-					var thisSegment = segments[segments.length - 1];
-
-					thisSegment.angle = angle;
-					thisSegment.direction = direction;
-					thisSegment.intersectionPoint = [points[i][0], points[i][1]];
-
-					if(i==0) {
-						thisSegment.abovePoint = [thisSegment.intersectionPoint[0], thisSegment.intersectionPoint[1] - width];
-						thisSegment.belowPoint = [thisSegment.intersectionPoint[0], thisSegment.intersectionPoint[1] + width];
-					}
-
-					if(i>0) {
-						
-						angleDiff = Math.abs((Math.abs(segments[segments.length - 1].angle) - Math.abs(segments[segments.length - 2].angle)))/2;
-						multiplier = (Math.abs(segments[segments.length - 1].angle) > Math.abs(segments[segments.length - 2].angle)) ? Math.abs(segments[segments.length - 2].angle) / segments[segments.length - 2].angle : Math.abs(segments[segments.length - 1].angle) / segments[segments.length - 1].angle;
-
-						if(!multiplier) multiplier = 1; // in case it's NaN
-
-						thisSegment.abovePoint = [thisSegment.intersectionPoint[0] - (Math.sin(angleDiff * multiplier) * width), thisSegment.intersectionPoint[1] - (Math.cos(angleDiff * multiplier) * width)];
-						thisSegment.belowPoint = [thisSegment.intersectionPoint[0] + (Math.sin(angleDiff * multiplier) * width), thisSegment.intersectionPoint[1] + (Math.cos(angleDiff * multiplier) * width)];
-
-					}
-
-				}
-
-				var negativeDirectionSegments = _.chain(segments)
-					.filter(function(d) {return d.direction != segments[0].direction;})
-					.sortBy(function(d) {return d.intersectionPoint[1];})
-					.value();
-
-				var positiveDirectionSegments = _.chain(segments)
-					.filter(function(d) {return d.direction == segments[0].direction && d != segments[0];})
-					.sortBy(function(d) {return -1 * d.intersectionPoint[1];})
-					.value();
-
-				maskSegments.push(segments[0].abovePoint);
-
-				negativeDirectionSegments.forEach(function(d) {
-					maskSegments.push(d.abovePoint);
-					maskSegments.push(d.belowPoint);
-				});
-
-				maskSegments.push([points[points.length - 1][0], points[points.length - 1][1] + width]);
-				maskSegments.push([points[points.length - 1][0], points[points.length - 1][1] - width]);
-
-				positiveDirectionSegments.forEach(function(d) {
-					maskSegments.push(d.belowPoint);
-					maskSegments.push(d.abovePoint);
-				});
-
-				maskSegments.push(segments[0].belowPoint);
-
-				var maskGroup = new paper.Group(segments);
-				maskGroup.mask = new paper.Path({
-					segments: maskSegments,
-					strokeColor: 'red',
-					closed: true
-				});
-
-				return maskGroup;
-
-			}
-
-			/*
-			OBJECTS INITIALIZATION
-			 */
-
-			function constructAnimatables(arr) {
-				arr.forEach(function(leaf) {
-
-					var animatable = new paper.Path({
-							segments: leaf.animatable.segments,
-							strokeColor: leaf.animatable.strokeColor,
-							strokeWidth: 3
-						}),
-						bounds = new paper.Path.Rectangle({
-						x: animatable.bounds.x,
-						y: animatable.bounds.y,
-						width: animatable.bounds.width,
-						height: animatable.bounds.height
+					positiveDirectionSegments.sort(function(a, b) {
+						return b.intersectionPoint[1] - a.intersectionPoint[1];
 					});
 					
-					leaf.group = new paper.Group([animatable, bounds]);
-					leaf.group.currentRotation = 0;
+					maskSegments.push(d.segments[0].abovePoint);
+					negativeDirectionSegments.forEach(function(d) {
+						maskSegments.push(d.abovePoint);
+						maskSegments.push(d.belowPoint);
+					});
 
-					leaf.flipGroup = new paper.Group([reversePath(animatable), reversePath(bounds)]);
-					leaf.flipGroup.currentRotation = 0;
-					
+					maskSegments.push([d.segments[d.segments.length - 1].endPoint[0], d.segments[d.segments.length - 1].endPoint[1] + d.animatable.boundingBox.width]);
+					maskSegments.push([d.segments[d.segments.length - 1].endPoint[0], d.segments[d.segments.length - 1].endPoint[1] - d.animatable.boundingBox.width]);
+
+					positiveDirectionSegments.forEach(function(d) {
+						maskSegments.push(d.belowPoint);
+						maskSegments.push(d.abovePoint);
+					});
+
+					maskSegments.push(d.segments[0].belowPoint);
+
+					d.clippingRegionCtx.beginPath();
+					d.clippingRegionCtx.moveTo(maskSegments[0][0], maskSegments[0][1]);
+
+					maskSegments.forEach(function(point, pointIdx) {
+						d.clippingRegionCtx.lineTo(maskSegments[(pointIdx + 1) % maskSegments.length][0], maskSegments[(pointIdx + 1) % maskSegments.length][1]);
+					});
+
+					// d.clippingRegionCtx.stroke();
+					d.clippingRegionCtx.clip();
 				});
 			}
 
-			function constructPaths(arr) {
-				arr.forEach(function(leaf) {
-					var animPath = leaf.path;
-					leaf.path = convertToSegments(animPath, leaf.group.bounds.width);
-					leaf.path.length = 0;
-					leaf.path.children.forEach(function(d) {leaf.path.length += d.length;});
-					var clippingGroup = new paper.Group([leaf.path.mask, leaf.group, leaf.flipGroup]);
+			function createTrackers() {
+				leaves.forEach(function(leaf, leafIdx) {
+					leaf.frontTracker = {};
+					leaf.frontTracker.currentSegment = 0;
+					leaf.frontTracker.currentPosition = 0;
+					leaf.frontTracker.pastThreshold = false;
+					leaf.frontTracker.moving = true;
+
+					leaf.flipTracker = {};
+					leaf.flipTracker.currentSegment = (leaf.segments.length % 2 == 0) ? leaf.segments.length - 1 : leaf.segments.length - 2;
+					leaf.flipTracker.currentPosition = leaf.segments[leaf.flipTracker.currentSegment].length;
+					leaf.flipTracker.pastThreshold = true;
+					leaf.flipTracker.moving = true;
 				});
 			}
 
-			function constructPointers(arr) {
-				arr.forEach(function(leaf) {
-					leaf.forwardPointer = pointer(leaf, false, false);
-					leaf.reversePointer = pointer(leaf, true, true);
+			createSpritesheet();
 
-					leaf.forwardPointer.init(leaf.reversePointer);
-					leaf.reversePointer.init(leaf.forwardPointer);
-				});
-			}
+			createSegmentObjects();
 
-			function initialize() {
-				constructAnimatables(settings.leaves);
-				constructPaths(settings.leaves);
-				constructPointers(settings.leaves);
-			}
+			drawSegmentObjects();
 
-			initialize();
+			createClippingRegions();
 
-			var counter = 0;
+			createTrackers();
+
+			/*
+			RAF
+			 */
+
+			var pixelsPerFrame = 2;
 
 			function animate() {
-				settings.leaves.forEach(function(leaf) {
-					if(leaf.forwardPointer.getMove()) {
-						leaf.forwardPointer.moveObject();
+
+				leaves.forEach(function(d, i) {
+					d.clippingRegionCtx.clearRect(0, 0, d.clippingRegion.width, d.clippingRegion.height);
+				});
+
+				canvases.forEach(function(canvas, canvasIdx) {
+					canvases[canvasIdx].ctx.clearRect(0, 0, canvases[canvasIdx].node.width, canvases[canvasIdx].node.height);
+				});
+
+				leaves.forEach(function(d, i) {
+
+					if (d.frontTracker.currentPosition <= d.segments[d.frontTracker.currentSegment].length) {
+						d.frontTracker.currentPosition += pixelsPerFrame;
+					} else {
+						d.frontTracker.moving = false;
 					}
-					if(leaf.reversePointer.getMove()) {
-						leaf.reversePointer.moveObject();
+
+					if (d.flipTracker.currentPosition <= d.segments[d.flipTracker.currentSegment].length) {
+						d.flipTracker.currentPosition += pixelsPerFrame;
+					} else {
+						d.flipTracker.moving = false;
 					}
-					if(counter%leaf.path.length == 0) {
-						leaf.forwardPointer.setMove(true);
-						leaf.forwardPointer.moveObject();
+
+					if (!d.frontTracker.pastThreshold && d.frontTracker.currentPosition >= (d.segments[d.frontTracker.currentSegment].length - (d.animatable.boundingBox.width * 2))) {
+						d.frontTracker.pastThreshold = true;
+						d.flipTracker.currentSegment = (d.frontTracker.currentSegment + 1) % (d.segments.length);
+						d.flipTracker.currentPosition = 0;
+						d.flipTracker.pastThreshold = false;
+						d.flipTracker.moving = true;
+					}
+
+					if (!d.flipTracker.pastThreshold && d.flipTracker.currentPosition >= (d.segments[d.flipTracker.currentSegment].length - (d.animatable.boundingBox.width * 2))) {
+						d.flipTracker.pastThreshold = true;
+						d.frontTracker.currentSegment = (d.flipTracker.currentSegment + 1) % (d.segments.length);
+						d.frontTracker.currentPosition = 0;
+						d.frontTracker.pastThreshold = false;
+						d.frontTracker.moving = true;
+					}
+					
+					var frontLocation = getLocationAt(d.frontTracker.currentPosition, d.segments[d.frontTracker.currentSegment]),
+						flipLocation = getLocationAt(d.flipTracker.currentPosition, d.segments[d.flipTracker.currentSegment]);
+
+					if(d.frontTracker.moving) {
+						d.clippingRegionCtx.translate(frontLocation.x, frontLocation.y);
+						d.clippingRegionCtx.rotate(d.segments[d.frontTracker.currentSegment].angle);
+						drawSprite(d.clippingRegionCtx, ctxTemp, i, -d.animatable.boundingBox.width / 2, -d.animatable.boundingBox.height / 2);
+						d.clippingRegionCtx.rotate(-d.segments[d.frontTracker.currentSegment].angle);
+						d.clippingRegionCtx.translate(-frontLocation.x, -frontLocation.y);
+						canvases.forEach(function(canvas, canvasIdx) {
+							if(frontLocation.x >= ((canvasIdx * canvasWidth) - d.animatable.boundingBox.width / 2) && frontLocation.x <= ((canvasIdx * canvasWidth) + canvasWidth + d.animatable.boundingBox.width / 2)) {
+								// copy in-memory canvas to DOM canvas
+								canvas.ctx.drawImage(d.clippingRegion, 0 + (canvasIdx * canvasWidth), 0, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
+							}
+						})
+					}
+
+					if(d.flipTracker.moving) {
+						d.clippingRegionCtx.translate(flipLocation.x, flipLocation.y);
+						d.clippingRegionCtx.rotate(Math.PI + d.segments[d.flipTracker.currentSegment].angle);
+						drawSprite(d.clippingRegionCtx, ctxTemp, i, -d.animatable.boundingBox.width / 2, -d.animatable.boundingBox.height / 2, true);
+						d.clippingRegionCtx.rotate(-(Math.PI + d.segments[d.flipTracker.currentSegment].angle));
+						d.clippingRegionCtx.translate(-flipLocation.x, -flipLocation.y);
+
+						canvases.forEach(function(canvas, canvasIdx) {
+							if(flipLocation.x >= ((canvasIdx * canvasWidth) - d.animatable.boundingBox.width / 2) && flipLocation.x <= ((canvasIdx * canvasWidth) + canvasWidth + d.animatable.boundingBox.width / 2)) {
+								// copy in-memory canvas to DOM canvas
+								canvas.ctx.drawImage(d.clippingRegion, 0 + (canvasIdx * canvasWidth), 0, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
+							}
+						});
 					}
 				});
 
-				counter++;
-
-				settings.leaves.forEach(function(leaf, leafIdx) {
-
-					for(i=0; i<canvasCount; i++) {
-
-						if(leaf.group.canvasGroup && leaf.group.canvasGroup.indexOf(canvases[i].idx) > -1) {
-							canvases[i].selfLeaves[leafIdx].group.visible = true;
-							placeLeaf(canvases[i], leafIdx, false);
-						} else {
-							canvases[i].selfLeaves[leafIdx].group.visible = false;
-						}
-
-						if(leaf.flipGroup.canvasGroup && leaf.flipGroup.canvasGroup.indexOf(canvases[i].idx) > -1) {
-							canvases[i].selfLeaves[leafIdx].flipGroup.visible = true;
-							placeLeaf(canvases[i], leafIdx, true);
-						} else {
-							canvases[i].selfLeaves[leafIdx].flipGroup.visible = false;
-						}
-
-						canvases[i].view.draw();
-
-					}
-				});
+				// drawSegmentObjects();
 
 				requestAnimationFrame(animate);
+
 			}
 
 			requestAnimationFrame(animate);
-
-			/*
-			BEGIN PAPERSCRIPT
-			 */
-
-			var canvases = [];
-			var canvasCount = 5;
-
-			for(i=0; i<canvasCount; i++) {
-				canvases[i] = new paper.Project(document.getElementById("canvas_" + (i+1)));
-				canvases[i].idx = (i + 1);
-				canvases[i].selfLeaves = [];
-				canvases[i].view.viewSize = [settings.viewWidth, settings.viewHeight];
-			}
-
-			placeLeaf = function(scope, leafIdx, flipFlag) {
-				var selfLeaf = scope.selfLeaves[leafIdx][flipFlag ? "flipGroup" : "group"],
-					globalLeaf = settings.leaves[leafIdx][flipFlag ? "flipGroup" : "group"];
-
-				selfLeaf.position = [globalLeaf.position.x - (scope.idx - 1) * settings.viewWidth, globalLeaf.position.y];
-
-				if(selfLeaf.currentRotation != globalLeaf.currentRotation) {
-					if(selfLeaf.currentRotation) {
-						selfLeaf.rotate(selfLeaf.currentRotation * -1);
-					}
-					selfLeaf.rotate(globalLeaf.currentRotation);
-					selfLeaf.currentRotation = globalLeaf.currentRotation;
-				}
-			};
-
-			settings.leaves.forEach(function(leaf, leafIdx) {
-
-				for(i=0; i<canvasCount; i++) {
-					canvases[i].selfLeaves[leafIdx] = {};
-					canvases[i].selfLeaves[leafIdx].group = leaf.group.clone();
-					canvases[i].selfLeaves[leafIdx].group.rotate(leaf.group.currentRotation * -1);
-					canvases[i].selfLeaves[leafIdx].flipGroup = leaf.flipGroup.clone();
-					canvases[i].selfLeaves[leafIdx].flipGroup.rotate(leaf.flipGroup.currentRotation * -1);
-					canvases[i].selfLeaves[leafIdx].mask = leaf.path.mask.clone();
-					canvases[i].selfLeaves[leafIdx].mask.segments = canvases[i].selfLeaves[leafIdx].mask.segments.map(function(d) {
-						return {
-							x: d.point.x - (canvases[i].idx - 1) * settings.viewWidth,
-							y: d.point.y
-						}
-					});
-
-					canvases[i].activeLayer.addChild(new paper.Group({
-						children: [canvases[i].selfLeaves[leafIdx].mask, canvases[i].selfLeaves[leafIdx].group, canvases[i].selfLeaves[leafIdx].flipGroup],
-						clipped: true
-					}));
-				}
-
-			})
 
 		}
 	};

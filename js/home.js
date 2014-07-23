@@ -21,11 +21,11 @@ define([], function() {
 				/*
 				IMPLEMENTATION BUG??? SHOULDN'T HAVE TO BE RESET EVERY FRAME
 				 */
-				self.requestID = window.webkitRequestAnimationFrame(animate);
+				self.requestID = requestAnimationFrame(animate);
 
 			}
 
-			this.requestID = window.webkitRequestAnimationFrame(animate);
+			this.requestID = requestAnimationFrame(animate);
 		},
 		destroy: function() {
 			window.cancelAnimationFrame(this.requestID);
