@@ -90,7 +90,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 					}
 				},
 				{
-					path: [[-50, -50], [250, 100], [120, 350], [580, 550], [50, 650]],
+					path: [[-50, -50], [450, 100], [120, 350], [580, 550], [150, 650]],
 					animatable: {
 						segments: [
 							{
@@ -128,7 +128,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 					}
 				},
 				{
-					path: [[-10, -50], [520, 200], [120, 300], [400, 500], [10, 550]],
+					path: [[380, -80], [580, 200], [220, 300], [500, 500], [10, 750]],
 					animatable: {
 						segments: [
 							{
@@ -166,7 +166,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 					}
 				},
 				{
-					path: [[300, -30], [70, 100], [480, 350], [75, 450], [300, 600]],
+					path: [[500, 0], [180, 100], [480, 350], [175, 450], [300, 600]],
 					animatable: {
 						segments: [
 							{
