@@ -169,17 +169,15 @@ nav {
 	}
 
 	.project-contents {
-		
 		@include leader(15);
 		@include trailer(10);
-		
 	}
 	
 	.caption {
-			color: $gray;
-			font-style: italic;
-			@include trailer(20);
-		}
+		color: $gray;
+		font-style: italic;
+		@include trailer(20);
+	}
 
 	.description {
 		@extend .medium-text;
@@ -200,14 +198,26 @@ $frame-height: 559px;
 		font-weight: 600;
 		text-transform: uppercase;
 	}
-	#top {
-		@include transform(scale(0.75, 0.75));
+	.description {
+		@extend .medium-text;
+		width: $content-width;
 		margin: 0 auto;
+		color: $gray;
+		font-weight: 400;
+	}
+	#top-container {
+		margin: 0 auto;
+		text-align: center;
+		@include leader(0);
+		position: relative;
+	}
+	#top {
+		margin: 0 auto;
+		@include transform(scale(0.75, 0.75));
 		@include size($frame-width, $frame-height);
 		background-image: url(../images/top.png);
 		background-size: $frame-count * $frame-width $frame-height;
 	}
-	position: relative;
 	#shadow {
 		background-image: url(../images/shadow.png);
 		width: 400px;
@@ -215,7 +225,7 @@ $frame-height: 559px;
 		position: absolute;
 		z-index: -1;
 		left: 50%;
-		top: 480px;
+		top: 420px;
 		margin-left: -20px;
 	}
 }
