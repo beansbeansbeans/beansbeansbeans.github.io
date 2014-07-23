@@ -15,7 +15,7 @@ define(['d3', 'underscore', 'templates/project_detail'], function(d3, _, project
 
 			var svg = d3.select("#scene").append("svg")
 			.attr("width", 960)
-			.attr("height", 500)
+			.attr("height", 460)
 			.append('g'),
 			indexOfArr = function(arr1, fnd) {
 				for (var i = 0, len1 = arr1.length; i < len1; i++) {
@@ -431,30 +431,30 @@ define(['d3', 'underscore', 'templates/project_detail'], function(d3, _, project
 			    	.attr("id", "myClip")
 			    	.append("circle")
 
-			    	svg.append("line")
-			    	.attr("stroke", "#222222")
-			    	.attr("stroke-width", "1")
-			    	.attr("x1", 0)
-			    	.attr("y1", 0)
-			    	.attr("x2", 960)
-			    	.attr("y2", 500)
+			    	// svg.append("line")
+			    	// .attr("stroke", "#222222")
+			    	// .attr("stroke-width", "1")
+			    	// .attr("x1", 0)
+			    	// .attr("y1", 0)
+			    	// .attr("x2", 960)
+			    	// .attr("y2", 500)
 
-			    	svg.append("line")
-			    	.attr("stroke", "#222222")
-			    	.attr("stroke-width", "1")
-			    	.attr("x1", 960)
-			    	.attr("y1", 0)
-			    	.attr("x2", 0)
-			    	.attr("y2", 500)
+			    	// svg.append("line")
+			    	// .attr("stroke", "#222222")
+			    	// .attr("stroke-width", "1")
+			    	// .attr("x1", 960)
+			    	// .attr("y1", 0)
+			    	// .attr("x2", 0)
+			    	// .attr("y2", 500)
 
-			    	svg.append("rect")
-			    	.attr("x", 160)
-			    	.attr("y", 83)
-			    	.attr("width", 640)
-			    	.attr("height", 333)
-			    	.attr("stroke", "#222222")
-			    	.attr("stroke-width", 1)
-			    	.attr("fill", "white");
+			    	// svg.append("rect")
+			    	// .attr("x", 160)
+			    	// .attr("y", 83)
+			    	// .attr("width", 640)
+			    	// .attr("height", 333)
+			    	// .attr("stroke", "#222222")
+			    	// .attr("stroke-width", 1)
+			    	// .attr("fill", "white");
 
 			    	function handleSlider(i, range) {
 			    		$("#" + i + "[type=range]").on("change", function() {
