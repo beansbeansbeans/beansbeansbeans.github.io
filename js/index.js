@@ -30,23 +30,31 @@ define("d3.global", ["d3"], function(_) {
 
 require(['jquery', 'router'], function($, Router) {
 
-    var router = new Router();
+    var router = new Router(),
+        initialize = function(module) {
+            module.initialize();
+            $("#view").removeClass("faded");
+            $("body").addClass("loaded");
+            clearTimeout(loadTimer);
+            // To tweak the loader: wrap all initialization code in a timeout that exceeds the delay below in the hashchange handler (currently set to 500ms)
+        },
+        loadTimer;
 
     router.registerRoute('projects/{projectid}', function(id) {
     	require(["projects/" + id], function(projectModule) {
-    		projectModule.initialize();
+    		initialize(projectModule);
     	});
     });
 
     router.registerRoute('projects', function() {
         require(["projects"], function(projects) {
-            projects.initialize();
+            initialize(projects);
         });
     });
 
     router.registerRoute('', function() {
         require(["home"], function(home) {
-            home.initialize();
+            initialize(home);
         });
     }, function() {
         require(["home"], function(home) {
@@ -55,7 +63,11 @@ require(['jquery', 'router'], function($, Router) {
     });
 
     $(window).on("hashchange", function() {
+        $("#view").addClass("faded");
         router.applyRoute(window.location.hash.split('#')[1]);
+        loadTimer = setTimeout(function() {
+            $("body").removeClass("loaded");
+        }, 500);
     })
 
     $(document).ready(function() {
@@ -63,9 +75,3 @@ require(['jquery', 'router'], function($, Router) {
     })
     
 });
-
-// TO FADE TRANSITION BETWEEN VIEWS:
-// 
-// 1) Refactor registerRoute stuff above to a single function
-// 2) On hashchange, show the spinner, fade out the current view
-// 3) Within the refactored registerRoute function, before calling initialize, hide the spinner and fade in the new view
