@@ -15,14 +15,27 @@ define(['templates/project_detail'], function(projectTemplate) {
 			var lastPosition,
 			    currentPosition,
 			    startingPosition,
-			    range = 100;
+			    range = 100,
+			    prefixedTransform = getVendorPrefix("transform");
+
+			function getVendorPrefix(property) {
+				var vendors = ['', 'webkit', 'Moz', 'O', 'ms'];
+				var prop = String(property);
+				vendors.every(function (vendor, index) {
+					if (index > 0) {
+						prop = vendor + property.charAt(0).toUpperCase() + property.slice(1);
+					}
+					return typeof document.body.style[prop] === 'undefined';
+				});
+				return prop;
+			}
 
 			function move(e) {
 			  if(lastPosition) {
 			    var delta = e.pageY - lastPosition;
 			    if(Math.abs(currentPosition - startingPosition) < range) {
 				    currentPosition += delta;
-				    $(e.target).css("-webkit-transform", "translateY(" + currentPosition + "px)");
+				    $(e.target).css(prefixedTransform, "translateY(" + currentPosition + "px)");
 			    }
 			  }
 			  lastPosition = e.pageY;

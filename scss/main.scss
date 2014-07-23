@@ -190,18 +190,8 @@ nav {
 // top animation
 
 $frame-count: 24;
-$duration: 2s;
 $frame-width: 341px;
 $frame-height: 559px;
-
-@include keyframe (top) {
-	from {
-		background-position: 0 0;
-	}
-	to {
-		background-position: $frame-count * $frame-width * -1 0px;
-	}
-}
 
 #homepage {
 	text-align: center;
@@ -216,7 +206,6 @@ $frame-height: 559px;
 		@include size($frame-width, $frame-height);
 		background-image: url(../images/top.png);
 		background-size: $frame-count * $frame-width $frame-height;
-		// @include animation(top $duration steps($frame-count) infinite);
 	}
 	position: relative;
 	#shadow {
