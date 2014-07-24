@@ -128,6 +128,32 @@ nav {
 	}
 }
 
+// details
+
+.log,
+.project {
+	.header {
+
+		.title {
+			@extend .extra-large-text;
+			font-weight: 600;
+			text-transform: uppercase;
+			@include trailer($font-size: map-get(map-get($text-map, extra-large), font-size), $lines: 8);
+		}
+		.blurb {
+			color: $gray;
+			font-style: italic;
+			@extend .medium-text;
+		}
+	}
+}
+
+// log detail
+
+.log {
+
+}
+
 // project detail
 
 .project {
@@ -153,20 +179,7 @@ nav {
 		width: $content-width;
 		margin: 0 auto;
 	}
-	.header {
-
-		.title {
-			@extend .extra-large-text;
-			font-weight: 600;
-			text-transform: uppercase;
-			@include trailer($font-size: map-get(map-get($text-map, extra-large), font-size), $lines: 8);
-		}
-		.blurb {
-			color: $gray;
-			font-style: italic;
-			@extend .medium-text;
-		}
-	}
+	
 
 	.project-contents {
 		@include leader(15);

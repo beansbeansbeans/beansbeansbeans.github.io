@@ -32,11 +32,13 @@ define([], function() {
     				rP = this.routeParts[i];
     			if(typeof rP == 'undefined') {
     				routeMatches = false;
+                    break;
     			} else {
     				var cP0 = rP.substr(0, 1);
     				if(cP0!="{") {
     					if(iRp != rP) {
 	    					routeMatches = false;
+                            break;
     					}
     				} else {
     					routeMatches = true;

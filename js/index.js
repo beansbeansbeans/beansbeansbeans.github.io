@@ -52,6 +52,18 @@ require(['jquery', 'router'], function($, Router) {
         });
     });
 
+    router.registerRoute('log/{logid}', function(id) {
+        require(["log/" + id], function(logModule) {
+            initialize(logModule);
+        });
+    });
+
+    router.registerRoute('log', function() {
+        require(["log"], function(log) {
+            initialize(log);
+        });
+    });
+
     router.registerRoute('', function() {
         require(["home"], function(home) {
             initialize(home);
