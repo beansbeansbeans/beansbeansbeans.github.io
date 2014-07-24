@@ -3,46 +3,47 @@ define(['templates/log_detail'], function(logTemplate) {
 		initialize: function() {
 			var data = {
 				title: "stuff",
-				logContents: '<canvas id="myCanvas" width="400" height="400" style="border:1px solid #000"></canvas>'
+				logContents: '<canvas id="myCanvas" width="400" height="400"></canvas>'
 			};
 
 			$("#view").html(logTemplate(data));
 
-			with( document.getElementById( 'myCanvas' ).getContext( '2d' ) ){
+			var canvas = document.getElementById('myCanvas');
+			var ctx = canvas.getContext('2d');
 
-			  fillStyle = '#F88';
-			  
-			  shadowOffsetX = 10;
-			  shadowOffsetY = 10;  
-			  shadowBlur = 20;  
-			  shadowColor = "rgba(0, 0, 0, .75)";          
+			ctx.fillStyle = '#Fff';
 
-			  translate( 50, 70 );
-			  scale( 2, 2 );
+			ctx.shadowOffsetX = 10;
+			ctx.shadowOffsetY = 10;  
+			ctx.shadowBlur = 20;  
+			ctx.shadowColor = "rgba(0, 0, 0, .75)";          
 
-			  beginPath();
+			ctx.translate( 50, 70 );
+			ctx.scale( 2, 2 );
 
-			    // Draw huge anti-clockwise box
-			    moveTo(  1000,  1000 );
-			    lineTo( -1000,  1000 );
-			    lineTo( -1000, -1000 );
-			    lineTo(  1000, -1000 );
-			    lineTo(  1000,  1000 );
-			              
-			    // Draw a small clockwise heart-shape
-			    moveTo( 75, 40 );
-			    bezierCurveTo(  75,   37,  70,   25,  50,   25 );
-			    bezierCurveTo(  20,   25,  20, 62.5,  20, 62.5 );
-			    bezierCurveTo(  20,   80,  40,  102,  75,  120 );
-			    bezierCurveTo( 110,  102, 130,   80, 130, 62.5 );
-			    bezierCurveTo( 130, 62.5, 130,   25, 100,   25 );
-			    bezierCurveTo(  85,   25,  75,   37,  75,   40 );
-			    
-			  closePath();
+			ctx.beginPath();
+			ctx.strokeStyle = "white";
 
-			  fill();
+			// Draw huge anti-clockwise box
+			ctx.moveTo(  1000,  1000 );
+			ctx.lineTo( -1000,  1000 );
+			ctx.lineTo( -1000, -1000 );
+			ctx.lineTo(  1000, -1000 );
+			ctx.lineTo(  1000,  1000 );
 
-			}
+			// Draw a small clockwise heart-shape
+			ctx.moveTo( 75, 40 );
+			ctx.bezierCurveTo(  75,   37,  70,   25,  50,   25 );
+			ctx.bezierCurveTo(  20,   25,  20, 62.5,  20, 62.5 );
+			ctx.bezierCurveTo(  20,   80,  40,  102,  75,  120 );
+			ctx.bezierCurveTo( 110,  102, 130,   80, 130, 62.5 );
+			ctx.bezierCurveTo( 130, 62.5, 130,   25, 100,   25 );
+			ctx.bezierCurveTo(  85,   25,  75,   37,  75,   40 );
+
+			ctx.closePath();
+
+			ctx.fill();
+
 		}
 	}
 	return stuff;
