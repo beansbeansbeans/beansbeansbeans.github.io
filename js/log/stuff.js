@@ -3,7 +3,7 @@ define(['templates/log_detail'], function(logTemplate) {
 		initialize: function() {
 			var data = {
 				title: "stuff",
-				logContents: '<canvas id="myCanvas" width="400" height="400"></canvas>'
+				logContents: '<canvas id="wave" width="400" height="400"></canvas><canvas id="myCanvas" width="400" height="400"></canvas>'
 			};
 
 			$("#view").html(logTemplate(data));
@@ -16,7 +16,7 @@ define(['templates/log_detail'], function(logTemplate) {
 			ctx.shadowOffsetX = 10;
 			ctx.shadowOffsetY = 10;  
 			ctx.shadowBlur = 20;  
-			ctx.shadowColor = "rgba(0, 0, 0, .75)";          
+			ctx.shadowColor = "rgba(0, 0, 0, .75)";     
 
 			ctx.translate( 50, 70 );
 			ctx.scale( 2, 2 );
@@ -43,6 +43,26 @@ define(['templates/log_detail'], function(logTemplate) {
 			ctx.closePath();
 
 			ctx.fill();
+
+			/*
+			BEGIN WAVE
+			 */
+			
+			var wave = document.getElementById('wave');
+			var wavectx = wave.getContext('2d');
+
+			wavectx.fillStyle = '#7096ad';
+
+			wavectx.beginPath();
+
+			wavectx.moveTo(0, 180);
+			wavectx.lineTo(400, 220);
+			wavectx.lineTo(400, 400);
+			wavectx.lineTo(0, 400);
+			wavectx.closePath();
+
+			wavectx.fill();
+			
 
 		}
 	}
