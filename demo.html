@@ -40,9 +40,9 @@ html, body {
   var context = new webkitAudioContext();
   var analyser = context.createAnalyser();
   
-  function drawCurve(ctx, ptsa, tension, numOfSegments) {
+  function drawCurve(ctx, ptsa) {
      ctx.beginPath();
-     drawLines(ctx, getCurvePoints(ptsa, tension, numOfSegments));
+     drawLines(ctx, getCurvePoints(ptsa));
   }
 
   function drawLines(ctx, pts) {
@@ -51,9 +51,10 @@ html, body {
       ctx.stroke();
   }
 
-  function getCurvePoints(pts, tension, numOfSegments) {
+  function getCurvePoints(pts) {
 
-      numOfSegments = numOfSegments ? numOfSegments : 16;
+      var tension = 0.5,
+          numOfSegments = 16;
 
       var _pts = [], res = [],    // clone array
           x, y,           // our x,y coords
@@ -124,7 +125,7 @@ html, body {
       ptsArr.push(CANVAS_HEIGHT - magnitude);
     }
 
-    drawCurve(ctx, ptsArr, 0.5, 16);
+    drawCurve(ctx, ptsArr);
 
     window.webkitRequestAnimationFrame(rafCallback);
   }
