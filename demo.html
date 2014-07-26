@@ -39,7 +39,7 @@ html, body {
 
   var context = new webkitAudioContext();
   var analyser = context.createAnalyser();
-  
+
   function drawCurve(ctx, ptsa) {
      ctx.beginPath();
      drawLines(ctx, getCurvePoints(ptsa));
@@ -87,9 +87,9 @@ html, body {
               st = t / numOfSegments;
 
               // calc cardinals
-              c1 =   2 * Math.pow(st, 3)  - 3 * Math.pow(st, 2) + 1; 
-              c2 = -(2 * Math.pow(st, 3)) + 3 * Math.pow(st, 2); 
-              c3 =       Math.pow(st, 3)  - 2 * Math.pow(st, 2) + st; 
+              c1 =   2 * Math.pow(st, 3)  - 3 * Math.pow(st, 2) + 1;
+              c2 = -(2 * Math.pow(st, 3)) + 3 * Math.pow(st, 2);
+              c3 =       Math.pow(st, 3)  - 2 * Math.pow(st, 2) + st;
               c4 =       Math.pow(st, 3)  -     Math.pow(st, 2);
 
               // calc x and y cords with common control vectors
