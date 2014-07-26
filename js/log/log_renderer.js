@@ -1,8 +1,6 @@
-define([], function() {
+define(['log/glyphs'], function(glyphs) {
     var renderer = {
         initialize: function(id) {
-            $("#log-" + id + " .log-contents").append('<canvas id="fft"></canvas><canvas id="letters" ></canvas>');
-
             this.id = id;
             this.canvasWidth = 500;
             this.canvasHeight = 400;
@@ -31,13 +29,48 @@ define([], function() {
             ctx.lineTo(this.canvasWidth, 0);
             ctx.lineTo(this.canvasWidth, this.canvasHeight);
 
-            ctx.moveTo( 75, 40 );
-            ctx.bezierCurveTo(  75,   37,  70,   25,  50,   25 );
-            ctx.bezierCurveTo(  20,   25,  20, 62.5,  20, 62.5 );
-            ctx.bezierCurveTo(  20,   80,  40,  102,  75,  120 );
-            ctx.bezierCurveTo( 110,  102, 130,   80, 130, 62.5 );
-            ctx.bezierCurveTo( 130, 62.5, 130,   25, 100,   25 );
-            ctx.bezierCurveTo(  85,   25,  75,   37,  75,   40 );
+            var cPathData = glyphs.c;
+            cPathData = cPathData.replace(/([a-z])/ig, ",$1");
+            cPathData = cPathData.split(",");
+
+            cPathData.forEach(function(d, i) {
+                var digits = d.substring(1).split(" "),
+                    command = d.charAt(0);
+                cPathData[i] = {
+                    command: command,
+                    digits: digits
+                };
+            });
+
+            ctx.scale(0.15, 0.15);
+
+            cPathData.forEach(function(d, i) {
+                if(d) {
+                    if(d.command == "M") {
+                        ctx.moveTo(d.digits[0], d.digits[1]);
+                        return;
+                    }
+                    if(d.command == "Q") {                                               ctx.quadraticCurveTo(d.digits[0], d.digits[1], d.digits[2], d.digits[3]);
+                        return;
+                    }
+                    if(d.command == "T") {
+                        ctx.quadraticCurveTo(cPathData[i-1].digits[cPathData[i-1].digits.length - 4], cPathData[i-1].digits[cPathData[i-1].digits.length - 3], d.digits[0], d.digits[1]);
+                        return;
+                    }
+                    if(d.command == "L") {
+                        ctx.lineTo(d.digits[0], d.digits[1]);
+                        return;
+                    }
+                    if(d.command == "V") {
+                        ctx.lineTo(cPathData[i-1].digits[cPathData[i-1].digits.length - 2], d.digits[0]);
+                        return;
+                    }
+                    if(d.command == "Z") {
+                        ctx.lineTo(cPathData[0].digits[0], cPathData[0].digits[1]);
+                        return;
+                    }
+                }
+            });
 
             ctx.closePath();
             ctx.fill();
@@ -66,7 +99,7 @@ define([], function() {
             audio.src = this.id + ".ogg";
             audio.controls = true;
 
-            $("#audio").append(audio);
+            $("#audio").append(audio).css("padding-top", this.canvasHeight);
 
             source.connect(analyser);
             analyser.connect(audioCtx.destination);

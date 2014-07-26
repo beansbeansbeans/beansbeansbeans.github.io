@@ -14,6 +14,11 @@ html, body {
 </head>
 <body>
 
+    <svg xmlns="http://www.w3.org/2000/svg" width="4cm" height="4cm" viewBox="0 0 400 400" version="1.1">
+      <path transform="scale(0.1, 0.1)" d="M1214 883Q1144 951 1067 985Q991 1020 909 1020Q782 1020 703 940T623 729Q623 602 698 522Q772 446 899 446Q975 446 1053 479Q1139 516 1225 582L1208 31Q1128 0 1036 -20Q950 -38 864 -39Q755 -39
+      657 -15T479 53Q284 164 186 336Q86 512 86 729Q86 885 143 1032Q196 1169 307 1280Q416 1389 559 1444Q704 1499 870 1499Q958 1499 1044 1481Q1132 1463 1214 1425V883Z" fill="red" />
+    </svg>
+
   <button onclick="window.console.log = function() {}">stop console</button>
 
 <div id="myaudio"></div>
@@ -32,7 +37,7 @@ html, body {
   const CANVAS_WIDTH = canvas.width;
 
   window.audio = new Audio();
-  audio.src = 'test.ogg';
+  audio.src = 'stuff.ogg';
   audio.controls = true;
 
   document.querySelector('#myaudio').appendChild(audio);
