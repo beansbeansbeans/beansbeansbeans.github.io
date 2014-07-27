@@ -2,8 +2,15 @@ define(['log/glyphs'], function(glyphs) {
     var renderer = {
         initialize: function(id) {
             this.id = id;
-            this.canvasWidth = 500;
-            this.canvasHeight = 400;
+            this.canvasWidth = $(window).width() * 0.5;
+
+            var naturalWordWidth = this.id.split("").reduce(function(prev, current) {
+                return prev + glyphs.letters[current].width;
+            }, 0);
+
+            this.scaleFactor = (this.canvasWidth / naturalWordWidth).toFixed(3);
+
+            this.canvasHeight = glyphs.height * this.scaleFactor * 1.5;
 
             this.renderLetters();
             this.renderVis();
@@ -11,7 +18,7 @@ define(['log/glyphs'], function(glyphs) {
         drawSVGInCanvas: function(letters) {
             var lettersArr = letters.split("");
             lettersArr.forEach(function(d, i) {
-                var cPathData = glyphs[d].path;
+                var cPathData = glyphs.letters[d].path;
                 cPathData = cPathData.replace(/([a-z])/ig, ",$1");
                 cPathData = cPathData.split(",");
 
@@ -37,7 +44,7 @@ define(['log/glyphs'], function(glyphs) {
                 });
 
                 if(i>0) {
-                    this.letterCtx.translate(glyphs[lettersArr[i-1]].width, 0);
+                    this.letterCtx.translate(glyphs.letters[lettersArr[i-1]].width, 0);
                 }
 
                 cPathData.forEach(function(d, i) {
@@ -77,12 +84,13 @@ define(['log/glyphs'], function(glyphs) {
             this.letterCtx.lineTo(0, this.canvasHeight);
             this.letterCtx.lineTo(this.canvasWidth, this.canvasHeight);
 
-            this.letterCtx.translate(0, this.canvasHeight / 1.5);
-            this.letterCtx.scale(0.15, -0.15);
+            this.letterCtx.translate(0, glyphs.height * this.scaleFactor + 0.5*(this.canvasHeight - (glyphs.height * this.scaleFactor)));
+            this.letterCtx.scale(this.scaleFactor, -this.scaleFactor);
 
             this.drawSVGInCanvas(this.id);
 
-            this.letterCtx.fill();
+            this.letterCtx.stroke();
+            // this.letterCtx.fill();
         },
         renderVis: function() {
             var canvas = $("#fft"),
