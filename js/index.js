@@ -70,7 +70,6 @@ require(['jquery', 'router'], function($, Router) {
     });
 
     $(window).on("hashchange", function() {
-        $("#view").addClass("faded");
         router.applyRoute(window.location.hash.split('#')[1]);
     });
 
