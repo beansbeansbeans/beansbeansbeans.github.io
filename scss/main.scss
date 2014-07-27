@@ -74,7 +74,6 @@ a {
 			padding-right: rhythm($lines: 4, $font-size: map-get(map-get($text-map, small), font-size));
 			outline: none !important;
 			&.active {
-				position: relative;
 				background: rgba(white, .2);
 			}
 			&:not(:first-of-type) {
