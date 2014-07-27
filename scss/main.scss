@@ -78,13 +78,10 @@ a {
 				background: rgba(white, .2);
 			}
 			&:not(:first-of-type) {
-				border-left: solid 1px rgba(white, 0.45);
+				border-left: solid 1px rgba(white, 1);
 				margin-left: -4px;
 			}
 		}
-	}
-	body:not(.loaded) & {
-		opacity: 0;
 	}
 }
 
@@ -113,35 +110,30 @@ nav {
 	}
 }
 
-#view {
-	@include transition(opacity 150ms);
-	opacity: 1;
-	&.faded {
-		opacity: 0;
-	}
-}
-
-#loader {
-	@include transition(opacity 100ms);
-	position: absolute;
-	top: 50vh;
-	text-align: center;
-	width: 100%;
-	.text {
-		text-transform: uppercase;
-		font-size: 50px;
-	}
-	.loaded & {
-		opacity: 0;
-	}
-}
-
 // details
 
 .log,
 .project {
+	@include padding-trailer($lines: 20);
+	.header,
+	.caption,
+	.description {
+		width: $content-width;
+		margin: 0 auto;
+	}
+	.back {
+		font-style: italic;
+		font-weight: 500;
+		color: $gray;
+		display: inline-block;
+		@include trailer($lines: 1);
+		&:before {
+			content: "←";
+			display: inline-block;
+			margin-right: .5em;
+		}
+	}
 	.header {
-
 		.title {
 			@extend .extra-large-text;
 			font-weight: 600;
@@ -159,41 +151,23 @@ nav {
 // log detail
 
 .log {
+	.back {
+		@extend .medium-text;
+	}
+	.log-contents {
 
+	}
 }
 
 // project detail
 
 .project {
 
-	@include padding-trailer($lines: 20);
-	
-	.back {
-		font-style: italic;
-		font-weight: 500;
-		color: $gray;
-		display: inline-block;
-		@include trailer($lines: 1);
-		&:before {
-			content: "←";
-			display: inline-block;
-			margin-right: .5em;
-		}
-	}
-	
-	.header,
-	.caption,
-	.description {
-		width: $content-width;
-		margin: 0 auto;
-	}
-	
-
 	.project-contents {
 		@include leader(15);
 		@include trailer(10);
 	}
-	
+
 	.caption {
 		color: $gray;
 		font-style: italic;
@@ -250,11 +224,3 @@ $frame-height: 559px;
 		margin-left: -20px;
 	}
 }
-
-
-
-
-
-
-
-

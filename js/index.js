@@ -33,12 +33,7 @@ require(['jquery', 'router'], function($, Router) {
     var router = new Router(),
         initialize = function(module) {
             module.initialize();
-            $("#view").removeClass("faded");
-            $("body").addClass("loaded");
-            clearTimeout(loadTimer);
-            // To tweak the loader: wrap all initialization code in a timeout that exceeds the delay below in the hashchange handler (currently set to 500ms)
-        },
-        loadTimer;
+        };
 
     router.registerRoute('projects/{projectid}', function(id) {
     	require(["projects/" + id], function(projectModule) {
@@ -77,13 +72,10 @@ require(['jquery', 'router'], function($, Router) {
     $(window).on("hashchange", function() {
         $("#view").addClass("faded");
         router.applyRoute(window.location.hash.split('#')[1]);
-        loadTimer = setTimeout(function() {
-            $("body").removeClass("loaded");
-        }, 500);
-    })
+    });
 
     $(document).ready(function() {
         router.applyRoute(window.location.hash.split('#')[1]);
     })
-    
+
 });
