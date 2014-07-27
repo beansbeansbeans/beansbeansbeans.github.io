@@ -2,7 +2,7 @@ define(['log/glyphs'], function(glyphs) {
     var renderer = {
         initialize: function(id) {
             this.id = id;
-            this.canvasWidth = $(window).width() * 0.5;
+            this.canvasWidth = $(window).width() * 0.75;
 
             var naturalWordWidth = this.id.split("").reduce(function(prev, current) {
                 return prev + glyphs.letters[current].width;
