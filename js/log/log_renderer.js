@@ -8,46 +8,53 @@ define(['log/glyphs'], function(glyphs) {
             this.renderLetters();
             this.renderVis();
         },
-        drawSVGInCanvas: function(letter) {
-            var cPathData = glyphs[letter].path;
-            cPathData = cPathData.replace(/([a-z])/ig, ",$1");
-            cPathData = cPathData.split(",");
+        drawSVGInCanvas: function(letters) {
+            var lettersArr = letters.split("");
+            lettersArr.forEach(function(d, i) {
+                var cPathData = glyphs[d].path;
+                cPathData = cPathData.replace(/([a-z])/ig, ",$1");
+                cPathData = cPathData.split(",");
 
-            cPathData.forEach(function(d, i) {
-                var digits = d.substring(1).split(" "),
-                    command = d.charAt(0);
+                cPathData.forEach(function(d, i) {
+                    var digits = d.substring(1).split(" "),
+                        command = d.charAt(0);
 
-                if(command == "T") {
-                    digits.unshift(2 * cPathData[i-1].digits[cPathData[i-1].digits.length - 1] - cPathData[i-1].digits[cPathData[i-1].digits.length - 3]);
-                    digits.unshift(2 * cPathData[i-1].digits[cPathData[i-1].digits.length - 2] - cPathData[i-1].digits[cPathData[i-1].digits.length - 4]);
-                    command = "Q";
-                } else if(command == "H") {
-                    digits.push(cPathData[i-1].digits[cPathData[i-1].digits.length - 1]);
-                    command = "L";
-                } else if(command == "V") {
-                    digits.unshift(cPathData[i-1].digits[cPathData[i-1].digits.length - 2]);
-                    command = "L";
-                }
-                cPathData[i] = {
-                    command: command,
-                    digits: digits
-                };
-            });
-
-            cPathData.forEach(function(d, i) {
-                if(d) {
-                    if(d.command == "M") {
-                        this.letterCtx.moveTo(d.digits[0], d.digits[1]);
-                    } else if(d.command == "Q") {                                               this.letterCtx.quadraticCurveTo(d.digits[0], d.digits[1], d.digits[2], d.digits[3]);
-                    } else if(d.command == "L") {
-                        this.letterCtx.lineTo(d.digits[0], d.digits[1]);
-                    } else if(d.command == "Z") {
-                        this.letterCtx.lineTo(cPathData[0].digits[0], cPathData[0].digits[1]);
+                    if(command == "T") {
+                        digits.unshift(2 * cPathData[i-1].digits[cPathData[i-1].digits.length - 1] - cPathData[i-1].digits[cPathData[i-1].digits.length - 3]);
+                        digits.unshift(2 * cPathData[i-1].digits[cPathData[i-1].digits.length - 2] - cPathData[i-1].digits[cPathData[i-1].digits.length - 4]);
+                        command = "Q";
+                    } else if(command == "H") {
+                        digits.push(cPathData[i-1].digits[cPathData[i-1].digits.length - 1]);
+                        command = "L";
+                    } else if(command == "V") {
+                        digits.unshift(cPathData[i-1].digits[cPathData[i-1].digits.length - 2]);
+                        command = "L";
                     }
-                }
-            }.bind(this));
+                    cPathData[i] = {
+                        command: command,
+                        digits: digits
+                    };
+                });
 
-            this.letterCtx.closePath();
+                if(i>0) {
+                    this.letterCtx.translate(glyphs[lettersArr[i-1]].width, 0);
+                }
+
+                cPathData.forEach(function(d, i) {
+                    if(d) {
+                        if(d.command == "M") {
+                            this.letterCtx.moveTo(d.digits[0], d.digits[1]);
+                        } else if(d.command == "Q") {                                               this.letterCtx.quadraticCurveTo(d.digits[0], d.digits[1], d.digits[2], d.digits[3]);
+                        } else if(d.command == "L") {
+                            this.letterCtx.lineTo(d.digits[0], d.digits[1]);
+                        } else if(d.command == "Z") {
+                            this.letterCtx.lineTo(cPathData[0].digits[0], cPathData[0].digits[1]);
+                        }
+                    }
+                }.bind(this));
+
+                this.letterCtx.closePath();
+            }.bind(this));
         },
         renderLetters: function() {
             this.letterCanvas = $("#letters"),
@@ -70,13 +77,10 @@ define(['log/glyphs'], function(glyphs) {
             this.letterCtx.lineTo(0, this.canvasHeight);
             this.letterCtx.lineTo(this.canvasWidth, this.canvasHeight);
 
-            this.letterCtx.save();
-
-            this.letterCtx.translate(this.canvasWidth / 2, this.canvasHeight / 2);
+            this.letterCtx.translate(0, this.canvasHeight / 1.5);
             this.letterCtx.scale(0.15, -0.15);
-            this.drawSVGInCanvas("r");
 
-            this.letterCtx.restore();
+            this.drawSVGInCanvas(this.id);
 
             this.letterCtx.fill();
         },
