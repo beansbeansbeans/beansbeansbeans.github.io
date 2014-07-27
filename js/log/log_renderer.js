@@ -89,8 +89,7 @@ define(['log/glyphs'], function(glyphs) {
 
             this.drawSVGInCanvas(this.id);
 
-            this.letterCtx.stroke();
-            // this.letterCtx.fill();
+            this.letterCtx.fill();
         },
         renderVis: function() {
             var canvas = $("#fft"),
@@ -126,18 +125,19 @@ define(['log/glyphs'], function(glyphs) {
             function drawWave() {
                 if(counter%2 == 0) {
                     var freqByteData = new Uint8Array(analyser.frequencyBinCount);
-                    analyser.getByteFrequencyData(freqByteData),
                         buffer = 10,
-                        bottomBuffer = 50,
+                        bottomBuffer = Math.floor(self.canvasHeight * 0.2),
                         space = 5,
                         offset = 100,
                         numBars = Math.round(self.canvasWidth / buffer),
                         ptsArr = [];
 
+                    analyser.getByteFrequencyData(freqByteData),
+
                     ctx.clearRect(0, 0, self.canvasWidth, self.canvasHeight);
 
                     for (var i=0; i<numBars; ++i) {
-                        var magnitude = freqByteData[i + offset] + bottomBuffer;
+                        var magnitude = freqByteData[i + offset];
                         ptsArr.push(i*(space + buffer));
                         ptsArr.push(self.canvasHeight - magnitude - bottomBuffer);
                     }
@@ -178,28 +178,26 @@ define(['log/glyphs'], function(glyphs) {
             	_pts.push(pts[pts.length - 1]);
 
             	for (i=2; i < (_pts.length - 4); i+=2) {
-            			for (t=0; t <= numOfSegments; t++) {
+        			for (t=0; t <= numOfSegments; t++) {
+    					t1x = (_pts[i+2] - _pts[i-2]) * tension;
+    					t2x = (_pts[i+4] - _pts[i]) * tension;
+    					t1y = (_pts[i+3] - _pts[i-1]) * tension;
+    					t2y = (_pts[i+5] - _pts[i+1]) * tension;
 
-            					t1x = (_pts[i+2] - _pts[i-2]) * tension;
-            					t2x = (_pts[i+4] - _pts[i]) * tension;
-            					t1y = (_pts[i+3] - _pts[i-1]) * tension;
-            					t2y = (_pts[i+5] - _pts[i+1]) * tension;
+    					st = t / numOfSegments;
 
-            					st = t / numOfSegments;
+    					c1 =   2 * Math.pow(st, 3)  - 3 * Math.pow(st, 2) + 1;
+    					c2 = -(2 * Math.pow(st, 3)) + 3 * Math.pow(st, 2);
+    					c3 =       Math.pow(st, 3)  - 2 * Math.pow(st, 2) + st;
+    					c4 =       Math.pow(st, 3)  -     Math.pow(st, 2);
 
-            					c1 =   2 * Math.pow(st, 3)  - 3 * Math.pow(st, 2) + 1;
-            					c2 = -(2 * Math.pow(st, 3)) + 3 * Math.pow(st, 2);
-            					c3 =       Math.pow(st, 3)  - 2 * Math.pow(st, 2) + st;
-            					c4 =       Math.pow(st, 3)  -     Math.pow(st, 2);
+    					x = c1 * _pts[i]    + c2 * _pts[i+2] + c3 * t1x + c4 * t2x;
+    					y = c1 * _pts[i+1]  + c2 * _pts[i+3] + c3 * t1y + c4 * t2y;
 
-            					x = c1 * _pts[i]    + c2 * _pts[i+2] + c3 * t1x + c4 * t2x;
-            					y = c1 * _pts[i+1]  + c2 * _pts[i+3] + c3 * t1y + c4 * t2y;
-
-            					res.push(x);
-            					res.push(y);
-            			}
+    					res.push(x);
+    					res.push(y);
+        			}
             	}
-
             	return res;
             }
 
