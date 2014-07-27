@@ -8,28 +8,8 @@ define(['log/glyphs'], function(glyphs) {
             this.renderLetters();
             this.renderVis();
         },
-        renderLetters: function() {
-            var canvas = $("#letters"),
-                ctx = canvas[0].getContext('2d');
-
-            canvas[0].width = this.canvasWidth;
-            canvas[0].height = this.canvasHeight;
-
-            ctx.shadowOffsetX = 10;
-            ctx.shadowOffsetY = 10;
-            ctx.shadowBlur = 20;
-            ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
-
-            ctx.fillStyle = "white";
-
-            ctx.beginPath();
-            ctx.moveTo(this.canvasWidth, this.canvasHeight);
-            ctx.lineTo(0, this.canvasHeight);
-            ctx.lineTo(0, 0);
-            ctx.lineTo(this.canvasWidth, 0);
-            ctx.lineTo(this.canvasWidth, this.canvasHeight);
-
-            var cPathData = glyphs.z;
+        drawSVGInCanvas: function(letter) {
+            var cPathData = glyphs[letter].path;
             cPathData = cPathData.replace(/([a-z])/ig, ",$1");
             cPathData = cPathData.split(",");
 
@@ -54,25 +34,51 @@ define(['log/glyphs'], function(glyphs) {
                 };
             });
 
-            ctx.scale(0.15, 0.15);
-            ctx.translate(300, 300);
-
             cPathData.forEach(function(d, i) {
                 if(d) {
                     if(d.command == "M") {
-                        ctx.moveTo(d.digits[0], d.digits[1]);
-                    } else if(d.command == "Q") {                                               ctx.quadraticCurveTo(d.digits[0], d.digits[1], d.digits[2], d.digits[3]);
+                        this.letterCtx.moveTo(d.digits[0], d.digits[1]);
+                    } else if(d.command == "Q") {                                               this.letterCtx.quadraticCurveTo(d.digits[0], d.digits[1], d.digits[2], d.digits[3]);
                     } else if(d.command == "L") {
-                        ctx.lineTo(d.digits[0], d.digits[1]);
+                        this.letterCtx.lineTo(d.digits[0], d.digits[1]);
                     } else if(d.command == "Z") {
-                        ctx.lineTo(cPathData[0].digits[0], cPathData[0].digits[1]);
+                        this.letterCtx.lineTo(cPathData[0].digits[0], cPathData[0].digits[1]);
                     }
                 }
-            });
+            }.bind(this));
 
-            ctx.closePath();
+            this.letterCtx.closePath();
+        },
+        renderLetters: function() {
+            this.letterCanvas = $("#letters"),
+            this.letterCtx = this.letterCanvas[0].getContext('2d');
 
-            ctx.fill();
+            this.letterCanvas[0].width = this.canvasWidth;
+            this.letterCanvas[0].height = this.canvasHeight;
+
+            this.letterCtx.shadowOffsetX = 10;
+            this.letterCtx.shadowOffsetY = 10;
+            this.letterCtx.shadowBlur = 20;
+            this.letterCtx.shadowColor = "rgba(0, 0, 0, 0.5)";
+
+            this.letterCtx.fillStyle = "white";
+
+            this.letterCtx.beginPath();
+            this.letterCtx.moveTo(this.canvasWidth, this.canvasHeight);
+            this.letterCtx.lineTo(this.canvasWidth, 0);
+            this.letterCtx.lineTo(0, 0);
+            this.letterCtx.lineTo(0, this.canvasHeight);
+            this.letterCtx.lineTo(this.canvasWidth, this.canvasHeight);
+
+            this.letterCtx.save();
+
+            this.letterCtx.translate(this.canvasWidth / 2, this.canvasHeight / 2);
+            this.letterCtx.scale(0.15, -0.15);
+            this.drawSVGInCanvas("r");
+
+            this.letterCtx.restore();
+
+            this.letterCtx.fill();
         },
         renderVis: function() {
             var canvas = $("#fft"),
