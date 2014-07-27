@@ -29,13 +29,25 @@ define(['log/glyphs'], function(glyphs) {
             ctx.lineTo(this.canvasWidth, 0);
             ctx.lineTo(this.canvasWidth, this.canvasHeight);
 
-            var cPathData = glyphs.c;
+            var cPathData = glyphs.z;
             cPathData = cPathData.replace(/([a-z])/ig, ",$1");
             cPathData = cPathData.split(",");
 
             cPathData.forEach(function(d, i) {
                 var digits = d.substring(1).split(" "),
                     command = d.charAt(0);
+
+                if(command == "T") {
+                    digits.unshift(2 * cPathData[i-1].digits[cPathData[i-1].digits.length - 1] - cPathData[i-1].digits[cPathData[i-1].digits.length - 3]);
+                    digits.unshift(2 * cPathData[i-1].digits[cPathData[i-1].digits.length - 2] - cPathData[i-1].digits[cPathData[i-1].digits.length - 4]);
+                    command = "Q";
+                } else if(command == "H") {
+                    digits.push(cPathData[i-1].digits[cPathData[i-1].digits.length - 1]);
+                    command = "L";
+                } else if(command == "V") {
+                    digits.unshift(cPathData[i-1].digits[cPathData[i-1].digits.length - 2]);
+                    command = "L";
+                }
                 cPathData[i] = {
                     command: command,
                     digits: digits
@@ -43,36 +55,23 @@ define(['log/glyphs'], function(glyphs) {
             });
 
             ctx.scale(0.15, 0.15);
+            ctx.translate(300, 300);
 
             cPathData.forEach(function(d, i) {
                 if(d) {
                     if(d.command == "M") {
                         ctx.moveTo(d.digits[0], d.digits[1]);
-                        return;
-                    }
-                    if(d.command == "Q") {                                               ctx.quadraticCurveTo(d.digits[0], d.digits[1], d.digits[2], d.digits[3]);
-                        return;
-                    }
-                    if(d.command == "T") {
-                        ctx.quadraticCurveTo(cPathData[i-1].digits[cPathData[i-1].digits.length - 4], cPathData[i-1].digits[cPathData[i-1].digits.length - 3], d.digits[0], d.digits[1]);
-                        return;
-                    }
-                    if(d.command == "L") {
+                    } else if(d.command == "Q") {                                               ctx.quadraticCurveTo(d.digits[0], d.digits[1], d.digits[2], d.digits[3]);
+                    } else if(d.command == "L") {
                         ctx.lineTo(d.digits[0], d.digits[1]);
-                        return;
-                    }
-                    if(d.command == "V") {
-                        ctx.lineTo(cPathData[i-1].digits[cPathData[i-1].digits.length - 2], d.digits[0]);
-                        return;
-                    }
-                    if(d.command == "Z") {
+                    } else if(d.command == "Z") {
                         ctx.lineTo(cPathData[0].digits[0], cPathData[0].digits[1]);
-                        return;
                     }
                 }
             });
 
             ctx.closePath();
+
             ctx.fill();
         },
         renderVis: function() {
