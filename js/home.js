@@ -18,11 +18,7 @@ define([], function() {
 					$("#shadow").css("background-position", (frame * shadowWidth) + "px 0px");
 				}
 				counter++;
-				/*
-				IMPLEMENTATION BUG??? SHOULDN'T HAVE TO BE RESET EVERY FRAME
-				 */
 				self.requestID = requestAnimationFrame(animate);
-
 			}
 
 			this.requestID = requestAnimationFrame(animate);

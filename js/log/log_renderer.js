@@ -15,6 +15,12 @@ define(['log/glyphs'], function(glyphs) {
             this.renderLetters();
             this.renderVis();
         },
+        destroy: function() {
+            window.cancelAnimationFrame(this.requestID);
+            this.audio.pause();
+            this.ticker.pause();
+            this.audio.currentTime = 0;
+        },
         drawSVGInCanvas: function(letters) {
             var lettersArr = letters.split("");
             lettersArr.forEach(function(d, i) {
@@ -25,7 +31,6 @@ define(['log/glyphs'], function(glyphs) {
                 cPathData.forEach(function(d, i) {
                     var digits = d.substring(1).split(" "),
                         command = d.charAt(0);
-
                     if(command == "T") {
                         digits.unshift(2 * cPathData[i-1].digits[cPathData[i-1].digits.length - 1] - cPathData[i-1].digits[cPathData[i-1].digits.length - 3]);
                         digits.unshift(2 * cPathData[i-1].digits[cPathData[i-1].digits.length - 2] - cPathData[i-1].digits[cPathData[i-1].digits.length - 4]);
@@ -51,7 +56,8 @@ define(['log/glyphs'], function(glyphs) {
                     if(d) {
                         if(d.command == "M") {
                             this.letterCtx.moveTo(d.digits[0], d.digits[1]);
-                        } else if(d.command == "Q") {                                               this.letterCtx.quadraticCurveTo(d.digits[0], d.digits[1], d.digits[2], d.digits[3]);
+                        } else if(d.command == "Q") {
+                            this.letterCtx.quadraticCurveTo(d.digits[0], d.digits[1], d.digits[2], d.digits[3]);
                         } else if(d.command == "L") {
                             this.letterCtx.lineTo(d.digits[0], d.digits[1]);
                         } else if(d.command == "Z") {
@@ -160,7 +166,7 @@ define(['log/glyphs'], function(glyphs) {
             source.connect(analyser);
             analyser.connect(audioCtx.destination);
 
-            requestAnimationFrame(drawWave);
+            this.requestID = requestAnimationFrame(drawWave);
 
             function drawWave() {
                 if(counter%2 == 0) {
@@ -185,7 +191,7 @@ define(['log/glyphs'], function(glyphs) {
                     drawCurve(ctx, ptsArr);
                 }
                 counter++;
-                requestAnimationFrame(drawWave);
+                self.requestID = requestAnimationFrame(drawWave);
             }
 
             function drawCurve(ctx, ptsa) {

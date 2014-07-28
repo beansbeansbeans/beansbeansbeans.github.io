@@ -51,6 +51,10 @@ require(['jquery', 'router'], function($, Router) {
         require(["log/" + id], function(logModule) {
             initialize(logModule);
         });
+    }, function(id) {
+        require(["log/" + id], function(logModule) {
+            if(logModule.destroy) logModule.destroy();
+        });
     });
 
     router.registerRoute('log', function() {

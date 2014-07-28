@@ -10,6 +10,9 @@ define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRe
 
 			logRenderer.initialize(data.title);
 
+		},
+		destroy: function() {
+			logRenderer.destroy();
 		}
 	}
 	return stuff;
