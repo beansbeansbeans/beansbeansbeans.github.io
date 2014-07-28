@@ -114,6 +114,7 @@ define(['log/glyphs'], function(glyphs) {
 
             audio.src = this.id + ".ogg";
             audio.controls = true;
+            audio.preload = true;
 
             $("#audio").append(audio).css("padding-top", this.canvasHeight);
 
