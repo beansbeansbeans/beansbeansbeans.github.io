@@ -99,7 +99,8 @@ define(['log/glyphs'], function(glyphs) {
                 analyser = audioCtx.createAnalyser(),
                 source = audioCtx.createMediaElementSource(audio),
                 counter = 0,
-                self = this;
+                self = this,
+                isPlaying = true;
 
             canvas[0].width = this.canvasWidth;
             canvas[0].height = this.canvasHeight;
@@ -115,8 +116,46 @@ define(['log/glyphs'], function(glyphs) {
             audio.src = this.id + ".ogg";
             audio.controls = true;
             audio.preload = true;
+            audio.autoplay = true;
 
             $("#audio").append(audio).css("padding-top", this.canvasHeight);
+
+            $("#controls #toggler").text("pause");
+
+            audio.addEventListener('loadedmetadata', function() {
+                $("#controls #time .total").text(Math.floor(audio.duration / 60) + ":" +  Math.floor(audio.duration % 60))
+            });
+
+            $("#controls #toggler").on("click", function() {
+                isPlaying = !isPlaying;
+                if(isPlaying) {
+                    $("#controls #toggler").text("pause");
+                    audio.play();
+                    ticker.tick();
+                } else {
+                    $("#controls #toggler").text("play");
+                    audio.pause();
+                    ticker.pause();
+                }
+            });
+
+            var ticker = (function() {
+                var playPosition = 0,
+                    interval;
+                return {
+                    tick: function() {
+                        interval = setInterval(function() {
+                            playPosition++;
+                            $("#controls #time .elapsed").text(Math.floor(playPosition / 60) + ":" +  Math.floor(playPosition % 60));
+                        }, 1000);
+                    },
+                    pause: function() {
+                        clearInterval(interval);
+                    }
+                }
+            })();
+
+            ticker.tick();
 
             source.connect(analyser);
             analyser.connect(audioCtx.destination);
@@ -145,7 +184,6 @@ define(['log/glyphs'], function(glyphs) {
 
                     drawCurve(ctx, ptsArr);
                 }
-
                 counter++;
                 requestAnimationFrame(drawWave);
             }
@@ -154,13 +192,11 @@ define(['log/glyphs'], function(glyphs) {
             	ctx.beginPath();
             	drawLines(ctx, getCurvePoints(ptsa));
             }
-
             function drawLines(ctx, pts) {
             	ctx.moveTo(pts[0], pts[1]);
             	for(i=2;i<pts.length-1;i+=2) ctx.lineTo(pts[i], pts[i+1]);
             		ctx.stroke();
             }
-
             function getCurvePoints(pts) {
             	var tension = 0.5,
             			numOfSegments = 16;
@@ -201,7 +237,6 @@ define(['log/glyphs'], function(glyphs) {
             	}
             	return res;
             }
-
         }
     }
     return renderer;

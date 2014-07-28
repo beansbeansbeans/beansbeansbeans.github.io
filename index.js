@@ -16,7 +16,6 @@ http.createServer(function(request, response) {
 				var filePath = path.join(__dirname, '/stuff.ogg');
 			    var stat = fs.statSync(filePath);
 				response.writeHead(200, {
-					"X-Content-Duration": 92.6,
 					"Content-Type": "audio/ogg",
 					"Content-Length": stat.size
 				});
