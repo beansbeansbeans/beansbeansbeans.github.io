@@ -12,8 +12,8 @@ http.createServer(function(request, response) {
 		if (fs.statSync(filename).isDirectory()) filename += '/index.html';
 
 		fs.readFile(filename, "binary", function(err, file) {
-			if(request.url == "/stuff.ogg") {
-				var filePath = path.join(__dirname, '/stuff.ogg');
+			if(request.url.indexOf(".ogg") > -1 ) {
+				var filePath = path.join(__dirname, request.url);
 			    var stat = fs.statSync(filePath);
 				response.writeHead(200, {
 					"Content-Type": "audio/ogg",
