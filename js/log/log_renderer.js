@@ -1,4 +1,28 @@
 define(['log/glyphs'], function(glyphs) {
+
+    var ticker = (function() {
+            var playPosition = 0,
+                interval;
+            return {
+                tick: function() {
+                    interval = setInterval(function() {
+                        playPosition++;
+                        $("#controls #time .elapsed").text(Math.floor(playPosition / 60) + ":" +  Math.floor(playPosition % 60));
+                    }, 1000);
+                },
+                pause: function() {
+                    clearInterval(interval);
+                },
+                setPosition: function(newPos) {
+                    playPosition = newPos;
+                }
+            }
+        })(),
+        audio = new Audio(),
+        audioCtx = new webkitAudioContext(),
+        analyser = audioCtx.createAnalyser(),
+        source = audioCtx.createMediaElementSource(audio);
+
     var renderer = {
         initialize: function(id) {
             this.id = id;
@@ -17,9 +41,8 @@ define(['log/glyphs'], function(glyphs) {
         },
         destroy: function() {
             window.cancelAnimationFrame(this.requestID);
-            this.audio.pause();
-            this.ticker.pause();
-            this.audio.currentTime = 0;
+            ticker.pause();
+            ticker.setPosition(0);
         },
         drawSVGInCanvas: function(letters) {
             var lettersArr = letters.split("");
@@ -100,10 +123,6 @@ define(['log/glyphs'], function(glyphs) {
         renderVis: function() {
             var canvas = $("#fft"),
                 ctx = canvas[0].getContext('2d'),
-                audio = new Audio(),
-                audioCtx = new webkitAudioContext(),
-                analyser = audioCtx.createAnalyser(),
-                source = audioCtx.createMediaElementSource(audio),
                 counter = 0,
                 self = this,
                 isPlaying = true;
@@ -144,22 +163,6 @@ define(['log/glyphs'], function(glyphs) {
                     ticker.pause();
                 }
             });
-
-            var ticker = (function() {
-                var playPosition = 0,
-                    interval;
-                return {
-                    tick: function() {
-                        interval = setInterval(function() {
-                            playPosition++;
-                            $("#controls #time .elapsed").text(Math.floor(playPosition / 60) + ":" +  Math.floor(playPosition % 60));
-                        }, 1000);
-                    },
-                    pause: function() {
-                        clearInterval(interval);
-                    }
-                }
-            })();
 
             ticker.tick();
 
