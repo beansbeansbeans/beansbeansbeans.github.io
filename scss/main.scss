@@ -56,29 +56,27 @@ a {
 #menu_wrapper {
 	@include transition(opacity 100ms);
 	@include trailer(20);
-	background: $color-background;
+	
 	display: inline-block;
 	@include leader(8);
-	@include border-radius(5);
 	#menu {
 		text-transform: uppercase;
 		.link {
-			color: rgba(white, 1);
+			color: $dark-blue;
+			@include border-radius(5);
 			display: inline-block;
 			position: relative;
 			@extend .small-text;
 			font-weight: 500;
-			@include padding-leader($lines: 4, $font-size: map-get(map-get($text-map, small), font-size));
-			@include padding-trailer($lines: 4, $font-size: map-get(map-get($text-map, small), font-size));
+			@include padding-leader($lines: 3, $font-size: map-get(map-get($text-map, small), font-size));
+			@include padding-trailer($lines: 3, $font-size: map-get(map-get($text-map, small), font-size));
 			padding-left: rhythm($lines: 4, $font-size: map-get(map-get($text-map, small), font-size));
 			padding-right: rhythm($lines: 4, $font-size: map-get(map-get($text-map, small), font-size));
 			outline: none !important;
 			&.active {
-				background: rgba(white, .2);
-			}
-			&:not(:first-of-type) {
-				border-left: solid 1px rgba(white, 1);
-				margin-left: -4px;
+				color: rgba(white, 1);
+				background: $color-background;
+				margin: 0 rhythm($lines: 2, $font-size: map-get(map-get($text-map, small), font-size));
 			}
 		}
 	}
@@ -121,11 +119,12 @@ nav {
 		margin: 0 auto;
 	}
 	.back {
+		@extend .medium-text;
 		font-style: italic;
 		font-weight: 500;
 		color: $gray;
 		display: inline-block;
-		@include trailer($lines: 1);
+		@include trailer($font-size: map-get(map-get($text-map, medium), font-size), $lines: 3);
 		&:before {
 			content: "←";
 			display: inline-block;
@@ -150,9 +149,6 @@ nav {
 // log detail
 
 .log {
-	.back {
-		@extend .medium-text;
-	}
 	.log-contents {
 
 	}

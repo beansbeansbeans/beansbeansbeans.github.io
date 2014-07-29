@@ -143,7 +143,7 @@ define(['log/glyphs'], function(glyphs) {
             audio.preload = true;
             audio.autoplay = true;
 
-            $("#audio").append(audio).css("padding-top", this.canvasHeight);
+            $("#audio").append(audio);
 
             $("#controls #toggler").text("pause");
 
