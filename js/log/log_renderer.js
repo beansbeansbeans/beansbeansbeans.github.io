@@ -21,7 +21,8 @@ define(['log/glyphs'], function(glyphs) {
         audio = new Audio(),
         audioCtx = new webkitAudioContext(),
         analyser = audioCtx.createAnalyser(),
-        source = audioCtx.createMediaElementSource(audio);
+        source = audioCtx.createMediaElementSource(audio),
+        colors = ["#2BBFBD", "#F2B33D", "#F29B30", "#F22E2E", "#F2385A", "#F5A503", "#56D9CD", "#3AA1BF", "#FC4349", "#ec4911"];
 
     var renderer = {
         initialize: function(id) {
@@ -126,6 +127,8 @@ define(['log/glyphs'], function(glyphs) {
                 counter = 0,
                 self = this,
                 isPlaying = true;
+
+            canvas.css("background-color", colors[Math.floor(Math.random() * colors.length)]);
 
             canvas[0].width = this.canvasWidth;
             canvas[0].height = this.canvasHeight;
