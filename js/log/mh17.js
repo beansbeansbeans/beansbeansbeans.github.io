@@ -1,8 +1,10 @@
 define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRenderer) {
-	var stuff = {
+	var mh17 = {
 		initialize: function() {
 			var data = {
-				title: "stuff",
+				title: "mh17",
+				detail: "About a plane",
+				date: "05/28/2014",
 				logContents: ""
 			};
 
@@ -15,5 +17,5 @@ define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRe
 			logRenderer.destroy();
 		}
 	}
-	return stuff;
+	return mh17;
 });

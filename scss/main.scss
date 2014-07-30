@@ -63,7 +63,7 @@ a {
 		text-transform: uppercase;
 		.link {
 			color: $dark-blue;
-			@include border-radius(5);
+			@include border-radius(5px);
 			display: inline-block;
 			position: relative;
 			@extend .small-text;

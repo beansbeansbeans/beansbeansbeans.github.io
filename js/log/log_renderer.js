@@ -21,7 +21,7 @@ define(['log/glyphs'], function(glyphs) {
             }
         })(),
         audio = new Audio(),
-        audioCtx = new webkitAudioContext(),
+        audioCtx = window.webkitAudioContext ? new webkitAudioContext() : new AudioContext();
         analyser = audioCtx.createAnalyser(),
         source = audioCtx.createMediaElementSource(audio),
         colors = ["#2BBFBD", "#F2B33D", "#F29B30", "#F22E2E", "#F2385A", "#F5A503", "#56D9CD", "#3AA1BF", "#FC4349", "#ec4911"];

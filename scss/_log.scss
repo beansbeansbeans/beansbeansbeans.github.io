@@ -1,6 +1,11 @@
 .log {
+	.canvas-wrapper {
+		@include leader(10);
+		@include trailer(5);
+	}
 	#fft {
 		background: $orange;
+
 	}
 	.log-contents {
 		position: relative;
@@ -13,22 +18,21 @@
 		}
 	}
 	audio {
-		visibility: hidden;
+		display: none;
 	}
 	#controls {
+		@include leader(5);
 		text-transform: uppercase;
-		@extend .large-text;
+		@include adjust-font-size-to(map-get(map-get($text-map, 'medium'), font-size), $lines: 10);
 		* {
 			display: inline-block;
 		}
 		#toggler {
-			font-weight: 800;
-			margin-right: 5px;
 			cursor: pointer;
-		}
-		#time {
-			font-weight: 300;
-			color: lighten($gray, 15%);
+			margin-right: 10px;
+			border: solid 2px $dark-blue;
+			@include border-radius(5px);
+			padding: 0 rhythm($lines: 3, $font-size: map-get(map-get($text-map, 'medium'), font-size));
 		}
 	}
 }

@@ -3,6 +3,8 @@ define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRe
         initialize: function() {
             var data = {
                 title: "starbucks",
+                detail: "About a dude",
+                date: "06/28/2014",
                 logContents: ""
             };
 
