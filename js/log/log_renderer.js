@@ -7,7 +7,9 @@ define(['log/glyphs'], function(glyphs) {
                 tick: function() {
                     interval = setInterval(function() {
                         playPosition++;
-                        $("#controls #time .elapsed").text(Math.floor(playPosition / 60) + ":" +  Math.floor(playPosition % 60));
+                        if(playPosition < audio.duration) {
+                            $("#controls #time .elapsed").text(Math.floor(playPosition / 60) + ":" +  Math.floor(playPosition % 60));
+                        }
                     }, 1000);
                 },
                 pause: function() {
