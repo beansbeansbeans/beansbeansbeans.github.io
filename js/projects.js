@@ -17,7 +17,7 @@ define(['templates/project_index'], function(projectIndex) {
 			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem fugit veritatis, aliquid?"
 		},
 		{
-			title: "shadows",
+			title: "notes",
 			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam at dicta a itaque."
 		}
 	];

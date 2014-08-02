@@ -191,3 +191,81 @@
 		}
 	}
 }
+
+#project-notes {
+	.project-contents {
+		position: relative;
+		height: 300px;
+		text-align: center;
+		@include perspective(1000px);
+	}
+	.behind, .front {
+		position: absolute;
+		width: 600px;
+		left: 50%;
+		margin-left: -300px;
+		height: 100%;
+		div {
+			display: inline-block;
+			height: 100%;
+			@include border-radius(5px);
+			// @include box-shadow(0 0 0 1px rgba(0,0,0,0.1),0 1px 2px rgba(0,0,0,0.1));
+			// border: solid 2px $white;
+		}
+	}
+	.behind {
+		@include transform(translateZ(-200px));
+		div {
+			background: $blue;
+			margin-right: 15px;
+		}
+		div:nth-of-type(1) {
+			width: 20%;
+		}
+		div:nth-of-type(2) {
+			width: 40%;
+			background: $orange;
+		}
+		div:nth-of-type(3) {
+			width: 10%;
+			background: $pale-blue;
+		}
+		div:nth-of-type(4) {
+			width: 20%;
+			background: $dark-blue;
+		}
+	}
+	.front {
+		// 10 divs
+		div {
+			width: 7%;
+			background: red;
+			margin-right: 15px;
+			opacity: 0.3;
+		}
+		div:nth-of-type(4) {
+			background: $orange;
+		}
+		div:nth-of-type(5) {
+			@include transform(translateZ(50px));
+			opacity: 0.7;
+		}
+		div:nth-of-type(4), div:nth-of-type(6) {
+			@include transform(translateZ(35px));
+			opacity: 0.5;
+		}
+		div:nth-of-type(6) {
+			background: $blue;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+

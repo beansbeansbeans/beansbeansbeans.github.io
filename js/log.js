@@ -1,7 +1,7 @@
 define(['templates/log_index'], function(logIndex) {
 	var data = [
 		{
-			title: "mh17",
+			title: "quick",
 			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quos nostrum sapiente alias veniam eaque reiciendis maiores et obcaecati, consectetur."
 		},
 		{
