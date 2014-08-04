@@ -82,6 +82,10 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 						duration: 1
 					},
 					{
+						note: "f#",
+						duration: 1
+					},
+					{
 						note: "a",
 						duration: 1
 					}
@@ -131,39 +135,44 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 
 			var remixBuffer = 10;
 
+			d3.select(".project-contents")
+				.append("svg")
+				.attr("width", containerWidth)
+				.attr("height", containerHeight);
+
 			drawSVG = function() {
 				var widthFactor = containerWidth / remix.reduce(function(prev, current) {
-					return prev + current.duration;
-				}, 0);
-
-				var accumulatedTransformX = 0;
+						return prev + current.duration;
+					}, 0),
+					accumulatedTransformX = 0;
 
 				remix.forEach(function(d, i) {
 					d.transformX = accumulatedTransformX;
 					accumulatedTransformX += remixBuffer + d.duration * widthFactor;
 				});
 
-				d3.select(".project-contents")
-					.append("svg")
-					.attr("width", containerWidth)
+				var noteGroups = d3.select("svg").selectAll("g")
+					.data(remix);
+
+				noteGroups.enter().append("g")
+					.attr("class", "note")
+					.append("rect")
 					.attr("height", containerHeight);
 
-				d3.select("svg").selectAll("g")
-					.data(remix)
-					.attr("class", "note")
-					.enter().append("g")
+				noteGroups
 					.attr("transform", function(d, i) {
 						return "translate(" + d.transformX + ", 0)";
-					});
-
-				d3.selectAll("g").append("rect")
+					})
+					.select("rect")
 					.attr("fill", function(d) {
 						return color(d.note);
 					})
 					.attr("width", function(d) {
 						return d.duration * widthFactor;
-					})
-					.attr("height", containerHeight);
+					});
+
+				noteGroups
+					.exit().remove();
 			}
 
 			drawSVG();
