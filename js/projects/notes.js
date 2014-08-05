@@ -64,34 +64,13 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 						color: "#432852"
 					}
 				],
-				buffer = 15,
+				buffer = 10,
 				containerWidth = 600,
 				containerHeight = 200,
 				noteWidth = (containerWidth - ((notes.length - 1) * buffer)) / notes.length,
-				remix = [
-					{
-						note: "c",
-						duration: 1
-					},
-					{
-						note: "a",
-						duration: 2
-					},
-					{
-						note: "b",
-						duration: 1
-					},
-					{
-						note: "f#",
-						duration: 1
-					},
-					{
-						note: "a",
-						duration: 1
-					}
-				];
+				remix = [];
 
-			$(".notes").width(containerWidth);
+			$(".project-contents").width(containerWidth);
 
 			notes.forEach(function(d, i) {
 				$("<div class='note' data-note='" + d.note + "'></di>").appendTo(".notes").css({
@@ -141,7 +120,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				.attr("height", containerHeight);
 
 			drawSVG = function() {
-				var widthFactor = containerWidth / remix.reduce(function(prev, current) {
+				var widthFactor = (containerWidth - remixBuffer * (remix.length - 1)) / remix.reduce(function(prev, current) {
 						return prev + current.duration;
 					}, 0),
 					accumulatedTransformX = 0;
@@ -157,11 +136,17 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				noteGroups.enter().append("g")
 					.attr("class", "note")
 					.append("rect")
+					.attr("rx", 5)
+					.attr("ry", 5)
+					.attr("fill-opacity", 0)
+					.attr("transform", "translate(" + containerWidth + ", 0)")
 					.attr("height", containerHeight);
 
 				noteGroups
+					.transition()
+					.duration(100)
 					.attr("transform", function(d, i) {
-						return "translate(" + d.transformX + ", 0)";
+						return "translate(" + parseInt(d.transformX - containerWidth, 10) + ", 0)";
 					})
 					.select("rect")
 					.attr("fill", function(d) {
@@ -169,7 +154,10 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					})
 					.attr("width", function(d) {
 						return d.duration * widthFactor;
-					});
+					})
+					.transition()
+					.duration(100)
+					.attr("fill-opacity", 1);
 
 				noteGroups
 					.exit().remove();

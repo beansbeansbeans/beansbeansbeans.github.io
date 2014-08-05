@@ -196,6 +196,9 @@
 	.project-contents {
 		position: relative;
 		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+		@include perspective(1000px);
 	}
 
 	/*
@@ -203,27 +206,33 @@
 	 */
 	
 	.notes {
-		margin: 0px auto 200px auto;
+		z-index: 1;
+		position: relative;
+		@include transform(translateZ(200px));
 		.note {
 			display: inline-block;
 			@include border-radius(5px);
-			opacity: 0.4;
+			opacity: 0.2;
 			@include transition(all 300ms);
+			border: solid 1px $white;
 			&:last-of-type {
 				margin-right: 0 !important;
 			}
 			&.active {
-				opacity: 0.6;
-				@include transform(scale(1.1));
+				opacity: 1;
+				@include transform(scale(1.2));
 			}
 			&.half-active {
-				opacity: 0.5;
-				@include transform(scale(1.05));
+				opacity: 0.4;
+				@include transform(scale(1.075));
 			}
 		}
 	}
 
 	svg {
+		position: absolute;
+		left: 0;
+		top: 0;
 		.note {
 			display: inline-block;
 		}
