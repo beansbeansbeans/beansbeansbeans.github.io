@@ -68,7 +68,9 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				containerWidth = 600,
 				containerHeight = 200,
 				noteWidth = (containerWidth - ((notes.length - 1) * buffer)) / notes.length,
-				remix = [];
+				remix = [],
+				mouseX,
+				mouseY;
 
 			$(".project-contents").width(containerWidth);
 
@@ -88,17 +90,51 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				$(e.target).next().addClass("half-active");
 			});
 
+			$(".notes").on("mousemove", function(e) {
+				mouseX = e.clientX;
+				mouseY = e.clientY;
+			})
+
 			$(".notes").on("mouseleave", function() {
 				$(".note").removeClass("active half-active");
 			});
 
-			$(".notes").on("click", ".note", function(e) {
-				remix.push({
-					note: $(e.target).attr("data-note"),
-					duration: 1
-				});
-				drawSVG();
+			$(".notes").on("mousedown", function() {
+				previousEl = document.elementFromPoint(mouseX, mouseY);
+				rafID = requestAnimationFrame(moveDraggable);
 			});
+
+			$(".notes").on("mouseup", function() {
+				window.cancelAnimationFrame(rafID);
+			});
+
+			var counter = 0,
+				currentEl,
+				previousEl,
+				dragDuration = 0;
+
+			var rafID = null,
+				moveDraggable = function() {
+					if(counter%5 == 0) {
+
+						dragDuration++;
+						currentEl = document.elementFromPoint(mouseX, mouseY);
+
+						if(currentEl !== previousEl) {
+							remix.push({
+								note: $(previousEl).attr("data-note"),
+								duration: dragDuration
+							});
+
+							drawSVG();
+
+							previousEl = currentEl;
+							dragDuration = 0;
+						}
+					}
+					counter++;
+					rafID = requestAnimationFrame(moveDraggable);
+				}
 
 			/*
 			BEGIN D3 MVP

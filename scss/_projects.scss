@@ -209,6 +209,7 @@
 		z-index: 1;
 		position: relative;
 		@include transform(translateZ(200px));
+		cursor: default;
 		.note {
 			display: inline-block;
 			@include border-radius(5px);
