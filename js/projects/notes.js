@@ -1,5 +1,55 @@
 define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 	var notes = {
+		notesKey: [
+			{
+				note: "f#",
+				color: "#BE0000"
+			},
+			{
+				note: "g",
+				color: "#CF2257"
+			},
+			{
+				note: "g#",
+				color: "#FD6041"
+			},
+			{
+				note: "a",
+				color: "#FEAA3A"
+			},
+			{
+				note: "a#",
+				color: "#EFC94C"
+			},
+			{
+				note: "b",
+				color: "#45B29D"
+			},
+			{
+				note: "c",
+				color: "#94B500"
+			},
+			{
+				note: "c#",
+				color: "#2DA4A8"
+			},
+			{
+				note: "d",
+				color: "#80BDB6"
+			},
+			{
+				note: "d#",
+				color: "#334D5C"
+			},
+			{
+				note: "e",
+				color: "#435772"
+			},
+			{
+				note: "f",
+				color: "#432852"
+			}
+		],
 		initialize: function() {
 			var data = {
 				identifier: "notes",
@@ -11,159 +61,176 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			};
 
 			$("#view").html(projectTemplate(data));
-
-			$(".project-contents").append("<div class='notes'></div>");
 			
-			var notes = [
+			var keyboard = [
 					{
 						note: "f#",
-						color: "#BE0000"
+						duration: 1
 					},
 					{
 						note: "g",
-						color: "#CF2257"
+						duration: 1
 					},
 					{
 						note: "g#",
-						color: "#FD6041"
+						duration: 1
 					},
 					{
 						note: "a",
-						color: "#FEAA3A"
+						duration: 1
 					},
 					{
 						note: "a#",
-						color: "#EFC94C"
+						duration: 1
 					},
 					{
 						note: "b",
-						color: "#45B29D"
+						duration: 1
 					},
 					{
 						note: "c",
-						color: "#94B500"
+						duration: 1
+					},
+					{
+						note: "f#",
+						duration: 1
 					},
 					{
 						note: "c#",
-						color: "#2DA4A8"
+						duration: 1
 					},
 					{
 						note: "d",
-						color: "#80BDB6"
+						duration: 1
 					},
 					{
 						note: "d#",
-						color: "#334D5C"
+						duration: 1
 					},
 					{
 						note: "e",
-						color: "#435772"
+						duration: 1
 					},
 					{
 						note: "f",
-						color: "#432852"
+						duration: 1
 					}
 				],
 				buffer = 10,
 				containerWidth = 600,
 				containerHeight = 200,
-				noteWidth = (containerWidth - ((notes.length - 1) * buffer)) / notes.length,
 				remix = [],
 				mouseX,
-				mouseY;
-
-			$(".project-contents").width(containerWidth);
-
-			notes.forEach(function(d, i) {
-				$("<div class='note' data-note='" + d.note + "'></di>").appendTo(".notes").css({
-					"background-color": d.color,
-					"height": containerHeight,
-					"width": noteWidth + "px",
-					"margin-right": buffer + "px"
-				});
-			});
-
-			$(".notes").on("mouseover", ".note", function(e) {
-				$(".note").removeClass("active half-active");
-				$(e.target).addClass("active");
-				$(e.target).prev().addClass("half-active");
-				$(e.target).next().addClass("half-active");
-			});
-
-			$(".notes").on("mousemove", function(e) {
-				mouseX = e.clientX;
-				mouseY = e.clientY;
-			})
-
-			$(".notes").on("mouseleave", function() {
-				$(".note").removeClass("active half-active");
-			});
-
-			$(".notes").on("mousedown", function() {
-				previousEl = document.elementFromPoint(mouseX, mouseY);
-				rafID = requestAnimationFrame(moveDraggable);
-			});
-
-			$(".notes").on("mouseup", function() {
-				window.cancelAnimationFrame(rafID);
-			});
-
-			var counter = 0,
+				mouseY,
+				$keyboard,
+				counter = 0,
 				currentEl,
 				previousEl,
-				dragDuration = 0;
+				dragDuration = 0,
+				rafID = null;
 
-			var rafID = null,
-				moveDraggable = function() {
-					if(counter%5 == 0) {
+			var calcWidthFactor = function(arr) {
+				return (containerWidth - buffer * (arr.length - 1)) / arr.reduce(function(prev, current) {
+					return prev + current.duration;
+				}, 0);
+			}
 
-						dragDuration++;
-						currentEl = document.elementFromPoint(mouseX, mouseY);
-
-						if(currentEl !== previousEl) {
-							remix.push({
-								note: $(previousEl).attr("data-note"),
-								duration: dragDuration
-							});
-
-							drawSVG();
-
-							previousEl = currentEl;
-							dragDuration = 0;
-						}
-					}
-					counter++;
-					rafID = requestAnimationFrame(moveDraggable);
-				}
-
-			/*
-			BEGIN D3 MVP
-			 */
-			
 			var color = d3.scale.ordinal()
-						.range(notes.map(function(note) {
+						.range(this.notesKey.map(function(note) {
 							return note.color
 						}))
-						.domain(notes.map(function(note) {
+						.domain(this.notesKey.map(function(note) {
 							return note.note
 						}));
 
-			var remixBuffer = 10;
+			var moveDraggable = function() {
+				if(counter%5 == 0) {
+
+					dragDuration++;
+					currentEl = document.elementFromPoint(mouseX, mouseY);
+
+					if(currentEl !== previousEl) {
+						remix.push({
+							note: $(previousEl).attr("data-note"),
+							duration: dragDuration
+						});
+
+						drawSVG();
+
+						previousEl = currentEl;
+						dragDuration = 0;
+					}
+				}
+				counter++;
+				rafID = requestAnimationFrame(moveDraggable);
+			}
+
+			$(".project-contents").width(containerWidth);
+
+			d3.select(".project-contents")
+				.append("div")
+				.attr("class", "keyboard")
+				.style("height", containerHeight);
 
 			d3.select(".project-contents")
 				.append("svg")
 				.attr("width", containerWidth)
 				.attr("height", containerHeight);
 
-			drawSVG = function() {
-				var widthFactor = (containerWidth - remixBuffer * (remix.length - 1)) / remix.reduce(function(prev, current) {
-						return prev + current.duration;
-					}, 0),
+			$keyboard = $(".keyboard");
+
+			$keyboard.on("mouseover", ".key", function(e) {
+				$(".key").removeClass("active half-active");
+				$(e.target).addClass("active");
+				$(e.target).prev().addClass("half-active");
+				$(e.target).next().addClass("half-active");
+			});
+
+			$keyboard.on("mousemove", function(e) {
+				mouseX = e.clientX;
+				mouseY = e.clientY;
+			})
+
+			$keyboard.on("mouseleave", function() {
+				$(".key").removeClass("active half-active");
+			});
+
+			$keyboard.on("mousedown", function() {
+				previousEl = document.elementFromPoint(mouseX, mouseY);
+				rafID = requestAnimationFrame(moveDraggable);
+			});
+
+			$keyboard.on("mouseup", function() {
+				window.cancelAnimationFrame(rafID);
+			});
+
+			var drawKeyboard = function() {
+				var widthFactor = calcWidthFactor(keyboard);
+
+				var noteGroups = d3.select(".keyboard").selectAll("div")
+									.data(keyboard);
+
+				noteGroups.enter().append("div")
+						.attr("class", "key")
+						.style("background-color", function(d) {
+							return color(d.note)
+						})
+						.style("width", function(d) {
+							return d.duration * widthFactor;
+						})
+						.style("margin-right", buffer)
+						.attr("data-note", function(d) {
+							return d.note
+						});
+			}
+
+			var drawSVG = function() {
+				var widthFactor = calcWidthFactor(remix),
 					accumulatedTransformX = 0;
 
 				remix.forEach(function(d, i) {
 					d.transformX = accumulatedTransformX;
-					accumulatedTransformX += remixBuffer + d.duration * widthFactor;
+					accumulatedTransformX += buffer + d.duration * widthFactor;
 				});
 
 				var noteGroups = d3.select("svg").selectAll("g")
@@ -199,6 +266,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					.exit().remove();
 			}
 
+			drawKeyboard();
 			drawSVG();
 
 		}
