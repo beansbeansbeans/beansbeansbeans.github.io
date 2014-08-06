@@ -62,60 +62,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 
 			$("#view").html(projectTemplate(data));
 			
-			var keyboard = [
-					{
-						note: "f#",
-						duration: 1
-					},
-					{
-						note: "g",
-						duration: 1
-					},
-					{
-						note: "g#",
-						duration: 1
-					},
-					{
-						note: "a",
-						duration: 1
-					},
-					{
-						note: "a#",
-						duration: 1
-					},
-					{
-						note: "b",
-						duration: 1
-					},
-					{
-						note: "c",
-						duration: 1
-					},
-					{
-						note: "f#",
-						duration: 1
-					},
-					{
-						note: "c#",
-						duration: 1
-					},
-					{
-						note: "d",
-						duration: 1
-					},
-					{
-						note: "d#",
-						duration: 1
-					},
-					{
-						note: "e",
-						duration: 1
-					},
-					{
-						note: "f",
-						duration: 1
-					}
-				],
+			var keyboard = [],
 				buffer = 10,
 				containerWidth = 600,
 				containerHeight = 200,
@@ -128,6 +75,13 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				previousEl,
 				dragDuration = 0,
 				rafID = null;
+
+			for(i=0; i<12; i++) {
+				keyboard.push({
+					note: this.notesKey[Math.round(Math.random() * (this.notesKey.length - 1))].note,
+					duration: 1
+				});
+			}
 
 			var calcWidthFactor = function(arr) {
 				return (containerWidth - buffer * (arr.length - 1)) / arr.reduce(function(prev, current) {
@@ -205,9 +159,8 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			});
 
 			var drawKeyboard = function() {
-				var widthFactor = calcWidthFactor(keyboard);
-
-				var noteGroups = d3.select(".keyboard").selectAll("div")
+				var widthFactor = calcWidthFactor(keyboard),
+					noteGroups = d3.select(".keyboard").selectAll("div")
 									.data(keyboard);
 
 				noteGroups.enter().append("div")
@@ -226,15 +179,14 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 
 			var drawSVG = function() {
 				var widthFactor = calcWidthFactor(remix),
-					accumulatedTransformX = 0;
+					accumulatedTransformX = 0,
+					noteGroups = d3.select("svg").selectAll("g")
+						.data(remix);
 
 				remix.forEach(function(d, i) {
 					d.transformX = accumulatedTransformX;
 					accumulatedTransformX += buffer + d.duration * widthFactor;
 				});
-
-				var noteGroups = d3.select("svg").selectAll("g")
-					.data(remix);
 
 				noteGroups.enter().append("g")
 					.attr("class", "note")
