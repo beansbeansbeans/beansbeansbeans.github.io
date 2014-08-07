@@ -209,10 +209,18 @@
 	
 	.keyboard {
 		z-index: 1;
+		opacity: 1;
 		position: relative;
+		@include transition(all 300ms);
 		@include transform(translateZ(200px));
 		cursor: default;
 		overflow: visible;
+		&.fade rect {
+			opacity: 0 !important;
+		}
+		&.bright rect {
+			opacity: 1 !important;
+		}
 		.key {
 			rect {
 				opacity: 0.2;

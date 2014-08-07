@@ -128,6 +128,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			}
 
 			$(".project-contents").width(containerWidth);
+			$(".project-contents").height(containerHeight);
 
 			d3.select(".project-contents")
 				.append("svg")
@@ -135,32 +136,51 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				.attr("width", containerWidth)
 				.attr("height", containerHeight);
 
-			d3.select(".project-contents")
-				.append("svg")
-				.attr("class", "notes")
-				.attr("width", containerWidth)
-				.attr("height", containerHeight);
+			var drawNotes = function() {
+				setTimeout(function() {
+					$(".keyboard").attr("class", "keyboard");
+				}, 1000);
 
-			$keyboard = $(".keyboard");
+				d3.select(".project-contents")
+					.append("svg")
+					.attr("class", "notes")
+					.attr("width", containerWidth)
+					.attr("height", containerHeight);
+			}
 
-			$keyboard.on("mousemove", function(e) {
-				mouseX = e.clientX;
-				mouseY = e.clientY;
-			});
+			var attachHandlers = function() {
+				$keyboard = $(".keyboard");
 
-			$keyboard.on("mouseleave", function() {
-				$(".key").removeClass("active half-active");
-			});
+				$keyboard.on("mousemove", function(e) {
+					mouseX = e.clientX;
+					mouseY = e.clientY;
+				});
 
-			$keyboard.on("mousedown", function() {
-				previousEl = document.elementFromPoint(mouseX, mouseY);
-				rafID = requestAnimationFrame(moveDraggable);
-			});
+				$keyboard.on("mouseleave", function() {
+					$(".key").removeClass("active half-active");
+				});
 
-			$keyboard.on("mouseup", function() {
-				$(".key rect").attr("class", "");
-				window.cancelAnimationFrame(rafID);
-			});
+				$keyboard.on("mousedown", function() {
+					previousEl = document.elementFromPoint(mouseX, mouseY);
+					rafID = requestAnimationFrame(moveDraggable);
+				});
+
+				$keyboard.on("mouseup", function() {
+					$(".key rect").attr("class", "");
+					window.cancelAnimationFrame(rafID);
+
+					$(".keyboard").attr("class", "keyboard fade");
+
+					setTimeout(function() {
+						$(".keyboard").remove();
+						$(".notes").attr("class", "keyboard bright").find(".note").attr("class", "key");
+						attachHandlers();
+						remix = [];
+						drawNotes();
+						drawSVG();
+					}, 150);
+				});
+			}
 
 			var drawKeyboard = function() {
 				var widthFactor = calcWidthFactor(keyboard),
@@ -236,8 +256,10 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					.exit().remove();
 			}
 
+			drawNotes();
 			drawKeyboard();
 			drawSVG();
+			attachHandlers();
 
 		}
 	}
