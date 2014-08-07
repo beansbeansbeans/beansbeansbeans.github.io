@@ -98,10 +98,18 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 						}));
 
 			var moveDraggable = function() {
-				if(counter%5 == 0) {
+				if(counter%3 == 0) {
 
 					dragDuration++;
 					currentEl = document.elementFromPoint(mouseX, mouseY);
+
+					$(".key rect").attr("class", "");
+
+					if($(currentEl).is("rect")) {
+						$(currentEl).attr("class", "active");
+						$(currentEl).parent().prev().find("rect").attr("class", "half-active");
+						$(currentEl).parent().next().find("rect").attr("class", "half-active");
+					}
 
 					if(currentEl !== previousEl) {
 						remix.push({
@@ -122,28 +130,23 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			$(".project-contents").width(containerWidth);
 
 			d3.select(".project-contents")
-				.append("div")
+				.append("svg")
 				.attr("class", "keyboard")
-				.style("height", containerHeight);
+				.attr("width", containerWidth)
+				.attr("height", containerHeight);
 
 			d3.select(".project-contents")
 				.append("svg")
+				.attr("class", "notes")
 				.attr("width", containerWidth)
 				.attr("height", containerHeight);
 
 			$keyboard = $(".keyboard");
 
-			$keyboard.on("mouseover", ".key", function(e) {
-				$(".key").removeClass("active half-active");
-				$(e.target).addClass("active");
-				$(e.target).prev().addClass("half-active");
-				$(e.target).next().addClass("half-active");
-			});
-
 			$keyboard.on("mousemove", function(e) {
 				mouseX = e.clientX;
 				mouseY = e.clientY;
-			})
+			});
 
 			$keyboard.on("mouseleave", function() {
 				$(".key").removeClass("active half-active");
@@ -155,32 +158,47 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			});
 
 			$keyboard.on("mouseup", function() {
+				$(".key rect").attr("class", "");
 				window.cancelAnimationFrame(rafID);
 			});
 
 			var drawKeyboard = function() {
 				var widthFactor = calcWidthFactor(keyboard),
+					accumulatedTransformX = 0,
 					noteGroups = d3.select(".keyboard").selectAll("div")
 									.data(keyboard);
 
-				noteGroups.enter().append("div")
+				keyboard.forEach(function(d, i) {
+					d.transformX = accumulatedTransformX;
+					accumulatedTransformX += buffer + d.duration * widthFactor
+				});
+
+				noteGroups.enter().append("g")
 						.attr("class", "key")
-						.style("background-color", function(d) {
+						.attr("transform", function(d) {
+							return "translate(" + parseInt(d.transformX, 10) + ", 0)";
+						})
+						.append("rect")
+						.attr("rx", 5)
+						.attr("ry", 5)
+						.attr("height", containerHeight)
+						.attr("fill", function(d) {
 							return color(d.note)
 						})
-						.style("width", function(d) {
+						.attr("width", function(d) {
 							return d.duration * widthFactor;
 						})
-						.style("margin-right", buffer)
 						.attr("data-note", function(d) {
 							return d.note
 						});
+
+				noteGroups.exit().remove();
 			}
 
 			var drawSVG = function() {
 				var widthFactor = calcWidthFactor(remix),
 					accumulatedTransformX = 0,
-					noteGroups = d3.select("svg").selectAll("g")
+					noteGroups = d3.select(".notes").selectAll("g")
 						.data(remix);
 
 				remix.forEach(function(d, i) {
