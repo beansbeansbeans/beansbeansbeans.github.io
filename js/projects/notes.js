@@ -74,9 +74,10 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				currentEl,
 				previousEl,
 				dragDuration = 0,
-				rafID = null;
+				rafID = null,
+				eventNamespace = ".notes";
 
-			for(i=0; i<12; i++) {
+			for(i=0; i<13; i++) {
 				keyboard.push({
 					note: this.notesKey[Math.round(Math.random() * (this.notesKey.length - 1))].note,
 					duration: 1
@@ -151,29 +152,40 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			var attachHandlers = function() {
 				$keyboard = $(".keyboard");
 
-				$keyboard.on("mousemove", function(e) {
+				$keyboard.on("mousemove" + eventNamespace, function(e) {
 					mouseX = e.clientX;
 					mouseY = e.clientY;
 				});
 
-				$keyboard.on("mouseleave", function() {
+				$keyboard.on("mouseleave" + eventNamespace, function() {
 					$(".key").removeClass("active half-active");
 				});
 
-				$keyboard.on("mousedown", function() {
+				$keyboard.on("mousedown" + eventNamespace, function() {
 					previousEl = document.elementFromPoint(mouseX, mouseY);
 					rafID = requestAnimationFrame(moveDraggable);
 				});
 
-				$keyboard.on("mouseup", function() {
+				$keyboard.on("mouseup" + eventNamespace, function() {
 					$(".key rect").attr("class", "");
 					window.cancelAnimationFrame(rafID);
 
 					$(".keyboard").attr("class", "keyboard fade");
 
 					setTimeout(function() {
+						$keyboard.off(eventNamespace);
 						$(".keyboard").remove();
 						$(".notes").attr("class", "keyboard bright").find(".note").attr("class", "key");
+						$(".key").each(function(i, d) {
+							var transformX = $(d).attr("transform"),
+								startIdx = transformX.indexOf("("),
+								stopIdx = transformX.indexOf(","),
+
+							transformX = +transformX.substring(startIdx + 1, stopIdx);
+
+							$(d).attr("transform", "translate(" + parseInt(transformX + containerWidth, 10) + ", 0)");
+							$(d).find("rect").attr("transform", "");
+						});
 						attachHandlers();
 						remix = [];
 						drawNotes();
@@ -211,8 +223,6 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 						.attr("data-note", function(d) {
 							return d.note
 						});
-
-				noteGroups.exit().remove();
 			}
 
 			var drawSVG = function() {
@@ -247,6 +257,9 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					})
 					.attr("width", function(d) {
 						return d.duration * widthFactor;
+					})
+					.attr("data-note", function(d) {
+						return d.note;
 					})
 					.transition()
 					.duration(100)

@@ -215,6 +215,9 @@
 		@include transform(translateZ(200px));
 		cursor: default;
 		overflow: visible;
+		&:hover .key rect {
+			opacity: 0.2;
+		}
 		&.fade rect {
 			opacity: 0 !important;
 		}
@@ -223,7 +226,6 @@
 		}
 		.key {
 			rect {
-				opacity: 0.2;
 			}
 			rect {
 				@include transition(all 200ms);
