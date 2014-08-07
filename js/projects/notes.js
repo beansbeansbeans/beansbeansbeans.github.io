@@ -100,6 +100,13 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 
 			var moveDraggable = function() {
 
+				if(![].every.call(d3.selectAll(".note")[0], function(d, i) {
+					return $(d).find("rect").attr("width") > 5;
+				})) {
+					$(".key rect").attr("class", "");
+					return false;
+				}
+
 				if(counter%3 == 0) {
 
 					dragDuration++;
@@ -126,6 +133,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					}
 
 				}
+				
 				counter++;
 				rafID = requestAnimationFrame(moveDraggable);
 			}
