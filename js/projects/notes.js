@@ -188,6 +188,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 							$(d).find("rect").attr("transform", "");
 						});
 						attachHandlers();
+						dragDuration = 0;
 						remix = [];
 						drawNotes();
 						drawSVG();
