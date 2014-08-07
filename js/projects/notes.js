@@ -110,19 +110,20 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 						$(currentEl).attr("class", "active");
 						$(currentEl).parent().prev().find("rect").attr("class", "half-active");
 						$(currentEl).parent().next().find("rect").attr("class", "half-active");
+	
+						if(currentEl !== previousEl) {
+							remix.push({
+								note: $(previousEl).attr("data-note"),
+								duration: dragDuration
+							});
+
+							drawSVG();
+
+							previousEl = currentEl;
+							dragDuration = 0;
+						}
 					}
 
-					if(currentEl !== previousEl) {
-						remix.push({
-							note: $(previousEl).attr("data-note"),
-							duration: dragDuration
-						});
-
-						drawSVG();
-
-						previousEl = currentEl;
-						dragDuration = 0;
-					}
 				}
 				counter++;
 				rafID = requestAnimationFrame(moveDraggable);
