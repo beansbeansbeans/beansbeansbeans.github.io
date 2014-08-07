@@ -141,6 +141,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			var drawNotes = function() {
 				setTimeout(function() {
 					$(".keyboard").attr("class", "keyboard");
+					$("body").removeClass("refreshing-notes");
 				}, 1000);
 
 				d3.select(".project-contents")
@@ -160,6 +161,9 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 
 				$keyboard.on("mouseleave" + eventNamespace, function() {
 					$(".key").removeClass("active half-active");
+					if(remix.length) {
+						refresh();
+					}
 				});
 
 				$keyboard.on("mousedown" + eventNamespace, function() {
@@ -167,33 +171,36 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					rafID = requestAnimationFrame(moveDraggable);
 				});
 
-				$keyboard.on("mouseup" + eventNamespace, function() {
-					$(".key rect").attr("class", "");
-					window.cancelAnimationFrame(rafID);
+				$keyboard.on("mouseup" + eventNamespace, refresh);
+			}
 
-					$(".keyboard").attr("class", "keyboard fade");
+			var refresh = function() {
+				$("body").addClass("refreshing-notes");
+				remix = [];
+				$(".key rect").attr("class", "");
+				window.cancelAnimationFrame(rafID);
 
-					setTimeout(function() {
-						$keyboard.off(eventNamespace);
-						$(".keyboard").remove();
-						$(".notes").attr("class", "keyboard bright").find(".note").attr("class", "key");
-						$(".key").each(function(i, d) {
-							var transformX = $(d).attr("transform"),
-								startIdx = transformX.indexOf("("),
-								stopIdx = transformX.indexOf(","),
+				$(".keyboard").attr("class", "keyboard fade");
 
-							transformX = +transformX.substring(startIdx + 1, stopIdx);
+				setTimeout(function() {
+					$keyboard.off(eventNamespace);
+					$(".keyboard").remove();
+					$(".notes").attr("class", "keyboard bright").find(".note").attr("class", "key");
+					$(".key").each(function(i, d) {
+						var transformX = $(d).attr("transform"),
+							startIdx = transformX.indexOf("("),
+							stopIdx = transformX.indexOf(","),
 
-							$(d).attr("transform", "translate(" + parseInt(transformX + containerWidth, 10) + ", 0)");
-							$(d).find("rect").attr("transform", "");
-						});
-						attachHandlers();
-						dragDuration = 0;
-						remix = [];
-						drawNotes();
-						drawSVG();
-					}, 150);
-				});
+						transformX = +transformX.substring(startIdx + 1, stopIdx);
+
+						$(d).attr("transform", "translate(" + parseInt(transformX + containerWidth, 10) + ", 0)");
+						$(d).find("rect").attr("transform", "");
+					});
+					attachHandlers();
+					dragDuration = 0;
+					drawNotes();
+					drawSVG();
+				}, 150);
 			}
 
 			var drawKeyboard = function() {

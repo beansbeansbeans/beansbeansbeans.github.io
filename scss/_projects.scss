@@ -201,12 +201,7 @@
 		@include perspective(1000px);
 		@include leader(20);
 		@include trailer(20);
-	}
-
-	/*
-	MVP
-	 */
-	
+	}	
 	.keyboard {
 		z-index: 1;
 		opacity: 1;
@@ -240,6 +235,10 @@
 				}
 			}
 		}
+	}
+
+	.refreshing-notes & {
+		pointer-events: none;
 	}
 
 	svg {
