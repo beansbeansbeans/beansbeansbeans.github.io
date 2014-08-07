@@ -141,6 +141,8 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			$(".project-contents").width(containerWidth);
 			$(".project-contents").height(containerHeight);
 
+			$("body").addClass("refreshing-notes");
+
 			d3.select(".project-contents")
 				.append("svg")
 				.attr("class", "keyboard hide")
@@ -177,6 +179,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				});
 
 				$keyboard.on("mouseup" + eventNamespace, refresh);
+
 			}
 
 			var refresh = function() {
@@ -305,6 +308,10 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					setTimeout(function() {
 						if(i == keyLength - 1) {
 							$keyboard.attr("class", "keyboard");
+							setTimeout(function() {
+								$("body").removeClass("refreshing-notes");
+								$keyboard.find("rect").attr("class", "");
+							}, 1000);
 						}
 						$(d).find("rect").attr("class", "pop");
 					}, timer);
