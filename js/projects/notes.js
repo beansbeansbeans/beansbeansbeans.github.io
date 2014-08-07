@@ -99,6 +99,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 						}));
 
 			var moveDraggable = function() {
+
 				if(counter%3 == 0) {
 
 					dragDuration++;
@@ -152,6 +153,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			}
 
 			var attachHandlers = function() {
+
 				$keyboard = $(".keyboard");
 
 				$keyboard.on("mousemove" + eventNamespace, function(e) {
@@ -176,7 +178,16 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 
 			var refresh = function() {
 				$("body").addClass("refreshing-notes");
+
+				remix.push({
+					note: $(currentEl).attr("data-note"),
+					duration: dragDuration
+				});
+
+				drawSVG();
+
 				remix = [];
+
 				$(".key rect").attr("class", "");
 				window.cancelAnimationFrame(rafID);
 
@@ -215,23 +226,23 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				});
 
 				noteGroups.enter().append("g")
-						.attr("class", "key")
-						.attr("transform", function(d) {
-							return "translate(" + parseInt(d.transformX, 10) + ", 0)";
-						})
-						.append("rect")
-						.attr("rx", 5)
-						.attr("ry", 5)
-						.attr("height", containerHeight)
-						.attr("fill", function(d) {
-							return color(d.note)
-						})
-						.attr("width", function(d) {
-							return d.duration * widthFactor;
-						})
-						.attr("data-note", function(d) {
-							return d.note
-						});
+					.attr("class", "key")
+					.attr("transform", function(d) {
+						return "translate(" + parseInt(d.transformX, 10) + ", 0)";
+					})
+					.append("rect")
+					.attr("rx", 5)
+					.attr("ry", 5)
+					.attr("height", containerHeight)
+					.attr("fill", function(d) {
+						return color(d.note)
+					})
+					.attr("width", function(d) {
+						return d.duration * widthFactor;
+					})
+					.attr("data-note", function(d) {
+						return d.note
+					});
 			}
 
 			var drawSVG = function() {
