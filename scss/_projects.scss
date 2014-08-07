@@ -210,6 +210,9 @@
 		@include transform(translateZ(200px));
 		cursor: default;
 		overflow: visible;
+		&.hide rect:not(.pop) {
+			opacity: 0 !important;
+		}
 		&:hover .key rect {
 			opacity: 0.2;
 		}
@@ -221,8 +224,6 @@
 		}
 		.key {
 			rect {
-			}
-			rect {
 				@include transition(all 200ms);
 				@include transform-origin(center);
 				&.active {
@@ -232,6 +233,9 @@
 				&.half-active {
 					opacity: 0.4;
 					@include transform(scale(1.075));
+				}
+				&.pop {
+					@include animation(pop 0.3s linear forwards);
 				}
 			}
 		}
@@ -251,7 +255,19 @@
 	}
 }
 
-
+@include keyframe(pop) {
+	0% {
+		opacity: 0;
+		@include transform(scale(0.5));
+	}
+	75% {
+		opacity: 1;
+		@include transform(scale(1.2));
+	}
+	100% {
+		@include transform(scale(1));
+	}
+}
 
 
 
