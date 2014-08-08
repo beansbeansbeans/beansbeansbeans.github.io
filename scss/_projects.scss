@@ -242,7 +242,9 @@
 	}
 
 	.refreshing-notes & {
-		pointer-events: none;
+		.keyboard {
+			pointer-events: none;
+		}
 	}
 
 	svg {
