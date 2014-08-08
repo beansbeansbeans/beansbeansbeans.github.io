@@ -75,7 +75,8 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				previousEl,
 				dragDuration = 0,
 				rafID = null,
-				eventNamespace = ".notes";
+				eventNamespace = ".notes",
+				playIcon = '<svg height="350" version="1.1" width="350" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;"><path fill="#333333" d="M11.166,23.963C11.166,23.963,22.359,17.5,22.359,17.5C23.789,16.676,23.789,15.325,22.359,14.5C22.359,14.5,11.166,8.037,11.166,8.037C9.737,7.21,8.57,7.89,8.57,9.537C8.57,9.537,8.57,22.463,8.57,22.463C8.568,24.113,9.737,24.789,11.166,23.963C11.166,23.963,11.166,23.963,11.166,23.963" transform="scale(2)"></path></svg>';
 
 			var calcWidthFactor = function(arr) {
 				return (containerWidth - buffer * (arr.length - 1)) / arr.reduce(function(prev, current) {
@@ -113,6 +114,8 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 						$(currentEl).parent().prev().find("rect").attr("class", "half-active");
 						$(currentEl).parent().next().find("rect").attr("class", "half-active");
 	
+						$(".player").text($(currentEl).attr("data-note"));
+
 						if(currentEl !== previousEl) {
 							if($(previousEl).attr("data-note") !== undefined) {
 								remix.push({
@@ -152,6 +155,9 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					.attr("class", "keyboard hide")
 					.attr("width", containerWidth)
 					.attr("height", containerHeight);
+
+				$(".project-contents").after('<div class="player">' + playIcon + '</div>')
+
 			}.bind(this);
 
 			var drawNotes = function() {

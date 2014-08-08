@@ -255,6 +255,28 @@
 			display: inline-block;
 		}
 	}
+
+	.player {
+		@include transition(all 250ms);
+		cursor: pointer;
+		overflow: hidden;
+		text-transform: uppercase;
+		width: rhythm($lines: 17, $font-size: map-get(map-get($text-map, large), font-size));
+		height: rhythm($lines: 17, $font-size: map-get(map-get($text-map, large), font-size));
+		margin: 0 auto;
+		@include rhythm-borders($width: 3px, $lines: 3, $font-size: map-get(map-get($text-map, large), font-size));
+		@include trailer($lines: 20, $font-size: map-get(map-get($text-map, large), font-size));
+		@include border-radius(5px);
+		text-align: center;
+		@include adjust-font-size-to(map-get(map-get($text-map, large), font-size), $lines: 11);
+		svg {
+			margin-top: -5px;
+			margin-left: -2px;
+		}
+		&:hover {
+			opacity: 0.6;
+		}
+	}
 }
 
 @include keyframe(pop) {
