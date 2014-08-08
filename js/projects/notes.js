@@ -63,7 +63,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			$("#view").html(projectTemplate(data));
 			
 			var keyboard = [],
-				buffer = 10,
+				buffer = 8,
 				containerWidth = 600,
 				containerHeight = 200,
 				remix = [],
@@ -94,7 +94,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			var moveDraggable = function() {
 
 				if(![].every.call(d3.selectAll(".note")[0], function(d, i) {
-					return $(d).find("rect").attr("width") > 5;
+					return $(d).find("rect").attr("width") > 3;
 				})) {
 					$(".key rect").attr("class", "");
 					return false;
@@ -108,15 +108,18 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					$(".key rect").attr("class", "");
 
 					if($(currentEl).is("rect")) {
+
 						$(currentEl).attr("class", "active");
 						$(currentEl).parent().prev().find("rect").attr("class", "half-active");
 						$(currentEl).parent().next().find("rect").attr("class", "half-active");
 	
 						if(currentEl !== previousEl) {
-							remix.push({
-								note: $(previousEl).attr("data-note"),
-								duration: dragDuration
-							});
+							if($(previousEl).attr("data-note") !== undefined) {
+								remix.push({
+									note: $(previousEl).attr("data-note"),
+									duration: dragDuration
+								});
+							}
 
 							drawSVG();
 
