@@ -77,13 +77,6 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				rafID = null,
 				eventNamespace = ".notes";
 
-			for(i=0; i<15; i++) {
-				keyboard.push({
-					note: this.notesKey[Math.round(Math.random() * (this.notesKey.length - 1))].note,
-					duration: 1
-				});
-			}
-
 			var calcWidthFactor = function(arr) {
 				return (containerWidth - buffer * (arr.length - 1)) / arr.reduce(function(prev, current) {
 					return prev + current.duration;
@@ -138,16 +131,25 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				rafID = requestAnimationFrame(moveDraggable);
 			}
 
-			$(".project-contents").width(containerWidth);
-			$(".project-contents").height(containerHeight);
+			var setUp = function() {
+				$(".project-contents").width(containerWidth);
+				$(".project-contents").height(containerHeight);
 
-			$("body").addClass("refreshing-notes");
+				$("body").addClass("refreshing-notes");
 
-			d3.select(".project-contents")
-				.append("svg")
-				.attr("class", "keyboard hide")
-				.attr("width", containerWidth)
-				.attr("height", containerHeight);
+				for(i=0; i<15; i++) {
+					keyboard.push({
+						note: this.notesKey[Math.round(Math.random() * (this.notesKey.length - 1))].note,
+						duration: 1
+					});
+				}
+
+				d3.select(".project-contents")
+					.append("svg")
+					.attr("class", "keyboard hide")
+					.attr("width", containerWidth)
+					.attr("height", containerHeight);
+			}.bind(this);
 
 			var drawNotes = function() {
 				d3.select(".project-contents")
@@ -319,6 +321,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				});
 			}
 
+			setUp();
 			drawNotes();
 			drawKeyboard();
 			drawSVG();
