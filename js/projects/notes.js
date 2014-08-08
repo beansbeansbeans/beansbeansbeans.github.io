@@ -170,9 +170,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 
 				$keyboard.on("mouseleave" + eventNamespace, function() {
 					$(".key").removeClass("active half-active");
-					if(remix.length) {
-						refresh();
-					}
+					refresh();
 				});
 
 				$keyboard.on("mousedown" + eventNamespace, function() {
@@ -186,6 +184,10 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			}
 
 			var refresh = function() {
+				if(!remix.length) {
+					return;
+				}
+
 				$("body").addClass("refreshing-notes");
 
 				remix.push({
