@@ -202,14 +202,20 @@
 		@include leader(20);
 		@include trailer(20);
 	}	
+	.keyboard,
+	.canvas {
+		@include transform(translateZ(200px));
+	}
 	.keyboard {
 		z-index: 1;
 		opacity: 1;
 		position: relative;
 		@include transition(all 300ms);
-		@include transform(translateZ(200px));
 		cursor: default;
 		overflow: visible;
+		&.dim .key rect {
+			opacity: 0.1;
+		}
 		&:hover .key rect {
 			opacity: 0.2;
 		}
@@ -271,8 +277,40 @@
 			opacity: 0.6;
 		}
 	}
+
+	.canvas {
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 1;
+		text-align: center;
+		.text {
+			position: relative;
+			text-transform: uppercase;
+			@extend .large-text;
+			font-weight: 700;
+			z-index: 1;
+		}
+		.particle {
+			position: absolute;
+			width: 35px;
+			height: 35px;
+			border: solid 2px $white;
+			@include border-radius(50%);
+			background: $blue;
+			@include animation(swipe 1.5s forwards);
+		}
+	}
 }
 
+@include keyframe(swipe) {
+	0% {
+		opacity: 0.9;
+	}
+	100% {
+		opacity: 0;
+	}
+}
 
 
 

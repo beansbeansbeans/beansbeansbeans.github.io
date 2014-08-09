@@ -310,11 +310,85 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				noteGroups.exit().remove();
 			}
 
+			var drawInstructional = function() {
+
+				$("body").addClass("refreshing-notes");
+				$(".keyboard").attr("class", "keyboard dim");
+
+				function getLocationAt(hypoteneuse, segmentObj) {
+					return {
+						x: Math.round(segmentObj.startPoint[0] + (hypoteneuse * Math.cos(segmentObj.angle))),
+						y: Math.round(segmentObj.startPoint[1] + (hypoteneuse * Math.sin(segmentObj.angle)))
+					}
+				}
+
+				$(".project-contents").append("<div class='canvas'><div class='text'>Create new melodies<br/> by swiping</div></div>");
+				$(".canvas").width(containerWidth);
+				$(".canvas").height(containerHeight);
+
+				$(".canvas .text").css("margin-top", (containerHeight - $(".canvas .text").height())/2);
+
+				var path = [
+						[0.1 * containerWidth, 0.1 * containerHeight],
+						[0.8 * containerWidth, 0.15 * containerHeight],
+						[0.3 * containerWidth, 0.3 * containerHeight],
+						[0.85 * containerWidth, 0.4 * containerHeight],
+						[0.5 * containerWidth, 0.6 * containerHeight],
+						[0.85 * containerWidth, 0.7 * containerHeight]
+					],
+					segments = [],
+					counter = 0,
+					segmentIndex = 0,
+					rafID = null;
+
+				setTimeout(function() {
+					rafID = requestAnimationFrame(swipe);
+				}, 750);
+
+				for(i=0; i<path.length - 1; i++) {
+					var angle = Math.atan2(path[i+1][1] - path[i][1], path[i+1][0] - path[i][0])
+					segments.push({
+						startPoint: path[i],
+						endPoint: path[i+1],
+						angle: angle,
+						length: Math.abs(path[i+1][1] - path[i][1]) / Math.sin(angle)
+					});
+				}
+
+				function swipe() {
+					if(segmentIndex == segments.length) {
+						cancelAnimationFrame(rafID);
+						setTimeout(function() {
+							$("body").removeClass("refreshing-notes");
+							$(".keyboard").attr("class", "keyboard");
+							$(".canvas").remove();
+						}, 750);
+						return false;
+					}
+
+					var currentLocation = getLocationAt(counter, segments[segmentIndex]);
+
+					$("<div class='particle'></div>").appendTo(".canvas").css({
+						top: currentLocation.y,
+						left: currentLocation.x
+					});
+
+					if(counter > segments[segmentIndex].length) {
+						segmentIndex++;
+						counter = 0;
+					}
+
+					counter += 25;
+					rafID = requestAnimationFrame(swipe);
+				}
+			}
+
 			setUp();
 			drawNotes();
 			drawKeyboard();
 			drawSVG();
 			attachHandlers();
+			drawInstructional();
 		}
 	}
 
