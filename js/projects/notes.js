@@ -3,51 +3,63 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 		notesKey: [
 			{
 				note: "f#",
-				color: "#BE0000"
+				color: "#BE0000",
+				freq: 370
 			},
 			{
 				note: "g",
-				color: "#CF2257"
+				color: "#CF2257",
+				freq: 392
 			},
 			{
 				note: "g#",
-				color: "#FD6041"
+				color: "#FD6041",
+				freq: 415
 			},
 			{
 				note: "a",
-				color: "#FEAA3A"
+				color: "#FEAA3A",
+				freq: 440
 			},
 			{
 				note: "a#",
-				color: "#EFC94C"
+				color: "#EFC94C",
+				freq: 466
 			},
 			{
 				note: "b",
-				color: "#45B29D"
+				color: "#45B29D",
+				freq: 494
 			},
 			{
 				note: "c",
-				color: "#94B500"
+				color: "#94B500",
+				freq: 523
 			},
 			{
 				note: "c#",
-				color: "#2DA4A8"
+				color: "#2DA4A8",
+				freq: 554
 			},
 			{
 				note: "d",
-				color: "#80BDB6"
+				color: "#80BDB6",
+				freq: 587
 			},
 			{
 				note: "d#",
-				color: "#334D5C"
+				color: "#334D5C",
+				freq: 622
 			},
 			{
 				note: "e",
-				color: "#435772"
+				color: "#435772",
+				freq: 659
 			},
 			{
 				note: "f",
-				color: "#432852"
+				color: "#432852",
+				freq: 698
 			}
 		],
 		initialize: function() {
@@ -64,6 +76,8 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			
 			var keyboard = [],
 				buffer = 8,
+				oscillator,
+				context,
 				containerWidth = 600,
 				containerHeight = 200,
 				remix = [],
@@ -105,6 +119,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 
 					dragDuration++;
 					currentEl = document.elementFromPoint(mouseX, mouseY);
+					oscillator.frequency.value = $(currentEl).attr("data-freq");
 
 					$(".key rect").attr("class", "");
 
@@ -120,6 +135,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 							if($(previousEl).attr("data-note") !== undefined) {
 								remix.push({
 									note: $(previousEl).attr("data-note"),
+									frequency: $(previousEl).attr("data-freq"),
 									duration: dragDuration
 								});
 							}
@@ -144,8 +160,10 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				$("body").addClass("refreshing-notes");
 
 				for(i=0; i<15; i++) {
+					var randIndex = Math.round(Math.random() * (this.notesKey.length - 1));
 					keyboard.push({
-						note: this.notesKey[Math.round(Math.random() * (this.notesKey.length - 1))].note,
+						note: this.notesKey[randIndex].note,
+						frequency: this.notesKey[randIndex].freq,
 						duration: 1
 					});
 				}
@@ -156,7 +174,30 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					.attr("width", containerWidth)
 					.attr("height", containerHeight);
 
-				$(".project-contents").after('<div class="player">' + playIcon + '</div>')
+				$(".project-contents").after('<div class="player">' + playIcon + '</div>');
+
+				$(".player").on("click", "svg", function() {
+					context = new webkitAudioContext();
+					oscillator = context.createOscillator();
+					oscillator.connect(context.destination);
+					oscillator.start(0);
+					oscillator.type = 0;
+					var delay = 0;
+					for(i=0; i<keyboard.length; i++) {
+						(function(index) {
+							setTimeout(function() {
+								$(".player").text(keyboard[index].note);
+								oscillator.frequency.value = keyboard[index].frequency;
+							}, delay);
+							delay += keyboard[index].duration * 100;
+						})(i);
+					}
+
+					setTimeout(function() {
+						$(".player").text("").append(playIcon);
+						oscillator.stop();
+					}, delay);
+				});
 
 			}.bind(this);
 
@@ -183,6 +224,12 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				});
 
 				$keyboard.on("mousedown" + eventNamespace, function() {
+					context = new webkitAudioContext();
+					oscillator = context.createOscillator();
+					oscillator.connect(context.destination);
+					oscillator.start(0);
+					oscillator.type = 0;
+
 					previousEl = document.elementFromPoint(mouseX, mouseY);
 					rafID = requestAnimationFrame(moveDraggable);
 				});
@@ -197,12 +244,17 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					return;
 				}
 
+				oscillator.stop();
+				$(".player").text("").append(playIcon);
+
 				$("body").addClass("refreshing-notes");
 
 				remix.push({
 					note: $(currentEl).attr("data-note"),
 					duration: dragDuration
 				});
+
+				keyboard = remix;
 
 				drawSVG();
 
@@ -260,7 +312,10 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 						return d.duration * widthFactor;
 					})
 					.attr("data-note", function(d) {
-						return d.note
+						return d.note;
+					})
+					.attr("data-freq", function(d) {
+						return d.frequency;
 					});
 			}
 
@@ -299,6 +354,9 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					})
 					.attr("data-note", function(d) {
 						return d.note;
+					})
+					.attr("data-freq", function(d) {
+						return d.frequency;
 					})
 					.transition()
 					.duration(100)
