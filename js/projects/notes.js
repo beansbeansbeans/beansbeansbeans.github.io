@@ -76,6 +76,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			
 			var keyboard = [],
 				buffer = 8,
+				playTime = 6,
 				oscillator,
 				context,
 				containerWidth = 600,
@@ -182,18 +183,26 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					oscillator.connect(context.destination);
 					oscillator.start(0);
 					oscillator.type = 0;
-					var delay = 0;
+					var delay = 0,
+						totalDuration = keyboard.reduce(function(prev, current) {
+							return prev + current.duration;
+						}, 0),
+						durFactor = playTime / totalDuration;
+
 					for(i=0; i<keyboard.length; i++) {
 						(function(index) {
 							setTimeout(function() {
 								$(".player").text(keyboard[index].note);
+								$($keyboard.find(".key")).find("rect").attr("class", "key");
+								$($keyboard.find(".key").get(index * 2)).find("rect").attr("class", "active");
 								oscillator.frequency.value = keyboard[index].frequency;
 							}, delay);
-							delay += keyboard[index].duration * 100;
+							delay += keyboard[index].duration * durFactor * 1000;
 						})(i);
 					}
 
 					setTimeout(function() {
+						$($keyboard.find(".key")).find("rect").attr("class", "key");
 						$(".player").text("").append(playIcon);
 						oscillator.stop();
 					}, delay);
