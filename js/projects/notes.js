@@ -71,7 +71,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			
 			var keyboard = [],
 				buffer = 8,
-				playTime = 6,
+				playTime = 5,
 				oscillator,
 				context,
 				containerWidth = 600,
