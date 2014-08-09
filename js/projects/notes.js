@@ -2,64 +2,59 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 	var notes = {
 		notesKey: [
 			{
-				note: "f#",
-				color: "#BE0000",
-				freq: 370
-			},
-			{
-				note: "g",
-				color: "#CF2257",
-				freq: 392
-			},
-			{
-				note: "g#",
-				color: "#FD6041",
-				freq: 415
-			},
-			{
-				note: "a",
-				color: "#FEAA3A",
-				freq: 440
-			},
-			{
-				note: "a#",
-				color: "#EFC94C",
-				freq: 466
-			},
-			{
-				note: "b",
-				color: "#45B29D",
-				freq: 494
-			},
-			{
 				note: "c",
-				color: "#94B500",
-				freq: 523
-			},
-			{
-				note: "c#",
-				color: "#2DA4A8",
-				freq: 554
+				color: "#BE0000",
+				freq: 262
 			},
 			{
 				note: "d",
-				color: "#80BDB6",
-				freq: 587
-			},
-			{
-				note: "d#",
-				color: "#334D5C",
-				freq: 622
-			},
-			{
-				note: "e",
-				color: "#435772",
-				freq: 659
+				color: "#CF2257",
+				freq: 294
 			},
 			{
 				note: "f",
-				color: "#432852",
+				color: "#FD6041",
+				freq: 349
+			},
+			{
+				note: "g",
+				color: "#FEAA3A",
+				freq: 392
+			},
+			{
+				note: "a",
+				color: "#EFC94C",
+				freq: 440
+			},
+			{
+				note: "c'",
+				color: "#45B29D",
+				freq: 523
+			},
+			{
+				note: "d'",
+				color: "#94B500",
+				freq: 587
+			},
+			{
+				note: "f'",
+				color: "#2DA4A8",
 				freq: 698
+			},
+			{
+				note: "g'",
+				color: "#80BDB6",
+				freq: 784
+			},
+			{
+				note: "a'",
+				color: "#334D5C",
+				freq: 880
+			},
+			{
+				note: "c''",
+				color: "#435772",
+				freq: 1046
 			}
 		],
 		initialize: function() {
@@ -123,7 +118,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					oscillator.frequency.value = $(currentEl).attr("data-freq");
 
 					if($(currentEl).is("rect")) {
-						
+
 						$(".key rect").attr("class", "");
 						$(currentEl).attr("class", "active");
 						$(currentEl).parent().prev().find("rect").attr("class", "half-active");
@@ -175,14 +170,15 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					.attr("height", containerHeight);
 
 				$(".project-contents").after('<div class="player">' + playIcon + '</div>');
+				
+				context = new webkitAudioContext();
+				oscillator = context.createOscillator();
+				oscillator.start(0);
+				oscillator.type = 0;
 
 				$(".player").on("click", "svg", function() {
-					$("body").addClass("refreshing-notes");
-					context = new webkitAudioContext();
-					oscillator = context.createOscillator();
 					oscillator.connect(context.destination);
-					oscillator.start(0);
-					oscillator.type = 0;
+					$("body").addClass("refreshing-notes");
 					var delay = 0,
 						totalDuration = keyboard.reduce(function(prev, current) {
 							return prev + current.duration;
@@ -204,7 +200,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					setTimeout(function() {
 						$($keyboard.find(".key")).find("rect").attr("class", "key");
 						$(".player").text("").append(playIcon);
-						oscillator.stop();
+						oscillator.disconnect(0);
 						$("body").removeClass("refreshing-notes");
 					}, delay);
 				});
@@ -234,11 +230,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				});
 
 				$keyboard.on("mousedown" + eventNamespace, function() {
-					context = new webkitAudioContext();
-					oscillator = context.createOscillator();
 					oscillator.connect(context.destination);
-					oscillator.start(0);
-					oscillator.type = 0;
 
 					previousEl = document.elementFromPoint(mouseX, mouseY);
 					rafID = requestAnimationFrame(moveDraggable);
@@ -254,7 +246,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					return;
 				}
 
-				oscillator.stop();
+				oscillator.disconnect(0);
 				$(".player").text("").append(playIcon);
 
 				$("body").addClass("refreshing-notes");
