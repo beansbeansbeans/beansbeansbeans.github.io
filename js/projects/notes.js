@@ -122,10 +122,9 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					currentEl = document.elementFromPoint(mouseX, mouseY);
 					oscillator.frequency.value = $(currentEl).attr("data-freq");
 
-					$(".key rect").attr("class", "");
-
 					if($(currentEl).is("rect")) {
-
+						
+						$(".key rect").attr("class", "");
 						$(currentEl).attr("class", "active");
 						$(currentEl).parent().prev().find("rect").attr("class", "half-active");
 						$(currentEl).parent().next().find("rect").attr("class", "half-active");
@@ -171,13 +170,14 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 
 				d3.select(".project-contents")
 					.append("svg")
-					.attr("class", "keyboard hide")
+					.attr("class", "keyboard")
 					.attr("width", containerWidth)
 					.attr("height", containerHeight);
 
 				$(".project-contents").after('<div class="player">' + playIcon + '</div>');
 
 				$(".player").on("click", "svg", function() {
+					$("body").addClass("refreshing-notes");
 					context = new webkitAudioContext();
 					oscillator = context.createOscillator();
 					oscillator.connect(context.destination);
@@ -205,6 +205,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 						$($keyboard.find(".key")).find("rect").attr("class", "key");
 						$(".player").text("").append(playIcon);
 						oscillator.stop();
+						$("body").removeClass("refreshing-notes");
 					}, delay);
 				});
 
@@ -375,27 +376,11 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					.exit().remove();
 			}
 
-			var popIn = function() {
-				var timer = 0,
-					keyLength = $keyboard.find(".key").length;
-
-				$keyboard.find(".key").each(function(i, d) {
-					setTimeout(function() {
-						if(i == keyLength - 1) {
-							$keyboard.attr("class", "keyboard");
-						}
-						$(d).find("rect").attr("class", "pop");
-					}, timer);
-					timer += 40;
-				});
-			}
-
 			setUp();
 			drawNotes();
 			drawKeyboard();
 			drawSVG();
 			attachHandlers();
-			popIn();
 
 		}
 	}
