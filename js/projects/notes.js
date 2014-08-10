@@ -106,7 +106,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					$(".key rect").attr("class", "");
 					return false;
 				}
-				if(counter%3 == 0) {
+				if(counter%2 == 0) {
 					dragDuration++;
 					currentEl = document.elementFromPoint(mouseX, mouseY);
 					if($(currentEl).attr("data-freq") !== undefined) {
@@ -222,26 +222,32 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 
 			var attachHandlers = function() {
 				$keyboard = $(".keyboard");
-				$keyboard.on("mousemove" + eventNamespace, function(e) {
-					mouseX = e.clientX;
-					mouseY = e.clientY;
+				$keyboard.on("mousemove" + eventNamespace + ", touchmove" + eventNamespace, function(e) {
+					if(e.clientX) {mouseX = e.clientX;
+					} else {mouseX = e.originalEvent.touches[0].clientX;}
+
+					if(e.clientY) {mouseY = e.clientY;
+					} else {mouseY = e.originalEvent.touches[0].clientY;
+					}
 				});
 				$keyboard.on("mouseleave" + eventNamespace, function() {
 					$(".key").removeClass("active half-active");
 					refresh();
 				});
-				$keyboard.on("mousedown" + eventNamespace, function() {
+				$keyboard.on("mousedown" + eventNamespace + ", touchstart" + eventNamespace, function() {
 					gainNode.connect(context.destination);
 					previousEl = document.elementFromPoint(mouseX, mouseY);
 					rafID = requestAnimationFrame(moveDraggable);
+					$keyboard.attr("class", "keyboard remixing");
 				});
-				$keyboard.on("mouseup" + eventNamespace, refresh);
+				$keyboard.on("mouseup" + eventNamespace + ", touchend" + eventNamespace, refresh);
 				$("body").removeClass("refreshing-notes");
 			}
 
 			var refresh = function() {
 				if(!remix.length) {return}
 
+				$keyboard.attr("class", "keyboard");
 				gainNode.disconnect(0);
 				$(".player").text("").append(playIcon);
 				$("body").addClass("refreshing-notes");

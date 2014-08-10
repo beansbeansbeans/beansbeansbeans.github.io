@@ -216,7 +216,7 @@
 		&.dim .key rect {
 			opacity: 0.1;
 		}
-		&:hover .key rect {
+		&:hover .key rect, &.remixing .key rect {
 			opacity: 0.2;
 		}
 		&.fade rect {
