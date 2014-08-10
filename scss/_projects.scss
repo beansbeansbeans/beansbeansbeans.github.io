@@ -299,6 +299,8 @@
 			@extend .large-text;
 			font-weight: 700;
 			z-index: 1;
+			opacity: 0;
+			@include animation(fadeIn .25s .5s forwards);
 		}
 		.particle {
 			position: absolute;
@@ -309,6 +311,12 @@
 			background: $blue;
 			@include animation(swipe 1.5s forwards);
 		}
+	}
+}
+
+@include keyframe(fadeIn) {
+	100% {
+		opacity: 1;
 	}
 }
 
