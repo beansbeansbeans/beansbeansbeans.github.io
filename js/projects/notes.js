@@ -109,7 +109,9 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				if(counter%3 == 0) {
 					dragDuration++;
 					currentEl = document.elementFromPoint(mouseX, mouseY);
-					oscillator.frequency.value = $(currentEl).attr("data-freq");
+					if($(currentEl).attr("data-freq") !== undefined) {
+						oscillator.frequency.value = +$(currentEl).attr("data-freq");
+					}
 					if($(currentEl).is("rect")) {
 						$(".key rect").attr("class", "");
 						$(currentEl).attr("class", "active");
@@ -155,7 +157,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				$(".project-contents").after('<div class="icon refresh">' + refreshIcon + '</div>');
 				$(".project-contents").after('<div class="icon player">' + playIcon + '</div>');
 				
-				context = new webkitAudioContext();
+				context = new AudioContext();
 				oscillator = context.createOscillator();
 				oscillator.start(0);
 				oscillator.type = 0;
