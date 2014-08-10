@@ -74,6 +74,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				playTime = 5,
 				oscillator,
 				context,
+				gainNode,
 				containerWidth = 600,
 				containerHeight = 200,
 				remix = [],
@@ -159,8 +160,13 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				oscillator.start(0);
 				oscillator.type = 0;
 
+				gainNode = context.createGain();
+				gainNode.gain.value = 0.2;
+
+				oscillator.connect(gainNode);
+
 				$(".player").on("click", "svg", function() {
-					oscillator.connect(context.destination);
+					gainNode.connect(context.destination);
 					$("body").addClass("refreshing-notes");
 					var delay = 0,
 						totalDuration = keyboard.reduce(function(prev, current) {
@@ -183,7 +189,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					setTimeout(function() {
 						$($keyboard.find(".key")).find("rect").attr("class", "key");
 						$(".player").text("").append(playIcon);
-						oscillator.disconnect(0);
+						gainNode.disconnect(0);
 						$("body").removeClass("refreshing-notes");
 					}, delay);
 				});
@@ -223,7 +229,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					refresh();
 				});
 				$keyboard.on("mousedown" + eventNamespace, function() {
-					oscillator.connect(context.destination);
+					gainNode.connect(context.destination);
 					previousEl = document.elementFromPoint(mouseX, mouseY);
 					rafID = requestAnimationFrame(moveDraggable);
 				});
@@ -234,7 +240,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			var refresh = function() {
 				if(!remix.length) {return}
 
-				oscillator.disconnect(0);
+				gainNode.disconnect(0);
 				$(".player").text("").append(playIcon);
 				$("body").addClass("refreshing-notes");
 				remix.push({
