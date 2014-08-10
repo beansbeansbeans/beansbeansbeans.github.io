@@ -86,7 +86,9 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				dragDuration = 0,
 				rafID = null,
 				eventNamespace = ".notes",
-				playIcon = '<svg height="350" version="1.1" width="350" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;"><path fill="#333333" d="M11.166,23.963C11.166,23.963,22.359,17.5,22.359,17.5C23.789,16.676,23.789,15.325,22.359,14.5C22.359,14.5,11.166,8.037,11.166,8.037C9.737,7.21,8.57,7.89,8.57,9.537C8.57,9.537,8.57,22.463,8.57,22.463C8.568,24.113,9.737,24.789,11.166,23.963C11.166,23.963,11.166,23.963,11.166,23.963" transform="scale(2)"></path></svg>';
+				playIcon = '<svg height="350" version="1.1" width="350" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;"><path fill="#333333" d="M11.166,23.963C11.166,23.963,22.359,17.5,22.359,17.5C23.789,16.676,23.789,15.325,22.359,14.5C22.359,14.5,11.166,8.037,11.166,8.037C9.737,7.21,8.57,7.89,8.57,9.537C8.57,9.537,8.57,22.463,8.57,22.463C8.568,24.113,9.737,24.789,11.166,23.963C11.166,23.963,11.166,23.963,11.166,23.963" transform="scale(2)"></path></svg>',
+				refreshIcon = '<svg height="350" version="1.1" width="350" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;"><path fill="#333333" d="M19.275,3.849l1.695,8.56l1.875-1.642c2.311,3.59,1.72,8.415-1.584,11.317c-2.24,1.96-5.186,2.57-7.875,1.908l-0.84,3.396c3.75,0.931,7.891,0.066,11.02-2.672c4.768-4.173,5.521-11.219,1.94-16.279l2.028-1.775L19.275,3.849zM8.154,20.232c-2.312-3.589-1.721-8.416,1.582-11.317c2.239-1.959,5.186-2.572,7.875-1.909l0.842-3.398c-3.752-0.93-7.893-0.067-11.022,2.672c-4.765,4.174-5.519,11.223-1.939,16.283l-2.026,1.772l8.26,2.812l-1.693-8.559L8.154,20.232z" transform="scale(1.5)"></path></svg>',
+				helpIcon = '<svg height="350" version="1.1" width="350" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;"><path fill="#333333" d="M16,1.466C7.973,1.466,1.466,7.973,1.466,16c0,8.027,6.507,14.534,14.534,14.534c8.027,0,14.534-6.507,14.534-14.534C30.534,7.973,24.027,1.466,16,1.466z M17.328,24.371h-2.707v-2.596h2.707V24.371zM17.328,19.003v0.858h-2.707v-1.057c0-3.19,3.63-3.696,3.63-5.963c0-1.034-0.924-1.826-2.134-1.826c-1.254,0-2.354,0.924-2.354,0.924l-1.541-1.915c0,0,1.519-1.584,4.137-1.584c2.487,0,4.796,1.54,4.796,4.136C21.156,16.208,17.328,16.627,17.328,19.003z" transform="scale(1.35)"></path></svg>';
 
 			var calcWidthFactor = function(arr) {
 				return (containerWidth - buffer * (arr.length - 1)) / arr.reduce(function(prev, current) {return prev + current.duration;}, 0);
@@ -148,7 +150,9 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					.attr("class", "keyboard")
 					.attr("width", containerWidth)
 					.attr("height", containerHeight);
-				$(".project-contents").after('<div class="player">' + playIcon + '</div>');
+				$(".project-contents").after('<div class="icon help">' + helpIcon + '</div>');
+				$(".project-contents").after('<div class="icon refresh">' + refreshIcon + '</div>');
+				$(".project-contents").after('<div class="icon player">' + playIcon + '</div>');
 				
 				context = new webkitAudioContext();
 				oscillator = context.createOscillator();
@@ -183,6 +187,21 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 						$("body").removeClass("refreshing-notes");
 					}, delay);
 				});
+
+				$(".help").on("click", "svg", drawInstructional);
+
+				$(".refresh").on("click", "svg", function() {
+					keyboard = [];
+					for(i=0; i<15; i++) {
+						var randIndex = Math.round(Math.random() * (this.notesKey.length - 1));
+						keyboard.push({
+							note: this.notesKey[randIndex].note,
+							frequency: this.notesKey[randIndex].freq,
+							duration: 1
+						});
+					}
+					drawKeyboard();
+				}.bind(this));
 			}.bind(this);
 
 			var drawNotes = function() {
@@ -260,6 +279,8 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					.attr("width", function(d) {return d.duration * widthFactor})
 					.attr("data-note", function(d) {return d.note})
 					.attr("data-freq", function(d) {return d.frequency});
+
+				noteGroups.exit().remove();
 			}
 
 			var drawSVG = function() {

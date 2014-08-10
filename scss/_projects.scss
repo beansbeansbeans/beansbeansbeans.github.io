@@ -256,26 +256,35 @@
 		}
 	}
 
-	.player {
+	.icon {
 		@include transition(all 250ms);
+		display: inline-block;
 		cursor: pointer;
 		overflow: hidden;
 		text-transform: uppercase;
-		width: rhythm($lines: 17, $font-size: map-get(map-get($text-map, large), font-size));
-		height: rhythm($lines: 17, $font-size: map-get(map-get($text-map, large), font-size));
-		margin: 0 auto;
-		@include rhythm-borders($width: 3px, $lines: 3, $font-size: map-get(map-get($text-map, large), font-size));
+		width: rhythm($lines: 10, $font-size: map-get(map-get($text-map, large), font-size));
+		height: rhythm($lines: 10, $font-size: map-get(map-get($text-map, large), font-size));
+		margin: 0 15px;
 		@include trailer($lines: 20, $font-size: map-get(map-get($text-map, large), font-size));
 		@include border-radius(5px);
 		text-align: center;
-		@include adjust-font-size-to(map-get(map-get($text-map, large), font-size), $lines: 11);
-		svg {
-			margin-top: -5px;
-			margin-left: -2px;
+		@include adjust-font-size-to(map-get(map-get($text-map, large), font-size), $lines: 9.75);
+		&.player svg {
+			margin-top: -8px;
+			margin-left: -7px;
+		}
+		&.refresh svg {
+			margin-top: 1px;
+			margin-left: 1px;
+		}
+		&.help svg {
+			margin-top: 2px;
+			margin-left: 2px;
 		}
 		&:hover {
 			opacity: 0.6;
 		}
+
 	}
 
 	.canvas {
