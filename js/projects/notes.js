@@ -257,6 +257,10 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			}
 
 			var drawKeyboard = function() {
+
+				// cheating...
+				$(".keyboard").html("");
+
 				var widthFactor = calcWidthFactor(keyboard),
 					accumulatedTransformX = 0,
 					noteGroups = d3.select(".keyboard").selectAll("div").data(keyboard);
