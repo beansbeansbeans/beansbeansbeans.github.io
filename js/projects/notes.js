@@ -220,7 +220,8 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				$("body").addClass("refreshing-notes");
 				remix.push({
 					note: $(currentEl).attr("data-note"),
-					duration: dragDuration
+					duration: dragDuration,
+					frequency: $(currentEl).attr("data-freq")
 				});
 
 				keyboard = remix;
