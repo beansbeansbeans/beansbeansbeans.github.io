@@ -228,24 +228,12 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				remix = [];
 				$(".key rect").attr("class", "");
 				window.cancelAnimationFrame(rafID);
-				$(".keyboard").attr("class", "keyboard fade");
 
-				setTimeout(function() {
-					$keyboard.off(eventNamespace).remove();
-					$(".notes").attr("class", "keyboard").find(".note").attr("class", "key");
-					$(".key").each(function(i, d) {
-						var transformX = $(d).attr("transform"),
-							startIdx = transformX.indexOf("("),
-							stopIdx = transformX.indexOf(","),
-
-						transformX = +transformX.substring(startIdx + 1, stopIdx);
-						$(d).attr("transform", "translate(" + parseInt(transformX + containerWidth, 10) + ", 0)");
-						$(d).find("rect").attr("transform", "");
-					});
-					attachHandlers();
-					dragDuration = 0;
-					drawNotes();
-				}, 150);
+				$keyboard.off(eventNamespace).remove();
+				$(".notes").attr("class", "keyboard").find(".note").attr("class", "key");
+				attachHandlers();
+				dragDuration = 0;
+				drawNotes();
 			}
 
 			var drawKeyboard = function() {
@@ -289,14 +277,13 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					.attr("rx", 5)
 					.attr("ry", 5)
 					.attr("fill-opacity", 0)
-					.attr("transform", "translate(" + containerWidth + ", 0)")
 					.attr("height", containerHeight);
 
 				noteGroups
 					.transition()
 					.duration(100)
 					.attr("transform", function(d, i) {
-						return "translate(" + parseInt(d.transformX - containerWidth, 10) + ", 0)";
+						return "translate(" + parseInt(d.transformX, 10) + ", 0)";
 					})
 					.select("rect")
 					.attr("fill", function(d) {return color(d.note)})

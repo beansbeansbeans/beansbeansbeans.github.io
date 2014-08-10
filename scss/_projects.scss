@@ -242,7 +242,7 @@
 	}
 
 	.refreshing-notes & {
-		.keyboard {
+		.keyboard, .player {
 			pointer-events: none;
 		}
 	}
