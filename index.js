@@ -9,26 +9,29 @@ http.createServer(function(request, response) {
 
 	fs.exists(filename, function(exists) {
 
-		if (fs.statSync(filename).isDirectory()) filename += '/index.html';
+		try{
+			if (fs.statSync(filename).isDirectory()) filename += '/index.html';
 
-		fs.readFile(filename, "binary", function(err, file) {
-			if(request.url.indexOf(".ogg") > -1 ) {
-				var filePath = path.join(__dirname, request.url);
-			    var stat = fs.statSync(filePath);
-				response.writeHead(200, {
-					"Content-Type": "audio/ogg",
-					"Content-Length": stat.size
-				});
-				var readStream = fs.createReadStream(filePath);
-			    readStream.pipe(response);
-			} else {
-				response.writeHead(200);
-				response.write(file, "binary");
-				response.end();
-			}
-		});
+			fs.readFile(filename, "binary", function(err, file) {
+				if(request.url.indexOf(".ogg") > -1 ) {
+					var filePath = path.join(__dirname, request.url);
+				    var stat = fs.statSync(filePath);
+					response.writeHead(200, {
+						"Content-Type": "audio/ogg",
+						"Content-Length": stat.size
+					});
+					var readStream = fs.createReadStream(filePath);
+				    readStream.pipe(response);
+				} else {
+					response.writeHead(200);
+					response.write(file, "binary");
+					response.end();
+				}
+			});
+		} catch(e) {
+			console.log(e);
+		}
 	});
-
 }).listen(8080);
 
 console.log("Static file server running");
