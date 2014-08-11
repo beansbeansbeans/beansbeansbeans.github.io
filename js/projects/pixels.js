@@ -1,4 +1,4 @@
-define(['fisheye', 'templates/project_detail'], function(fisheye, projectTemplate) {
+define(['fisheye', 'lib/d3', 'templates/project_detail'], function(fisheye, d3, projectTemplate) {
 	var pixels = {
 		initialize: function() {
 			var data = {

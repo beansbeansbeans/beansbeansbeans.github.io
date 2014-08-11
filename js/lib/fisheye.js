@@ -1,4 +1,4 @@
-define([], function() {
+define(['lib/d3'], function(d3) {
 
   fisheye = {
     scale: function(scaleType) {

@@ -8,9 +8,6 @@ require.config({
       'paper': 'lib/paper'
     },
     shim: {
-    	'fisheye': {
-    		deps: ['d3.global']
-    	},
         'handlebars': {
             exports: 'Handlebars'
         },
