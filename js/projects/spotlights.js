@@ -1,4 +1,4 @@
-define(['d3', 'underscore', 'templates/project_detail'], function(d3, _, projectTemplate) {
+define(['lib/d3', 'underscore', 'templates/project_detail'], function(d3, _, projectTemplate) {
 	var spotlights = {
 		initialize: function() {
 			var data = {
