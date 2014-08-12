@@ -251,11 +251,13 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				gainNode.disconnect(0);
 				$(".player").text("").append(playIcon);
 				$("body").addClass("refreshing-notes");
-				remix.push({
-					note: $(currentEl).attr("data-note"),
-					duration: dragDuration,
-					frequency: $(currentEl).attr("data-freq")
-				});
+				if($(currentEl).attr("data-note") !== undefined) {
+					remix.push({
+						note: $(currentEl).attr("data-note"),
+						duration: dragDuration,
+						frequency: $(currentEl).attr("data-freq")
+					});
+				}
 
 				keyboard = remix;
 				drawSVG();
