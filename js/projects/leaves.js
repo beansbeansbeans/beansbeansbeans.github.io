@@ -501,7 +501,8 @@ define(['templates/project_detail'], function(projectTemplate) {
 			RAF
 			 */
 
-			var pixelsPerFrame = 2;
+			var pixelsPerFrame = 2,
+				self = this;
 
 			function animate() {
 
@@ -577,13 +578,15 @@ define(['templates/project_detail'], function(projectTemplate) {
 				});
 
 				// drawSegmentObjects();
-
-				requestAnimationFrame(animate);
+				self.rafID = requestAnimationFrame(animate);
 
 			}
 
-			requestAnimationFrame(animate);
+			this.rafID = requestAnimationFrame(animate);
 
+		},
+		destroy: function() {
+			window.cancelAnimationFrame(this.rafID);
 		}
 	};
 	return leaves;

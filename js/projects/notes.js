@@ -57,6 +57,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				freq: 1046
 			}
 		],
+		rafID: null,
 		initialize: function() {
 			var data = {
 				identifier: "notes",
@@ -85,7 +86,6 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				currentEl,
 				previousEl,
 				dragDuration = 0,
-				rafID = null,
 				eventNamespace = ".notes",
 				playIcon = '<svg height="350" version="1.1" width="350" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;"><path fill="#333333" d="M11.166,23.963C11.166,23.963,22.359,17.5,22.359,17.5C23.789,16.676,23.789,15.325,22.359,14.5C22.359,14.5,11.166,8.037,11.166,8.037C9.737,7.21,8.57,7.89,8.57,9.537C8.57,9.537,8.57,22.463,8.57,22.463C8.568,24.113,9.737,24.789,11.166,23.963C11.166,23.963,11.166,23.963,11.166,23.963" transform="scale(2)"></path></svg>',
 				refreshIcon = '<svg height="350" version="1.1" width="350" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;"><path fill="#333333" d="M19.275,3.849l1.695,8.56l1.875-1.642c2.311,3.59,1.72,8.415-1.584,11.317c-2.24,1.96-5.186,2.57-7.875,1.908l-0.84,3.396c3.75,0.931,7.891,0.066,11.02-2.672c4.768-4.173,5.521-11.219,1.94-16.279l2.028-1.775L19.275,3.849zM8.154,20.232c-2.312-3.589-1.721-8.416,1.582-11.317c2.239-1.959,5.186-2.572,7.875-1.909l0.842-3.398c-3.752-0.93-7.893-0.067-11.022,2.672c-4.765,4.174-5.519,11.223-1.939,16.283l-2.026,1.772l8.26,2.812l-1.693-8.559L8.154,20.232z" transform="scale(1.5)"></path></svg>',
@@ -133,8 +133,8 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					}
 				}
 				counter++;
-				rafID = requestAnimationFrame(moveDraggable);
-			}
+				this.rafID = requestAnimationFrame(moveDraggable);
+			}.bind(this);
 
 			var setUp = function() {
 				$(".project-contents").width(containerWidth);
@@ -237,12 +237,12 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				$keyboard.on("mousedown" + eventNamespace + ", touchstart" + eventNamespace, function() {
 					gainNode.connect(context.destination);
 					previousEl = document.elementFromPoint(mouseX, mouseY);
-					rafID = requestAnimationFrame(moveDraggable);
+					this.rafID = requestAnimationFrame(moveDraggable);
 					$keyboard.attr("class", "keyboard remixing");
-				});
+				}.bind(this));
 				$keyboard.on("mouseup" + eventNamespace + ", touchend" + eventNamespace, refresh);
 				$("body").removeClass("refreshing-notes");
-			}
+			}.bind(this);
 
 			var refresh = function() {
 				if(!remix.length) {return}
@@ -261,14 +261,14 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				drawSVG();
 				remix = [];
 				$(".key rect").attr("class", "");
-				window.cancelAnimationFrame(rafID);
+				window.cancelAnimationFrame(this.rafID);
 
 				$keyboard.off(eventNamespace).remove();
 				$(".notes").attr("class", "keyboard").find(".note").attr("class", "key");
 				attachHandlers();
 				dragDuration = 0;
 				drawNotes();
-			}
+			}.bind(this);
 
 			var drawKeyboard = function() {
 
@@ -416,6 +416,9 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			drawSVG();
 			attachHandlers();
 			drawInstructional();
+		},
+		destroy: function() {
+			window.cancelAnimationFrame(this.rafID);
 		}
 	}
 

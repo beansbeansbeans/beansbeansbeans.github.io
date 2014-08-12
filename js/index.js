@@ -36,6 +36,10 @@ require(['jquery', 'router'], function($, Router) {
     	require(["projects/" + id], function(projectModule) {
     		initialize(projectModule);
     	});
+    }, function(id) {
+        require(["projects/" + id], function(projectModule) {
+            if(projectModule.destroy) projectModule.destroy();
+        });
     });
 
     router.registerRoute('projects', function() {
