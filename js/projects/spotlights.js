@@ -1,5 +1,6 @@
 define(['lib/d3', 'underscore', 'templates/project_detail'], function(d3, _, projectTemplate) {
 	var spotlights = {
+		intervalID: null,
 		initialize: function() {
 			var data = {
 				identifier: "spotlights", 
@@ -364,128 +365,103 @@ define(['lib/d3', 'underscore', 'templates/project_detail'], function(d3, _, pro
 
 			},
 			updateSpotlights = function(spotlightData) {
-			        //spotlightData will be the spotlights object
-			        var renderedSpotlights = svg.selectAll("path").data(spotlightData);
+		        //spotlightData will be the spotlights object
+		        var renderedSpotlights = svg.selectAll("path").data(spotlightData);
 
-			        // update (the only relevant operation, I think)
-			        renderedSpotlights.attr("d", function(d, i) {
-			        	return "M" + intersectionPoints[d.leftEdge.startPoint][0] + " " + intersectionPoints[d.leftEdge.startPoint][1] + "L" + intersectionPoints[d.leftEdge.endPoint][0] + " " + intersectionPoints[d.leftEdge.endPoint][1] + "L" + intersectionPoints[d.rightEdge.endPoint][0] + " " + intersectionPoints[d.rightEdge.endPoint][1] + "z"
-			        })
+		        // update (the only relevant operation, I think)
+		        renderedSpotlights.attr("d", function(d, i) {
+		        	return "M" + intersectionPoints[d.leftEdge.startPoint][0] + " " + intersectionPoints[d.leftEdge.startPoint][1] + "L" + intersectionPoints[d.leftEdge.endPoint][0] + " " + intersectionPoints[d.leftEdge.endPoint][1] + "L" + intersectionPoints[d.rightEdge.endPoint][0] + " " + intersectionPoints[d.rightEdge.endPoint][1] + "z"
+		        })
 
-			        // enter (this is needed, but it will only happen once)
-			        renderedSpotlights.enter().append("path")
-			        .attr("stroke", "none")
-			        .attr("fill", "#F7E967")
-			        .attr("fill-opacity", .5)
-			        .attr("d", function(d, i) {
-			        	return "M" + intersectionPoints[d.leftEdge.startPoint][0] + " " + intersectionPoints[d.leftEdge.startPoint][1] + "L" + intersectionPoints[d.leftEdge.endPoint][0] + " " + intersectionPoints[d.leftEdge.endPoint][1] + "L" + intersectionPoints[d.rightEdge.endPoint][0] + " " + intersectionPoints[d.rightEdge.endPoint][1] + "z"
-			        })
-			    },
-			    updatePolygons = function(polygonData) {
-			    	var renderedPolygons = svg.selectAll("polygon").data(polygonData);
+		        // enter (this is needed, but it will only happen once)
+		        renderedSpotlights.enter().append("path")
+		        .attr("stroke", "none")
+		        .attr("fill", "#F7E967")
+		        .attr("fill-opacity", .5)
+		        .attr("d", function(d, i) {
+		        	return "M" + intersectionPoints[d.leftEdge.startPoint][0] + " " + intersectionPoints[d.leftEdge.startPoint][1] + "L" + intersectionPoints[d.leftEdge.endPoint][0] + " " + intersectionPoints[d.leftEdge.endPoint][1] + "L" + intersectionPoints[d.rightEdge.endPoint][0] + " " + intersectionPoints[d.rightEdge.endPoint][1] + "z"
+		        })
+		    },
+		    updatePolygons = function(polygonData) {
+		    	var renderedPolygons = svg.selectAll("polygon").data(polygonData);
 
-			        // update
-			        renderedPolygons
-			        .attr("fill", function(d, i) {
-			        	return colors(d.depth)
-			        })
-			        .attr("points", function(d, i) {
-			        	var pointString = "";
-			        	d.points.forEach(function(point, index) {
-			        		pointString += intersectionPoints[point][0];
-			        		pointString += ",";
-			        		pointString += intersectionPoints[point][1];
-			        		pointString += " "
-			        	})
-			        	return pointString;
-			        })
+		        // update
+		        renderedPolygons
+		        .attr("fill", function(d, i) {
+		        	return colors(d.depth)
+		        })
+		        .attr("points", function(d, i) {
+		        	var pointString = "";
+		        	d.points.forEach(function(point, index) {
+		        		pointString += intersectionPoints[point][0];
+		        		pointString += ",";
+		        		pointString += intersectionPoints[point][1];
+		        		pointString += " "
+		        	})
+		        	return pointString;
+		        })
 
-			        // enter
-			        renderedPolygons.enter().append("polygon")
-			          // .attr("stroke", "white")
-			          // .attr("stroke-width", 1)
-			          .attr("fill", function(d, i) {
-			          	return colors(d.depth)
-			          })
-			          .attr("clip-path", "url(#myClip)")
-			          .attr("points", function(d, i) {
-			          	var pointString = "";
-			          	d.points.forEach(function(point, index) {
-			          		pointString += intersectionPoints[point][0];
-			          		pointString += ",";
-			          		pointString += intersectionPoints[point][1];
-			          		pointString += " "
-			          	})
-			          	return pointString;
-			          })
+		        // enter
+		        renderedPolygons.enter().append("polygon")
+		          // .attr("stroke", "white")
+		          // .attr("stroke-width", 1)
+		          .attr("fill", function(d, i) {
+		          	return colors(d.depth)
+		          })
+		          .attr("clip-path", "url(#myClip)")
+		          .attr("points", function(d, i) {
+		          	var pointString = "";
+		          	d.points.forEach(function(point, index) {
+		          		pointString += intersectionPoints[point][0];
+		          		pointString += ",";
+		          		pointString += intersectionPoints[point][1];
+		          		pointString += " "
+		          	})
+		          	return pointString;
+		          })
 
-			        // enter and update
+		        // enter and update
 
-			        // exit
-			        renderedPolygons.exit().remove();
+		        // exit
+		        renderedPolygons.exit().remove();
 
-			    },
-			    initialize = function() {
+		    },
+		    initialize = function() {
 
-			    	svg.append("defs").append("clipPath")
-			    	.attr("id", "myClip")
-			    	.append("circle")
+		    	svg.append("defs").append("clipPath")
+		    	.attr("id", "myClip")
+		    	.append("circle")
 
-			    	// svg.append("line")
-			    	// .attr("stroke", "#222222")
-			    	// .attr("stroke-width", "1")
-			    	// .attr("x1", 0)
-			    	// .attr("y1", 0)
-			    	// .attr("x2", 960)
-			    	// .attr("y2", 500)
+		    	function handleSlider(i, range) {
+		    		$("#" + i + "[type=range]").on("change", function() {
+		    			var leftIndex = spotlightRayBounds[i*2],
+		    			rightIndex = spotlightRayBounds[i*2 + 1];
+		    			intersectionPoints[leftIndex][0] = parseInt(this.value) - range;
+		    			intersectionPoints[rightIndex][0] = parseInt(this.value) + range;
+		    			updateSpotlights(spotlights)
+		    			generatePolygonData();
+		    			updatePolygons(cleanedPolygons)
+		    		})         
+		    	}
+		    	for( var i = 0; i < spotlightRayBounds.length / 2; i++ ) {
+		    		spotlights[i] = new Spotlight(hinges[i], spotlightRayBounds[i*2], spotlightRayBounds[i*2 + 1]);
+		    		var spotlightHalfRange = .5 * (intersectionPoints[spotlights[i].rightEdge.endPoint][0] - intersectionPoints[spotlights[i].leftEdge.endPoint][0]),
+		    		min = 85 + spotlightHalfRange + i,
+		    		max = 875 - spotlightHalfRange - i,
+		    		value = intersectionPoints[spotlights[i].leftEdge.endPoint][0] + spotlightHalfRange;
+		    		$("#sliders").append("<input type='range' id='" + i + "' min='" + min + "' max='" + max + "' value='" + value + "'>");
+		    		handleSlider(i, spotlightHalfRange)
+		    	};
 
-			    	// svg.append("line")
-			    	// .attr("stroke", "#222222")
-			    	// .attr("stroke-width", "1")
-			    	// .attr("x1", 960)
-			    	// .attr("y1", 0)
-			    	// .attr("x2", 0)
-			    	// .attr("y2", 500)
+		    };
+		    initialize();
+		    updateSpotlights(spotlights);
+		    generatePolygonData();
+		    updatePolygons(cleanedPolygons);
 
-			    	// svg.append("rect")
-			    	// .attr("x", 160)
-			    	// .attr("y", 83)
-			    	// .attr("width", 640)
-			    	// .attr("height", 333)
-			    	// .attr("stroke", "#222222")
-			    	// .attr("stroke-width", 1)
-			    	// .attr("fill", "white");
-
-			    	function handleSlider(i, range) {
-			    		$("#" + i + "[type=range]").on("change", function() {
-			    			var leftIndex = spotlightRayBounds[i*2],
-			    			rightIndex = spotlightRayBounds[i*2 + 1];
-			    			intersectionPoints[leftIndex][0] = parseInt(this.value) - range;
-			    			intersectionPoints[rightIndex][0] = parseInt(this.value) + range;
-			    			updateSpotlights(spotlights)
-			    			generatePolygonData();
-			    			updatePolygons(cleanedPolygons)
-			    		})         
-			    	}
-			    	for( var i = 0; i < spotlightRayBounds.length / 2; i++ ) {
-			    		spotlights[i] = new Spotlight(hinges[i], spotlightRayBounds[i*2], spotlightRayBounds[i*2 + 1]);
-			    		var spotlightHalfRange = .5 * (intersectionPoints[spotlights[i].rightEdge.endPoint][0] - intersectionPoints[spotlights[i].leftEdge.endPoint][0]),
-			    		min = 85 + spotlightHalfRange + i,
-			    		max = 875 - spotlightHalfRange - i,
-			    		value = intersectionPoints[spotlights[i].leftEdge.endPoint][0] + spotlightHalfRange;
-			    		$("#sliders").append("<input type='range' id='" + i + "' min='" + min + "' max='" + max + "' value='" + value + "'>");
-			    		handleSlider(i, spotlightHalfRange)
-			    	};
-
-			    };
-			    initialize();
-			    updateSpotlights(spotlights);
-			    generatePolygonData();
-			    updatePolygons(cleanedPolygons);
-
-			    (function() {
-			    	var width = 845;
-			    	var height = 467;
+		    (function(self) {
+		    	var width = 845;
+		    	var height = 467;
 			    var r = 38; // radius of the balls
 			    var dt = 0.5;
 			    var a = -0.2;
@@ -531,13 +507,15 @@ define(['lib/d3', 'underscore', 'templates/project_detail'], function(d3, _, pro
 
 			    function start() {
 			    	update();
-			    	setInterval(update, 10);
+			    	self.intervalID = setInterval(update, 10);
 			    }
 
 			    start();
-			})();
+			})(this);
 
-
+		},
+		destroy: function() {
+			clearInterval(this.intervalID);
 		}
 	};
 	return spotlights;
