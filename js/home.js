@@ -1,7 +1,7 @@
 define([], function() {
 	var home = {
 		initialize: function() {
-			$("#view").html("<div id='homepage'><h1>home</h1><div class='description'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut nobis quisquam eveniet aut cum, adipisci incidunt ducimus, amet architecto repellendus.</div><div id='top-container'><div id='top'></div><div id='shadow'></div></div></div>");
+			$("#view").html("<div id='homepage'><h1>home</h1><div class='description'>I purchased this radish-shaped top from David Earle's Etsy shop in May, 2014 for twelve dollars.</div><div id='top-container'><div id='top'></div><div id='shadow'></div></div></div>");
 
 			var counter = 0,
 				frameCount = 25,
