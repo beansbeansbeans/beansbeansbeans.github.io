@@ -5,8 +5,8 @@ define([], function() {
 
 			var counter = 0,
 				frameCount = 25,
-				frameWidth = 341,
-				shadowWidth = 402,
+				frameWidth = 256,
+				shadowWidth = 362,
 				frameInterval = 4,
 				self = this;
 

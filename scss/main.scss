@@ -178,8 +178,8 @@ nav {
 // top animation
 
 $frame-count: 24;
-$frame-width: 341px;
-$frame-height: 559px;
+$frame-width: 256px;
+$frame-height: 419px;
 
 #homepage {
 	text-align: center;
@@ -198,24 +198,23 @@ $frame-height: 559px;
 	#top-container {
 		margin: 0 auto;
 		text-align: center;
-		@include leader(0);
+		@include leader(12);
 		position: relative;
 	}
 	#top {
 		margin: 0 auto;
-		@include transform(scale(0.75, 0.75));
 		@include size($frame-width, $frame-height);
 		background-image: url(../images/top.png);
 		background-size: $frame-count * $frame-width $frame-height;
 	}
 	#shadow {
 		background-image: url(../images/shadow.png);
-		width: 400px;
-		height: 114px;
+		width: 360px;
+		height: 103px;
 		position: absolute;
 		z-index: -1;
 		left: 50%;
-		top: 420px;
-		margin-left: -20px;
+		top: 350px;
+		margin-left: -10px;
 	}
 }

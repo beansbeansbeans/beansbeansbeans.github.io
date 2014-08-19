@@ -650,29 +650,25 @@ nav li .description {
 #homepage #top-container {
   margin: 0 auto;
   text-align: center;
-  margin-top: 0em;
+  margin-top: 3.75em;
   position: relative;
 }
 #homepage #top {
   margin: 0 auto;
-  -moz-transform: scale(0.75, 0.75);
-  -ms-transform: scale(0.75, 0.75);
-  -webkit-transform: scale(0.75, 0.75);
-  transform: scale(0.75, 0.75);
-  width: 341px;
-  height: 559px;
+  width: 256px;
+  height: 419px;
   background-image: url(../images/top.png);
-  background-size: 8184px 559px;
+  background-size: 6144px 419px;
 }
 #homepage #shadow {
   background-image: url(../images/shadow.png);
-  width: 400px;
-  height: 114px;
+  width: 360px;
+  height: 103px;
   position: absolute;
   z-index: -1;
   left: 50%;
-  top: 420px;
-  margin-left: -20px;
+  top: 350px;
+  margin-left: -10px;
 }
 
 /*# sourceMappingURL=main.css.map */
