@@ -1,3 +1,16 @@
+#project-straws {
+	#glass {
+		@include leader(40);
+		margin-left: auto;
+		margin-right: auto;
+		border-left: solid 4px $blue;
+		border-right: solid 4px $blue;
+		border-bottom: solid 4px $blue;
+		position: relative;
+		@include border-radius(0 0 15px 15px);
+	}
+}
+
 #project-pixels {
 	#border {
 		@include box-sizing(content-box);

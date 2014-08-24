@@ -1,6 +1,10 @@
 define(['templates/project_index'], function(projectIndex) {
 	var data = [
 		{
+			title: "straws",
+			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet porro, natus excepturi."
+		},
+		{
 			title: "notes",
 			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam at dicta a itaque."
 		},
