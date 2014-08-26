@@ -21,10 +21,19 @@ define(['templates/project_detail'], function(projectTemplate) {
 				yIntercept = (-straw.top.y) - slope * straw.top.x,
 
 				liesWithinStraw = function(point) {
-					if( point.x >= straw.top.x && 
-						point.x <= (straw.top.x + dX) && 
-						point.y <= -straw.top.y && 
-						point.y >= (-straw.top.y + dY)) {
+					var topLeft = {
+						x: (straw.top.x < (straw.top.x + dX)) ? straw.top.x : (straw.top.x + dX),
+						y: (-straw.top.y < (-straw.top.y + dY)) ? -straw.top.y : (-straw.top.y + dY)
+					},
+					bottomRight = {
+						x: (straw.top.x > (straw.top.x + dX)) ? straw.top.x : (straw.top.x + dX),
+						y: (-straw.top.y > (-straw.top.y + dY)) ? -straw.top.y : (-straw.top.y + dY)
+					};
+
+					if( point.x >= topLeft.x && 
+						point.x <= bottomRight.x && 
+						point.y >= topLeft.y && 
+						point.y <= bottomRight.y) {
 						return true
 					} 
 					else {return false}
@@ -50,6 +59,8 @@ define(['templates/project_detail'], function(projectTemplate) {
 					}
 					return point;
 				}.bind(this);
+
+				
 
 			intersectionArray.push(linearSolution("left"));
 			intersectionArray.push(linearSolution("right"));
@@ -124,10 +135,9 @@ define(['templates/project_detail'], function(projectTemplate) {
 							// window.cancelAnimationFrame(self.rafID);
 							// return false;
 							if(d.intersectionPoints[0].position === "bottom") {
-								d.angle -= sign(d.angle);								
+								d.angle += (d.angle < -90) ? -1 : 1;								
 							} else {
 								d.angle += sign(d.angle);
-								// in this case we might also need to change the transform origin 
 							}			
 
 							var	dX = d.height * Math.cos(self.degToRadians(d.angle)),
