@@ -118,8 +118,9 @@ define(['templates/project_detail'], function(projectTemplate) {
 			var release = function() {
 				straws.forEach(function(d, i) {
 					if(d.intersectionPoints.length < 2) {
-						d.top.y++;
-						if(d.intersectionPoints.length) {
+						if(!d.intersectionPoints.length) {
+							d.top.y++;
+						} else {
 							// window.cancelAnimationFrame(self.rafID);
 							// return false;
 							if(d.intersectionPoints[0].position === "bottom") {
@@ -129,28 +130,16 @@ define(['templates/project_detail'], function(projectTemplate) {
 								// in this case we might also need to change the transform origin 
 							}			
 
-							// given intersection point, slope (angle), and y value, we can find the x value
-							// I THINK THE PROBLEM IS HERE.
 							var	dX = d.height * Math.cos(self.degToRadians(d.angle)),
 								dY = d.height * Math.sin(self.degToRadians(d.angle)),
-								slope = dY / dX,
-								yIntercept = (d.intersectionPoints[0].point.y) - (slope * d.intersectionPoints[0].point.x);
+								slope = dY / dX;
 
-							console.log(dY);
-							console.log(dX);
-							console.log(yIntercept);
-							console.log(d.top.x);	
-							console.log(d.top.y);	
-							console.log("==============");
-
-							d.top.x = (-d.top.y - yIntercept) / slope;
-							// d.transformOrigin = d.intersectionPoints[0].point.x + "px " + d.intersectionPoints[0].point.y + "px";
-
+							d.top.x = d.intersectionPoints[0].point.x - dX;
+							d.top.y = -(d.intersectionPoints[0].point.y - dY);
 						}
 
 						d.el.css({
-							transform: "translate3d(" + d.top.x + "px," + d.top.y + "px,0) rotate(" + parseInt((-90) - d.angle, 10) + "deg)",
-							// transformOrigin: d.transformOrigin
+							transform: "translate3d(" + d.top.x + "px," + d.top.y + "px,0) rotate(" + parseInt((-90) - d.angle, 10) + "deg)"
 						});
 
 						self.testForIntersection(d);
