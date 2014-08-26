@@ -39,6 +39,16 @@ define(['templates/project_detail'], function(projectTemplate) {
 					else {return false}
 				}.bind(this),
 
+				liesWithinGlass = function(point) {
+					if( point.x >= 0 &&
+						point.x <= this.glassWidth &&
+						point.y >= 0 &&
+						point.y <= this.glassHeight) {
+						return true;
+					}
+					else {return false}
+				}.bind(this),
+
 				linearSolution = function(edge) {
 					var point = {position: edge};
 					if(edge === "left") {
@@ -52,18 +62,26 @@ define(['templates/project_detail'], function(projectTemplate) {
 							y: slope * this.glassWidth + yIntercept
 						}
 					} else {
-						point.point = {
-							x: (-this.glassHeight - yIntercept)/slope,
-							y: -this.glassHeight
+						if(slope == Number.POSITIVE_INFINITY || slope == Number.NEGATIVE_INFINITY) {
+							point.point = {
+								x: straw.top.x,
+								y: -this.glassHeight
+							}
+						} else {
+							point.point = {
+								x: (-this.glassHeight - yIntercept)/slope,
+								y: -this.glassHeight
+							}
 						}
 					}
 					return point;
 				}.bind(this);
-
 				
+			if(slope !== Number.POSITIVE_INFINITY && slope !== Number.NEGATIVE_INFINITY) {
+				intersectionArray.push(linearSolution("left"));
+				intersectionArray.push(linearSolution("right"));
+			}
 
-			intersectionArray.push(linearSolution("left"));
-			intersectionArray.push(linearSolution("right"));
 			intersectionArray.push(linearSolution("bottom"));
 
 			intersectionArray.forEach(function(d) {
@@ -71,6 +89,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 					return point.position === d.position;
 				});
 				if(liesWithinStraw(d.point) && !repeatArray.length) {straw.intersectionPoints.push(d)}
+				console.log(liesWithinGlass(d.point));
 			});
 		},
 		initialize: function() {
@@ -123,7 +142,8 @@ define(['templates/project_detail'], function(projectTemplate) {
 					x: 150,
 					y: -200
 				},
-				angle: -60 + Math.random() * 10
+				// angle: -60 + Math.random() * 10
+				angle: -90
 			}));
 
 			var release = function() {
@@ -138,7 +158,9 @@ define(['templates/project_detail'], function(projectTemplate) {
 								d.angle += (d.angle < -90) ? -1 : 1;								
 							} else {
 								d.angle += sign(d.angle);
-							}			
+							}
+
+							console.log("THERE ARE INTERSECTION POINTS!");			
 
 							var	dX = d.height * Math.cos(self.degToRadians(d.angle)),
 								dY = d.height * Math.sin(self.degToRadians(d.angle)),
