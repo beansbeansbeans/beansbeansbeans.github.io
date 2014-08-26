@@ -42,8 +42,8 @@ define(['templates/project_detail'], function(projectTemplate) {
 				liesWithinGlass = function(point) {
 					if( point.x >= 0 &&
 						point.x <= this.glassWidth &&
-						point.y >= 0 &&
-						point.y <= this.glassHeight) {
+						point.y <= 0 &&
+						point.y >= -this.glassHeight) {
 						return true;
 					}
 					else {return false}
@@ -88,8 +88,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				var repeatArray = straw.intersectionPoints.filter(function(point) {
 					return point.position === d.position;
 				});
-				if(liesWithinStraw(d.point) && !repeatArray.length) {straw.intersectionPoints.push(d)}
-				console.log(liesWithinGlass(d.point));
+				if(liesWithinStraw(d.point) && liesWithinGlass(d.point) && !repeatArray.length) {straw.intersectionPoints.push(d)}
 			});
 		},
 		initialize: function() {
@@ -159,8 +158,6 @@ define(['templates/project_detail'], function(projectTemplate) {
 							} else {
 								d.angle += sign(d.angle);
 							}
-
-							console.log("THERE ARE INTERSECTION POINTS!");			
 
 							var	dX = d.height * Math.cos(self.degToRadians(d.angle)),
 								dY = d.height * Math.sin(self.degToRadians(d.angle)),
