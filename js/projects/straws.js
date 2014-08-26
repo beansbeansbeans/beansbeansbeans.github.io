@@ -1,4 +1,11 @@
 define(['templates/project_detail'], function(projectTemplate) {
+	function sign(x) {
+		if(x===0) {
+			return -1;
+		} else {
+			return (x < 0 ? -1 : 1);
+		}
+	}
 	var straws = {
 		glassWidth: 450,
 		glassHeight: 325,
@@ -8,14 +15,21 @@ define(['templates/project_detail'], function(projectTemplate) {
 		},
 		testForIntersection: function(straw) {
 			var intersectionArray = [],
-				dX = (straw.height * Math.cos(this.degToRadians(-90 + straw.angle))),
-				dY = (straw.height * Math.sin(this.degToRadians(-90 + straw.angle))),
+				dX = straw.height * Math.cos(this.degToRadians(straw.angle)),
+				dY = straw.height * Math.sin(this.degToRadians(straw.angle)),
 				slope = dY / dX,
-				yIntercept = straw.top.y - slope * straw.top.x;
+				yIntercept = (-straw.top.y) - slope * straw.top.x,
+
 				liesWithinStraw = function(point) {
-					if(point.x >= straw.top.x && point.x <= (straw.top.x - dX) && point.y >= straw.top.y && point.y <= (straw.top.y - dY)) {return true} 
+					if( point.x >= straw.top.x && 
+						point.x <= (straw.top.x + dX) && 
+						point.y <= -straw.top.y && 
+						point.y >= (-straw.top.y + dY)) {
+						return true
+					} 
 					else {return false}
 				}.bind(this),
+
 				linearSolution = function(edge) {
 					var point = {position: edge};
 					if(edge === "left") {
@@ -30,8 +44,8 @@ define(['templates/project_detail'], function(projectTemplate) {
 						}
 					} else {
 						point.point = {
-							x: (this.glassHeight - yIntercept)/slope,
-							y: this.glassHeight
+							x: (-this.glassHeight - yIntercept)/slope,
+							y: -this.glassHeight
 						}
 					}
 					return point;
@@ -77,14 +91,15 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.angle = options.angle;
 				this.el = $(self.strawTemplate);
 				this.intersectionPoints = [];
+				this.transformOrigin = "top left";
 			
 				this.el.appendTo("#glass").css({
 					position: "absolute",
 					background: "#ec4911",
 					width: this.width,
 					height: this.height,
-					transform: "translate3d(" + this.top.x + "px," + this.top.y + "px, 0) rotate(" + this.angle + "deg)",
-					transformOrigin: "bottom left"
+					transform: "translate3d(" + this.top.x + "px," + this.top.y + "px, 0) rotate(" + parseInt((-90) - this.angle, 10) + "deg)",
+					transformOrigin: this.transformOrigin
 				});
 			}
 
@@ -97,27 +112,48 @@ define(['templates/project_detail'], function(projectTemplate) {
 					x: 150,
 					y: -200
 				},
-				angle: -20 + Math.random() * 10
+				angle: -60 + Math.random() * 10
 			}));
 
-			// release
-			// this should first drop the straw straight down, then pick an angle if perpendicular, else release down
-			
 			var release = function() {
 				straws.forEach(function(d, i) {
 					if(d.intersectionPoints.length < 2) {
-						if(!d.intersectionPoints.length) { d.top.y++ } 
-						else {
-							// touching in one spot
+						d.top.y++;
+						if(d.intersectionPoints.length) {
+							// window.cancelAnimationFrame(self.rafID);
+							// return false;
+							if(d.intersectionPoints[0].position === "bottom") {
+								d.angle -= sign(d.angle);								
+							} else {
+								d.angle += sign(d.angle);
+								// in this case we might also need to change the transform origin 
+							}			
+
+							// given intersection point, slope (angle), and y value, we can find the x value
+							// I THINK THE PROBLEM IS HERE.
+							var	dX = d.height * Math.cos(self.degToRadians(d.angle)),
+								dY = d.height * Math.sin(self.degToRadians(d.angle)),
+								slope = dY / dX,
+								yIntercept = (d.intersectionPoints[0].point.y) - (slope * d.intersectionPoints[0].point.x);
+
+							console.log(dY);
+							console.log(dX);
+							console.log(yIntercept);
+							console.log(d.top.x);	
+							console.log(d.top.y);	
+							console.log("==============");
+
+							d.top.x = (-d.top.y - yIntercept) / slope;
+							// d.transformOrigin = d.intersectionPoints[0].point.x + "px " + d.intersectionPoints[0].point.y + "px";
+
 						}
 
 						d.el.css({
-							transform: "translate3d(" + d.top.x + "px," + d.top.y + "px,0) rotate(" + d.angle + "deg)"
+							transform: "translate3d(" + d.top.x + "px," + d.top.y + "px,0) rotate(" + parseInt((-90) - d.angle, 10) + "deg)",
+							// transformOrigin: d.transformOrigin
 						});
 
 						self.testForIntersection(d);
-
-						console.log(d.intersectionPoints);
 
 						// TESTING FOR INTERSECTION
 						// if the solution to the linear problem between the straw and any of the three sides of the glass lies within the glass, then that is an intersection point
@@ -142,15 +178,6 @@ define(['templates/project_detail'], function(projectTemplate) {
 				});
 
 				this.rafID = requestAnimationFrame(release);
-
-				// notes
-				// once an intersection point has been added, over the course of the release it should retain that intersection point
-				// 
-				// so release is a requestAnimationFrame handler - and every frame it:
-				// (1) calculates how to move the straw
-				// (2) updates position of the straw
-				// (3) updates intersection points of the straw 
-				// 
 
 			}.bind(this);
 

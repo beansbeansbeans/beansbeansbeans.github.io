@@ -1,5 +1,7 @@
 # STRAWS
 
+THE PROBLEM IS THAT I'M CONFUSING TWO COORDINATE SPACES - THE *CARTESIAN* AND THE *DRAWING* SPACES. THE INTERSECTION POINTS ARE CURRENTLY RECORDED IN *DRAWING* SPACE.
+
 Need to define the coordinate space. 
 
 It could be simply the area of the glass. Then for things to extend out of the glass, we'd just need some negative position values. 

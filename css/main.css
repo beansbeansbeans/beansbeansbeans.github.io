@@ -74,6 +74,8 @@
   height: 525px;
   padding-top: 25px;
   border: solid 2px #00303e;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
   border-radius: 5px;
 }
 #project-pixels #border, #project-pixels #movie {
