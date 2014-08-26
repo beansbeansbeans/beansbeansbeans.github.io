@@ -138,11 +138,10 @@ define(['templates/project_detail'], function(projectTemplate) {
 				width: 15,
 				height: 450,
 				top: {
-					x: 150,
-					y: -200
+					x: -80,
+					y: -250
 				},
-				// angle: -60 + Math.random() * 10
-				angle: -90
+				angle: -60 + Math.random() * 10
 			}));
 
 			var release = function() {
@@ -153,18 +152,18 @@ define(['templates/project_detail'], function(projectTemplate) {
 						} else {
 							// window.cancelAnimationFrame(self.rafID);
 							// return false;
-							if(d.intersectionPoints[0].position === "bottom") {
-								d.angle += (d.angle < -90) ? -1 : 1;								
-							} else {
-								d.angle += sign(d.angle);
-							}
-
+							d.angle += (d.angle < -90) ? -0.5 : 0.5;								
 							var	dX = d.height * Math.cos(self.degToRadians(d.angle)),
-								dY = d.height * Math.sin(self.degToRadians(d.angle)),
-								slope = dY / dX;
-
+								dY = d.height * Math.sin(self.degToRadians(d.angle));
+							if(d.intersectionPoints[0].position !== "bottom") {
+								// the problem here is that we need to make sure that the straw is actually moving down
+								var shrinker = 0.9 * Math.abs(d.intersectionPoints[0].point.x - d.top.x) / dX;
+								dX *= shrinker;
+								dY *= shrinker;
+							}
 							d.top.x = d.intersectionPoints[0].point.x - dX;
 							d.top.y = -(d.intersectionPoints[0].point.y - dY);
+							console.log(dY);
 						}
 
 						d.el.css({
