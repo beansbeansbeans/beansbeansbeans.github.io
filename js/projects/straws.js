@@ -1,11 +1,4 @@
 define(['templates/project_detail'], function(projectTemplate) {
-	function sign(x) {
-		if(x===0) {
-			return -1;
-		} else {
-			return (x < 0 ? -1 : 1);
-		}
-	}
 	var straws = {
 		glassWidth: 450,
 		glassHeight: 325,
@@ -13,42 +6,39 @@ define(['templates/project_detail'], function(projectTemplate) {
 		degToRadians: function(deg) {
 			return deg * Math.PI / 180;
 		},
+		liesWithinGlass: function(point) {
+			if( point.x >= 0 &&
+				point.x <= this.glassWidth &&
+				point.y <= 0 &&
+				point.y >= -this.glassHeight) {
+				return true;
+			}
+			else {return false}
+		},
+		liesWithinStraw: function(point, straw, dX, dY) {
+			var topLeft = {
+				x: (straw.top.x < (straw.top.x + dX)) ? straw.top.x : (straw.top.x + dX),
+				y: (-straw.top.y < (-straw.top.y + dY)) ? -straw.top.y : (-straw.top.y + dY)
+			},
+			bottomRight = {
+				x: (straw.top.x > (straw.top.x + dX)) ? straw.top.x : (straw.top.x + dX),
+				y: (-straw.top.y > (-straw.top.y + dY)) ? -straw.top.y : (-straw.top.y + dY)
+			};
+
+			if( point.x >= topLeft.x && 
+				point.x <= bottomRight.x && 
+				point.y >= topLeft.y && 
+				point.y <= bottomRight.y) {
+				return true
+			} 
+			else {return false}
+		},
 		testForIntersection: function(straw) {
 			var intersectionArray = [],
 				dX = straw.height * Math.cos(this.degToRadians(straw.angle)),
 				dY = straw.height * Math.sin(this.degToRadians(straw.angle)),
 				slope = dY / dX,
 				yIntercept = (-straw.top.y) - slope * straw.top.x,
-
-				liesWithinStraw = function(point) {
-					var topLeft = {
-						x: (straw.top.x < (straw.top.x + dX)) ? straw.top.x : (straw.top.x + dX),
-						y: (-straw.top.y < (-straw.top.y + dY)) ? -straw.top.y : (-straw.top.y + dY)
-					},
-					bottomRight = {
-						x: (straw.top.x > (straw.top.x + dX)) ? straw.top.x : (straw.top.x + dX),
-						y: (-straw.top.y > (-straw.top.y + dY)) ? -straw.top.y : (-straw.top.y + dY)
-					};
-
-					if( point.x >= topLeft.x && 
-						point.x <= bottomRight.x && 
-						point.y >= topLeft.y && 
-						point.y <= bottomRight.y) {
-						return true
-					} 
-					else {return false}
-				}.bind(this),
-
-				liesWithinGlass = function(point) {
-					if( point.x >= 0 &&
-						point.x <= this.glassWidth &&
-						point.y <= 0 &&
-						point.y >= -this.glassHeight) {
-						return true;
-					}
-					else {return false}
-				}.bind(this),
-
 				linearSolution = function(edge) {
 					var point = {position: edge};
 					if(edge === "left") {
@@ -88,8 +78,26 @@ define(['templates/project_detail'], function(projectTemplate) {
 				var repeatArray = straw.intersectionPoints.filter(function(point) {
 					return point.position === d.position;
 				});
-				if(liesWithinStraw(d.point) && liesWithinGlass(d.point) && !repeatArray.length) {straw.intersectionPoints.push(d)}
-			});
+				if(this.liesWithinStraw(d.point, straw, dX, dY) && this.liesWithinGlass(d.point) && !repeatArray.length) {straw.intersectionPoints.push(d)}
+			}.bind(this));
+		},
+		handleDragStart: function(e) {
+			$(e.currentTarget).attr('data-being-dragged', true);
+			this.indexOfDraggedStraw = $(".straw").index($(e.currentTarget));
+		},
+		handleDragEnd: function() {
+			$('[data-being-dragged=true]').attr("data-being-dragged", false);
+		},
+		handleDragMove: function(e) {
+			if(!$('[data-being-dragged=true]').length) return false;
+			console.log("dragging a straw");
+			console.log(this);
+
+			// var straw = this.strawArray[this.indexOfDraggedStraw],
+			// 	dX = straw.height * Math.cos(this.degToRadians(straw.angle)),
+			// 	dY = straw.height * Math.sin(this.degToRadians(straw.angle)),
+			// 	multiplier = (e.clientX - straw.top.x)/ straw.width; 
+
 		},
 		initialize: function() {
 			var data = {
@@ -121,7 +129,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.el = $(self.strawTemplate);
 				this.intersectionPoints = [];
 				this.transformOrigin = "top left";
-			
+
 				this.el.appendTo("#glass").css({
 					position: "absolute",
 					background: "#ec4911",
@@ -132,26 +140,33 @@ define(['templates/project_detail'], function(projectTemplate) {
 				});
 			}
 
-			var straws = [];
+			$("body").on("mousedown", ".straw", this.handleDragStart.bind(this));
+			$("body").on("mouseup", this.handleDragEnd.bind(this));
+			$("body").on("mousemove", this.handleDragMove.bind(this));
 
-			straws.push(new Straw({
-				width: 15,
+			this.strawArray = [];
+
+			this.strawArray.push(new Straw({
+				width: 25,
 				height: 450,
 				top: {
-					x: -30,
+					x: 40,
 					y: -150
 				},
-				angle: -30 - Math.random() * 10
+				angle: -55 - Math.random() * 10
 			}));
 
 			var release = function() {
-				straws.forEach(function(d, i) {
+				this.strawArray.forEach(function(d, i) {
+					if(d.el.attr("data-being-dragged") == "true") {
+						return false;
+					}
 					if(d.intersectionPoints.length < 2) {
 						if(!d.intersectionPoints.length) {
 							d.top.y++;
 						} else {
 							if(d.intersectionPoints[0].position == "bottom") {
-								d.angle += (d.angle < -90) ? -0.75 : 0.75;
+								d.angle += (d.angle < -90) ? -0.5 : 0.5;
 								var	dX = d.height * Math.cos(self.degToRadians(d.angle)),
 									dY = d.height * Math.sin(self.degToRadians(d.angle));
 							} else {
@@ -161,13 +176,13 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 								var	dX = d.height * Math.cos(self.degToRadians(d.angle)),
 									dY = d.height * Math.sin(self.degToRadians(d.angle)),
-									shrinker = Math.abs(0.9 * Math.abs(d.intersectionPoints[0].point.x - d.top.x) / dX);
+									shrinker = Math.abs(0.95 * Math.abs(d.intersectionPoints[0].point.x - d.top.x) / dX);
 
 								dX *= shrinker;
 								dY *= shrinker;
+								
+								if(dY < 1) d.intersectionPoints[0].point.y -= 1
 							}
-
-							if(dY < 1) d.intersectionPoints[0].point.y -= 1
 
 							d.top.x = d.intersectionPoints[0].point.x - dX;
 							d.top.y = -(d.intersectionPoints[0].point.y - dY);
@@ -179,7 +194,6 @@ define(['templates/project_detail'], function(projectTemplate) {
 						});
 
 						self.testForIntersection(d);
-
 					}
 				});
 
