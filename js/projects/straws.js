@@ -138,10 +138,10 @@ define(['templates/project_detail'], function(projectTemplate) {
 				width: 15,
 				height: 450,
 				top: {
-					x: -80,
-					y: -250
+					x: -30,
+					y: -150
 				},
-				angle: -60 + Math.random() * 10
+				angle: -30 - Math.random() * 10
 			}));
 
 			var release = function() {
@@ -156,18 +156,22 @@ define(['templates/project_detail'], function(projectTemplate) {
 									dY = d.height * Math.sin(self.degToRadians(d.angle));
 							} else {
 								if(d.angle < -45 && d.angle > -135) {
-									d.angle += (d.angle < -90) ? -0.25 : 0.25;
+									d.angle += (d.angle < -90) ? -0.2 : 0.2;
 								}
 
 								var	dX = d.height * Math.cos(self.degToRadians(d.angle)),
 									dY = d.height * Math.sin(self.degToRadians(d.angle)),
-									shrinker = 0.9 * Math.abs(d.intersectionPoints[0].point.x - d.top.x) / dX;
+									shrinker = Math.abs(0.9 * Math.abs(d.intersectionPoints[0].point.x - d.top.x) / dX);
 
 								dX *= shrinker;
 								dY *= shrinker;
 							}
+
+							if(dY < 1) d.intersectionPoints[0].point.y -= 1
+
 							d.top.x = d.intersectionPoints[0].point.x - dX;
 							d.top.y = -(d.intersectionPoints[0].point.y - dY);
+
 						}
 
 						d.el.css({
@@ -175,25 +179,6 @@ define(['templates/project_detail'], function(projectTemplate) {
 						});
 
 						self.testForIntersection(d);
-
-						// TESTING FOR INTERSECTION
-						// if the solution to the linear problem between the straw and any of the three sides of the glass lies within the glass, then that is an intersection point
-						// update intersectionPoints
-
-						// always try to move down - either directly or with a rotation
-						// 
-						// determine whether touching glass bottom: does one of its intersection points have a y value of the glass height?
-						
-						// there should just be one function - fall until hits an edge, fall until hits an edge, etc. until equilibrium
-						
-						// () if the straw is totally free form, move it straight down
-						// () if the straw is touching the glass bottom, then have it pivot toward the bottom of the glass (either picking a random direction, or having it continue in the current direction)
-						// () if the straw is touching the glass lip, have it pivot toward its own center point, and SIMULTANEOUSLY have it move down
-						
-						// straw.css({
-						// 	transform: translate3d(x, y, z),
-						// 	transformOrigin: whatever
-						// });
 
 					}
 				});
