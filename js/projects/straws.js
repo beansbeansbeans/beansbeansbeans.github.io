@@ -80,33 +80,63 @@ define(['templates/project_detail'], function(projectTemplate) {
 				var repeatArray = straw.intersectionPoints.filter(function(point) {
 					return point.position === d.position;
 				});
-				if(this.liesWithinStraw(d.point, straw, dX, dY) && this.liesWithinGlass(d.point) && !repeatArray.length) {straw.intersectionPoints.push(d)}
+				if(this.liesWithinStraw(d.point, straw, dX, dY) && this.liesWithinGlass(d.point) && !repeatArray.length) {
+					console.log("intersetion foudn!");
+					straw.intersectionPoints.push(d)
+				}
 			}.bind(this));
 		},
 		handleDragStart: function(e) {
+			console.log("DRAG START");
 			$(e.currentTarget).attr('data-being-dragged', true);
 			this.indexOfDraggedStraw = $(".straw").index($(e.currentTarget));
 
 			var straw = this.strawArray[this.indexOfDraggedStraw];
 			this.draggedDX = straw.height * Math.cos(this.degToRadians(straw.angle));
 			this.draggedDY = straw.height * Math.sin(this.degToRadians(straw.angle));
-			this.draggedMultiplier = (e.clientX - (straw.top.x + this.offsetLeft)) / this.draggedDX;
+			this.draggedMultiplier = (e.clientX - (straw.top.x + this.offsetLeft)) / this.draggedDX; // this should not change through the lifetime of the drag
 		},
 		handleDragEnd: function() {
+			console.log("DRAG END");
 			$('[data-being-dragged=true]').attr("data-being-dragged", false);
 		},
 		handleDragMove: function(e) {
 			if(!$('[data-being-dragged=true]').length) return false;
 
-			var straw = this.strawArray[this.indexOfDraggedStraw]; 
+			console.log("drag move");
 
+			var straw = this.strawArray[this.indexOfDraggedStraw];
+
+			if(straw.intersectionPoints.length < 2) {
+
+				if(straw.intersectionPoints.length) {
+					this.draggedDX = straw.height * Math.cos(this.degToRadians(straw.angle));
+					this.draggedDY = straw.height * Math.sin(this.degToRadians(straw.angle));
+
+					if(straw.intersectionPoints[0].position === "bottom") {
+						straw.angle += (straw.angle > -90) ? 0.5 : -0.5;
+					} else {
+						if(straw.intersectionPoints[0].position === "left") {
+							straw.angle += (straw.angle > -90) ? 0.5 : -0.5;
+						}
+						if(straw.intersectionPoints[0].position === "right") {
+							straw.angle += (straw.angle > -90) ? -0.5 : 0.5;
+						}
+					}
+
+					// this.testForIntersection(straw);
+				}
+
+			}
+			
 			straw.top.x = (e.clientX - this.offsetLeft) - this.draggedMultiplier * this.draggedDX;
 			straw.top.y = (e.clientY - this.offsetTop) + this.draggedMultiplier * this.draggedDY;
 
+			this.testForIntersection(straw);
+
 			straw.el.css({
 				transform: "translate3d(" + straw.top.x + "px," + straw.top.y + "px,0) rotate(" + parseInt((-90) - straw.angle, 10) + "deg)"
-			})
-
+			});
 		},
 		initialize: function() {
 			var data = {
@@ -170,13 +200,10 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			var release = function() {
 				this.strawArray.forEach(function(d, i) {
-					if(d.el.attr("data-being-dragged") == "true") {
-						return false;
-					}
+					if(d.el.attr("data-being-dragged") == "true") return false;
 					if(d.intersectionPoints.length < 2) {
-						if(!d.intersectionPoints.length) {
-							d.top.y++;
-						} else {
+						if(!d.intersectionPoints.length) d.top.y++;
+						else {
 							if(d.intersectionPoints[0].position == "bottom") {
 								d.angle += (d.angle < -90) ? -0.5 : 0.5;
 								var	dX = d.height * Math.cos(self.degToRadians(d.angle)),
@@ -198,7 +225,6 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 							d.top.x = d.intersectionPoints[0].point.x - dX;
 							d.top.y = -(d.intersectionPoints[0].point.y - dY);
-
 						}
 
 						d.el.css({
