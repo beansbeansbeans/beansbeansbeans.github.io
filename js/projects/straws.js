@@ -74,6 +74,8 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			intersectionArray.push(linearSolution("bottom"));
 
+			straw.intersectionPoints = [];
+
 			intersectionArray.forEach(function(d) {
 				var repeatArray = straw.intersectionPoints.filter(function(point) {
 					return point.position === d.position;
@@ -84,19 +86,26 @@ define(['templates/project_detail'], function(projectTemplate) {
 		handleDragStart: function(e) {
 			$(e.currentTarget).attr('data-being-dragged', true);
 			this.indexOfDraggedStraw = $(".straw").index($(e.currentTarget));
+
+			var straw = this.strawArray[this.indexOfDraggedStraw];
+			this.draggedDX = straw.height * Math.cos(this.degToRadians(straw.angle));
+			this.draggedDY = straw.height * Math.sin(this.degToRadians(straw.angle));
+			this.draggedMultiplier = (e.clientX - (straw.top.x + this.offsetLeft)) / this.draggedDX;
 		},
 		handleDragEnd: function() {
 			$('[data-being-dragged=true]').attr("data-being-dragged", false);
 		},
 		handleDragMove: function(e) {
 			if(!$('[data-being-dragged=true]').length) return false;
-			console.log("dragging a straw");
-			console.log(this);
 
-			// var straw = this.strawArray[this.indexOfDraggedStraw],
-			// 	dX = straw.height * Math.cos(this.degToRadians(straw.angle)),
-			// 	dY = straw.height * Math.sin(this.degToRadians(straw.angle)),
-			// 	multiplier = (e.clientX - straw.top.x)/ straw.width; 
+			var straw = this.strawArray[this.indexOfDraggedStraw]; 
+
+			straw.top.x = (e.clientX - this.offsetLeft) - this.draggedMultiplier * this.draggedDX;
+			straw.top.y = (e.clientY - this.offsetTop) + this.draggedMultiplier * this.draggedDY;
+
+			straw.el.css({
+				transform: "translate3d(" + straw.top.x + "px," + straw.top.y + "px,0) rotate(" + parseInt((-90) - straw.angle, 10) + "deg)"
+			})
 
 		},
 		initialize: function() {
@@ -120,6 +129,9 @@ define(['templates/project_detail'], function(projectTemplate) {
 				width: this.glassWidth,
 				height: this.glassHeight
 			});
+
+			this.offsetLeft = $("#glass").offset().left;
+			this.offsetTop = $("#glass").offset().top;
 
 			var Straw = function(options) {
 				this.width = options.width || 10;
@@ -193,8 +205,8 @@ define(['templates/project_detail'], function(projectTemplate) {
 							transform: "translate3d(" + d.top.x + "px," + d.top.y + "px,0) rotate(" + parseInt((-90) - d.angle, 10) + "deg)"
 						});
 
-						self.testForIntersection(d);
 					}
+					self.testForIntersection(d);
 				});
 
 				this.rafID = requestAnimationFrame(release);
