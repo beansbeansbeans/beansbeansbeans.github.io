@@ -3,37 +3,45 @@ define(['templates/project_detail'], function(projectTemplate) {
 		glassWidth: 450,
 		glassHeight: 325,
 		strawTemplate: "<div class='straw'></div>",
-		tiltAxis: function() {
-			// Maybe the coordinates can just be virtual - on desktop you transform the glass sides with CSS and on mobile you do nothing at all - just respect the virtual coordinates. On desktop the virtual coordinates would line up with the visible glass, on mobile they would only line up when parallel with the ground. 
-			
-			var rotation = this.orientation - ($("#tilter").attr("max") / 2);
+		degToRadians: function(deg) {
+			return deg * Math.PI / 180;
+		},
+		radToDegrees: function(rad) {
+			return rad * 57.2958;
+		},
+		tiltAxis: function() {			
+			var rotation = this.orientation - ($("#tilter").attr("max") / 2) || 0;
 			$("#glassOutline").css("transform", "rotate(" + rotation + "deg)");
 
-			// must update all coordinates
-			// this.glassTopLeft.x = ;
-			// this.glassTopLeft.y = ;
+			var xDiff = Math.round((Math.abs(Math.cos(this.degToRadians((rotation > 0 ? this.innerLeftRightAngle : -this.innerLeftRightAngle) - rotation))) * this.hypoteneuse / 2) - (this.glassWidth / 2)),
+				yDiff = Math.round((this.glassHeight / 2) - (Math.abs(Math.sin(this.degToRadians((rotation > 0 ? this.innerLeftRightAngle : -this.innerLeftRightAngle) - rotation))) * this.hypoteneuse / 2));
+
+			if(rotation > 0) {
+				xDiff = -xDiff;
+				yDiff = -yDiff;
+			}
+
+			this.glassTopLeft.x -= xDiff;
+			this.glassTopLeft.y -= yDiff;
+
+			this.glassTopRight.x -= xDiff;
+			this.glassTopRight.y += yDiff;
+
+			this.glassBottomLeft.x += xDiff;
+			this.glassBottomLeft.y -= yDiff;
+
+			this.glassBottomRight.x += xDiff;
+			this.glassBottomRight.y += yDiff;
 
 			this.glassLeftEdgeSlope = (this.glassTopLeft.y - this.glassBottomLeft.y) / (this.glassTopLeft.x - this.glassBottomLeft.x);
 			this.glassLeftEdgeIntercept = this.glassTopLeft.y - this.glassLeftEdgeSlope * this.glassTopLeft.x;
 
-			console.log("left edge slope: " + this.glassLeftEdgeSlope);
-			console.log("left edge intercept: " + this.glassLeftEdgeIntercept);
-
 			this.glassRightEdgeSlope = (this.glassTopRight.y - this.glassBottomRight.y) / (this.glassTopRight.x - this.glassBottomRight.x);
 			this.glassRightEdgeIntercept = this.glassTopRight.y - this.glassRightEdgeSlope * this.glassTopRight.x;
-
-			console.log("right edge slope: " + this.glassRightEdgeSlope);
-			console.log("right edge intercept: " + this.glassRightEdgeIntercept);
 
 			this.glassBottomEdgeSlope = (this.glassBottomLeft.y - this.glassBottomRight.y) / (this.glassBottomLeft.x - this.glassBottomRight.x);
 			this.glassBottomEdgeIntercept = this.glassBottomLeft.y - this.glassRightEdgeSlope * this.glassBottomLeft.x;
 
-			console.log("bottom edge slope: " + this.glassBottomEdgeSlope);
-			console.log("bottom edge intercept: " + this.glassBottomEdgeIntercept);
-
-		},
-		degToRadians: function(deg) {
-			return deg * Math.PI / 180;
 		},
 		liesWithinGlass: function(point) {
 			if( point.x >= 0 &&
@@ -127,7 +135,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				identifier: "straws",
 				title: "Straws",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta quibusdam voluptatibus aperiam doloribus vero, repudiandae officia odio consectetur sequi?",
-				projectContents: '<button id="stopRAF">stop raf</button><div id="glass"><div id="glassOutline"></div></div><input type="range" id="tilter" min="0" max="80"/>',
+				projectContents: '<button id="stopRAF">stop raf</button><div id="glass"><div class="testPoint1"></div><div class="testPoint2"></div><div class="testPoint3"></div><div class="testPoint4"></div><div id="glassOutline"></div></div><input type="range" id="tilter" min="0" max="80"/>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, laboriosam.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium iste eius vero quasi debitis molestiae omnis ea quas. Quibusdam, est."
 			},
@@ -171,6 +179,10 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			this.offsetLeft = $("#glass").offset().left;
 			this.offsetTop = $("#glass").offset().top;
+
+			this.hypoteneuse = Math.round(Math.sqrt(Math.pow(this.glassWidth, 2) + Math.pow(this.glassHeight, 2)));
+			this.innerLeftRightAngle = Math.abs(this.radToDegrees(Math.acos((this.glassWidth/2)/(this.hypoteneuse/2))));
+			this.innerTopBottomAngle = Math.abs(90 - this.innerLeftRightAngle);
 
 			var Straw = function(options) {
 				this.width = options.width || 10;

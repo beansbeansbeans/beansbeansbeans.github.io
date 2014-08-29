@@ -72,6 +72,14 @@
   -webkit-border-radius: 0;
   border-radius: 0 0 15px 15px;
 }
+#project-straws #glass [class*="testPoint"] {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: yellow;
+  border: solid 1px black;
+  z-index: 1;
+}
 #project-straws #tilter {
   margin-top: 200px;
 }
