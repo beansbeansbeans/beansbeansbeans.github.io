@@ -8,6 +8,29 @@ define(['templates/project_detail'], function(projectTemplate) {
 			
 			var rotation = this.orientation - ($("#tilter").attr("max") / 2);
 			$("#glassOutline").css("transform", "rotate(" + rotation + "deg)");
+
+			// must update all coordinates
+			// this.glassTopLeft.x = ;
+			// this.glassTopLeft.y = ;
+
+			this.glassLeftEdgeSlope = (this.glassTopLeft.y - this.glassBottomLeft.y) / (this.glassTopLeft.x - this.glassBottomLeft.x);
+			this.glassLeftEdgeIntercept = this.glassTopLeft.y - this.glassLeftEdgeSlope * this.glassTopLeft.x;
+
+			console.log("left edge slope: " + this.glassLeftEdgeSlope);
+			console.log("left edge intercept: " + this.glassLeftEdgeIntercept);
+
+			this.glassRightEdgeSlope = (this.glassTopRight.y - this.glassBottomRight.y) / (this.glassTopRight.x - this.glassBottomRight.x);
+			this.glassRightEdgeIntercept = this.glassTopRight.y - this.glassRightEdgeSlope * this.glassTopRight.x;
+
+			console.log("right edge slope: " + this.glassRightEdgeSlope);
+			console.log("right edge intercept: " + this.glassRightEdgeIntercept);
+
+			this.glassBottomEdgeSlope = (this.glassBottomLeft.y - this.glassBottomRight.y) / (this.glassBottomLeft.x - this.glassBottomRight.x);
+			this.glassBottomEdgeIntercept = this.glassBottomLeft.y - this.glassRightEdgeSlope * this.glassBottomLeft.x;
+
+			console.log("bottom edge slope: " + this.glassBottomEdgeSlope);
+			console.log("bottom edge intercept: " + this.glassBottomEdgeIntercept);
+
 		},
 		degToRadians: function(deg) {
 			return deg * Math.PI / 180;
@@ -46,38 +69,46 @@ define(['templates/project_detail'], function(projectTemplate) {
 				slope = dY / dX,
 				yIntercept = (-straw.top.y) - slope * straw.top.x,
 				linearSolution = function(edge) {
-					var point = {position: edge};
+					var point = {
+						position: edge,
+						point: {}
+					};
 					if(edge === "left") {
-						point.point = {
-							x: 0,
-							y: yIntercept
-						}
+						var sideSlope = this.glassLeftEdgeSlope,
+							sideIntercept = this.glassLeftEdgeIntercept,
+							sidePoint = this.glassTopLeft;
 					} else if(edge === "right") {
-						point.point = {
-							x: this.glassWidth,
-							y: slope * this.glassWidth + yIntercept
-						}
+						var sideSlope = this.glassRightEdgeSlope,
+							sideIntercept = this.glassRightEdgeIntercept,
+							sidePoint = this.glassTopRight;
 					} else {
-						if(slope == Number.POSITIVE_INFINITY || slope == Number.NEGATIVE_INFINITY) {
-							point.point = {
-								x: straw.top.x,
-								y: -this.glassHeight
-							}
+						var sideSlope = this.glassBottomEdgeSlope,
+							sideIntercept = this.glassBottomEdgeIntercept,
+							sidePoint = this.glassBottomLeft;
+					}
+
+					if(sideSlope == slope) {
+						point.point.x = Infinity;
+						point.point.y = Infinity;
+					} else {
+						if(sideSlope == Number.POSITIVE_INFINITY || sideSlope == Number.NEGATIVE_INFINITY) {
+							point.point.x = sidePoint.x;
+							point.point.y = slope * sidePoint.x + yIntercept;
+						} else if(sideSlope == 0) {
+							point.point.x = (sidePoint.y - yIntercept) / slope;
+							point.point.y = sidePoint.y;
 						} else {
-							point.point = {
-								x: (-this.glassHeight - yIntercept)/slope,
-								y: -this.glassHeight
-							}
+							console.log("sides are neither vertical nor horizontal");
+							point.point.x = (sideIntercept - yIntercept) / (slope - sideSlope);
+							point.point.y = slope * point.point.x + yIntercept;
 						}
 					}
+
 					return point;
 				}.bind(this);
 				
-			if(slope !== Number.POSITIVE_INFINITY && slope !== Number.NEGATIVE_INFINITY) {
-				intersectionArray.push(linearSolution("left"));
-				intersectionArray.push(linearSolution("right"));
-			}
-
+			intersectionArray.push(linearSolution("left"));
+			intersectionArray.push(linearSolution("right"));
 			intersectionArray.push(linearSolution("bottom"));
 
 			straw.intersectionPoints = [];
@@ -224,6 +255,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 			}.bind(this);
 
 			this.rafID = requestAnimationFrame(release);
+			this.tiltAxis();
 		},
 		destroy: function() {
 			window.cancelAnimationFrame(this.rafID);
