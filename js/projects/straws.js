@@ -3,6 +3,12 @@ define(['templates/project_detail'], function(projectTemplate) {
 		glassWidth: 450,
 		glassHeight: 325,
 		strawTemplate: "<div class='straw'></div>",
+		tiltAxis: function() {
+			// Maybe the coordinates can just be virtual - on desktop you transform the glass sides with CSS and on mobile you do nothing at all - just respect the virtual coordinates. On desktop the virtual coordinates would line up with the visible glass, on mobile they would only line up when parallel with the ground. 
+			
+			var rotation = this.orientation - ($("#tilter").attr("max") / 2);
+			$("#glassOutline").css("transform", "rotate(" + rotation + "deg)");
+		},
 		degToRadians: function(deg) {
 			return deg * Math.PI / 180;
 		},
@@ -81,69 +87,16 @@ define(['templates/project_detail'], function(projectTemplate) {
 					return point.position === d.position;
 				});
 				if(this.liesWithinStraw(d.point, straw, dX, dY) && this.liesWithinGlass(d.point) && !repeatArray.length) {
-					console.log("intersetion foudn!");
 					straw.intersectionPoints.push(d)
 				}
 			}.bind(this));
-		},
-		handleDragStart: function(e) {
-			console.log("DRAG START");
-			$(e.currentTarget).attr('data-being-dragged', true);
-			this.indexOfDraggedStraw = $(".straw").index($(e.currentTarget));
-
-			var straw = this.strawArray[this.indexOfDraggedStraw];
-			this.draggedDX = straw.height * Math.cos(this.degToRadians(straw.angle));
-			this.draggedDY = straw.height * Math.sin(this.degToRadians(straw.angle));
-			this.draggedMultiplier = (e.clientX - (straw.top.x + this.offsetLeft)) / this.draggedDX; // this should not change through the lifetime of the drag
-		},
-		handleDragEnd: function() {
-			console.log("DRAG END");
-			$('[data-being-dragged=true]').attr("data-being-dragged", false);
-		},
-		handleDragMove: function(e) {
-			if(!$('[data-being-dragged=true]').length) return false;
-
-			console.log("drag move");
-
-			var straw = this.strawArray[this.indexOfDraggedStraw];
-
-			if(straw.intersectionPoints.length < 2) {
-
-				if(straw.intersectionPoints.length) {
-					this.draggedDX = straw.height * Math.cos(this.degToRadians(straw.angle));
-					this.draggedDY = straw.height * Math.sin(this.degToRadians(straw.angle));
-
-					if(straw.intersectionPoints[0].position === "bottom") {
-						straw.angle += (straw.angle > -90) ? 0.5 : -0.5;
-					} else {
-						if(straw.intersectionPoints[0].position === "left") {
-							straw.angle += (straw.angle > -90) ? 0.5 : -0.5;
-						}
-						if(straw.intersectionPoints[0].position === "right") {
-							straw.angle += (straw.angle > -90) ? -0.5 : 0.5;
-						}
-					}
-
-					// this.testForIntersection(straw);
-				}
-
-			}
-			
-			straw.top.x = (e.clientX - this.offsetLeft) - this.draggedMultiplier * this.draggedDX;
-			straw.top.y = (e.clientY - this.offsetTop) + this.draggedMultiplier * this.draggedDY;
-
-			this.testForIntersection(straw);
-
-			straw.el.css({
-				transform: "translate3d(" + straw.top.x + "px," + straw.top.y + "px,0) rotate(" + parseInt((-90) - straw.angle, 10) + "deg)"
-			});
 		},
 		initialize: function() {
 			var data = {
 				identifier: "straws",
 				title: "Straws",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta quibusdam voluptatibus aperiam doloribus vero, repudiandae officia odio consectetur sequi?",
-				projectContents: '<button id="stopRAF">stop raf</button><div id="glass"></div>',
+				projectContents: '<button id="stopRAF">stop raf</button><div id="glass"><div id="glassOutline"></div></div><input type="range" id="tilter" min="0" max="80"/>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, laboriosam.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium iste eius vero quasi debitis molestiae omnis ea quas. Quibusdam, est."
 			},
@@ -155,10 +108,35 @@ define(['templates/project_detail'], function(projectTemplate) {
 				window.cancelAnimationFrame(this.rafID);
 			}.bind(this));
 
+			$("#tilter").on("change", function() {
+				this.orientation = $("#tilter").val();
+				this.tiltAxis(this.orientation);
+			}.bind(this));
+
 			$("#glass").css({
 				width: this.glassWidth,
 				height: this.glassHeight
 			});
+
+			this.glassTopLeft = {
+				x: 0,
+				y: 0
+			}
+
+			this.glassTopRight = {
+				x: this.glassWidth,
+				y: 0
+			}
+
+			this.glassBottomLeft = {
+				x: 0,
+				y: -this.glassHeight
+			}
+
+			this.glassBottomRight = {
+				x: this.glassWidth,
+				y: -this.glassHeight
+			}
 
 			this.offsetLeft = $("#glass").offset().left;
 			this.offsetTop = $("#glass").offset().top;
@@ -182,10 +160,6 @@ define(['templates/project_detail'], function(projectTemplate) {
 				});
 			}
 
-			$("body").on("mousedown", ".straw", this.handleDragStart.bind(this));
-			$("body").on("mouseup", this.handleDragEnd.bind(this));
-			$("body").on("mousemove", this.handleDragMove.bind(this));
-
 			this.strawArray = [];
 
 			this.strawArray.push(new Straw({
@@ -197,6 +171,16 @@ define(['templates/project_detail'], function(projectTemplate) {
 				},
 				angle: -55 - Math.random() * 10
 			}));
+
+			this.strawArray.push(new Straw({
+				width: 30,
+				height: 475,
+				top: {
+					x: 350,
+					y: -100
+				},
+				angle: -130
+			}))
 
 			var release = function() {
 				this.strawArray.forEach(function(d, i) {
