@@ -4,16 +4,34 @@ define(['templates/project_detail'], function(projectTemplate) {
 		glassHeight: 325,
 		glassEdges: {
 			left: {
-				start: {},
-				finish: {}
+				start: {
+					x: 0,
+					y: 0
+				},
+				finish: {
+					x: 0,
+					y: -this.glassHeight
+				}
 			},
 			right: {
-				start: {},
-				finish: {}
+				start: {
+					x: this.glassWidth,
+					y: 0
+				},
+				finish: {
+					x: this.glassWidth,
+					y: -this.glassHeight
+				}
 			},
 			bottom: {
-				start: {},
-				finish: {}
+				start: {
+					x: 0,
+					y: -this.glassHeight
+				},
+				finish: {
+					x: this.glassWidth,
+					y: -this.glassHeight
+				}
 			}
 		},
 		strawTemplate: "<div class='straw'></div>",
@@ -57,12 +75,6 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.findLimits(d);
 				this.testIntersectGlass(d);
 			}.bind(this));
-
-			console.log("GLASS EDGES COMING UP:");
-			console.log(this.glassEdges);
-			console.log("do they intersect?");
-			console.log(this.strawArray[0].intersectsGlass);
-
 		},
 		findLimits: function(straw) {
 			straw.dX = Math.cos(this.degToRadians(straw.angle)) * straw.height;
@@ -101,9 +113,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 			}
 		},
 		between: function(a, b, c) {
-			if(!(a < b && b < c) && !(c < b && b < a)) {
-				return false;
-			}
+			if(!(a < b && b < c) && !(c < b && b < a)) return false;
 			return true;
 		},
 		liesWithin: function(point, straw, side) {
@@ -159,36 +169,6 @@ define(['templates/project_detail'], function(projectTemplate) {
 				height: this.glassHeight
 			});
 
-			this.glassEdges.left.start = {
-				x: 0,
-				y: 0
-			}
-
-			this.glassEdges.right.start = {
-				x: this.glassWidth,
-				y: 0
-			}
-
-			this.glassEdges.left.finish = {
-				x: 0,
-				y: -this.glassHeight
-			}
-
-			this.glassEdges.bottom.start = {
-				x: 0,
-				y: -this.glassHeight
-			}
-
-			this.glassEdges.right.finish = {
-				x: this.glassWidth,
-				y: -this.glassHeight
-			}
-
-			this.glassEdges.bottom.finish = {
-				x: this.glassWidth,
-				y: -this.glassHeight
-			}
-
 			this.hypoteneuse = Math.round(Math.sqrt(Math.pow(this.glassWidth, 2) + Math.pow(this.glassHeight, 2)));
 			this.innerLeftRightAngle = Math.abs(this.radToDegrees(Math.acos(this.glassWidth/this.hypoteneuse)));
 
@@ -225,10 +205,10 @@ define(['templates/project_detail'], function(projectTemplate) {
 				width: 25,
 				height: 475,
 				top: { //cartesian
-					x: 40,
+					x: 340,
 					y: 100
 				},
-				angle: -60
+				angle: -130
 			}));
 
 			var release = function() {
