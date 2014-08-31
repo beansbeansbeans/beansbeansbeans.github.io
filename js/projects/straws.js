@@ -2,133 +2,135 @@ define(['templates/project_detail'], function(projectTemplate) {
 	var straws = {
 		glassWidth: 450,
 		glassHeight: 325,
+		glassEdges: {
+			left: {
+				start: {},
+				finish: {}
+			},
+			right: {
+				start: {},
+				finish: {}
+			},
+			bottom: {
+				start: {},
+				finish: {}
+			}
+		},
 		strawTemplate: "<div class='straw'></div>",
-		degToRadians: function(deg) {
-			return deg * Math.PI / 180;
-		},
-		radToDegrees: function(rad) {
-			return rad * 57.2958;
-		},
-		tiltAxis: function() {			
+		degToRadians: function(deg) { return deg * Math.PI / 180 },
+		radToDegrees: function(rad) { return rad * 57.2958 },
+		tiltAxis: function() {	
 			var rotation = this.orientation - ($("#tilter").attr("max") / 2) || 0;
 			$("#glassOutline").css("transform", "rotate(" + rotation + "deg)");
 
-			var xDiff = Math.round((Math.abs(Math.cos(this.degToRadians((rotation > 0 ? this.innerLeftRightAngle : -this.innerLeftRightAngle) - rotation))) * this.hypoteneuse / 2) - (this.glassWidth / 2)),
-				yDiff = Math.round((this.glassHeight / 2) - (Math.abs(Math.sin(this.degToRadians((rotation > 0 ? this.innerLeftRightAngle : -this.innerLeftRightAngle) - rotation))) * this.hypoteneuse / 2));
+			var tLRotation = -this.innerLeftRightAngle - rotation,
+				bLRotation = this.innerLeftRightAngle - rotation,
+				xDiff = Math.round((Math.abs(Math.cos(this.degToRadians(tLRotation))) * this.hypoteneuse / 2) - (this.glassWidth / 2)),
+				yDiff = Math.round((this.glassHeight / 2) - (Math.abs(Math.sin(this.degToRadians(tLRotation))) * this.hypoteneuse / 2)),
+				altXDiff = Math.round((this.glassWidth / 2) - (Math.abs(Math.cos(this.degToRadians(bLRotation))) * this.hypoteneuse / 2)),
+				altYDiff = Math.round((this.glassHeight / 2) - (Math.abs(Math.sin(this.degToRadians(bLRotation))) * this.hypoteneuse / 2));
 
-			if(rotation > 0) {
-				xDiff = -xDiff;
-				yDiff = -yDiff;
-			}
+			this.glassEdges.left.start.x = 0 - xDiff;
+			this.glassEdges.left.start.y = 0 - yDiff;
 
-			this.glassTopLeft.x -= xDiff;
-			this.glassTopLeft.y -= yDiff;
+			this.glassEdges.left.finish.x = 0 + altXDiff;
+			this.glassEdges.left.finish.y = -this.glassHeight + altYDiff;
 
-			this.glassTopRight.x -= xDiff;
-			this.glassTopRight.y += yDiff;
+			this.glassEdges.bottom.start.x = 0 + altXDiff;
+			this.glassEdges.bottom.start.y = -this.glassHeight + altYDiff;
 
-			this.glassBottomLeft.x += xDiff;
-			this.glassBottomLeft.y -= yDiff;
+			this.glassEdges.bottom.finish.x = this.glassWidth + xDiff;
+			this.glassEdges.bottom.finish.y = -this.glassHeight + yDiff;
 
-			this.glassBottomRight.x += xDiff;
-			this.glassBottomRight.y += yDiff;
+			this.glassEdges.right.start.x = this.glassWidth - altXDiff;
+			this.glassEdges.right.start.y = 0 - altYDiff;
 
-			this.glassLeftEdgeSlope = (this.glassTopLeft.y - this.glassBottomLeft.y) / (this.glassTopLeft.x - this.glassBottomLeft.x);
-			this.glassLeftEdgeIntercept = this.glassTopLeft.y - this.glassLeftEdgeSlope * this.glassTopLeft.x;
+			this.glassEdges.right.finish.x = this.glassWidth + xDiff;
+			this.glassEdges.right.finish.y = -this.glassHeight + yDiff;
 
-			this.glassRightEdgeSlope = (this.glassTopRight.y - this.glassBottomRight.y) / (this.glassTopRight.x - this.glassBottomRight.x);
-			this.glassRightEdgeIntercept = this.glassTopRight.y - this.glassRightEdgeSlope * this.glassTopRight.x;
-
-			this.glassBottomEdgeSlope = (this.glassBottomLeft.y - this.glassBottomRight.y) / (this.glassBottomLeft.x - this.glassBottomRight.x);
-			this.glassBottomEdgeIntercept = this.glassBottomLeft.y - this.glassRightEdgeSlope * this.glassBottomLeft.x;
-
-		},
-		liesWithinGlass: function(point) {
-			if( point.x >= 0 &&
-				point.x <= this.glassWidth &&
-				point.y <= 0 &&
-				point.y >= -this.glassHeight) {
-				return true;
-			}
-			else {return false}
-		},
-		liesWithinStraw: function(point, straw, dX, dY) {
-			var topLeft = {
-				x: (straw.top.x < (straw.top.x + dX)) ? straw.top.x : (straw.top.x + dX),
-				y: (-straw.top.y < (-straw.top.y + dY)) ? -straw.top.y : (-straw.top.y + dY)
-			},
-			bottomRight = {
-				x: (straw.top.x > (straw.top.x + dX)) ? straw.top.x : (straw.top.x + dX),
-				y: (-straw.top.y > (-straw.top.y + dY)) ? -straw.top.y : (-straw.top.y + dY)
-			};
-
-			if( point.x >= topLeft.x && 
-				point.x <= bottomRight.x && 
-				point.y >= topLeft.y && 
-				point.y <= bottomRight.y) {
-				return true
-			} 
-			else {return false}
-		},
-		testForIntersection: function(straw) {
-			var intersectionArray = [],
-				dX = straw.height * Math.cos(this.degToRadians(straw.angle)),
-				dY = straw.height * Math.sin(this.degToRadians(straw.angle)),
-				slope = dY / dX,
-				yIntercept = (-straw.top.y) - slope * straw.top.x,
-				linearSolution = function(edge) {
-					var point = {
-						position: edge,
-						point: {}
-					};
-					if(edge === "left") {
-						var sideSlope = this.glassLeftEdgeSlope,
-							sideIntercept = this.glassLeftEdgeIntercept,
-							sidePoint = this.glassTopLeft;
-					} else if(edge === "right") {
-						var sideSlope = this.glassRightEdgeSlope,
-							sideIntercept = this.glassRightEdgeIntercept,
-							sidePoint = this.glassTopRight;
-					} else {
-						var sideSlope = this.glassBottomEdgeSlope,
-							sideIntercept = this.glassBottomEdgeIntercept,
-							sidePoint = this.glassBottomLeft;
-					}
-
-					if(sideSlope == slope) {
-						point.point.x = Infinity;
-						point.point.y = Infinity;
-					} else {
-						if(sideSlope == Number.POSITIVE_INFINITY || sideSlope == Number.NEGATIVE_INFINITY) {
-							point.point.x = sidePoint.x;
-							point.point.y = slope * sidePoint.x + yIntercept;
-						} else if(sideSlope == 0) {
-							point.point.x = (sidePoint.y - yIntercept) / slope;
-							point.point.y = sidePoint.y;
-						} else {
-							console.log("sides are neither vertical nor horizontal");
-							point.point.x = (sideIntercept - yIntercept) / (slope - sideSlope);
-							point.point.y = slope * point.point.x + yIntercept;
-						}
-					}
-
-					return point;
-				}.bind(this);
-				
-			intersectionArray.push(linearSolution("left"));
-			intersectionArray.push(linearSolution("right"));
-			intersectionArray.push(linearSolution("bottom"));
-
-			straw.intersectionPoints = [];
-
-			intersectionArray.forEach(function(d) {
-				var repeatArray = straw.intersectionPoints.filter(function(point) {
-					return point.position === d.position;
-				});
-				if(this.liesWithinStraw(d.point, straw, dX, dY) && this.liesWithinGlass(d.point) && !repeatArray.length) {
-					straw.intersectionPoints.push(d)
-				}
+			Object.keys(this.glassEdges).forEach(function(d) {
+				this.glassEdges[d].slope = (this.glassEdges[d].start.y - this.glassEdges[d].finish.y) / (this.glassEdges[d].start.x - this.glassEdges[d].finish.x);
+				this.glassEdges[d].intercept = this.glassEdges[d].start.y - this.glassEdges[d].slope * this.glassEdges[d].start.x;
 			}.bind(this));
+
+			this.strawArray.forEach(function(d) {
+				this.findLimits(d);
+				this.testIntersectGlass(d);
+			}.bind(this));
+
+			console.log("GLASS EDGES COMING UP:");
+			console.log(this.glassEdges);
+			console.log("do they intersect?");
+			console.log(this.strawArray[0].intersectsGlass);
+
+		},
+		findLimits: function(straw) {
+			straw.dX = Math.cos(this.degToRadians(straw.angle)) * straw.height;
+			straw.dY = Math.sin(this.degToRadians(straw.angle)) * straw.height;
+			straw.slope = straw.dY / straw.dX;
+
+			straw.intercept = straw.top.y - straw.slope * straw.top.x;
+			straw.motionCase = (straw.angle > -90) ? 1 : -1;
+
+			straw.yLimit = 0;
+			straw.xLimit = 0;
+		},
+		intersects: function(straw, side) {
+			var edge = this.glassEdges[side],
+				xSolution = (edge.intercept - straw.intercept) / (straw.slope - edge.slope)
+
+			if(straw.slope == edge.slope) return false;
+
+			if(edge.slope == Number.POSITIVE_INFINITY || edge.slope == Number.NEGATIVE_INFINITY) {
+				return {
+					x: edge.start.x,
+					y: straw.slope * edge.start.x + straw.intercept
+				}
+			}
+
+			if(straw.slope == Number.POSITIVE_INFINITY || straw.slope == Number.NEGATIVE_INFINITY) {
+				return {
+					x: straw.top.x,
+					y: edge.slope * straw.top.x + edge.intercept
+				}
+			}
+
+			return {
+				x: xSolution,
+				y: straw.slope * xSolution + straw.intercept
+			}
+		},
+		between: function(a, b, c) {
+			if(!(a < b && b < c) && !(c < b && b < a)) {
+				return false;
+			}
+			return true;
+		},
+		liesWithin: function(point, straw, side) {
+			if(point === false) return false;
+
+			var edge = this.glassEdges[side];
+
+			if(!this.between(straw.top.x, point.x, straw.top.x + straw.dX) || !this.between(straw.top.y, point.y, straw.top.y + straw.dY)) {
+				if((straw.dY !== 0 || (point.y !== straw.top.y || (!this.between(straw.top.x, point.x, straw.top.x + straw.dX)))) && (straw.dX !== 0 || (point.x !== straw.top.x || (!this.between(straw.top.y, point.y, straw.top.y + straw.dY))))) {
+					return false;
+				}
+			}
+
+			if(!this.between(edge.start.x, point.x, edge.finish.x) || !this.between(edge.start.y, point.y, edge.finish.y)) {
+				if((edge.start.x !== edge.finish.x || (point.x !== edge.start.x || (!this.between(edge.start.y, point.y, edge.finish.y)))) && (edge.start.y !== edge.finish.y || (point.y !== edge.start.y || (!this.between(edge.start.x, point.x, edge.finish.x))))) {
+					return false;
+				}
+			}
+
+			return true;
+		},
+		testIntersectGlass: function(straw) {
+			if(this.liesWithin(this.intersects(straw, "left"), straw, "left") || this.liesWithin(this.intersects(straw, "right"), straw, "right") || this.liesWithin(this.intersects(straw, "bottom"), straw, "bottom")) {
+				straw.intersectsGlass = true;
+			} else {
+				straw.intersectsGlass = false;
+			}
 		},
 		initialize: function() {
 			var data = {
@@ -157,32 +159,38 @@ define(['templates/project_detail'], function(projectTemplate) {
 				height: this.glassHeight
 			});
 
-			this.glassTopLeft = {
+			this.glassEdges.left.start = {
 				x: 0,
 				y: 0
 			}
 
-			this.glassTopRight = {
+			this.glassEdges.right.start = {
 				x: this.glassWidth,
 				y: 0
 			}
 
-			this.glassBottomLeft = {
+			this.glassEdges.left.finish = {
 				x: 0,
 				y: -this.glassHeight
 			}
 
-			this.glassBottomRight = {
+			this.glassEdges.bottom.start = {
+				x: 0,
+				y: -this.glassHeight
+			}
+
+			this.glassEdges.right.finish = {
 				x: this.glassWidth,
 				y: -this.glassHeight
 			}
 
-			this.offsetLeft = $("#glass").offset().left;
-			this.offsetTop = $("#glass").offset().top;
+			this.glassEdges.bottom.finish = {
+				x: this.glassWidth,
+				y: -this.glassHeight
+			}
 
 			this.hypoteneuse = Math.round(Math.sqrt(Math.pow(this.glassWidth, 2) + Math.pow(this.glassHeight, 2)));
-			this.innerLeftRightAngle = Math.abs(this.radToDegrees(Math.acos((this.glassWidth/2)/(this.hypoteneuse/2))));
-			this.innerTopBottomAngle = Math.abs(90 - this.innerLeftRightAngle);
+			this.innerLeftRightAngle = Math.abs(this.radToDegrees(Math.acos(this.glassWidth/this.hypoteneuse)));
 
 			var Straw = function(options) {
 				this.width = options.width || 10;
@@ -190,88 +198,73 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.top = options.top;
 				this.angle = options.angle;
 				this.el = $(self.strawTemplate);
-				this.intersectionPoints = [];
-				this.transformOrigin = "top left";
 
 				this.el.appendTo("#glass").css({
 					position: "absolute",
 					background: "#ec4911",
 					width: this.width,
 					height: this.height,
-					transform: "translate3d(" + this.top.x + "px," + this.top.y + "px, 0) rotate(" + parseInt((-90) - this.angle, 10) + "deg)",
-					transformOrigin: this.transformOrigin
+					transform: "translate3d(" + this.top.x + "px," + (-this.top.y) + "px, 0) rotate(" + parseInt((-90) - this.angle, 10) + "deg)",
+					transformOrigin: "top left"
 				});
 			}
 
 			this.strawArray = [];
 
-			this.strawArray.push(new Straw({
-				width: 25,
-				height: 450,
-				top: {
-					x: 40,
-					y: -150
-				},
-				angle: -55 - Math.random() * 10
-			}));
+			// this.strawArray.push(new Straw({
+			// 	width: 25,
+			// 	height: 450,
+			// 	top: {
+			// 		x: 140,
+			// 		y: -350
+			// 	},
+			// 	angle: -55
+			// }));
 
 			this.strawArray.push(new Straw({
-				width: 30,
+				width: 25,
 				height: 475,
-				top: {
-					x: 350,
-					y: -100
+				top: { //cartesian
+					x: 40,
+					y: 100
 				},
-				angle: -130
-			}))
+				angle: -60
+			}));
 
 			var release = function() {
 				this.strawArray.forEach(function(d, i) {
-					if(d.el.attr("data-being-dragged") == "true") return false;
-					if(d.intersectionPoints.length < 2) {
-						if(!d.intersectionPoints.length) d.top.y++;
-						else {
-							if(d.intersectionPoints[0].position == "bottom") {
-								d.angle += (d.angle < -90) ? -0.5 : 0.5;
-								var	dX = d.height * Math.cos(self.degToRadians(d.angle)),
-									dY = d.height * Math.sin(self.degToRadians(d.angle));
-							} else {
-								if(d.angle < -45 && d.angle > -135) {
-									d.angle += (d.angle < -90) ? -0.2 : 0.2;
-								}
 
-								var	dX = d.height * Math.cos(self.degToRadians(d.angle)),
-									dY = d.height * Math.sin(self.degToRadians(d.angle)),
-									shrinker = Math.abs(0.95 * Math.abs(d.intersectionPoints[0].point.x - d.top.x) / dX);
-
-								dX *= shrinker;
-								dY *= shrinker;
-								
-								if(dY < 1) d.intersectionPoints[0].point.y -= 1
-							}
-
-							d.top.x = d.intersectionPoints[0].point.x - dX;
-							d.top.y = -(d.intersectionPoints[0].point.y - dY);
-						}
-
-						d.el.css({
-							transform: "translate3d(" + d.top.x + "px," + d.top.y + "px,0) rotate(" + parseInt((-90) - d.angle, 10) + "deg)"
-						});
-
+					if(d.intersectsGlass === true) {
+						d.angle += 1 * d.motionCase; // motionCase: 1 (wants to move right) or -1
+						this.findLimits(d);
+						d.top.x = (d.motionCase * (d.top.x + 1 * d.motionCase) < d.xLimit) ? d.top.x + 1 * d.motionCase : d.top.x;
 					}
-					self.testForIntersection(d);
-				});
+
+					d.top.y = (d.top.y + 1 < d.yLimit) ? d.top.y + 1 : d.top.y;
+
+					if((d.intersectsGlass === true && d.xLimit === d.top.x && d.yLimit === d.top.y) || d.dY > 0) {
+						// if the straw has reached its limits or if its bottom is higher than its top
+						d.angle -= 1 * d.motionCase;
+						this.findLimits(d);
+					}
+
+					d.el.css("transform", "translate3d(" + d.top.x + "px," + (-d.top.y) + "px,0) rotate(" + parseInt((-90) - d.angle, 10) + "deg)");
+
+					this.testIntersectGlass(d);
+
+				}.bind(this));
 
 				this.rafID = requestAnimationFrame(release);
 
 			}.bind(this);
 
-			this.rafID = requestAnimationFrame(release);
+			// this.rafID = requestAnimationFrame(release);
 			this.tiltAxis();
 		},
 		destroy: function() {
 			window.cancelAnimationFrame(this.rafID);
 		}
 	};
+	window.straws = straws;
 	return straws;
 });
