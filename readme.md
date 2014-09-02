@@ -8,7 +8,7 @@
 
 - once a straw has made contact with a glass wall, it may move along it (including crossing sides - e.g. from right to bottom) but it cannot rise above it
 
-- at a certain me-defined rotation angle of the *glass*, the straws switch cases
+- (MAYBE NOT) at a certain me-defined rotation angle of the *glass*, the straws switch cases
 
 
 ## HOW STRAWS MOVE
