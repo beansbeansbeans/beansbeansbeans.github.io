@@ -124,9 +124,6 @@ define(['templates/project_detail'], function(projectTemplate) {
 				yLimitPotentials.push(straw.start.y - Math.abs(solution - straw.finish.y));
 			}
 
-			console.log("Y LIMIT POTENTIALS!");
-			console.log(yLimitPotentials);
-
 			straw.yLimit = Math.max.apply(null, yLimitPotentials);
 
 			xLimitPotentials = [];
@@ -264,7 +261,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 			}
 
 			this.strawArray = [];
-			
+
 			this.strawArray.push(new Straw({
 				width: 25,
 				height: 475,
@@ -277,45 +274,29 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			var release = function() {
 				this.strawArray.forEach(function(d, i) {
-					console.log("=========");
-
 					if((d.intersectsGlass === true && (d.xLimit) >= d.start.x && (d.yLimit) >= d.start.y) || d.dY > 0) {
-						// THE PROBLEM IS THAT THIS IS NEVER BEING TRIGGERED
-						console.log("UNDO UNDO UNDO");
 						return false;
 					} else {
 						if(d.intersectsGlass === true) {
-							console.log("INTERSECTING GLASS NOW!!");
-							d.angle += 0.5 * d.motionCase; // motionCase: 1 (wants to move right) or -1
+							d.angle += 0.5 * d.motionCase;
 						}
 
 						this.findLimits(d);
 						
 						if(d.intersectsGlass === true && (d.start.x + 1 * d.motionCase) > d.xLimit) {
-							console.log("there's x room");
 							d.start.x = d.start.x + 1 * d.motionCase;
 						}
 
 						if(d.start.y - 1 > (d.yLimit - 1)) {
-							console.log("there's y room");
 							d.start.y -= 1;
 						}
-
-						console.log("X LIMIT");
-						console.log(d.xLimit);
-						console.log("Y LIMIT");
-						console.log(d.yLimit);
-						console.log(d.start);
 
 						d.el.css("transform", "translate3d(" + d.start.x + "px," + (-d.start.y) + "px,0) rotate(" + parseInt((-90) - d.angle, 10) + "deg)");
 	
 						if(d.intersectsGlass === false) {
 							this.testIntersectGlass(d);
 						}
-						
 					}
-
-
 				}.bind(this));
 
 				this.rafID = requestAnimationFrame(release);
