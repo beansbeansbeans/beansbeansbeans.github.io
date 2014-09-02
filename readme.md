@@ -1,3 +1,21 @@
+# DEBUGGING
+
+There's serious problems with error margin going on. At certain places I'm depending on absolute precision, at certain places I'm depending on fuzziness. 
+
+## thoughts
+
+Once you intersect the glass, you can never stop intersecting the glass. 
+
+Every frame, if you're intersecting the glass and there's room, you're going to change angle.
+
+I still like the idea of limits.
+
+Let's say you're intersecting the left corner and you change angle. This needs to immediately result in a change in start.x and start.y. 
+
+The problem is that I haven't built a way for straws to get further away from boundaries, such as glass walls.
+
+# ##############
+
 # RELEASING STRAWS
 
 ## CONSTRAINTS OF MOVEMENT

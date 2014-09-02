@@ -91,11 +91,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			if(this.between(straw.start.x, this.glassEdges.left.start.x, straw.finish.x)) {
 				var solution = straw.slope * this.glassEdges.left.start.x + straw.intercept;
-				if(solution < this.glassEdges.left.finish.y) {
-					yLimitPotentials.push(straw.start.y);
-				} else {
-					yLimitPotentials.push(straw.start.y - Math.abs(solution - this.glassEdges.left.start.y));
-				}
+				yLimitPotentials.push(straw.start.y - Math.abs(solution - this.glassEdges.left.start.y));
 			}
 
 			if(this.between(straw.start.x, this.glassEdges.right.start.x, straw.finish.x)) {
@@ -128,6 +124,9 @@ define(['templates/project_detail'], function(projectTemplate) {
 				yLimitPotentials.push(straw.start.y - Math.abs(solution - straw.finish.y));
 			}
 
+			console.log("Y LIMIT POTENTIALS!");
+			console.log(yLimitPotentials);
+
 			straw.yLimit = Math.max.apply(null, yLimitPotentials);
 
 			xLimitPotentials = [];
@@ -153,12 +152,6 @@ define(['templates/project_detail'], function(projectTemplate) {
 				if(this.between(this.glassEdges.bottom.start.y, straw.finish.y, this.glassEdges.bottom.finish.y)) {
 					var solution = (straw.finish.y - this.glassEdges.bottom.intercept)/this.glassEdges.bottom.slope;
 					xLimitPotentials.push(straw.start.x + Math.abs(solution - straw.finish.x));
-				}
-
-				if(xLimitPotentials.length == 0) {
-					// DEBUG!!! in this case, the finish point has already broken the bounds of the glass
-					var solution = (straw.finish.y - this.glassEdges.left.intercept)/this.glassEdges.left.slope || this.glassEdges.left.start.x;
-					xLimitPotentials.push(straw.start.x - ((solution < straw.finish.x) ? (straw.finish.x - solution) : 0));
 				}
 
 				straw.xLimit = Math.max.apply(null, xLimitPotentials);
@@ -236,17 +229,13 @@ define(['templates/project_detail'], function(projectTemplate) {
 				window.cancelAnimationFrame(this.rafID);
 			}.bind(this));
 
-			$("#plus").on("click", function() {
-				$("#tilter").val(parseInt($("#tilter").val()) + 1);
+			$("#plus, #minus").on("click", function(e) {
+				var multiplier = 1;
+				if($(e.target).attr("id") == "minus") multiplier = -1;
+				$("#tilter").val(parseInt($("#tilter").val()) + 1 * multiplier);
 				this.orientation = $("#tilter").val();
 				this.tiltAxis(this.orientation);
-			}.bind(this));
-
-			$("#minus").on("click", function() {
-				$("#tilter").val(parseInt($("#tilter").val()) - 1);
-				this.orientation = $("#tilter").val();
-				this.tiltAxis(this.orientation);
-			}.bind(this));
+			}.bind(this))
 
 			$("#glass").css({
 				width: this.glassWidth,
@@ -275,49 +264,56 @@ define(['templates/project_detail'], function(projectTemplate) {
 			}
 
 			this.strawArray = [];
-
-			// this.strawArray.push(new Straw({
-			// 	width: 25,
-			// 	height: 450,
-			// 	top: {
-			// 		x: 140,
-			// 		y: -350
-			// 	},
-			// 	angle: -55
-			// }));
-
+			
 			this.strawArray.push(new Straw({
 				width: 25,
 				height: 475,
 				start: { //cartesian
-					x: 340,
-					y: 100
+					x: 20,
+					y: 300
 				},
-				angle: -130
+				angle: -50
 			}));
 
 			var release = function() {
 				this.strawArray.forEach(function(d, i) {
+					console.log("=========");
 
-					this.findLimits(d);
-					this.testIntersectGlass(d);
-
-					if(d.intersectsGlass === true) {
-						if((d.start.x + 1 * d.motionCase) > d.xLimit) {
+					if((d.intersectsGlass === true && (d.xLimit) >= d.start.x && (d.yLimit) >= d.start.y) || d.dY > 0) {
+						// THE PROBLEM IS THAT THIS IS NEVER BEING TRIGGERED
+						console.log("UNDO UNDO UNDO");
+						return false;
+					} else {
+						if(d.intersectsGlass === true) {
+							console.log("INTERSECTING GLASS NOW!!");
 							d.angle += 0.5 * d.motionCase; // motionCase: 1 (wants to move right) or -1
+						}
+
+						this.findLimits(d);
+						
+						if(d.intersectsGlass === true && (d.start.x + 1 * d.motionCase) > d.xLimit) {
+							console.log("there's x room");
 							d.start.x = d.start.x + 1 * d.motionCase;
 						}
-					}
 
-					if(d.start.y - 1 > (d.yLimit - 1)) {
-						d.start.y -= 1;
-					}
+						if(d.start.y - 1 > (d.yLimit - 1)) {
+							console.log("there's y room");
+							d.start.y -= 1;
+						}
 
-					if((d.intersectsGlass === true && d.xLimit >= d.start.x && d.yLimit >= d.start.y) || d.dY > 0) {
-						d.angle -= 0.5 * d.motionCase;
-					}
+						console.log("X LIMIT");
+						console.log(d.xLimit);
+						console.log("Y LIMIT");
+						console.log(d.yLimit);
+						console.log(d.start);
 
-					d.el.css("transform", "translate3d(" + d.start.x + "px," + (-d.start.y) + "px,0) rotate(" + parseInt((-90) - d.angle, 10) + "deg)");
+						d.el.css("transform", "translate3d(" + d.start.x + "px," + (-d.start.y) + "px,0) rotate(" + parseInt((-90) - d.angle, 10) + "deg)");
+	
+						if(d.intersectsGlass === false) {
+							this.testIntersectGlass(d);
+						}
+						
+					}
 
 
 				}.bind(this));
