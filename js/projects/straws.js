@@ -2,6 +2,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 	var straws = {
 		glassWidth: 450,
 		glassHeight: 325,
+		orientation: 0,
 		glassEdges: {
 			left: {
 				start: {
@@ -38,11 +39,10 @@ define(['templates/project_detail'], function(projectTemplate) {
 		degToRadians: function(deg) { return deg * Math.PI / 180 },
 		radToDegrees: function(rad) { return rad * 57.2958 },
 		tiltAxis: function() {	
-			var rotation = this.orientation - ($("#tilter").attr("max") / 2) || 0;
-			$("#glassOutline").css("transform", "rotate(" + rotation + "deg)");
+			$("#glassOutline").css("transform", "rotate(" + this.orientation + "deg)");
 
-			var tLRotation = -this.innerLeftRightAngle - rotation,
-				bLRotation = this.innerLeftRightAngle - rotation,
+			var tLRotation = -this.innerLeftRightAngle - this.orientation,
+				bLRotation = this.innerLeftRightAngle - this.orientation,
 				xDiff = Math.round((Math.abs(Math.cos(this.degToRadians(tLRotation))) * this.hypoteneuse / 2) - (this.glassWidth / 2)),
 				yDiff = Math.round((this.glassHeight / 2) - (Math.abs(Math.sin(this.degToRadians(tLRotation))) * this.hypoteneuse / 2)),
 				altXDiff = Math.round((this.glassWidth / 2) - (Math.abs(Math.cos(this.degToRadians(bLRotation))) * this.hypoteneuse / 2)),
@@ -71,88 +71,13 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.glassEdges[d].intercept = this.glassEdges[d].start.y - this.glassEdges[d].slope * this.glassEdges[d].start.x;
 			}.bind(this));
 
-			this.strawArray.forEach(function(d) {
-				this.findLimits(d);
-				this.testIntersectGlass(d);
-			}.bind(this));
-		},
-		findLimits: function(straw) {
-			straw.dX = Math.cos(this.degToRadians(straw.angle)) * straw.height;
-			straw.dY = Math.sin(this.degToRadians(straw.angle)) * straw.height;
-			straw.slope = straw.dY / straw.dX;
-
-			straw.finish.x = straw.start.x + straw.dX;
-			straw.finish.y = straw.start.y + straw.dY;
-
-			straw.intercept = straw.start.y - straw.slope * straw.start.x;
-			straw.motionCase = (straw.angle > -90) ? 1 : -1;
-			
-			var yLimitPotentials = [];
-
-			if(this.between(straw.start.x, this.glassEdges.left.start.x, straw.finish.x)) {
-				var solution = straw.slope * this.glassEdges.left.start.x + straw.intercept;
-				yLimitPotentials.push(straw.start.y - Math.abs(solution - this.glassEdges.left.start.y));
-			}
-
-			if(this.between(straw.start.x, this.glassEdges.right.start.x, straw.finish.x)) {
-				var solution = straw.slope * this.glassEdges.right.start.x + straw.intercept;
-				yLimitPotentials.push(straw.start.y - Math.abs(solution - this.glassEdges.right.start.y));
-			}
-
-			if(this.between(this.glassEdges.bottom.start.x, straw.finish.x, this.glassEdges.bottom.finish.x)) {
-				var solution = this.glassEdges.bottom.slope * straw.finish.x + this.glassEdges.bottom.intercept;
-				yLimitPotentials.push(straw.start.y - Math.abs(solution - straw.finish.y));
-			}
-
-			if(this.between(this.glassEdges.left.start.x, straw.start.x, this.glassEdges.left.finish.x)) {
-				var solution = this.glassEdges.left.slope * straw.start.x + this.glassEdges.left.intercept
-				yLimitPotentials.push(straw.start.y - Math.abs(solution - straw.finish.y));
-			}
-
-			if(this.between(this.glassEdges.left.start.x, straw.finish.x, this.glassEdges.left.finish.x)) {
-				var solution = this.glassEdges.left.slope * straw.finish.x + this.glassEdges.left.intercept
-				yLimitPotentials.push(straw.start.y - Math.abs(solution - straw.finish.y));
-			}
-
-			if(this.between(this.glassEdges.right.start.x, straw.start.x, this.glassEdges.right.finish.x)) {
-				var solution = this.glassEdges.right.slope * straw.start.x + this.glassEdges.right.intercept;
-				yLimitPotentials.push(straw.start.y - Math.abs(solution - straw.start.y));
-			}
-
-			if(this.between(this.glassEdges.right.start.x, straw.finish.x, this.glassEdges.right.finish.x)) {
-				var solution = this.glassEdges.right.slope * straw.finish.x + this.glassEdges.right.intercept;
-				yLimitPotentials.push(straw.start.y - Math.abs(solution - straw.finish.y));
-			}
-
-			straw.yLimit = Math.max.apply(null, yLimitPotentials);
-
-			xLimitPotentials = [];
-
-			if(straw.motionCase === 1) {
-				if(this.between(this.glassEdges.right.start.y, straw.finish.y, this.glassEdges.right.finish.y)) {
-					var solution = (straw.finish.y - this.glassEdges.right.intercept)/this.glassEdges.right.slope || this.glassEdges.right.start.x;
-					xLimitPotentials.push(straw.start.x + Math.abs(solution - straw.finish.x));
-				}
-				
-				if(this.between(this.glassEdges.bottom.start.y, straw.finish.y, this.glassEdges.bottom.finish.y)) {
-					var solution = (straw.finish.y - this.glassEdges.bottom.intercept)/this.glassEdges.bottom.slope;
-					xLimitPotentials.push(straw.start.x - Math.abs(solution - straw.finish.x));
-				}
-
-				straw.xLimit = Math.min.apply(null, xLimitPotentials);
-			} else {
-				if(this.between(this.glassEdges.left.start.y, straw.finish.y, this.glassEdges.left.finish.y)) {
-					var solution = (straw.finish.y - this.glassEdges.left.intercept)/this.glassEdges.left.slope || this.glassEdges.left.start.x;
-					xLimitPotentials.push(straw.start.x - ((solution < straw.finish.x) ? (straw.finish.x - solution) : 0));
-				}
-				
-				if(this.between(this.glassEdges.bottom.start.y, straw.finish.y, this.glassEdges.bottom.finish.y)) {
-					var solution = (straw.finish.y - this.glassEdges.bottom.intercept)/this.glassEdges.bottom.slope;
-					xLimitPotentials.push(straw.start.x + Math.abs(solution - straw.finish.x));
-				}
-
-				straw.xLimit = Math.max.apply(null, xLimitPotentials);
-			}
+			// if(Math.abs(rotation) > 10) {
+			// 	this.direction = rotation > 0 ? -1 : 1;
+			// } else {
+			// 	this.strawArray.forEach(function(d) {
+			// 		d.direction = d.angle < -90 ? -1 : 1;
+			// 	});
+			// }
 		},
 		intersects: function(straw, side) {
 			var edge = this.glassEdges[side],
@@ -166,14 +91,12 @@ define(['templates/project_detail'], function(projectTemplate) {
 					y: straw.slope * edge.start.x + straw.intercept
 				}
 			}
-
 			if(straw.slope == Number.POSITIVE_INFINITY || straw.slope == Number.NEGATIVE_INFINITY) {
 				return {
 					x: straw.start.x,
 					y: edge.slope * straw.start.x + edge.intercept
 				}
 			}
-
 			return {
 				x: xSolution,
 				y: straw.slope * xSolution + straw.intercept
@@ -230,8 +153,8 @@ define(['templates/project_detail'], function(projectTemplate) {
 				var multiplier = 1;
 				if($(e.target).attr("id") == "minus") multiplier = -1;
 				$("#tilter").val(parseInt($("#tilter").val()) + 1 * multiplier);
-				this.orientation = $("#tilter").val();
-				this.tiltAxis(this.orientation);
+				this.orientation = $("#tilter").val() - ($("#tilter").attr("max") / 2);
+				this.tiltAxis();
 			}.bind(this))
 
 			$("#glass").css({
@@ -243,73 +166,70 @@ define(['templates/project_detail'], function(projectTemplate) {
 			this.innerLeftRightAngle = Math.abs(this.radToDegrees(Math.acos(this.glassWidth/this.hypoteneuse)));
 
 			var Straw = function(options) {
-				this.width = options.width || 10;
-				this.height = options.height || self.glassHeight * 1.25;
-				this.start = options.start;
-				this.finish = {};
-				this.angle = options.angle;
+				this.width = options.width;
+				this.height = options.height;
 				this.el = $(self.strawTemplate);
+				this.direction = [-1, 1][Math.round(Math.random())];
+				this.range = (0.7 + Math.random() * 0.3).toFixed(2);
+								
+				var glassBottomHypDistance = (1 - this.range) * self.glassWidth / 2;
+
+				this.finish = {
+					x: Math.cos(self.degToRadians(self.orientation)) * (this.direction == 1 ? glassBottomHypDistance : self.glassWidth - glassBottomHypDistance),
+					y: self.glassHeight
+				}
+
+				if(Math.round(Math.sqrt(Math.pow(self.glassWidth - glassBottomHypDistance, 2) + Math.pow(self.glassHeight, 2))) < this.height) {
+					// straw goes over
+					this.angle = self.radToDegrees(Math.atan(self.glassHeight/(self.glassWidth - glassBottomHypDistance)));
+				} else {
+					// straw leans against right edge
+					this.angle = self.radToDegrees(Math.atan( Math.sqrt(Math.pow(this.height, 2) - Math.pow((self.glassWidth - glassBottomHypDistance), 2)) / (self.glassWidth - glassBottomHypDistance)));
+				}
+
+				if(this.direction == -1) this.angle = (180 - this.angle);
+
+				this.start = {
+					x: Math.cos(self.degToRadians(this.angle)) * this.height,
+					y: Math.sin(self.degToRadians(this.angle)) * this.height
+				}
 
 				this.el.appendTo("#glass").css({
 					position: "absolute",
 					background: "#ec4911",
 					width: this.width,
 					height: this.height,
-					transform: "translate3d(" + this.start.x + "px," + (-this.start.y) + "px, 0) rotate(" + parseInt((-90) - this.angle, 10) + "deg)",
-					transformOrigin: "top left"
+					transform: "translate3d(" + this.finish.x + "px," + (this.finish.y - this.height) + "px, 0) rotate(" + parseInt(90 - this.angle, 10) + "deg)",
+					transformOrigin: "bottom left"
 				});
 			}
+
+			this.tiltAxis();
 
 			this.strawArray = [];
 
 			this.strawArray.push(new Straw({
 				width: 25,
-				height: 475,
-				start: { //cartesian
-					x: 20,
-					y: 300
-				},
-				angle: -50
+				height: 475
 			}));
 
 			var release = function() {
 				this.strawArray.forEach(function(d, i) {
-					if((d.intersectsGlass === true && (d.xLimit) >= d.start.x && (d.yLimit) >= d.start.y) || d.dY > 0) {
-						return false;
-					} else {
-						if(d.intersectsGlass === true) {
-							d.angle += 0.5 * d.motionCase;
-						}
+					d.angle = d.direction * 0.5;
 
-						this.findLimits(d);
-						
-						if(d.intersectsGlass === true && (d.start.x + 1 * d.motionCase) > d.xLimit) {
-							d.start.x = d.start.x + 1 * d.motionCase;
-						}
-
-						if(d.start.y - 1 > (d.yLimit - 1)) {
-							d.start.y -= 1;
-						}
-
-						d.el.css("transform", "translate3d(" + d.start.x + "px," + (-d.start.y) + "px,0) rotate(" + parseInt((-90) - d.angle, 10) + "deg)");
-	
-						if(d.intersectsGlass === false) {
-							this.testIntersectGlass(d);
-						}
-					}
+					d.css("transform", "translate3d(" + d.finish.x + "px," + (-d.finish.y) + "px, 0) rotate(" + parseInt((-90) - d.angle, 10) + "deg)");
 				}.bind(this));
 
 				this.rafID = requestAnimationFrame(release);
 
 			}.bind(this);
 
-			this.rafID = requestAnimationFrame(release);
-			this.tiltAxis();
 		},
 		destroy: function() {
 			window.cancelAnimationFrame(this.rafID);
 		}
 	};
+
 	window.straws = straws;
 	return straws;
 });

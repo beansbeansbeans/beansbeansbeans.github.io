@@ -1,3 +1,5 @@
+# DIRECTION 1 = GOING RIGHT, -1 = GOING LEFT
+
 # DEBUGGING
 
 There's serious problems with error margin going on. At certain places I'm depending on absolute precision, at certain places I'm depending on fuzziness. 
