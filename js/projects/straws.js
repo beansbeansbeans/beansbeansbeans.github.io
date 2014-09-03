@@ -195,23 +195,21 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.el = $(self.strawTemplate);
 				this.direction = [-1, 1][Math.round(Math.random())];
 				this.range = (0.7 + Math.random() * 0.25).toFixed(2);
-				this.rangeAdvance = 1;
+				this.rangeAdvance = 0.75;
 
 				self.updateStrawFinish(this);
 
-				var glassBottomHypDistance = (1 - this.range * this.rangeAdvance) * self.glassWidth / 2;
+				var maxHypDistance = (1 - this.range) * self.glassWidth / 2;
 
-				if(Math.round(Math.sqrt(Math.pow(self.glassWidth - glassBottomHypDistance, 2) + Math.pow(self.glassHeight, 2))) < this.height) {
-					// straw goes over
-					this.maxAngle = self.radToDegrees(Math.atan(self.glassHeight/(self.glassWidth - glassBottomHypDistance)));
+				if(Math.round(Math.sqrt(Math.pow(self.glassWidth - maxHypDistance, 2) + Math.pow(self.glassHeight, 2))) < this.height) {
+					this.maxAngle = self.radToDegrees(Math.atan(self.glassHeight/(self.glassWidth - maxHypDistance)));
 				} else {
-					// straw leans against right edge
-					this.maxAngle = self.radToDegrees(Math.atan( Math.sqrt(Math.pow(this.height, 2) - Math.pow((self.glassWidth - glassBottomHypDistance), 2)) / (self.glassWidth - glassBottomHypDistance)));
+					this.maxAngle = self.radToDegrees(Math.atan( Math.sqrt(Math.pow(this.height, 2) - Math.pow((self.glassWidth - maxHypDistance), 2)) / (self.glassWidth - maxHypDistance)));
 				}
 
 				if(this.direction == -1) this.maxAngle = (180 - this.maxAngle);
 
-				this.angle = this.maxAngle;
+				this.angle = this.maxAngle + 10 * this.direction + this.direction * Math.random() * 30;
 
 				self.updateStrawProps(this);
 				self.testIntersectGlass(this);
@@ -240,10 +238,14 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			var release = function() {
 				this.strawArray.forEach(function(d, i) {
-					// every frame, try to move the finish point. in this case we're not worrying about it yet - all straws are at their maximum finish
-										
+					
+					if(d.rangeAdvance < 1) {
+						d.rangeAdvance += 0.01;
+						this.updateStrawFinish(d);
+					}
+
 					if(d.direction * (d.angle - (d.maxAngle - this.orientation)) > 0) {
-						d.angle -= d.direction * 0.05;
+						d.angle -= d.direction * 0.1;
 						this.updateStrawProps(d);
 					} else {
 						d.angle = d.maxAngle - this.orientation;
