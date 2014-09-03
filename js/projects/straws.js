@@ -44,10 +44,10 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			var tLRotation = -this.innerLeftRightAngle - this.orientation,
 				bLRotation = this.innerLeftRightAngle - this.orientation,
-				xDiff = Math.round((Math.abs(Math.cos(this.degToRadians(tLRotation))) * this.hypoteneuse / 2) - (this.glassWidth / 2)),
-				yDiff = Math.round((this.glassHeight / 2) - (Math.abs(Math.sin(this.degToRadians(tLRotation))) * this.hypoteneuse / 2)),
-				altXDiff = Math.round((this.glassWidth / 2) - (Math.abs(Math.cos(this.degToRadians(bLRotation))) * this.hypoteneuse / 2)),
-				altYDiff = Math.round((this.glassHeight / 2) - (Math.abs(Math.sin(this.degToRadians(bLRotation))) * this.hypoteneuse / 2));
+				xDiff = (Math.abs(Math.cos(this.degToRadians(tLRotation))) * this.hypoteneuse / 2) - (this.glassWidth / 2),
+				yDiff = (this.glassHeight / 2) - (Math.abs(Math.sin(this.degToRadians(tLRotation))) * this.hypoteneuse / 2),
+				altXDiff = (this.glassWidth / 2) - (Math.abs(Math.cos(this.degToRadians(bLRotation))) * this.hypoteneuse / 2),
+				altYDiff = (this.glassHeight / 2) - (Math.abs(Math.sin(this.degToRadians(bLRotation))) * this.hypoteneuse / 2);
 
 			this.glassEdges.left.start.x = 0 - xDiff;
 			this.glassEdges.left.start.y = 0 - yDiff;
@@ -131,7 +131,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 			return true;
 		},
 		testIntersectGlass: function(straw) {
-			if(this.liesWithin(this.intersects(straw, "left"), straw, "left") || this.liesWithin(this.intersects(straw, "right"), straw, "right") || this.liesWithin(this.intersects(straw, "bottom"), straw, "bottom")) {
+			if(this.liesWithin(this.intersects(straw, "left"), straw, "left") || this.liesWithin(this.intersects(straw, "right"), straw, "right")) {
 				straw.intersectsGlass = true;
 			} else {
 				straw.intersectsGlass = false;
@@ -155,20 +155,6 @@ define(['templates/project_detail'], function(projectTemplate) {
 				x: this.glassEdges.bottom.start.x + Math.cos(this.degToRadians(this.orientation * -1)) * (straw.direction == 1 ? glassBottomHypDistance : this.glassWidth - glassBottomHypDistance),
 				y: this.glassEdges.bottom.start.y + Math.sin(this.degToRadians(this.orientation * -1)) * (straw.direction == 1 ? glassBottomHypDistance : this.glassWidth - glassBottomHypDistance)
 			}
-		},
-		updateStrawMaxAngle: function(straw) {
-			// assuming here that we're starting at the range limit - this should be the only time we need to manually adjust the angle to its maximum value because in every other case we're relying on testIntersectsGlass to tell us whether we can continue modifying the angle
-			var glassBottomHypDistance = (1 - straw.range * straw.rangeAdvance) * this.glassWidth / 2;
-
-			if(Math.round(Math.sqrt(Math.pow(this.glassWidth - glassBottomHypDistance, 2) + Math.pow(this.glassHeight, 2))) < straw.height) {
-				// straw goes over
-				straw.angle = this.radToDegrees(Math.atan(this.glassHeight/(this.glassWidth - glassBottomHypDistance)));
-			} else {
-				// straw leans against right edge
-				straw.angle = this.radToDegrees(Math.atan( Math.sqrt(Math.pow(straw.height, 2) - Math.pow((this.glassWidth - glassBottomHypDistance), 2)) / (this.glassWidth - glassBottomHypDistance)));
-			}
-
-			if(straw.direction == -1) straw.angle = (180 - straw.angle);
 		},
 		initialize: function() {
 			var data = {
@@ -200,7 +186,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				height: this.glassHeight
 			});
 
-			this.hypoteneuse = Math.round(Math.sqrt(Math.pow(this.glassWidth, 2) + Math.pow(this.glassHeight, 2)));
+			this.hypoteneuse = Math.sqrt(Math.pow(this.glassWidth, 2) + Math.pow(this.glassHeight, 2));
 			this.innerLeftRightAngle = Math.abs(this.radToDegrees(Math.acos(this.glassWidth/this.hypoteneuse)));
 
 			var Straw = function(options) {
@@ -208,15 +194,26 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.height = options.height;
 				this.el = $(self.strawTemplate);
 				this.direction = [-1, 1][Math.round(Math.random())];
-				this.range = (0.7 + Math.random() * 0.3).toFixed(2);
+				this.range = (0.7 + Math.random() * 0.25).toFixed(2);
 				this.rangeAdvance = 1;
 
 				self.updateStrawFinish(this);
 
-				self.updateStrawMaxAngle(this);
+				var glassBottomHypDistance = (1 - this.range * this.rangeAdvance) * self.glassWidth / 2;
+
+				if(Math.round(Math.sqrt(Math.pow(self.glassWidth - glassBottomHypDistance, 2) + Math.pow(self.glassHeight, 2))) < this.height) {
+					// straw goes over
+					this.maxAngle = self.radToDegrees(Math.atan(self.glassHeight/(self.glassWidth - glassBottomHypDistance)));
+				} else {
+					// straw leans against right edge
+					this.maxAngle = self.radToDegrees(Math.atan( Math.sqrt(Math.pow(this.height, 2) - Math.pow((self.glassWidth - glassBottomHypDistance), 2)) / (self.glassWidth - glassBottomHypDistance)));
+				}
+
+				if(this.direction == -1) this.maxAngle = (180 - this.maxAngle);
+
+				this.angle = this.maxAngle;
 
 				self.updateStrawProps(this);
-
 				self.testIntersectGlass(this);
 
 				this.el.appendTo("#glass").css({
@@ -238,14 +235,15 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			var release = function() {
 				this.strawArray.forEach(function(d, i) {
-					// console.log("raf");
 					// every frame, try to move the finish point. in this case we're not worrying about it yet - all straws are at their maximum finish
-
-					if(!d.intersectsGlass) {
-						d.angle -= d.direction * 0.25;
+										
+					if(d.direction * (d.angle - (d.maxAngle - this.orientation)) > 0) {
+						d.angle -= d.direction * 0.05;
 						this.updateStrawProps(d);
+
+						console.log(d.angle);
 					} else {
-						// this.updateStrawMaxAngle(d);
+						d.angle = d.maxAngle - this.orientation;
 					}
 
 					d.el.css("transform", "translate3d(" + d.finish.x + "px," + (-d.finish.y - d.height) + "px, 0) rotate(" + parseInt((90) - d.angle, 10) + "deg)");
