@@ -176,7 +176,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 			$("#plus, #minus").on("click", function(e) {
 				var multiplier = 1;
 				if($(e.target).attr("id") == "minus") multiplier = -1;
-				$("#tilter").val(parseInt($("#tilter").val()) + 1 * multiplier);
+				$("#tilter").val(parseInt($("#tilter").val()) + 5 * multiplier);
 				this.orientation = $("#tilter").val() - ($("#tilter").attr("max") / 2);
 				this.tiltAxis();
 			}.bind(this))
@@ -231,6 +231,11 @@ define(['templates/project_detail'], function(projectTemplate) {
 			this.strawArray.push(new Straw({
 				width: 25,
 				height: 475
+			}));
+
+			this.strawArray.push(new Straw({
+				width: 25,
+				height: 525
 			}));
 
 			var release = function() {
