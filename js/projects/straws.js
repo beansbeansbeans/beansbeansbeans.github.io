@@ -132,6 +132,12 @@ define(['templates/project_detail'], function(projectTemplate) {
 				straw.intersectsGlass = false;
 			}
 		},
+		updateStrawProps: function(straw) {
+			// needs width, height, direction, range, finish
+		},
+		updateStrawFinish: function(straw) {
+
+		},
 		initialize: function() {
 			var data = {
 				identifier: "straws",
@@ -171,12 +177,13 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.el = $(self.strawTemplate);
 				this.direction = [-1, 1][Math.round(Math.random())];
 				this.range = (0.7 + Math.random() * 0.3).toFixed(2);
-								
+				
+				// assuming here that we're starting at the range limit
 				var glassBottomHypDistance = (1 - this.range) * self.glassWidth / 2;
 
 				this.finish = {
-					x: Math.cos(self.degToRadians(self.orientation)) * (this.direction == 1 ? glassBottomHypDistance : self.glassWidth - glassBottomHypDistance),
-					y: self.glassHeight
+					x: self.glassEdges.bottom.start.x + Math.cos(self.degToRadians(self.orientation)) * (this.direction == 1 ? glassBottomHypDistance : self.glassWidth - glassBottomHypDistance),
+					y: self.glassEdges.bottom.start.y + Math.sin(self.degToRadians(self.orientation)) * (this.direction == 1 ? glassBottomHypDistance : self.glassWidth - glassBottomHypDistance)
 				}
 
 				if(Math.round(Math.sqrt(Math.pow(self.glassWidth - glassBottomHypDistance, 2) + Math.pow(self.glassHeight, 2))) < this.height) {
@@ -189,17 +196,24 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 				if(this.direction == -1) this.angle = (180 - this.angle);
 
+				this.dX = Math.cos(self.degToRadians(this.angle)) * this.height;
+				this.dY = Math.sin(self.degToRadians(this.angle)) * this.height;
+				this.slope = this.dY / this.dX;
+				this.intercept = this.finish.y - this.slope * this.finish.x;
+
 				this.start = {
-					x: Math.cos(self.degToRadians(this.angle)) * this.height,
-					y: Math.sin(self.degToRadians(this.angle)) * this.height
+					x: this.finish.x + this.dX,
+					y: this.finish.y + this.dY
 				}
+
+				self.testIntersectGlass(this);
 
 				this.el.appendTo("#glass").css({
 					position: "absolute",
 					background: "#ec4911",
 					width: this.width,
 					height: this.height,
-					transform: "translate3d(" + this.finish.x + "px," + (this.finish.y - this.height) + "px, 0) rotate(" + parseInt(90 - this.angle, 10) + "deg)",
+					transform: "translate3d(" + this.finish.x + "px," + (-this.finish.y - this.height) + "px, 0) rotate(" + parseInt(90 - this.angle, 10) + "deg)",
 					transformOrigin: "bottom left"
 				});
 			}
@@ -215,7 +229,15 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			var release = function() {
 				this.strawArray.forEach(function(d, i) {
-					d.angle = d.direction * 0.5;
+					// every frame, try to move the finish point. in this case we're not worrying about it yet - all straws are at their maximum finish
+					// next, try to move the angle and see if that results in an intersecting straw
+					d.angle += d.direction * 0.5;
+
+					if(this.testIntersectGlass(d)) {
+						// reverse movement
+					} else {
+						// preserve movement
+					}
 
 					d.css("transform", "translate3d(" + d.finish.x + "px," + (-d.finish.y) + "px, 0) rotate(" + parseInt((-90) - d.angle, 10) + "deg)");
 				}.bind(this));
