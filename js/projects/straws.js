@@ -35,6 +35,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				}
 			}
 		},
+		strawArray: [],
 		strawTemplate: "<div class='straw'></div>",
 		degToRadians: function(deg) { return deg * Math.PI / 180 },
 		radToDegrees: function(rad) { return rad * 57.2958 },
@@ -69,6 +70,10 @@ define(['templates/project_detail'], function(projectTemplate) {
 			Object.keys(this.glassEdges).forEach(function(d) {
 				this.glassEdges[d].slope = (this.glassEdges[d].start.y - this.glassEdges[d].finish.y) / (this.glassEdges[d].start.x - this.glassEdges[d].finish.x);
 				this.glassEdges[d].intercept = this.glassEdges[d].start.y - this.glassEdges[d].slope * this.glassEdges[d].start.x;
+			}.bind(this));
+
+			this.strawArray.forEach(function(d) {
+				this.updateStrawFinish(d);
 			}.bind(this));
 
 			// if(Math.abs(rotation) > 10) {
@@ -208,7 +213,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				if(this.direction == -1) this.angle = (180 - this.angle);
 
 				self.updateStrawProps(this);
-				
+
 				self.testIntersectGlass(this);
 
 				this.el.appendTo("#glass").css({
@@ -223,8 +228,6 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			this.tiltAxis();
 
-			this.strawArray = [];
-
 			this.strawArray.push(new Straw({
 				width: 25,
 				height: 475
@@ -232,22 +235,25 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			var release = function() {
 				this.strawArray.forEach(function(d, i) {
+					console.log("raf");
 					// every frame, try to move the finish point. in this case we're not worrying about it yet - all straws are at their maximum finish
-					// next, try to move the angle and see if that results in an intersecting straw
-					d.angle += d.direction * 0.5;
 
-					if(this.testIntersectGlass(d)) {
-						// reverse movement
-					} else {
-						// preserve movement
+					if(!d.intersectsGlass) {
+						// next, try to move the angle and see if that results in an intersecting straw
+						d.angle -= d.direction * 0.5;
+						this.updateStrawProps(d);
 					}
 
-					d.css("transform", "translate3d(" + d.finish.x + "px," + (-d.finish.y) + "px, 0) rotate(" + parseInt((-90) - d.angle, 10) + "deg)");
+					d.el.css("transform", "translate3d(" + d.finish.x + "px," + (-d.finish.y - d.height) + "px, 0) rotate(" + parseInt((90) - d.angle, 10) + "deg)");
+
+					this.testIntersectGlass(d);
 				}.bind(this));
 
 				this.rafID = requestAnimationFrame(release);
 
 			}.bind(this);
+
+			requestAnimationFrame(release);
 
 		},
 		destroy: function() {
