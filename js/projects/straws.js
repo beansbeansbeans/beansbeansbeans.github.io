@@ -133,10 +133,23 @@ define(['templates/project_detail'], function(projectTemplate) {
 			}
 		},
 		updateStrawProps: function(straw) {
-			// needs width, height, direction, range, finish
+			straw.dX = Math.cos(this.degToRadians(straw.angle)) * straw.height;
+			straw.dY = Math.sin(this.degToRadians(straw.angle)) * straw.height;
+			straw.slope = straw.dY / straw.dX;
+			straw.intercept = straw.finish.y - straw.slope * straw.finish.x;
+
+			straw.start = {
+				x: straw.finish.x + straw.dX,
+				y: straw.finish.y + straw.dY
+			}
 		},
 		updateStrawFinish: function(straw) {
+			var glassBottomHypDistance = (1 - straw.range * straw.rangeAdvance) * this.glassWidth / 2;
 
+			straw.finish = {
+				x: this.glassEdges.bottom.start.x + Math.cos(this.degToRadians(this.orientation)) * (straw.direction == 1 ? glassBottomHypDistance : this.glassWidth - glassBottomHypDistance),
+				y: this.glassEdges.bottom.start.y + Math.sin(this.degToRadians(this.orientation)) * (straw.direction == 1 ? glassBottomHypDistance : this.glassWidth - glassBottomHypDistance)
+			}
 		},
 		initialize: function() {
 			var data = {
@@ -177,14 +190,12 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.el = $(self.strawTemplate);
 				this.direction = [-1, 1][Math.round(Math.random())];
 				this.range = (0.7 + Math.random() * 0.3).toFixed(2);
-				
-				// assuming here that we're starting at the range limit
-				var glassBottomHypDistance = (1 - this.range) * self.glassWidth / 2;
+				this.rangeAdvance = 1;
 
-				this.finish = {
-					x: self.glassEdges.bottom.start.x + Math.cos(self.degToRadians(self.orientation)) * (this.direction == 1 ? glassBottomHypDistance : self.glassWidth - glassBottomHypDistance),
-					y: self.glassEdges.bottom.start.y + Math.sin(self.degToRadians(self.orientation)) * (this.direction == 1 ? glassBottomHypDistance : self.glassWidth - glassBottomHypDistance)
-				}
+				self.updateStrawFinish(this);
+				
+				// assuming here that we're starting at the range limit - this should be the only time we need to manually adjust the angle to its maximum value because in every other case we're relying on testIntersectsGlass to tell us whether we can continue modifying the angle
+				var glassBottomHypDistance = (1 - this.range * this.rangeAdvance) * self.glassWidth / 2;
 
 				if(Math.round(Math.sqrt(Math.pow(self.glassWidth - glassBottomHypDistance, 2) + Math.pow(self.glassHeight, 2))) < this.height) {
 					// straw goes over
@@ -196,16 +207,8 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 				if(this.direction == -1) this.angle = (180 - this.angle);
 
-				this.dX = Math.cos(self.degToRadians(this.angle)) * this.height;
-				this.dY = Math.sin(self.degToRadians(this.angle)) * this.height;
-				this.slope = this.dY / this.dX;
-				this.intercept = this.finish.y - this.slope * this.finish.x;
-
-				this.start = {
-					x: this.finish.x + this.dX,
-					y: this.finish.y + this.dY
-				}
-
+				self.updateStrawProps(this);
+				
 				self.testIntersectGlass(this);
 
 				this.el.appendTo("#glass").css({
