@@ -240,13 +240,11 @@ define(['templates/project_detail'], function(projectTemplate) {
 					if(d.direction * (d.angle - (d.maxAngle - this.orientation)) > 0) {
 						d.angle -= d.direction * 0.05;
 						this.updateStrawProps(d);
-
-						console.log(d.angle);
 					} else {
 						d.angle = d.maxAngle - this.orientation;
 					}
 
-					d.el.css("transform", "translate3d(" + d.finish.x + "px," + (-d.finish.y - d.height) + "px, 0) rotate(" + parseInt((90) - d.angle, 10) + "deg)");
+					d.el.css("transform", "translate3d(" + d.finish.x + "px," + (-d.finish.y - d.height) + "px, 0) rotate(" + this.degToRadians(90 - d.angle) + "rad)");
 
 					this.testIntersectGlass(d);
 				}.bind(this));
