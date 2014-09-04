@@ -44,10 +44,10 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			var tLRotation = -this.innerLeftRightAngle - this.orientation,
 				bLRotation = this.innerLeftRightAngle - this.orientation,
-				xDiff = (Math.abs(Math.cos(this.degToRadians(tLRotation))) * this.hypoteneuse / 2) - (this.glassWidth / 2),
-				yDiff = (this.glassHeight / 2) - (Math.abs(Math.sin(this.degToRadians(tLRotation))) * this.hypoteneuse / 2),
-				altXDiff = (this.glassWidth / 2) - (Math.abs(Math.cos(this.degToRadians(bLRotation))) * this.hypoteneuse / 2),
-				altYDiff = (this.glassHeight / 2) - (Math.abs(Math.sin(this.degToRadians(bLRotation))) * this.hypoteneuse / 2);
+				xDiff = (Math.cos(this.degToRadians(tLRotation)) * this.hypoteneuse / 2) - (this.glassWidth / 2),
+				yDiff = (this.glassHeight / 2) - (Math.sin(this.degToRadians(tLRotation)) * this.hypoteneuse / 2),
+				altXDiff = (this.glassWidth / 2) - (Math.cos(this.degToRadians(bLRotation)) * this.hypoteneuse / 2),
+				altYDiff = (this.glassHeight / 2) - (Math.sin(this.degToRadians(bLRotation)) * this.hypoteneuse / 2);
 
 			this.glassEdges.left.start.x = 0 - xDiff;
 			this.glassEdges.left.start.y = 0 - yDiff;
@@ -77,7 +77,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				d.intersectsGlass = false;
 			}.bind(this));
 
-			if(Math.abs(this.orientation) > 40) {
+			if(Math.abs(this.orientation) > 45) {
 				this.strawArray.forEach(function(d) {
 					this.updateStrawDirection(d, this.orientation > 0 ? 1 : -1)
 				}.bind(this))
@@ -176,7 +176,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				identifier: "straws",
 				title: "Straws",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta quibusdam voluptatibus aperiam doloribus vero, repudiandae officia odio consectetur sequi?",
-				projectContents: '<button id="stopRAF">stop raf</button><div id="glass"><div class="testPoint1"></div><div class="testPoint2"></div><div class="testPoint3"></div><div class="testPoint4"></div><div id="glassOutline"></div></div><input type="range" id="tilter" min="0" max="90"/><button id="plus">+</button><button id="minus">-</button>',
+				projectContents: '<button id="stopRAF">stop raf</button><div id="glass"><div class="testPoint1"></div><div class="testPoint2"></div><div class="testPoint3"></div><div class="testPoint4"></div><div id="glassOutline"></div></div><input type="range" id="tilter" min="0" max="100"/><button id="plus">+</button><button id="minus">-</button>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, laboriosam.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium iste eius vero quasi debitis molestiae omnis ea quas. Quibusdam, est."
 			},
@@ -189,10 +189,13 @@ define(['templates/project_detail'], function(projectTemplate) {
 			}.bind(this));
 
 			$("#plus, #minus").on("click", function(e) {
-				var multiplier = 1;
+				var multiplier = 1,
+					max = $("#tilter").attr("max") / 2,
+					val = parseInt($("#tilter").val());
 				if($(e.target).attr("id") == "minus") multiplier = -1;
-				$("#tilter").val(parseInt($("#tilter").val()) + 1 * multiplier);
-				this.orientation = $("#tilter").val() - $("#tilter").attr("max") / 2;
+				if(multiplier * (multiplier * max - (val + multiplier - max)) <= 0) return false;
+				$("#tilter").val(val + 1 * multiplier);
+				this.orientation = $("#tilter").val() - max;
 				this.tiltAxis();
 			}.bind(this))
 
