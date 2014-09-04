@@ -1,7 +1,7 @@
 define(['templates/project_detail'], function(projectTemplate) {
 	var straws = {
 		glassWidth: 450,
-		glassHeight: 325,
+		glassHeight: 425,
 		orientation: 0,
 		glassEdges: {
 			left: {
@@ -74,21 +74,14 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			this.strawArray.forEach(function(d) {
 				this.updateStrawFinish(d);
+				d.intersectsGlass = false;
 			}.bind(this));
 
-			if(Math.abs(this.orientation) > 20) {
+			if(Math.abs(this.orientation) > 40) {
 				this.strawArray.forEach(function(d) {
 					this.updateStrawDirection(d, this.orientation > 0 ? 1 : -1)
 				}.bind(this))
 			}
-
-			// if(Math.abs(rotation) > 10) {
-			// 	this.direction = rotation > 0 ? -1 : 1;
-			// } else {
-			// 	this.strawArray.forEach(function(d) {
-			// 		d.direction = d.angle < -90 ? -1 : 1;
-			// 	});
-			// }
 		},
 		intersects: function(straw, side) {
 			var edge = this.glassEdges[side],
@@ -136,8 +129,8 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			return true;
 		},
-		testIntersectGlass: function(straw) {
-			if(this.liesWithin(this.intersects(straw, "left"), straw, "left") || this.liesWithin(this.intersects(straw, "right"), straw, "right")) {
+		testIntersectGlass: function(straw, side) {
+			if(this.liesWithin(this.intersects(straw, side), straw, side)) {
 				straw.intersectsGlass = true;
 			} else {
 				straw.intersectsGlass = false;
@@ -183,7 +176,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				identifier: "straws",
 				title: "Straws",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta quibusdam voluptatibus aperiam doloribus vero, repudiandae officia odio consectetur sequi?",
-				projectContents: '<button id="stopRAF">stop raf</button><div id="glass"><div class="testPoint1"></div><div class="testPoint2"></div><div class="testPoint3"></div><div class="testPoint4"></div><div id="glassOutline"></div></div><input type="range" id="tilter" min="0" max="60"/><button id="plus">+</button><button id="minus">-</button>',
+				projectContents: '<button id="stopRAF">stop raf</button><div id="glass"><div class="testPoint1"></div><div class="testPoint2"></div><div class="testPoint3"></div><div class="testPoint4"></div><div id="glassOutline"></div></div><input type="range" id="tilter" min="0" max="90"/><button id="plus">+</button><button id="minus">-</button>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, laboriosam.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium iste eius vero quasi debitis molestiae omnis ea quas. Quibusdam, est."
 			},
@@ -198,7 +191,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 			$("#plus, #minus").on("click", function(e) {
 				var multiplier = 1;
 				if($(e.target).attr("id") == "minus") multiplier = -1;
-				$("#tilter").val(parseInt($("#tilter").val()) + 5 * multiplier);
+				$("#tilter").val(parseInt($("#tilter").val()) + 1 * multiplier);
 				this.orientation = $("#tilter").val() - $("#tilter").attr("max") / 2;
 				this.tiltAxis();
 			}.bind(this))
@@ -216,7 +209,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.height = options.height;
 				this.el = $(self.strawTemplate);
 				this.direction = [-1, 1][Math.round(Math.random())];
-				this.range = (0.7 + Math.random() * 0.25).toFixed(2);
+				this.range = (0.6 + Math.random() * 0.3).toFixed(2);
 				this.rangeAdvance = 0.75 * this.direction;
 
 				self.updateStrawFinish(this);
@@ -225,7 +218,6 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.angle = this.maxAngle + 10 * this.direction + this.direction * Math.random() * 30;
 
 				self.updateStrawProps(this);
-				self.testIntersectGlass(this);
 
 				this.el.appendTo("#glass").css({
 					position: "absolute",
@@ -258,7 +250,9 @@ define(['templates/project_detail'], function(projectTemplate) {
 					}
 
 					if(d.direction * (d.angle - (d.maxAngle - this.orientation)) > 0) {
-						d.angle -= d.direction * 0.1;
+						if(!d.intersectsGlass) {
+							d.angle -= d.direction * 0.1;
+						}
 						this.updateStrawProps(d);
 					} else {
 						d.angle = d.maxAngle - this.orientation;
@@ -266,7 +260,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 					d.el.css("transform", "translate3d(" + d.finish.x + "px," + (-d.finish.y - d.height) + "px, 0) rotate(" + this.degToRadians(90 - d.angle) + "rad)");
 
-					this.testIntersectGlass(d);
+					this.testIntersectGlass(d, (d.direction == 1) ? "right" : "left");
 				}.bind(this));
 
 				this.rafID = requestAnimationFrame(release);
