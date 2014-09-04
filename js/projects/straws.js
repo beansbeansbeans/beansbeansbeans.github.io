@@ -76,6 +76,12 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.updateStrawFinish(d);
 			}.bind(this));
 
+			if(Math.abs(this.orientation) > 20) {
+				this.strawArray.forEach(function(d) {
+					this.updateStrawDirection(d, this.orientation > 0 ? 1 : -1)
+				}.bind(this))
+			}
+
 			// if(Math.abs(rotation) > 10) {
 			// 	this.direction = rotation > 0 ? -1 : 1;
 			// } else {
@@ -167,8 +173,9 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			if(straw.direction == -1) straw.maxAngle = (180 - straw.maxAngle);
 		},
-		updateStrawDirection: function(straw) {
-			straw.direction = straw.direction * -1;
+		updateStrawDirection: function(straw, direction) {
+			straw.direction = direction;
+			straw.intersectsGlass = false;
 			this.updateStrawMaxAngle(straw);
 		},
 		initialize: function() {
@@ -176,7 +183,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				identifier: "straws",
 				title: "Straws",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta quibusdam voluptatibus aperiam doloribus vero, repudiandae officia odio consectetur sequi?",
-				projectContents: '<button id="stopRAF">stop raf</button><div id="glass"><div class="testPoint1"></div><div class="testPoint2"></div><div class="testPoint3"></div><div class="testPoint4"></div><div id="glassOutline"></div></div><input type="range" id="tilter" min="0" max="50"/><button id="plus">+</button><button id="minus">-</button>',
+				projectContents: '<button id="stopRAF">stop raf</button><div id="glass"><div class="testPoint1"></div><div class="testPoint2"></div><div class="testPoint3"></div><div class="testPoint4"></div><div id="glassOutline"></div></div><input type="range" id="tilter" min="0" max="60"/><button id="plus">+</button><button id="minus">-</button>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, laboriosam.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium iste eius vero quasi debitis molestiae omnis ea quas. Quibusdam, est."
 			},
@@ -237,10 +244,10 @@ define(['templates/project_detail'], function(projectTemplate) {
 				height: 475
 			}));
 
-			// this.strawArray.push(new Straw({
-			// 	width: 25,
-			// 	height: 525
-			// }));
+			this.strawArray.push(new Straw({
+				width: 25,
+				height: 525
+			}));
 
 			var release = function() {
 				this.strawArray.forEach(function(d, i) {
