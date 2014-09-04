@@ -149,12 +149,27 @@ define(['templates/project_detail'], function(projectTemplate) {
 			}
 		},
 		updateStrawFinish: function(straw) {
-			var glassBottomHypDistance = (1 - straw.range * straw.rangeAdvance) * this.glassWidth / 2;
+			var glassBottomHypDistance = 0.5 * (1 - straw.range) * this.glassWidth + ((straw.rangeAdvance - 1) / -2) * straw.range * this.glassWidth;
 
 			straw.finish = {
-				x: this.glassEdges.bottom.start.x + Math.cos(this.degToRadians(this.orientation * -1)) * (straw.direction == 1 ? glassBottomHypDistance : this.glassWidth - glassBottomHypDistance),
-				y: this.glassEdges.bottom.start.y + Math.sin(this.degToRadians(this.orientation * -1)) * (straw.direction == 1 ? glassBottomHypDistance : this.glassWidth - glassBottomHypDistance)
+				x: this.glassEdges.bottom.start.x + Math.cos(this.degToRadians(-this.orientation)) * glassBottomHypDistance,
+				y: this.glassEdges.bottom.start.y + Math.sin(this.degToRadians(-this.orientation)) * glassBottomHypDistance
 			}
+		},
+		updateStrawMaxAngle: function(straw) {
+			var maxHypDistance = (1 - straw.range) * this.glassWidth / 2;
+
+			if(Math.round(Math.sqrt(Math.pow(this.glassWidth - maxHypDistance, 2) + Math.pow(this.glassHeight, 2))) < straw.height) {
+				straw.maxAngle = this.radToDegrees(Math.atan(this.glassHeight/(this.glassWidth - maxHypDistance)));
+			} else {
+				straw.maxAngle = this.radToDegrees(Math.atan( Math.sqrt(Math.pow(straw.height, 2) - Math.pow((this.glassWidth - maxHypDistance), 2)) / (this.glassWidth - maxHypDistance)));
+			}
+
+			if(straw.direction == -1) straw.maxAngle = (180 - straw.maxAngle);
+		},
+		updateStrawDirection: function(straw) {
+			straw.direction = straw.direction * -1;
+			this.updateStrawMaxAngle(straw);
 		},
 		initialize: function() {
 			var data = {
@@ -177,7 +192,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				var multiplier = 1;
 				if($(e.target).attr("id") == "minus") multiplier = -1;
 				$("#tilter").val(parseInt($("#tilter").val()) + 5 * multiplier);
-				this.orientation = $("#tilter").val() - ($("#tilter").attr("max") / 2);
+				this.orientation = $("#tilter").val() - $("#tilter").attr("max") / 2;
 				this.tiltAxis();
 			}.bind(this))
 
@@ -195,19 +210,10 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.el = $(self.strawTemplate);
 				this.direction = [-1, 1][Math.round(Math.random())];
 				this.range = (0.7 + Math.random() * 0.25).toFixed(2);
-				this.rangeAdvance = 0.75;
+				this.rangeAdvance = 0.75 * this.direction;
 
 				self.updateStrawFinish(this);
-
-				var maxHypDistance = (1 - this.range) * self.glassWidth / 2;
-
-				if(Math.round(Math.sqrt(Math.pow(self.glassWidth - maxHypDistance, 2) + Math.pow(self.glassHeight, 2))) < this.height) {
-					this.maxAngle = self.radToDegrees(Math.atan(self.glassHeight/(self.glassWidth - maxHypDistance)));
-				} else {
-					this.maxAngle = self.radToDegrees(Math.atan( Math.sqrt(Math.pow(this.height, 2) - Math.pow((self.glassWidth - maxHypDistance), 2)) / (self.glassWidth - maxHypDistance)));
-				}
-
-				if(this.direction == -1) this.maxAngle = (180 - this.maxAngle);
+				self.updateStrawMaxAngle(this);
 
 				this.angle = this.maxAngle + 10 * this.direction + this.direction * Math.random() * 30;
 
@@ -231,16 +237,16 @@ define(['templates/project_detail'], function(projectTemplate) {
 				height: 475
 			}));
 
-			this.strawArray.push(new Straw({
-				width: 25,
-				height: 525
-			}));
+			// this.strawArray.push(new Straw({
+			// 	width: 25,
+			// 	height: 525
+			// }));
 
 			var release = function() {
 				this.strawArray.forEach(function(d, i) {
-					
-					if(d.rangeAdvance < 1) {
-						d.rangeAdvance += 0.01;
+
+					if(d.direction * (d.rangeAdvance - d.direction) < 0) {
+						d.rangeAdvance += d.direction * 0.001;
 						this.updateStrawFinish(d);
 					}
 
