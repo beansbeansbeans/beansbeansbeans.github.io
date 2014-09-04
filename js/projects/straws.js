@@ -212,10 +212,14 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.range = (0.6 + Math.random() * 0.3).toFixed(2);
 				this.rangeAdvance = 0.75 * this.direction;
 
+				this.rangeAdvanceRate = 0.001 * Math.random() * 5;
+
 				self.updateStrawFinish(this);
 				self.updateStrawMaxAngle(this);
 
 				this.angle = this.maxAngle + 10 * this.direction + this.direction * Math.random() * 30;
+
+				this.angleAdvanceRate = 0.1 * Math.random() * 3;
 
 				self.updateStrawProps(this);
 
@@ -245,13 +249,13 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.strawArray.forEach(function(d, i) {
 
 					if(d.direction * (d.rangeAdvance - d.direction) < 0) {
-						d.rangeAdvance += d.direction * 0.001;
+						d.rangeAdvance += d.direction * d.rangeAdvanceRate;
 						this.updateStrawFinish(d);
 					}
 
 					if(d.direction * (d.angle - (d.maxAngle - this.orientation)) > 0) {
 						if(!d.intersectsGlass) {
-							d.angle -= d.direction * 0.1;
+							d.angle -= d.direction * d.angleAdvanceRate;
 						}
 						this.updateStrawProps(d);
 					} else {
