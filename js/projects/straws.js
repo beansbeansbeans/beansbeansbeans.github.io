@@ -226,14 +226,14 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.range = (0.6 + Math.random() * 0.3).toFixed(2);
 				this.rangeAdvance = 0.75 * this.direction;
 
-				this.rangeAdvanceRate = 0.0008 + 0.001 * Math.random() * 5;
+				this.rangeAdvanceRate = 0.001 + 0.001 * Math.random() * 5;
 
 				self.updateStrawFinish(this);
 				self.updateStrawMaxAngle(this);
 
 				this.angle = this.maxAngle + 10 * this.direction + this.direction * Math.random() * 30;
 
-				this.angleAdvanceRate = 0.1 * Math.random() * 3;
+				this.angleAdvanceRate = 0.1 + 0.1 * Math.random() * 3;
 
 				self.updateStrawProps(this);
 
@@ -271,7 +271,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 					} else if(d.direction * (d.angle - (d.minAngle - this.orientation)) < 0) {
 						d.angle = d.maxAngle - this.orientation;
 					} else {
-						d.angle = d.minAngle - this.orientation - d.direction * 2;
+						d.angle = d.minAngle - this.orientation - d.direction * d.angleAdvanceRate;
 					}
 
 					d.el.css("transform", "translate3d(" + d.finish.x + "px," + (-d.finish.y - d.height) + "px, 0) rotate(" + this.degToRadians(90 - d.angle) + "rad)");
