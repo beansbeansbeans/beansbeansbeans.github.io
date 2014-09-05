@@ -77,9 +77,9 @@ define(['templates/project_detail'], function(projectTemplate) {
 				d.intersectsGlass = false;
 			}.bind(this));
 
-			if(Math.abs(this.orientation) > 45) {
+			if(Math.abs(this.orientation) > 40) {
 				this.strawArray.forEach(function(d) {
-					this.updateStrawDirection(d, this.orientation > 0 ? 1 : -1)
+					this.updateStrawDirection(d, this.orientation > 0 ? 1 : -1);
 				}.bind(this))
 			}
 		},
@@ -156,7 +156,8 @@ define(['templates/project_detail'], function(projectTemplate) {
 			}
 		},
 		updateStrawMaxAngle: function(straw) {
-			var maxHypDistance = (1 - straw.range) * this.glassWidth / 2;
+			var maxHypDistance = (1 - straw.range * straw.rangeAdvance) * this.glassWidth / 2,
+				minHypDistance = this.glassWidth - maxHypDistance;
 
 			if(Math.round(Math.sqrt(Math.pow(this.glassWidth - maxHypDistance, 2) + Math.pow(this.glassHeight, 2))) < straw.height) {
 				straw.maxAngle = this.radToDegrees(Math.atan(this.glassHeight/(this.glassWidth - maxHypDistance)));
@@ -164,7 +165,17 @@ define(['templates/project_detail'], function(projectTemplate) {
 				straw.maxAngle = this.radToDegrees(Math.atan( Math.sqrt(Math.pow(straw.height, 2) - Math.pow((this.glassWidth - maxHypDistance), 2)) / (this.glassWidth - maxHypDistance)));
 			}
 
-			if(straw.direction == -1) straw.maxAngle = (180 - straw.maxAngle);
+			if(Math.round(Math.sqrt(Math.pow(this.glassWidth - minHypDistance, 2) + Math.pow(this.glassHeight, 2))) < straw.height) {
+				straw.minAngle = 180 - this.radToDegrees(Math.atan(this.glassHeight/(this.glassWidth - minHypDistance)));
+			} else {
+				straw.minAngle = 180 - this.radToDegrees(Math.atan( Math.sqrt(Math.pow(straw.height, 2) - Math.pow((this.glassWidth - minHypDistance), 2)) / (this.glassWidth - minHypDistance)));
+			}
+			
+			if(straw.direction == -1) {
+				var tempMin = straw.minAngle;
+				straw.minAngle = straw.maxAngle;
+				straw.maxAngle = tempMin;
+			}			
 		},
 		updateStrawDirection: function(straw, direction) {
 			straw.direction = direction;
@@ -215,7 +226,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.range = (0.6 + Math.random() * 0.3).toFixed(2);
 				this.rangeAdvance = 0.75 * this.direction;
 
-				this.rangeAdvanceRate = 0.001 * Math.random() * 5;
+				this.rangeAdvanceRate = 0.0008 + 0.001 * Math.random() * 5;
 
 				self.updateStrawFinish(this);
 				self.updateStrawMaxAngle(this);
@@ -253,21 +264,21 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 					if(d.direction * (d.rangeAdvance - d.direction) < 0) {
 						d.rangeAdvance += d.direction * d.rangeAdvanceRate;
-						this.updateStrawFinish(d);
 					}
 
-					if(d.direction * (d.angle - (d.maxAngle - this.orientation)) > 0) {
-						if(!d.intersectsGlass) {
-							d.angle -= d.direction * d.angleAdvanceRate;
-						}
-						this.updateStrawProps(d);
-					} else {
+					if(this.between(d.minAngle - this.orientation, d.angle, d.maxAngle - this.orientation)) {
+						d.angle -= d.direction * d.angleAdvanceRate;
+					} else if(d.direction * (d.angle - (d.minAngle - this.orientation)) < 0) {
 						d.angle = d.maxAngle - this.orientation;
+					} else {
+						d.angle = d.minAngle - this.orientation - d.direction * 2;
 					}
 
 					d.el.css("transform", "translate3d(" + d.finish.x + "px," + (-d.finish.y - d.height) + "px, 0) rotate(" + this.degToRadians(90 - d.angle) + "rad)");
 
-					this.testIntersectGlass(d, (d.direction == 1) ? "right" : "left");
+					this.updateStrawFinish(d);
+					this.updateStrawProps(d);
+					this.updateStrawMaxAngle(d);
 				}.bind(this));
 
 				this.rafID = requestAnimationFrame(release);
