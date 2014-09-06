@@ -208,7 +208,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				$("#tilter").val(val + 1 * multiplier);
 				this.orientation = $("#tilter").val() - max;
 				this.tiltAxis();
-			}.bind(this))
+			}.bind(this));
 
 			$("#glass").css({
 				width: this.glassWidth,
@@ -248,6 +248,35 @@ define(['templates/project_detail'], function(projectTemplate) {
 			}
 
 			this.tiltAxis();
+
+			if(window.orientation !== undefined) {
+				this.isMobile = true;
+				if(window.innerWidth > window.innerHeight) {
+					this.deviceOrientation = "landscape";
+				} else {
+					this.deviceOrientation = "portrait";
+				}
+
+				window.addEventListener('deviceorientation', function(eventData) {
+					if(this.deviceOrientation == "portrait") {
+						this.orientation = -eventData.gamma;
+					} else {
+						this.orientation = -eventData.beta;
+					}
+					this.tiltAxis();
+				}.bind(this), false);
+
+				// this one isn't working for whatever reason...
+				window.addEventListener('orientationchange', function() {
+					if(window.innerWidth > window.innerHeight) {
+						this.deviceOrientation = "portrait";
+					} else {
+						this.deviceOrientation = "landscape";
+					}
+				}.bind(this), false);
+			} else {
+				this.isMobile = false;
+			}
 
 			this.strawArray.push(new Straw({
 				width: 25,
