@@ -37,10 +37,12 @@ define(['templates/project_detail'], function(projectTemplate) {
 		},
 		strawArray: [],
 		strawTemplate: "<div class='straw'></div>",
+		bubbleTemplate: "<div class='bubble'></div>",
 		degToRadians: function(deg) { return deg * Math.PI / 180 },
 		radToDegrees: function(rad) { return rad * 57.2958 },
 		tiltAxis: function() {	
 			$("#glassOutline").css("transform", "rotate(" + this.orientation + "deg)");
+			$("#bubbleContainer").css("transform", "rotate(" + -this.orientation + "deg)");
 
 			var tLRotation = -this.innerLeftRightAngle - this.orientation,
 				bLRotation = this.innerLeftRightAngle - this.orientation,
@@ -187,7 +189,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				identifier: "straws",
 				title: "Straws",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta quibusdam voluptatibus aperiam doloribus vero, repudiandae officia odio consectetur sequi?",
-				projectContents: '<button id="stopRAF">stop raf</button><div id="glass"><div class="testPoint1"></div><div class="testPoint2"></div><div class="testPoint3"></div><div class="testPoint4"></div><div id="glassOutline"></div></div><input type="range" id="tilter" min="0" max="100"/><button id="plus">+</button><button id="minus">-</button>',
+				projectContents: '<button id="stopRAF">stop raf</button><div id="glass"><div id="glassOutline"><div id="bubbleContainer"></div></div></div><input type="range" id="tilter" min="0" max="90"/><button id="plus">+</button><button id="minus">-</button>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, laboriosam.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium iste eius vero quasi debitis molestiae omnis ea quas. Quibusdam, est."
 			},
@@ -214,6 +216,10 @@ define(['templates/project_detail'], function(projectTemplate) {
 				width: this.glassWidth,
 				height: this.glassHeight
 			});
+
+			for(i=0; i<60; i++) {
+				$(this.bubbleTemplate).appendTo("#bubbleContainer");
+			}
 
 			this.hypoteneuse = Math.sqrt(Math.pow(this.glassWidth, 2) + Math.pow(this.glassHeight, 2));
 			this.innerLeftRightAngle = Math.abs(this.radToDegrees(Math.acos(this.glassWidth/this.hypoteneuse)));
