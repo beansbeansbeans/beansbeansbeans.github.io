@@ -1,7 +1,7 @@
 $glass-height: 425px;
 $glass-width: 450px;
 $glass-middle: $glass-width / 2;
-$bubble-container-height: 0.35;
+$bubble-container-height: 0.45;
 $bubble-max: $glass-height * $bubble-container-height; //149
 // 810px horizontal range
 
@@ -16,26 +16,52 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 		}
 		#glassOutline {
 			position: absolute;
-			@include square(100%);
-			left: 0;
+			left: -15px;
+			right: -15px;
+			bottom: -15px;
 			top: 0;
 			border-left: solid 4px $blue;
 			border-right: solid 4px $blue;
 			border-bottom: solid 4px $blue;
 			@include border-radius(0 0 15px 15px);
 			overflow: hidden;
+			&:before {
+				content: "";
+				display: block;
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				background: transparent;
+				border: solid 10px white;
+				border-top: none;
+				z-index: 1;
+			}
 		}
 		#bubbleContainer {
 			position: absolute;
-			left: -180px;
-			right: -180px;
-			bottom: 0;
-			height: $bubble-container-height * 100%;
+			left: -210px;
+			right: -210px;
+			bottom: -140px;
+			height: calc(#{$bubble-container-height} * 100% + 140px);
+			&:before {
+				content: "";
+				display: block;
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 5px;
+				background: rgba($blue, 0.2);
+				@include animation(color-change 8s linear infinite);
+			}
 			.bubble {
 				position: absolute;
 				top: $bubble-max;
 				@include border-radius(50%);
 				background: $pale-blue;
+				background: $white;
 				opacity: 0.7;
 				border: solid 1px rgba($blue, 0.3);
 			}
@@ -325,6 +351,24 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 	}
 	#tilter {
 		margin-top: 200px;
+	}
+}
+
+@include keyframe (color-change) {
+	0% {
+		background: rgba($blue, 0.3);
+	}
+	30% {
+		background: rgba(#418DBB, 0.3);
+	}
+	60% {
+		background: rgba(#75BBC4, 0.3);
+	}
+	80% {
+		background: rgba(#6FBAAE, 0.3);
+	}
+	100% {
+		background: rgba($blue, 0.3)
 	}
 }
 

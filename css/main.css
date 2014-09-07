@@ -451,9 +451,9 @@
 }
 #project-straws #glass #glassOutline {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
+  left: -15px;
+  right: -15px;
+  bottom: -15px;
   top: 0;
   border-left: solid 4px #7096ad;
   border-right: solid 4px #7096ad;
@@ -463,20 +463,48 @@
   border-radius: 0 0 15px 15px;
   overflow: hidden;
 }
+#project-straws #glass #glassOutline:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  border: solid 10px white;
+  border-top: none;
+  z-index: 1;
+}
 #project-straws #glass #bubbleContainer {
   position: absolute;
-  left: -180px;
-  right: -180px;
+  left: -210px;
+  right: -210px;
+  bottom: -140px;
+  height: calc(0.45 * 100% + 140px);
+}
+#project-straws #glass #bubbleContainer:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
   bottom: 0;
-  height: 35%;
+  top: 5px;
+  background: rgba(112, 150, 173, 0.2);
+  -webkit-animation: color-change 8s linear infinite;
+  -moz-animation: color-change 8s linear infinite;
+  -o-animation: color-change 8s linear infinite;
+  animation: color-change 8s linear infinite;
 }
 #project-straws #glass #bubbleContainer .bubble {
   position: absolute;
-  top: 148.75px;
+  top: 191.25px;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   background: #c1d1de;
+  background: #fff9ef;
   opacity: 0.7;
   border: solid 1px rgba(112, 150, 173, 0.3);
 }
@@ -513,7 +541,7 @@
   width: 20px;
   height: 20px;
   left: 30%;
-  top: 158.75px;
+  top: 201.25px;
 }
 #project-straws #glass #bubbleContainer .bubble:nth-of-type(5) {
   -webkit-animation: bubble-large 15s linear infinite;
@@ -539,7 +567,7 @@
   width: 30px;
   height: 30px;
   left: 30%;
-  top: 168.75px;
+  top: 211.25px;
 }
 #project-straws #glass #bubbleContainer .bubble:nth-of-type(8) {
   -webkit-animation: bubble-small 4s linear infinite;
@@ -558,7 +586,7 @@
   width: 40px;
   height: 40px;
   left: 70%;
-  top: 158.75px;
+  top: 201.25px;
 }
 #project-straws #glass #bubbleContainer .bubble:nth-of-type(10) {
   -webkit-animation: bubble-large-alt 20s linear infinite;
@@ -611,7 +639,7 @@
   animation: bubble-rest 20s linear infinite;
   width: 22px;
   height: 22px;
-  top: 158.75px;
+  top: 201.25px;
 }
 #project-straws #glass #bubbleContainer .bubble:nth-of-type(16) {
   -webkit-animation: bubble-rest 18s linear infinite;
@@ -620,7 +648,7 @@
   animation: bubble-rest 18s linear infinite;
   width: 24px;
   height: 24px;
-  top: 153.75px;
+  top: 196.25px;
 }
 #project-straws #glass #bubbleContainer .bubble:nth-of-type(17) {
   -webkit-animation: bubble-rest 22s linear infinite;
@@ -629,7 +657,7 @@
   animation: bubble-rest 22s linear infinite;
   width: 16px;
   height: 16px;
-  top: 150.75px;
+  top: 193.25px;
 }
 #project-straws #glass #bubbleContainer .bubble:nth-of-type(18) {
   -webkit-animation: bubble-rest 15s linear infinite;
@@ -638,7 +666,7 @@
   animation: bubble-rest 15s linear infinite;
   width: 20px;
   height: 20px;
-  top: 156.75px;
+  top: 199.25px;
 }
 #project-straws #glass #bubbleContainer .bubble:nth-of-type(19) {
   -webkit-animation: bubble-rest-alt 20s linear infinite;
@@ -991,7 +1019,7 @@
   width: 58px;
   height: 58px;
   left: 20%;
-  top: 178.75px;
+  top: 221.25px;
 }
 #project-straws #glass #bubbleContainer .bubble:nth-of-type(60) {
   -webkit-animation: bubble-large-alt 20s 1s linear infinite;
@@ -1006,6 +1034,90 @@
   margin-top: 200px;
 }
 
+@-webkit-keyframes color-change {
+  0% {
+    background: rgba(112, 150, 173, 0.3);
+  }
+
+  30% {
+    background: rgba(65, 141, 187, 0.3);
+  }
+
+  60% {
+    background: rgba(117, 187, 196, 0.3);
+  }
+
+  80% {
+    background: rgba(111, 186, 174, 0.3);
+  }
+
+  100% {
+    background: rgba(112, 150, 173, 0.3);
+  }
+}
+@-moz-keyframes color-change {
+  0% {
+    background: rgba(112, 150, 173, 0.3);
+  }
+
+  30% {
+    background: rgba(65, 141, 187, 0.3);
+  }
+
+  60% {
+    background: rgba(117, 187, 196, 0.3);
+  }
+
+  80% {
+    background: rgba(111, 186, 174, 0.3);
+  }
+
+  100% {
+    background: rgba(112, 150, 173, 0.3);
+  }
+}
+@-o-keyframes color-change {
+  0% {
+    background: rgba(112, 150, 173, 0.3);
+  }
+
+  30% {
+    background: rgba(65, 141, 187, 0.3);
+  }
+
+  60% {
+    background: rgba(117, 187, 196, 0.3);
+  }
+
+  80% {
+    background: rgba(111, 186, 174, 0.3);
+  }
+
+  100% {
+    background: rgba(112, 150, 173, 0.3);
+  }
+}
+@keyframes color-change {
+  0% {
+    background: rgba(112, 150, 173, 0.3);
+  }
+
+  30% {
+    background: rgba(65, 141, 187, 0.3);
+  }
+
+  60% {
+    background: rgba(117, 187, 196, 0.3);
+  }
+
+  80% {
+    background: rgba(111, 186, 174, 0.3);
+  }
+
+  100% {
+    background: rgba(112, 150, 173, 0.3);
+  }
+}
 @-webkit-keyframes bubble-1 {
   0% {
     opacity: 0;
