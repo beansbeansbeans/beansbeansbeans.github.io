@@ -189,7 +189,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				identifier: "straws",
 				title: "Straws",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta quibusdam voluptatibus aperiam doloribus vero, repudiandae officia odio consectetur sequi?",
-				projectContents: '<div id="glass"><div id="glassBack"></div><div id="glassOutline"><div id="bubbleContainer"></div></div></div><input type="range" id="tilter" min="0" max="90"/><button id="plus">+</button><button id="minus">-</button>',
+				projectContents: '<div id="glass"><div id="glassBack"></div><div id="glassOutline"><div id="bubbleContainer"></div></div></div><button id="plus">+</button><button id="minus">-</button>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, laboriosam.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium iste eius vero quasi debitis molestiae omnis ea quas. Quibusdam, est."
 			},
@@ -197,15 +197,13 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			$("#view").html(projectTemplate(data));
 
-			this.maxOrientation = $("#tilter").attr("max") / 2;
+			this.maxOrientation = 45;
 
 			$("#plus, #minus").on("click", function(e) {
-				var multiplier = 1,
-					val = parseInt($("#tilter").val());
+				var multiplier = 1;
 				if($(e.target).attr("id") == "minus") multiplier = -1;
-				if(multiplier * (multiplier * this.maxOrientation - (val + multiplier - this.maxOrientation)) <= 0) return false;
-				$("#tilter").val(val + 1 * multiplier);
-				this.orientation = $("#tilter").val() - this.maxOrientation;
+				if(Math.abs(this.orientation + 1) > this.maxOrientation) return false;
+				this.orientation += 1 * multiplier;
 				this.tiltAxis();
 			}.bind(this));
 
@@ -256,7 +254,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			if(window.orientation !== undefined) {
 				this.isMobile = true;
-				
+
 				if(window.innerWidth > window.innerHeight) {
 					this.deviceOrientation = "landscape";
 				} else {
