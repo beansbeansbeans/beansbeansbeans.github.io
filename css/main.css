@@ -445,7 +445,7 @@
 }
 #project-straws #glass #glassBack {
   position: absolute;
-  left: -2px;
+  left: 4px;
   top: 0;
   right: 0;
   bottom: -50px;
@@ -461,28 +461,20 @@
 }
 #project-straws #glass #glassOutline {
   position: absolute;
-  left: -15px;
+  left: 0px;
   right: -15px;
   bottom: -85px;
   top: 0;
   overflow: hidden;
 }
-#project-straws #glass #glassOutline:before, #project-straws #glass #glassOutline:after {
+#project-straws #glass #glassOutline:after {
   content: "";
   display: block;
   position: absolute;
-  left: 0;
-  right: 0;
+  left: -4px;
+  right: -7px;
   bottom: 0;
   z-index: 1;
-}
-#project-straws #glass #glassOutline:before {
-  background: transparent;
-  border: solid 10px white;
-  border-top: none;
-  top: 30px;
-}
-#project-straws #glass #glassOutline:after {
   background-image: url(../images/glass.png);
   background-repeat: no-repeat;
   background-size: 99% 98%;
@@ -493,16 +485,7 @@
   left: -210px;
   right: -210px;
   bottom: 0px;
-  height: 60%;
-}
-#project-straws #glass #bubbleContainer:before {
-  content: "";
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 5px;
+  height: 56%;
 }
 #project-straws #glass #bubbleContainer .bubble {
   position: absolute;
