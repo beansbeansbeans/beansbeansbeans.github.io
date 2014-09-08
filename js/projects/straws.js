@@ -197,18 +197,19 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			$("#view").html(projectTemplate(data));
 
+			this.maxOrientation = $("#tilter").attr("max") / 2;
+
 			$("#stopRAF").on("click", function() {
 				window.cancelAnimationFrame(this.rafID);
 			}.bind(this));
 
 			$("#plus, #minus").on("click", function(e) {
 				var multiplier = 1,
-					max = $("#tilter").attr("max") / 2,
 					val = parseInt($("#tilter").val());
 				if($(e.target).attr("id") == "minus") multiplier = -1;
-				if(multiplier * (multiplier * max - (val + multiplier - max)) <= 0) return false;
+				if(multiplier * (multiplier * this.maxOrientation - (val + multiplier - this.maxOrientation)) <= 0) return false;
 				$("#tilter").val(val + 1 * multiplier);
-				this.orientation = $("#tilter").val() - max;
+				this.orientation = $("#tilter").val() - this.maxOrientation;
 				this.tiltAxis();
 			}.bind(this));
 
@@ -265,8 +266,10 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 				window.addEventListener('deviceorientation', function(eventData) {
 					if(this.deviceOrientation == "portrait") {
+						if(Math.abs(eventData.gamma) > this.maxOrientation) return false;
 						this.orientation = -eventData.gamma;
 					} else {
+						if(Math.abs(eventData.beta) > this.maxOrientation) return false;
 						this.orientation = -eventData.beta;
 					}
 					this.tiltAxis();
