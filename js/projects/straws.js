@@ -41,7 +41,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 		degToRadians: function(deg) { return deg * Math.PI / 180 },
 		radToDegrees: function(rad) { return rad * 57.2958 },
 		tiltAxis: function() {	
-			$("#glassOutline").css("transform", "rotate(" + this.orientation + "deg)");
+			$("#glassOutline, #glassBack").css("transform", "rotate(" + this.orientation + "deg)");
 			$("#bubbleContainer").css("transform", "rotate(" + -this.orientation + "deg)");
 
 			var tLRotation = -this.innerLeftRightAngle - this.orientation,
@@ -189,7 +189,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				identifier: "straws",
 				title: "Straws",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta quibusdam voluptatibus aperiam doloribus vero, repudiandae officia odio consectetur sequi?",
-				projectContents: '<button id="stopRAF">stop raf</button><div id="glass"><div id="glassOutline"><div id="bubbleContainer"></div></div></div><input type="range" id="tilter" min="0" max="90"/><button id="plus">+</button><button id="minus">-</button>',
+				projectContents: '<button id="stopRAF">stop raf</button><div id="glass"><div id="glassBack"></div><div id="glassOutline"><div id="bubbleContainer"></div></div></div><input type="range" id="tilter" min="0" max="90"/><button id="plus">+</button><button id="minus">-</button>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, laboriosam.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium iste eius vero quasi debitis molestiae omnis ea quas. Quibusdam, est."
 			},
@@ -243,7 +243,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 				self.updateStrawProps(this);
 
-				this.el.appendTo("#glass").css({
+				this.el.insertAfter("#glassBack").css({
 					position: "absolute",
 					background: "#ec4911",
 					width: this.width,
@@ -286,12 +286,12 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			this.strawArray.push(new Straw({
 				width: 25,
-				height: 475
+				height: 575
 			}));
 
 			this.strawArray.push(new Straw({
 				width: 25,
-				height: 525
+				height: 625
 			}));
 
 			var release = function() {

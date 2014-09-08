@@ -443,7 +443,17 @@
   margin-right: auto;
   position: relative;
 }
-#project-straws #glass #glassOutline, #project-straws #glass #bubbleContainer, #project-straws #glass .straw {
+#project-straws #glass #glassBack {
+  position: absolute;
+  left: -2px;
+  top: 0;
+  right: 0;
+  bottom: -50px;
+  background-image: url(../images/glass_back.png);
+  background-repeat: no-repeat;
+  background-size: 100% 98%;
+}
+#project-straws #glass #glassBack, #project-straws #glass #glassOutline, #project-straws #glass #bubbleContainer, #project-straws #glass .straw {
   -moz-transition: -moz-transform 250ms;
   -o-transition: -o-transform 250ms;
   -webkit-transition: -webkit-transform 250ms;
@@ -453,35 +463,37 @@
   position: absolute;
   left: -15px;
   right: -15px;
-  bottom: -15px;
+  bottom: -85px;
   top: 0;
-  border-left: solid 4px #7096ad;
-  border-right: solid 4px #7096ad;
-  border-bottom: solid 4px #7096ad;
-  -moz-border-radius: 0 0 15px 15px;
-  -webkit-border-radius: 0;
-  border-radius: 0 0 15px 15px;
   overflow: hidden;
 }
-#project-straws #glass #glassOutline:before {
+#project-straws #glass #glassOutline:before, #project-straws #glass #glassOutline:after {
   content: "";
   display: block;
   position: absolute;
   left: 0;
-  top: 0;
   right: 0;
   bottom: 0;
+  z-index: 1;
+}
+#project-straws #glass #glassOutline:before {
   background: transparent;
   border: solid 10px white;
   border-top: none;
-  z-index: 1;
+  top: 30px;
+}
+#project-straws #glass #glassOutline:after {
+  background-image: url(../images/glass.png);
+  background-repeat: no-repeat;
+  background-size: 99% 98%;
+  top: 20px;
 }
 #project-straws #glass #bubbleContainer {
   position: absolute;
   left: -210px;
   right: -210px;
-  bottom: -140px;
-  height: calc(0.45 * 100% + 140px);
+  bottom: 0px;
+  height: 60%;
 }
 #project-straws #glass #bubbleContainer:before {
   content: "";
@@ -491,20 +503,14 @@
   right: 0;
   bottom: 0;
   top: 5px;
-  background: rgba(112, 150, 173, 0.2);
-  -webkit-animation: color-change 8s linear infinite;
-  -moz-animation: color-change 8s linear infinite;
-  -o-animation: color-change 8s linear infinite;
-  animation: color-change 8s linear infinite;
 }
 #project-straws #glass #bubbleContainer .bubble {
   position: absolute;
-  top: 191.25px;
+  top: 212.5px;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   background: #c1d1de;
-  background: #fff9ef;
   opacity: 0.7;
   border: solid 1px rgba(112, 150, 173, 0.3);
 }
@@ -541,7 +547,7 @@
   width: 20px;
   height: 20px;
   left: 30%;
-  top: 201.25px;
+  top: 222.5px;
 }
 #project-straws #glass #bubbleContainer .bubble:nth-of-type(5) {
   -webkit-animation: bubble-large 15s linear infinite;
@@ -567,7 +573,7 @@
   width: 30px;
   height: 30px;
   left: 30%;
-  top: 211.25px;
+  top: 232.5px;
 }
 #project-straws #glass #bubbleContainer .bubble:nth-of-type(8) {
   -webkit-animation: bubble-small 4s linear infinite;
@@ -586,7 +592,7 @@
   width: 40px;
   height: 40px;
   left: 70%;
-  top: 201.25px;
+  top: 222.5px;
 }
 #project-straws #glass #bubbleContainer .bubble:nth-of-type(10) {
   -webkit-animation: bubble-large-alt 20s linear infinite;
@@ -639,7 +645,7 @@
   animation: bubble-rest 20s linear infinite;
   width: 22px;
   height: 22px;
-  top: 201.25px;
+  top: 222.5px;
 }
 #project-straws #glass #bubbleContainer .bubble:nth-of-type(16) {
   -webkit-animation: bubble-rest 18s linear infinite;
@@ -648,7 +654,7 @@
   animation: bubble-rest 18s linear infinite;
   width: 24px;
   height: 24px;
-  top: 196.25px;
+  top: 217.5px;
 }
 #project-straws #glass #bubbleContainer .bubble:nth-of-type(17) {
   -webkit-animation: bubble-rest 22s linear infinite;
@@ -657,7 +663,7 @@
   animation: bubble-rest 22s linear infinite;
   width: 16px;
   height: 16px;
-  top: 193.25px;
+  top: 214.5px;
 }
 #project-straws #glass #bubbleContainer .bubble:nth-of-type(18) {
   -webkit-animation: bubble-rest 15s linear infinite;
@@ -666,7 +672,7 @@
   animation: bubble-rest 15s linear infinite;
   width: 20px;
   height: 20px;
-  top: 199.25px;
+  top: 220.5px;
 }
 #project-straws #glass #bubbleContainer .bubble:nth-of-type(19) {
   -webkit-animation: bubble-rest-alt 20s linear infinite;
@@ -1019,7 +1025,7 @@
   width: 58px;
   height: 58px;
   left: 20%;
-  top: 221.25px;
+  top: 242.5px;
 }
 #project-straws #glass #bubbleContainer .bubble:nth-of-type(60) {
   -webkit-animation: bubble-large-alt 20s 1s linear infinite;
