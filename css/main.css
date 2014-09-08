@@ -451,7 +451,7 @@
   bottom: -50px;
   background-image: url(../images/glass_back.png);
   background-repeat: no-repeat;
-  background-size: 100% 98%;
+  background-size: 100%;
 }
 #project-straws #glass #glassBack, #project-straws #glass #glassOutline, #project-straws #glass #bubbleContainer, #project-straws #glass .straw {
   -moz-transition: -moz-transform 250ms;
@@ -477,7 +477,7 @@
   z-index: 1;
   background-image: url(../images/glass.png);
   background-repeat: no-repeat;
-  background-size: 99% 98%;
+  background-size: 99% 100%;
   top: 20px;
 }
 #project-straws #glass #bubbleContainer {

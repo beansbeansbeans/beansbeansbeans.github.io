@@ -19,7 +19,7 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 			bottom: -50px;
 			background-image: url(../images/glass_back.png);
 			background-repeat: no-repeat;
-			background-size: 100% 98%;
+			background-size: 100%;
 		}
 		#glassBack, #glassOutline, #bubbleContainer, .straw {
 			@include transition(transform 250ms);
@@ -41,7 +41,7 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 				z-index: 1;
 				background-image: url(../images/glass.png);
 				background-repeat: no-repeat;
-				background-size: 99% 98%;
+				background-size: 99% 100%;
 				top: 20px;
 			}
 		}
