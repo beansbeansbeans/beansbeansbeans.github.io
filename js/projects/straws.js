@@ -189,7 +189,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				identifier: "straws",
 				title: "Straws",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta quibusdam voluptatibus aperiam doloribus vero, repudiandae officia odio consectetur sequi?",
-				projectContents: '<button id="stopRAF">stop raf</button><div id="glass"><div id="glassBack"></div><div id="glassOutline"><div id="bubbleContainer"></div></div></div><input type="range" id="tilter" min="0" max="90"/><button id="plus">+</button><button id="minus">-</button>',
+				projectContents: '<div id="glass"><div id="glassBack"></div><div id="glassOutline"><div id="bubbleContainer"></div></div></div><input type="range" id="tilter" min="0" max="90"/><button id="plus">+</button><button id="minus">-</button>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, laboriosam.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium iste eius vero quasi debitis molestiae omnis ea quas. Quibusdam, est."
 			},
@@ -198,10 +198,6 @@ define(['templates/project_detail'], function(projectTemplate) {
 			$("#view").html(projectTemplate(data));
 
 			this.maxOrientation = $("#tilter").attr("max") / 2;
-
-			$("#stopRAF").on("click", function() {
-				window.cancelAnimationFrame(this.rafID);
-			}.bind(this));
 
 			$("#plus, #minus").on("click", function(e) {
 				var multiplier = 1,
@@ -230,7 +226,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.height = options.height;
 				this.el = $(self.strawTemplate);
 				this.direction = [-1, 1][Math.round(Math.random())];
-				this.range = (0.6 + Math.random() * 0.3).toFixed(2);
+				this.range = (0.5 + Math.random() * 0.45).toFixed(2);
 				this.rangeAdvance = 0.75 * this.direction;
 
 				this.rangeAdvanceRate = 0.001 + 0.001 * Math.random() * 5;
@@ -246,7 +242,9 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 				this.el.insertAfter("#glassBack").css({
 					position: "absolute",
-					background: "#ec4911",
+					"background-repeat": "no-repeat",
+					"background-size": "100% auto",
+					"background-image": "url(../images/straw_" + options.color + ".png)",
 					width: this.width,
 					height: this.height,
 					transform: "translate3d(" + this.finish.x + "px," + (-this.finish.y - this.height) + "px, 0) rotate(" + parseInt(90 - this.angle, 10) + "deg)",
@@ -258,6 +256,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			if(window.orientation !== undefined) {
 				this.isMobile = true;
+				
 				if(window.innerWidth > window.innerHeight) {
 					this.deviceOrientation = "landscape";
 				} else {
@@ -289,12 +288,26 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			this.strawArray.push(new Straw({
 				width: 25,
-				height: 575
+				height: 600,
+				color: "green"
 			}));
 
 			this.strawArray.push(new Straw({
 				width: 25,
-				height: 625
+				height: 650,
+				color: "pink"
+			}));
+
+			this.strawArray.push(new Straw({
+				width: 25,
+				height: 625,
+				color: "blue"
+			}));
+
+			this.strawArray.push(new Straw({
+				width: 25,
+				height: 675,
+				color: "purple"
 			}));
 
 			var release = function() {
