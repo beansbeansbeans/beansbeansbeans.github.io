@@ -74,69 +74,15 @@ define(['templates/project_detail'], function(projectTemplate) {
 				this.glassEdges[d].intercept = this.glassEdges[d].start.y - this.glassEdges[d].slope * this.glassEdges[d].start.x;
 			}.bind(this));
 
-			this.strawArray.forEach(function(d) {
-				this.updateStrawFinish(d);
-				d.intersectsGlass = false;
-			}.bind(this));
-
-			if(Math.abs(this.orientation) > 40) {
+			if(Math.abs(this.orientation) > 36) {
 				this.strawArray.forEach(function(d) {
 					this.updateStrawDirection(d, this.orientation > 0 ? 1 : -1);
 				}.bind(this))
 			}
 		},
-		intersects: function(straw, side) {
-			var edge = this.glassEdges[side],
-				xSolution = (edge.intercept - straw.intercept) / (straw.slope - edge.slope)
-
-			if(straw.slope == edge.slope) return false;
-
-			if(edge.slope == Number.POSITIVE_INFINITY || edge.slope == Number.NEGATIVE_INFINITY) {
-				return {
-					x: edge.start.x,
-					y: straw.slope * edge.start.x + straw.intercept
-				}
-			}
-			if(straw.slope == Number.POSITIVE_INFINITY || straw.slope == Number.NEGATIVE_INFINITY) {
-				return {
-					x: straw.start.x,
-					y: edge.slope * straw.start.x + edge.intercept
-				}
-			}
-			return {
-				x: xSolution,
-				y: straw.slope * xSolution + straw.intercept
-			}
-		},
 		between: function(a, b, c) {
 			if(!(a < b && b < c) && !(c < b && b < a)) return false;
 			return true;
-		},
-		liesWithin: function(point, straw, side) {
-			if(point === false) return false;
-
-			var edge = this.glassEdges[side];
-
-			if(!this.between(straw.start.x, point.x, straw.finish.x) || !this.between(straw.start.y, point.y, straw.finish.y)) {
-				if((straw.dY !== 0 || (point.y !== straw.start.y || (!this.between(straw.start.x, point.x, straw.finish.x)))) && (straw.dX !== 0 || (point.x !== straw.start.x || (!this.between(straw.start.y, point.y, straw.finish.y))))) {
-					return false;
-				}
-			}
-
-			if(!this.between(edge.start.x, point.x, edge.finish.x) || !this.between(edge.start.y, point.y, edge.finish.y)) {
-				if((edge.start.x !== edge.finish.x || (point.x !== edge.start.x || (!this.between(edge.start.y, point.y, edge.finish.y)))) && (edge.start.y !== edge.finish.y || (point.y !== edge.start.y || (!this.between(edge.start.x, point.x, edge.finish.x))))) {
-					return false;
-				}
-			}
-
-			return true;
-		},
-		testIntersectGlass: function(straw, side) {
-			if(this.liesWithin(this.intersects(straw, side), straw, side)) {
-				straw.intersectsGlass = true;
-			} else {
-				straw.intersectsGlass = false;
-			}
 		},
 		updateStrawProps: function(straw) {
 			straw.dX = Math.cos(this.degToRadians(straw.angle)) * straw.height;
@@ -181,7 +127,6 @@ define(['templates/project_detail'], function(projectTemplate) {
 		},
 		updateStrawDirection: function(straw, direction) {
 			straw.direction = direction;
-			straw.intersectsGlass = false;
 			this.updateStrawMaxAngle(straw);
 		},
 		initialize: function() {
@@ -313,8 +258,8 @@ define(['templates/project_detail'], function(projectTemplate) {
 			}));
 
 			var release = function() {
-				if(this.orientationMultiplier && Math.abs(this.orientation + 0.5 * this.orientationMultiplier) < this.maxOrientation) {
-					this.orientation += 0.5 * this.orientationMultiplier;
+				if(this.orientationMultiplier && Math.abs(this.orientation + 0.25 * this.orientationMultiplier) < this.maxOrientation) {
+					this.orientation += 0.25 * this.orientationMultiplier;
 				}
 
 				this.strawArray.forEach(function(d, i) {
@@ -350,7 +295,5 @@ define(['templates/project_detail'], function(projectTemplate) {
 			window.cancelAnimationFrame(this.rafID);
 		}
 	};
-
-	window.straws = straws;
 	return straws;
 });
