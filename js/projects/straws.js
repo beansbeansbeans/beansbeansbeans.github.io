@@ -201,7 +201,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			$("#plus, #minus").on("mouseenter", function(e) {
 				var multiplier = 1;
-				if($(e.target).attr("id") == "minus") multiplier = -1;
+				if($(e.target).attr("id") == "plus") multiplier = -1;
 				this.orientationMultiplier = multiplier
 			}.bind(this));
 
