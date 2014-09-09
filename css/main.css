@@ -437,6 +437,50 @@
     opacity: 0;
   }
 }
+#project-straws .project-contents {
+  position: relative;
+}
+#project-straws #plus, #project-straws #minus {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  top: 145px;
+  -moz-transition: all 250ms;
+  -o-transition: all 250ms;
+  -webkit-transition: all 250ms;
+  transition: all 250ms;
+  opacity: 0.2;
+  z-index: 100;
+}
+#project-straws #plus:before, #project-straws #minus:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-image: url(../images/arrow.png);
+}
+#project-straws #plus:hover, #project-straws #minus:hover {
+  opacity: 1;
+}
+#project-straws #plus {
+  right: -webkit-calc(50% + 350px);
+  right: calc(50% + 350px);
+}
+#project-straws #minus {
+  left: -webkit-calc(50% + 365px);
+  left: calc(50% + 365px);
+}
+#project-straws #minus:before {
+  -moz-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
 #project-straws #glass {
   margin-top: 9.375em;
   margin-bottom: 9.375em;

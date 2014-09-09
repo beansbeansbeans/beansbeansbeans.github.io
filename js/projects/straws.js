@@ -189,7 +189,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				identifier: "straws",
 				title: "Straws",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta quibusdam voluptatibus aperiam doloribus vero, repudiandae officia odio consectetur sequi?",
-				projectContents: '<div id="glass"><div id="glassBack"></div><div id="glassOutline"><div id="bubbleContainer"></div></div></div><button id="plus">+</button><button id="minus">-</button>',
+				projectContents: '<div id="glass"><div id="glassBack"></div><div id="glassOutline"><div id="bubbleContainer"></div></div></div><div id="plus"></div><div id="minus"></div>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, laboriosam.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium iste eius vero quasi debitis molestiae omnis ea quas. Quibusdam, est."
 			},
@@ -199,12 +199,14 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			this.maxOrientation = 45;
 
-			$("#plus, #minus").on("click", function(e) {
+			$("#plus, #minus").on("mouseenter", function(e) {
 				var multiplier = 1;
 				if($(e.target).attr("id") == "minus") multiplier = -1;
-				if(Math.abs(this.orientation + 1) > this.maxOrientation) return false;
-				this.orientation += 1 * multiplier;
-				this.tiltAxis();
+				this.orientationMultiplier = multiplier
+			}.bind(this));
+
+			$("#plus, #minus").on("mouseleave", function() {
+				this.orientationMultiplier = null;
 			}.bind(this));
 
 			$("#glass").css({
@@ -254,6 +256,8 @@ define(['templates/project_detail'], function(projectTemplate) {
 
 			if(window.orientation !== undefined) {
 				this.isMobile = true;
+
+				$("#plus, #minus").remove();
 
 				if(window.innerWidth > window.innerHeight) {
 					this.deviceOrientation = "landscape";
@@ -309,6 +313,10 @@ define(['templates/project_detail'], function(projectTemplate) {
 			}));
 
 			var release = function() {
+				if(this.orientationMultiplier && Math.abs(this.orientation + 0.5 * this.orientationMultiplier) < this.maxOrientation) {
+					this.orientation += 0.5 * this.orientationMultiplier;
+				}
+
 				this.strawArray.forEach(function(d, i) {
 
 					if(d.direction * (d.rangeAdvance - d.direction) < 0) {
@@ -330,6 +338,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 					this.updateStrawMaxAngle(d);
 				}.bind(this));
 
+				this.tiltAxis();
 				this.rafID = requestAnimationFrame(release);
 
 			}.bind(this);

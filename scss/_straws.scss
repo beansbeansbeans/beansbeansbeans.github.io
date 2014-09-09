@@ -6,6 +6,43 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 // 810px horizontal range
 
 #project-straws {
+	.project-contents {
+		position: relative;
+	}
+	#plus, #minus {
+		position: absolute;
+		@include square(200px);
+		top: 145px;
+		@include transition(all 250ms);
+		opacity: 0.2;
+		z-index: 100;
+		&:before {
+			content: "";
+			display: block;
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			background-repeat: no-repeat;
+			background-position: 50%;
+			background-image: url(../images/arrow.png);
+		}
+		&:hover {
+			opacity: 1;
+		}
+	}
+	#plus {
+		right: -webkit-calc(50% + 350px);
+		right: calc(50% + 350px);
+	}
+	#minus {
+		left: -webkit-calc(50% + 365px);
+		left: calc(50% + 365px);
+		&:before {
+			@include transform(rotateY(180deg));
+		}
+	}
 	#glass {
 		@include leader(30);
 		@include trailer(30);
