@@ -1,5 +1,10 @@
 define([], function() {
 	var home = {
+		needsLoading: true,
+		preloadAssets: [
+			"top.png",
+			"shadow.png"
+		],
 		initialize: function() {
 			$("#view").html("<div id='homepage'><h1>home</h1><div class='description'>I purchased this radish-shaped top from David Earle's Etsy shop in May, 2014 for twelve dollars.</div><div id='top-container'><div id='top'></div><div id='shadow'></div></div></div>");
 

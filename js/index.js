@@ -25,7 +25,7 @@ define("d3.global", ["d3"], function(_) {
 	d3 = _;
 });
 
-require(['jquery', 'router'], function($, Router) {
+require(['jquery', 'router', 'loader'], function($, Router, Loader) {
 
     var router = new Router(),
         initialize = function(module) {
@@ -66,6 +66,7 @@ require(['jquery', 'router'], function($, Router) {
 
     router.registerRoute('', function() {
         require(["home"], function(home) {
+            console.log(home.needsLoading);
             initialize(home);
         });
     }, function() {
