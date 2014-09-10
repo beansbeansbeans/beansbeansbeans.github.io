@@ -143,7 +143,7 @@ define(['log/glyphs'], function(glyphs) {
             ctx.lineWidth = 5;
             ctx.strokeStyle = "#fff9ef";
 
-            audio.src = this.id + ".ogg";
+            audio.src = "audio/" + this.id + ".ogg";
             audio.controls = true;
             audio.preload = true;
             audio.autoplay = true;
