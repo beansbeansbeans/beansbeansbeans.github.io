@@ -118,7 +118,7 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 			}
 			.bubble:nth-of-type(5) {
 				@include animation(bubble-large 15s linear infinite);
-				@include square(35px);
+				@include square(30px);
 			}
 			.bubble:nth-of-type(6) {
 				@include animation(bubble-small 5s linear infinite);
@@ -126,7 +126,7 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 			}
 			.bubble:nth-of-type(7) {
 				@include animation(bubble-large 13s linear infinite);
-				@include square(30px);
+				@include square(28px);
 				left: 30%;
 				top: $bubble-max + 20;
 			}
@@ -137,13 +137,13 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 			}
 			.bubble:nth-of-type(9) {
 				@include animation(bubble-large-alt 18s linear infinite);
-				@include square(40px);
+				@include square(20px);
 				left: 70%;
 				top: $bubble-max + 10;
 			}
 			.bubble:nth-of-type(10) {
 				@include animation(bubble-large-alt 20s linear infinite);
-				@include square(35px);
+				@include square(15px);
 				left: 60%;
 			}
 			.bubble:nth-of-type(11) {
@@ -166,39 +166,46 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 				left: 20%;
 			}
 			.bubble:nth-of-type(15) {
-				@include animation(bubble-rest 20s linear infinite);
+				@include animation(bubble-rest 40s linear infinite);
 				@include square(22px);
 				top: $bubble-max + 10;
+				left: 10px;
 			}
 			.bubble:nth-of-type(16) {
-				@include animation(bubble-rest 18s linear infinite);
+				@include animation(bubble-rest 38s linear infinite);
 				@include square(24px);
 				top: $bubble-max + 5;
+				left: 50px;
 			}
 			.bubble:nth-of-type(17) {
-				@include animation(bubble-rest 22s linear infinite);
+				@include animation(bubble-rest 42s linear infinite);
 				@include square(16px);
 				top: $bubble-max + 2;
+				left: 100px;
 			}
 			.bubble:nth-of-type(18) {
-				@include animation(bubble-rest 15s linear infinite);
+				@include animation(bubble-rest 35s 2s linear infinite);
 				@include square(20px);
 				top: $bubble-max + 8;
+				left: 150px;
 			}
 			.bubble:nth-of-type(19) {
-				@include animation(bubble-rest-alt 20s linear infinite);
+				@include animation(bubble-rest-alt 40s 3s linear infinite);
 				@include square(22px);
+				left: 50px;
 			}
 			.bubble:nth-of-type(20) {
-				@include animation(bubble-rest-alt 18s linear infinite);
+				@include animation(bubble-rest-alt 48s 4s linear infinite);
 				@include square(24px);
+				left: 200px;
 			}
 			.bubble:nth-of-type(21) {
-				@include animation(bubble-rest-alt 22s linear infinite);
+				@include animation(bubble-rest-alt 42s 2s linear infinite);
 				@include square(16px);
+				left: 300px;
 			}
 			.bubble:nth-of-type(22) {
-				@include animation(bubble-rest-alt 15s linear infinite);
+				@include animation(bubble-rest-alt 45s linear infinite);
 				@include square(20px);
 			}
 			.bubble:nth-of-type(23) {
@@ -233,12 +240,12 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 			}
 			.bubble:nth-of-type(29) {
 				@include animation(bubble-large 17s linear infinite);
-				@include square(38px);
+				@include square(18px);
 				left: 20%;
 			}
 			.bubble:nth-of-type(30) {
 				@include animation(bubble-large-alt 20s linear infinite);
-				@include square(45px);
+				@include square(15px);
 				left: 80%;
 			}
 			.bubble:nth-of-type(31) {
@@ -261,7 +268,7 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 			}
 			.bubble:nth-of-type(35) {
 				@include animation(bubble-large 15s 1s linear infinite);
-				@include square(35px);
+				@include square(25px);
 			}
 			.bubble:nth-of-type(36) {
 				@include animation(bubble-small 5s 1s linear infinite);
@@ -269,7 +276,7 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 			}
 			.bubble:nth-of-type(37) {
 				@include animation(bubble-large 13s 1s linear infinite);
-				@include square(30px);
+				@include square(20px);
 				left: 30%;
 			}
 			.bubble:nth-of-type(38) {
@@ -279,12 +286,12 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 			}
 			.bubble:nth-of-type(39) {
 				@include animation(bubble-large-alt 18s 1s linear infinite);
-				@include square(50px);
+				@include square(20px);
 				left: 70%;
 			}
 			.bubble:nth-of-type(40) {
 				@include animation(bubble-large-alt 20s 1s linear infinite);
-				@include square(35px);
+				@include square(25px);
 				left: 60%;
 			}
 			.bubble:nth-of-type(41) {
@@ -307,35 +314,37 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 				left: 20%;
 			}
 			.bubble:nth-of-type(45) {
-				@include animation(bubble-rest 20s 1s linear infinite);
+				@include animation(bubble-rest 40s 1s linear infinite);
 				@include square(22px);
 			}
 			.bubble:nth-of-type(46) {
-				@include animation(bubble-rest 18s 1s linear infinite);
+				@include animation(bubble-rest 48s 2s linear infinite);
 				@include square(24px);
 			}
 			.bubble:nth-of-type(47) {
-				@include animation(bubble-rest 22s 1s linear infinite);
+				@include animation(bubble-rest 42s 5s linear infinite);
 				@include square(16px);
+				left: 200px;
 			}
 			.bubble:nth-of-type(48) {
-				@include animation(bubble-rest 15s 1s linear infinite);
+				@include animation(bubble-rest 45s 10s linear infinite);
 				@include square(20px);
 			}
 			.bubble:nth-of-type(49) {
-				@include animation(bubble-rest-alt 20s 1s linear infinite);
+				@include animation(bubble-rest-alt 40s 6s linear infinite);
 				@include square(22px);
 			}
 			.bubble:nth-of-type(50) {
-				@include animation(bubble-rest-alt 18s 1s linear infinite);
+				@include animation(bubble-rest-alt 48s 8s linear infinite);
 				@include square(24px);
+				left: 500px;
 			}
 			.bubble:nth-of-type(51) {
-				@include animation(bubble-rest-alt 22s 1s linear infinite);
+				@include animation(bubble-rest-alt 42s 10s linear infinite);
 				@include square(16px);
 			}
 			.bubble:nth-of-type(52) {
-				@include animation(bubble-rest-alt 15s 1s linear infinite);
+				@include animation(bubble-rest-alt 45s 1s linear infinite);
 				@include square(20px);
 			}
 			.bubble:nth-of-type(53) {
@@ -370,14 +379,172 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 			}
 			.bubble:nth-of-type(59) {
 				@include animation(bubble-large 17s 1s linear infinite);
-				@include square(58px);
+				@include square(28px);
 				left: 20%;
 				top: $bubble-max + 30;
 			}
 			.bubble:nth-of-type(60) {
-				@include animation(bubble-large-alt 20s 1s linear infinite);
-				@include square(52px);
+				@include animation(bubble-large-alt 15s 4s linear infinite);
+				@include square(22px);
 				left: 80%;
+			}
+			.bubble:nth-of-type(61) {
+				@include animation(bubble-1 15s 5s linear infinite);
+				@include square(20px);
+			}
+			.bubble:nth-of-type(62) {
+				@include animation(bubble-2 12s 5s linear infinite);
+				@include square(25px);
+			}
+			.bubble:nth-of-type(63) {
+				@include animation(bubble-1 8s 4s linear infinite);
+				@include square(22px);
+				left: 30%;
+			}
+			.bubble:nth-of-type(64) {
+				@include animation(bubble-2 16s 2s linear infinite);
+				@include square(20px);
+				left: 50%;
+			}
+			.bubble:nth-of-type(65) {
+				@include animation(bubble-large 20s 6s linear infinite);
+				@include square(15px);
+				left: 25%;
+			}
+			.bubble:nth-of-type(66) {
+				@include animation(bubble-small 12s 3s linear infinite);
+				@include square(15px);
+				right: 30%;
+			}
+			.bubble:nth-of-type(67) {
+				@include animation(bubble-large 19s 5s linear infinite);
+				@include square(18px);
+				left: 35%;
+			}
+			.bubble:nth-of-type(68) {
+				@include animation(bubble-small 9s 3s linear infinite);
+				@include square(18px);
+				left: 40%;
+			}
+			.bubble:nth-of-type(69) {
+				@include animation(bubble-large-alt 18s 4s linear infinite);
+				@include square(20px);
+				left: 66%;
+			}
+			.bubble:nth-of-type(70) {
+				@include animation(bubble-large-alt 24s 5s linear infinite);
+				@include square(25px);
+				left: 40%;
+			}
+			.bubble:nth-of-type(71) {
+				@include animation(bubble-2-alt 12s 6s linear infinite);
+				@include square(20px);
+				left: 80%;
+			}
+			.bubble:nth-of-type(72) {
+				@include animation(bubble-2-alt 12s 3s linear infinite);
+				@include square(18px);
+				left: 40%;
+			}
+			.bubble:nth-of-type(73) {
+				@include animation(bubble-1-alt 4s 2s linear infinite);
+				@include square(16px);
+				top: $bubble-max + 30px;
+			}
+			.bubble:nth-of-type(74) {
+				@include animation(bubble-1-alt 9s 1s linear infinite);
+				@include square(20px);
+				left: 20%;
+				top: $bubble-max + 20px;
+			}
+			.bubble:nth-of-type(75) {
+				@include animation(bubble-rest 30s 1s linear infinite);
+				@include square(22px);
+				top: $bubble-max + 30px;
+			}
+			.bubble:nth-of-type(76) {
+				@include animation(bubble-rest 38s 2s linear infinite);
+				@include square(24px);
+				top: $bubble-max + 10px;
+			}
+			.bubble:nth-of-type(77) {
+				@include animation(bubble-rest 32s 8s linear infinite);
+				@include square(16px);
+				left: 200px;
+				top: $bubble-max + 15px;
+			}
+			.bubble:nth-of-type(78) {
+				@include animation(bubble-rest 35s 8s linear infinite);
+				@include square(20px);
+				top: $bubble-max + 20px;
+			}
+			.bubble:nth-of-type(79) {
+				@include animation(bubble-rest-alt 33s 6s linear infinite);
+				@include square(22px);
+				top: $bubble-max + 22px;
+			}
+			.bubble:nth-of-type(80) {
+				@include animation(bubble-rest-alt 40s 8s linear infinite);
+				@include square(24px);
+				left: 500px;
+				top: $bubble-max + 20px;
+			}
+			.bubble:nth-of-type(81) {
+				@include animation(bubble-rest-alt 40s 10s linear infinite);
+				@include square(16px);
+				top: $bubble-max - 5px;
+			}
+			.bubble:nth-of-type(82) {
+				@include animation(bubble-rest-alt 40s 1s linear infinite);
+				@include square(20px);
+				left: 20px;
+				top: $bubble-max + 2px;
+			}
+			.bubble:nth-of-type(83) {
+				@include animation(bubble-1 12s 3s linear infinite);
+				@include square(22px);
+				left: 70%;
+				top: $bubble-max - 15px;
+			}
+			.bubble:nth-of-type(84) {
+				@include animation(bubble-2 23.5s 1s linear infinite);
+				@include square(23px);
+				left: 30%;
+				top: $bubble-max + 5px;
+			}
+			.bubble:nth-of-type(85) {
+				@include animation(bubble-1-alt 24s 1s linear infinite);
+				@include square(21px);
+				left: 45%;
+				top: $bubble-max + 10px;
+			}
+			.bubble:nth-of-type(86) {
+				@include animation(bubble-2-alt 20s 1s linear infinite);
+				@include square(20px);
+				left: 55%;
+				top: $bubble-max + 2px;
+			}
+			.bubble:nth-of-type(87) {
+				@include animation(bubble-small 13s 4s linear infinite);
+				@include square(12px);
+				left: 30%;
+			}
+			.bubble:nth-of-type(88) {
+				@include animation(bubble-small 7s 1s linear infinite);
+				@include square(13px);
+				left: 66%;
+			}
+			.bubble:nth-of-type(89) {
+				@include animation(bubble-large 17s 3s linear infinite);
+				@include square(28px);
+				left: 18%;
+				top: $bubble-max + 20;
+			}
+			.bubble:nth-of-type(90) {
+				@include animation(bubble-large-alt 20s 1s linear infinite);
+				@include square(22px);
+				left: 80%;
+				top: $bubble-max + 10px;
 			}
 		}
 	}
@@ -429,13 +596,13 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 		@include transform(translate3d($glass-middle - 50px, -148px, 0));
 	}
 	60% {
-		@include transform(translate3d($glass-middle - 100px, -150px, 0));
+		@include transform(translate3d($glass-middle - 100px, -130px, 0));
 	}
 	70% {
 		@include transform(translate3d($glass-middle - 150px, -148px, 0));
 	}
 	80% {
-		@include transform(translate3d($glass-middle - 300px, -150px));
+		@include transform(translate3d($glass-middle - 300px, -130px));
 	}
 	100% {
 		@include transform(translate3d(0, -150px, 0));
@@ -468,7 +635,7 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 		@include transform(translate3d($glass-middle + 50px, -148px, 0));
 	}
 	60% {
-		@include transform(translate3d($glass-middle + 100px, -150px, 0));
+		@include transform(translate3d($glass-middle + 100px, -130px, 0));
 	}
 	70% {
 		@include transform(translate3d($glass-middle + 150px, -148px, 0));
@@ -477,7 +644,7 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 		@include transform(translate3d($glass-middle + 300px, -150px));
 	}
 	100% {
-		@include transform(translate3d(0, -150px, 0));
+		@include transform(translate3d(0, -130px, 0));
 		opacity: 0;
 	}
 }
@@ -501,7 +668,7 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 		@include transform(translate3d($glass-middle + 112, -130px, 0));
 	}
 	30% {
-		@include transform(translate3d($glass-middle + 130, -152px, 0));
+		@include transform(translate3d($glass-middle + 130, -122px, 0));
 	}
 	40% {
 		@include transform(translate3d($glass-middle + 150, -148px, 0));
@@ -513,10 +680,10 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 		@include transform(translate3d($glass-middle + 210, -146px, 0));
 	}
 	80% {
-		@include transform(translate3d($glass-middle + 300, -150px));
+		@include transform(translate3d($glass-middle + 300, -120px));
 	}
 	100% {
-		@include transform(translate3d($glass-middle + 350, -149px, 0));
+		@include transform(translate3d($glass-middle + 350, -129px, 0));
 		opacity: 0;
 	}
 }
@@ -540,19 +707,19 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 		@include transform(translate3d($glass-middle - 112, -130px, 0));
 	}
 	30% {
-		@include transform(translate3d($glass-middle - 130, -152px, 0));
+		@include transform(translate3d($glass-middle - 130, -122px, 0));
 	}
 	40% {
 		@include transform(translate3d($glass-middle - 150, -148px, 0));
 	}
 	60% {
-		@include transform(translate3d($glass-middle - 200, -150px, 0));
+		@include transform(translate3d($glass-middle - 200, -120px, 0));
 	}
 	70% {
 		@include transform(translate3d($glass-middle - 210, -146px, 0));
 	}
 	80% {
-		@include transform(translate3d($glass-middle - 300, -150px));
+		@include transform(translate3d($glass-middle - 300, -120px));
 	}
 	100% {
 		@include transform(translate3d($glass-middle - 350, -149px, 0));
@@ -622,11 +789,11 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 		@include transform(translate3d(520px, -148px, 0));
 	}
 	40% {
-		@include transform(translate3d(580px, -150px, 0));
+		@include transform(translate3d(580px, -120px, 0));
 		opacity: 1;
 	}
 	50% {
-		@include transform(translate3d(450px, -148px, 0));
+		@include transform(translate3d(450px, -128px, 0));
 	}
 	60% {
 		@include transform(translate3d(350px, -150px, 0));
@@ -682,7 +849,7 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 		@include transform(translate3d($glass-middle + 200px, -142px, 0));
 	}
 	15% {
-		@include transform(translate3d($glass-middle + 100px, -148px, 0));
+		@include transform(translate3d($glass-middle + 100px, -138px, 0));
 	}
 	22% {
 		@include transform(translate3d($glass-middle + 300px, -144px, 0));
@@ -691,7 +858,7 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 		@include transform(translate3d($glass-middle + 400px, -148px, 0));
 	}
 	38% {
-		@include transform(translate3d($glass-middle + 300px, -144px, 0));
+		@include transform(translate3d($glass-middle + 300px, -134px, 0));
 	}
 	45% {
 		@include transform(translate3d($glass-middle + 100px, -148px, 0));
@@ -700,13 +867,13 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 		@include transform(translate3d($glass-middle, -150px, 0));
 	}
 	58% {
-		@include transform(translate3d($glass-middle - 150px, -148px, 0));
+		@include transform(translate3d($glass-middle - 150px, -138px, 0));
 	}
 	63% {
 		@include transform(translate3d($glass-middle - 300px, -151px, 0));
 	}
 	70% {
-		@include transform(translate3d($glass-middle - 410px, -146px, 0));
+		@include transform(translate3d($glass-middle - 410px, -136px, 0));
 	}
 	72% {
 		@include transform(translate3d($glass-middle - 300px, -144px, 0));
@@ -733,13 +900,13 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 		@include transform(translate3d($glass-middle + 150px, -142px, 0));
 	}
 	15% {
-		@include transform(translate3d($glass-middle + 100px, -148px, 0));
+		@include transform(translate3d($glass-middle + 100px, -138px, 0));
 	}
 	22% {
-		@include transform(translate3d($glass-middle + 350px, -144px, 0));
+		@include transform(translate3d($glass-middle + 350px, -134px, 0));
 	}
 	30% {
-		@include transform(translate3d($glass-middle + 425px, -148px, 0));
+		@include transform(translate3d($glass-middle + 425px, -138px, 0));
 	}
 	38% {
 		@include transform(translate3d($glass-middle + 290px, -144px, 0));
@@ -751,19 +918,19 @@ $bubble-max: $glass-height * $bubble-container-height; //149
 		@include transform(translate3d($glass-middle, -150px, 0));
 	}
 	58% {
-		@include transform(translate3d($glass-middle - 100px, -148px, 0));
+		@include transform(translate3d($glass-middle - 100px, -138px, 0));
 	}
 	63% {
 		@include transform(translate3d($glass-middle - 290px, -151px, 0));
 	}
 	70% {
-		@include transform(translate3d($glass-middle - 380px, -146px, 0));
+		@include transform(translate3d($glass-middle - 380px, -136px, 0));
 	}
 	72% {
-		@include transform(translate3d($glass-middle - 320px, -144px, 0));
+		@include transform(translate3d($glass-middle - 320px, -134px, 0));
 	}
 	79% {
-		@include transform(translate3d($glass-middle - 180px, -148px, 0));
+		@include transform(translate3d($glass-middle - 180px, -138px, 0));
 	}
 	85% {
 		@include transform(translate3d($glass-middle - 250px, -144px, 0));
