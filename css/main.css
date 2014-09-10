@@ -4570,6 +4570,9 @@
 .log .canvas-wrapper {
   margin-top: 3.125em;
   margin-bottom: 1.5625em;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
 }
 .log #fft {
   background: #ec4911;
@@ -4581,11 +4584,8 @@
   position: absolute;
   left: 0;
   top: 0;
-  left: 50%;
-  -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
+  /* right: -1px; */
+  /* bottom: -1px; */
 }
 .log audio {
   display: none;

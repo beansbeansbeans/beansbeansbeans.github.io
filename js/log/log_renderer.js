@@ -96,6 +96,11 @@ define(['log/glyphs'], function(glyphs) {
             }.bind(this));
         },
         renderLetters: function() {
+            $(".canvas-wrapper").css({
+                width: this.canvasWidth,
+                height: this.canvasHeight
+            });
+
             this.letterCanvas = $("#letters"),
             this.letterCtx = this.letterCanvas[0].getContext('2d');
 
@@ -132,8 +137,8 @@ define(['log/glyphs'], function(glyphs) {
 
             canvas.css("background-color", colors[Math.floor(Math.random() * colors.length)]);
 
-            canvas[0].width = this.canvasWidth;
-            canvas[0].height = this.canvasHeight;
+            canvas[0].width = this.canvasWidth - 1;
+            canvas[0].height = this.canvasHeight - 1;
 
             ctx.shadowOffsetX = 12;
             ctx.shadowOffsetY = 5;
