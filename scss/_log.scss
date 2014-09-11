@@ -1,4 +1,7 @@
 .log {
+	.title {
+		text-transform: lowercase;
+	}
 	.canvas-wrapper {
 		@include leader(10);
 		@include trailer(5);

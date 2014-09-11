@@ -4,7 +4,7 @@ define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRe
 			var data = {
 				title: "plain",
 				detail: "A decent day",
-				date: "08/02/2014",
+				date: "August 2, 2014",
 				logContents: ""
 			};
 

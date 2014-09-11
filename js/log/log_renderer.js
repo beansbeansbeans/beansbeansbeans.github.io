@@ -33,7 +33,7 @@ define(['log/glyphs'], function(glyphs) {
 
             var naturalWordWidth = this.id.split("").reduce(function(prev, current) {
                 return prev + glyphs.letters[current].width;
-            }, 0);
+            }, 0) + 500;
 
             this.scaleFactor = (this.canvasWidth / naturalWordWidth).toFixed(3);
 
@@ -121,7 +121,7 @@ define(['log/glyphs'], function(glyphs) {
             this.letterCtx.lineTo(0, this.canvasHeight);
             this.letterCtx.lineTo(this.canvasWidth, this.canvasHeight);
 
-            this.letterCtx.translate(0, glyphs.height * this.scaleFactor + 0.5*(this.canvasHeight - (glyphs.height * this.scaleFactor)));
+            this.letterCtx.translate(250 * this.scaleFactor, glyphs.height * this.scaleFactor + 0.5*(this.canvasHeight - (glyphs.height * this.scaleFactor)));
             this.letterCtx.scale(this.scaleFactor, -this.scaleFactor);
 
             this.drawSVGInCanvas(this.id);
@@ -137,8 +137,8 @@ define(['log/glyphs'], function(glyphs) {
 
             canvas.css("background-color", colors[Math.floor(Math.random() * colors.length)]);
 
-            canvas[0].width = this.canvasWidth - 1;
-            canvas[0].height = this.canvasHeight - 1;
+            canvas[0].width = this.canvasWidth;
+            canvas[0].height = this.canvasHeight;
 
             ctx.shadowOffsetX = 12;
             ctx.shadowOffsetY = 5;

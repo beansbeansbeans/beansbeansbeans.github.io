@@ -1,10 +1,10 @@
 define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRenderer) {
-	var plain = {
+	var quick = {
 		initialize: function() {
 			var data = {
-				title: "leopard",
-				detail: "A decent day",
-				date: "08/15/2014",
+				title: "jack",
+				detail: "A pretty good day",
+				date: "September 4, 2014",
 				logContents: ""
 			};
 
@@ -16,5 +16,5 @@ define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRe
 			logRenderer.destroy();
 		}
 	}
-	return plain;
+	return quick;
 });

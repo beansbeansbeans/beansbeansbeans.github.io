@@ -26,7 +26,7 @@ define(['templates/project_index'], function(projectIndex) {
 		}
 	];
 	var projects = {
-		needsLoading: false;
+		needsLoading: false,
 		initialize: function() {
 			$("#view").html(projectIndex(data));
 		},

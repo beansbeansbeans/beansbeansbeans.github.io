@@ -1,21 +1,20 @@
 define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRenderer) {
-	var mh17 = {
+	var plain = {
 		initialize: function() {
 			var data = {
-				title: "mh17",
-				detail: "About a plane",
-				date: "05/28/2014",
+				title: "zelda",
+				detail: "A decent day",
+				date: "August 11, 2014",
 				logContents: ""
 			};
 
 			$("#view").html(logTemplate(data));
 
 			logRenderer.initialize(data.title);
-
 		},
 		destroy: function() {
 			logRenderer.destroy();
 		}
 	}
-	return mh17;
+	return plain;
 });

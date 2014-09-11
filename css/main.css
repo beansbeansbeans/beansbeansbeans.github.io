@@ -4567,6 +4567,9 @@
     transform: translate3d(225px, -148px, 0);
   }
 }
+.log .title {
+  text-transform: lowercase;
+}
 .log .canvas-wrapper {
   margin-top: 3.125em;
   margin-bottom: 1.5625em;
@@ -4584,8 +4587,6 @@
   position: absolute;
   left: 0;
   top: 0;
-  /* right: -1px; */
-  /* bottom: -1px; */
 }
 .log audio {
   display: none;
@@ -4747,7 +4748,6 @@ nav li .description {
 .log .header .title,
 .project .header .title {
   font-weight: 600;
-  text-transform: uppercase;
   margin-bottom: 0.74074em;
 }
 .log .header .blurb,
@@ -4764,6 +4764,9 @@ nav li .description {
   color: #93939c;
   font-style: italic;
   margin-bottom: 6.25em;
+}
+.project .header .title {
+  text-transform: uppercase;
 }
 
 #homepage {

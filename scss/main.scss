@@ -136,7 +136,6 @@ nav {
 		.title {
 			@extend .extra-large-text;
 			font-weight: 600;
-			text-transform: uppercase;
 			@include trailer($font-size: map-get(map-get($text-map, extra-large), font-size), $lines: 8);
 		}
 		.blurb {
@@ -172,6 +171,10 @@ nav {
 
 	.description {
 		@extend .medium-text;
+	}
+
+	.header .title {
+		text-transform: uppercase;
 	}
 
 }
