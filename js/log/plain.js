@@ -3,6 +3,7 @@ define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRe
 		initialize: function() {
 			var data = {
 				title: "plain",
+				length: 48,
 				detail: "A decent day",
 				date: "August 2, 2014",
 				logContents: ""
@@ -10,7 +11,7 @@ define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRe
 
 			$("#view").html(logTemplate(data));
 
-			logRenderer.initialize(data.title);
+			logRenderer.initialize(data);
 		},
 		destroy: function() {
 			logRenderer.destroy();

@@ -7,11 +7,11 @@ define(['log/glyphs'], function(glyphs) {
                 tick: function() {
                     interval = setInterval(function() {
                         playPosition++;
-                        if(playPosition < audio.duration) {
-                            $("#controls #time .elapsed").text(Math.floor(playPosition / 60) + ":" +  Math.floor(playPosition % 60));
+                        if(playPosition <= length) {
+                            $("#controls #time .elapsed").text(Math.floor(playPosition / 60) + ":" + ((Math.floor(playPosition % 60) < 10) ? "0" + Math.floor(playPosition % 60) : Math.floor(playPosition % 60)));
                         }
-                    }, 1000);
-                },
+                    }.bind(this), 1000);
+                }.bind(this),
                 pause: function() {
                     clearInterval(interval);
                 },
@@ -20,6 +20,7 @@ define(['log/glyphs'], function(glyphs) {
                 }
             }
         })(),
+        length,
         audio = new Audio(),
         audioCtx = window.webkitAudioContext ? new webkitAudioContext() : new AudioContext();
         analyser = audioCtx.createAnalyser(),
@@ -27,8 +28,10 @@ define(['log/glyphs'], function(glyphs) {
         colors = ["#2BBFBD", "#F2B33D", "#F29B30", "#F22E2E", "#F2385A", "#F5A503", "#56D9CD", "#3AA1BF", "#FC4349", "#ec4911"];
 
     var renderer = {
-        initialize: function(id) {
-            this.id = id;
+        initialize: function(data) {
+            this.id = data.title;
+            length = data.length;
+            $("#controls #time .total").text(Math.floor(length / 60) + ":" + ((Math.floor(length % 60) < 10) ? "0" + Math.floor(length % 60) : Math.floor(length % 60)));
             this.canvasWidth = $(window).width() * 0.65;
 
             var naturalWordWidth = this.id.split("").reduce(function(prev, current) {
@@ -156,10 +159,6 @@ define(['log/glyphs'], function(glyphs) {
             $("#audio").append(audio);
 
             $("#controls #toggler").text("pause");
-
-            audio.addEventListener('loadedmetadata', function() {
-                $("#controls #time .total").text(Math.floor(audio.duration / 60) + ":" +  Math.floor(audio.duration % 60))
-            });
 
             $("#controls #toggler").on("click", function() {
                 isPlaying = !isPlaying;

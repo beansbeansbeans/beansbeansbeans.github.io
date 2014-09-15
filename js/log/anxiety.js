@@ -1,11 +1,11 @@
 define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRenderer) {
-    var bacall = {
+    var anxiety = {
         initialize: function() {
             var data = {
-                title: "bacall",
-                length: 46,
+                title: "anxiety",
+                length: 57,
                 detail: "A boring day",
-                date: "August 12, 2014",
+                date: "September 12, 2014",
                 logContents: ""
             };
 
@@ -17,5 +17,5 @@ define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRe
             logRenderer.destroy();
         }
     }
-    return bacall;
+    return anxiety;
 });
