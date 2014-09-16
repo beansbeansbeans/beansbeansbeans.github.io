@@ -1,5 +1,15 @@
 define(['templates/project_detail'], function(projectTemplate) {
 	var straws = {
+		needsPreloading: true,
+		preloadAssets: [
+			"arrow.png",
+			"glass_back.png",
+			"glass.png",
+			"straw_blue.png",
+			"straw_green.png",
+			"straw_pink.png",
+			"straw_purple.png"
+		],
 		glassWidth: 450,
 		glassHeight: 425,
 		orientation: 0,

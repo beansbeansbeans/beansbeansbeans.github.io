@@ -4641,6 +4641,9 @@ html {
 html:not(.loading) #loader {
   opacity: 0;
 }
+html.loading #menu_wrapper, html.loading #view {
+  opacity: 0;
+}
 
 body {
   font-family: Brandon;
@@ -4674,10 +4677,10 @@ a {
 }
 
 #loader {
-  -moz-transition: opacity 200ms;
-  -o-transition: opacity 200ms;
-  -webkit-transition: opacity 200ms;
-  transition: opacity 200ms;
+  -moz-transition: opacity 100ms;
+  -o-transition: opacity 100ms;
+  -webkit-transition: opacity 100ms;
+  transition: opacity 100ms;
   background: white;
   opacity: 1;
   position: fixed;
@@ -4700,11 +4703,15 @@ a {
   font-weight: 800;
 }
 
-#menu_wrapper {
+#menu_wrapper, #view {
   -moz-transition: opacity 100ms;
   -o-transition: opacity 100ms;
   -webkit-transition: opacity 100ms;
   transition: opacity 100ms;
+  opacity: 1;
+}
+
+#menu_wrapper {
   margin-bottom: 6.25em;
   display: inline-block;
   margin-top: 2.5em;

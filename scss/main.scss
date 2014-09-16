@@ -36,6 +36,11 @@ html {
 	&:not(.loading) #loader {
 		opacity: 0;
 	}
+	&.loading {
+		#menu_wrapper, #view {
+			opacity: 0;	
+		}
+	}
 }
 
 body {
@@ -69,7 +74,7 @@ a {
 }
 
 #loader {
-	@include transition(opacity 200ms);
+	@include transition(opacity 100ms);
 	background: white;
 	opacity: 1;
 	position: fixed;
@@ -90,8 +95,12 @@ a {
 	}
 }
 
-#menu_wrapper {
+#menu_wrapper, #view {
 	@include transition(opacity 100ms);
+	opacity: 1;
+}
+
+#menu_wrapper {
 	@include trailer(20);
 	display: inline-block;
 	@include leader(8);
