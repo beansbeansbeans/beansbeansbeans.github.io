@@ -29,7 +29,23 @@ require(['jquery', 'router', 'loader'], function($, Router, Loader) {
 
     var router = new Router(),
         initialize = function(module) {
-            module.initialize();
+            if(module.needsLoading) {
+                var el, imageCounter = 0;
+                module.preloadAssets.forEach(function(d) {
+                    el = document.createElement('img');
+                    el.setAttribute('src', 'images/' + d);
+                    $("#stash").append(el);
+                    $(el).on("load", function() {
+                        imageCounter++;
+                        if(imageCounter == module.preloadAssets.length) {
+                            module.needsLoading = false;
+                            module.initialize();
+                        }
+                    })
+                })
+            } else {
+                module.initialize();
+            }
         };
 
     router.registerRoute('projects/{projectid}', function(id) {
@@ -66,7 +82,6 @@ require(['jquery', 'router', 'loader'], function($, Router, Loader) {
 
     router.registerRoute('', function() {
         require(["home"], function(home) {
-            console.log(home.needsLoading);
             initialize(home);
         });
     }, function() {

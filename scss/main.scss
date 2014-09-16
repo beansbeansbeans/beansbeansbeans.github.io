@@ -54,6 +54,14 @@ a {
 	@include box-sizing(border-box);
 }
 
+#stash {
+	visibility: hidden;
+	position: absolute;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+}
+
 #menu_wrapper {
 	@include transition(opacity 100ms);
 	@include trailer(20);

@@ -4661,6 +4661,14 @@ a {
   box-sizing: border-box;
 }
 
+#stash {
+  visibility: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
 #menu_wrapper {
   -moz-transition: opacity 100ms;
   -o-transition: opacity 100ms;
