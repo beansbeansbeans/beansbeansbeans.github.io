@@ -32,6 +32,12 @@ $text-map: (
 	}
 }
 
+html {
+	&:not(.loading) #loader {
+		opacity: 0;
+	}
+}
+
 body {
 	font-family: Brandon;
 	text-align: center;
@@ -62,10 +68,30 @@ a {
 	overflow: hidden;
 }
 
+#loader {
+	@include transition(opacity 200ms);
+	background: white;
+	opacity: 1;
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	.text {
+		text-align: center;
+		position: absolute;
+		width: 100%;
+		text-transform: uppercase;
+		top: 50%;
+		@include transform(translateY(-50%));
+		@extend .extra-large-text;
+		font-weight: 800;
+	}
+}
+
 #menu_wrapper {
 	@include transition(opacity 100ms);
 	@include trailer(20);
-	
 	display: inline-block;
 	@include leader(8);
 	#menu {

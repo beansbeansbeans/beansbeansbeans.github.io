@@ -30,6 +30,7 @@ require(['jquery', 'router', 'loader'], function($, Router, Loader) {
     var router = new Router(),
         initialize = function(module) {
             if(module.needsLoading) {
+                $("html").addClass("loading");
                 var el, imageCounter = 0;
                 module.preloadAssets.forEach(function(d) {
                     el = document.createElement('img');
@@ -39,11 +40,13 @@ require(['jquery', 'router', 'loader'], function($, Router, Loader) {
                         imageCounter++;
                         if(imageCounter == module.preloadAssets.length) {
                             module.needsLoading = false;
+                            $("html").removeClass("loading");
                             module.initialize();
                         }
                     })
                 })
             } else {
+                $("html").removeClass("loading");
                 module.initialize();
             }
         };

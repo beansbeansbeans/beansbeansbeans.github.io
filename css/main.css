@@ -4632,10 +4632,14 @@ html {
   line-height: 1.25em;
 }
 
-.extra-large-text, .log .header .title,
+.extra-large-text, #loader .text, .log .header .title,
 .project .header .title, #homepage h1 {
   font-size: 3.375em;
   line-height: 1.11111em;
+}
+
+html:not(.loading) #loader {
+  opacity: 0;
 }
 
 body {
@@ -4667,6 +4671,32 @@ a {
   width: 0;
   height: 0;
   overflow: hidden;
+}
+
+#loader {
+  -moz-transition: opacity 200ms;
+  -o-transition: opacity 200ms;
+  -webkit-transition: opacity 200ms;
+  transition: opacity 200ms;
+  background: white;
+  opacity: 1;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+#loader .text {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  text-transform: uppercase;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  font-weight: 800;
 }
 
 #menu_wrapper {
