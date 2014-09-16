@@ -4685,6 +4685,7 @@ a {
   right: 0;
   bottom: 0;
   top: 0;
+  pointer-events: none;
 }
 #loader .text {
   text-align: center;
