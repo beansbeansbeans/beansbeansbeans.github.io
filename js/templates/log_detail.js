@@ -9,6 +9,6 @@ return Handlebars.template({"compiler":[5,">= 2.0.0"],"main":function(depth0,hel
     + "</div>\n	</div>\n	<div class=\"log-contents\">\n		";
   stack1 = ((helper = helpers.logContents || (depth0 && depth0.logContents)),(typeof helper === functionType ? helper.call(depth0, {"name":"logContents","hash":{},"data":data}) : helper));
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  return buffer + "\n		<div class=\"canvas-wrapper\">\n			<canvas id=\"fft\"></canvas>\n			<canvas id=\"letters\" ></canvas>\n		</div>\n		<div id=\"audio\"></div>\n		<div id=\"controls\">\n			<div id=\"toggler\"></div>\n			<div id=\"time\">\n				<div class=\"elapsed\"></div>\n				/\n				<div class=\"total\"></div>\n			</div>\n		</div>\n	</div>\n</div>\n";
+  return buffer + "\n		<div class=\"canvas-wrapper\">\n			<canvas id=\"fft\"></canvas>\n			<canvas id=\"letters\" ></canvas>\n		</div>\n		<div id=\"audio\"></div>\n		<div id=\"controls\">\n			<div id=\"toggler\"></div>\n			<div id=\"time\">\n				<div class=\"elapsed\">0</div>\n				/\n				<div class=\"total\"></div>\n			</div>\n		</div>\n	</div>\n</div>\n";
 },"useData":true});
 });

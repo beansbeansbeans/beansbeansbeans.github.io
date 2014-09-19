@@ -1,7 +1,8 @@
-<nav>
+<nav id="project_index">
 	{{#each this}}
-	    <li>
+	    <li data-project-id={{title}}>
 	    	<a href="#projects/{{title}}">
+	    		<div class="image"></div>
 	    		<div class="title">
 	    			{{title}}
 	    		</div>

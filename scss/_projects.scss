@@ -1,3 +1,46 @@
+#project_index {
+	li {
+		.image {
+			background-image: url(../images/projects_sprite.jpg);
+			margin-left: auto;
+			margin-right: auto;
+			position: relative;
+			@include trailer(5);
+		}
+		&[data-project-id="straws"] .image {
+			background-position: 0 -973px; 
+			width: 209px; 
+			height: 128px;
+		}
+		&[data-project-id="notes"] .image {
+			background-position: 0 -395px; 
+			width: 128px; 
+			height: 174px;
+			@include trailer(7);
+		}
+		&[data-project-id="leaves"] .image {
+			background-position: 0 -175px; 
+			width: 128px; 
+			height: 169px;
+		}
+		&[data-project-id="pixels"] .image {
+			background-position: 0 -625px; 
+			width: 158px; 
+			height: 112px;
+		}
+		&[data-project-id="hiveplot"] .image {
+			width: 128px; 
+			height: 126px;
+			left: 14px;
+		}
+		&[data-project-id="spotlights"] .image {
+			background-position: 0 -779px; 
+			width: 128px; 
+			height: 142px;
+		}
+	}
+}
+
 #project-pixels {
 	#border {
 		@include box-sizing(content-box);
