@@ -93,6 +93,53 @@ a {
 		@extend .extra-large-text;
 		font-weight: 800;
 	}
+	.animation {
+		top: 56%;
+		top: calc(50% + 50px);
+		left: 50%;
+		left: calc(50% - 8px);
+		@include animation(loader10m 2s ease-in-out infinite);
+		&, &:before, &:after {
+			position: absolute;
+			@include border-radius(50%);
+			width: 15px;
+			height: 15px;
+		}
+		&:before, &:after {
+			content: "";
+			top: 0px;
+		}
+		&:before {
+			left: -25px;
+			@include animation(loader10g 2s ease-in-out infinite);
+		}
+		&:after {
+			left: 25px;
+			@include animation(loader10d 2s ease-in-out infinite);
+		}
+	}
+}
+
+@include keyframe (loader10g) {
+	0%{background-color: rgba($blue, .2);}
+	25%{background-color: rgba($blue, 1);}
+	50%{background-color: rgba($blue, .2);}
+	100%{background-color: rgba($blue, .2);}
+}
+
+@include keyframe (loader10m) {
+	0%{background-color: rgba($blue, .2);}
+	25%{background-color: rgba($blue, .2);}
+	50%{background-color: rgba($blue, 1);}
+	75%{background-color: rgba($blue, .2);}
+	100%{background-color: rgba($blue, .2);}
+}
+
+@include keyframe (loader10d) {
+	0%{background-color: rgba($blue, .2);}
+	50%{background-color: rgba($blue, .2);}
+	75%{background-color: rgba($blue, 1);}
+	100%{background-color: rgba($blue, .2);}
 }
 
 #menu_wrapper, #view {
