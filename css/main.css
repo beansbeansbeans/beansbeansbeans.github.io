@@ -60,34 +60,40 @@
   position: relative;
   margin-bottom: 1.5625em;
 }
+#project_index li[data-project-id="dancers"] .image {
+  width: 178px;
+  height: 130px;
+  margin-bottom: 2.5em;
+}
 #project_index li[data-project-id="straws"] .image {
-  background-position: 0 -973px;
+  background-position: 0 -914px;
   width: 209px;
   height: 128px;
 }
 #project_index li[data-project-id="notes"] .image {
-  background-position: 0 -395px;
+  background-position: 0 -456px;
   width: 128px;
   height: 174px;
   margin-bottom: 2.1875em;
 }
 #project_index li[data-project-id="leaves"] .image {
-  background-position: 0 -175px;
+  background-position: 0 -281px;
   width: 128px;
   height: 169px;
 }
 #project_index li[data-project-id="pixels"] .image {
-  background-position: 0 -625px;
+  background-position: 0 -650px;
   width: 158px;
   height: 112px;
 }
 #project_index li[data-project-id="hiveplot"] .image {
   width: 128px;
   height: 126px;
+  background-position: 0 -139px;
   left: 14px;
 }
 #project_index li[data-project-id="spotlights"] .image {
-  background-position: 0 -779px;
+  background-position: 0 -763px;
   width: 128px;
   height: 142px;
 }
@@ -4655,8 +4661,8 @@ html {
 }
 
 .small-text, body, #menu_wrapper #menu .link {
-  font-size: 1em;
-  line-height: 1.25em;
+  font-size: 1.125em;
+  line-height: 1.11111em;
 }
 
 .medium-text, nav li .description, .log .back,
@@ -5022,16 +5028,16 @@ a {
   display: inline-block;
   position: relative;
   font-weight: 500;
-  padding-top: 0.9375em;
-  padding-bottom: 0.9375em;
-  padding-left: 1.25em;
-  padding-right: 1.25em;
+  padding-top: 0.83333em;
+  padding-bottom: 0.83333em;
+  padding-left: 1.11111em;
+  padding-right: 1.11111em;
   outline: none !important;
 }
 #menu_wrapper #menu .link.active {
   color: white;
   background: #00303e;
-  margin: 0 0.625em;
+  margin: 0 0.55556em;
 }
 
 nav {

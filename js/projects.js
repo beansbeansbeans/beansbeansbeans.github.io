@@ -1,6 +1,10 @@
 define(['templates/project_index'], function(projectIndex) {
 	var data = [
 		{
+			title: "dancers",
+			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet porro, natus excepturi."
+		},
+		{
 			title: "straws",
 			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet porro, natus excepturi."
 		},
@@ -26,12 +30,10 @@ define(['templates/project_index'], function(projectIndex) {
 		}
 	];
 	var projects = {
-		needsLoading: false,
+		needsLoading: true,
+		preloadAssets: [ "projects_sprite.jpg" ],
 		initialize: function() {
 			$("#view").html(projectIndex(data));
-		},
-		teardown: function() {
-
 		}
 	}
 	return projects;
