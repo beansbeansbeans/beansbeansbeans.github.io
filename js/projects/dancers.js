@@ -29,8 +29,11 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				morph = function(element, data, initialTension) {
 					var newTension = ((initialTension - 0.01) < minTension ? minTension : initialTension - 0.01);
 
-					element.attr("d", line.tension(newTension)(data))
-						.attr("data-tension", newTension);
+					element.attr("data-tension", newTension);
+
+					element.selectAll("path")[0].forEach(function(d, i) {
+						d3.select(d).attr("d", line.tension(newTension)(data[i]));
+					});
 
 					morphTimeoutID = requestAnimationFrame(function() {
 						morph(element, data, newTension);
@@ -38,21 +41,25 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				};
 
 			d3.json("/js/projects/dancers.json", function(data) {
-				data.forEach(function(d) {
-					svg.append("path")
-						.attr("d", line.tension(maxTension)(d))
-						.attr("data-tension", maxTension)
+				data.forEach(function(dancer) {
+					var dancerGroup = svg.append("g");
+					dancer.forEach(function(path) {
+						dancerGroup.append("path")
+							.attr("d", line.tension(maxTension)(path));
+					});
+
+					dancerGroup.attr("data-tension", maxTension)
 						.on("mouseover", function() {
 							var element = d3.select(this),
 								initialTension = element.attr("data-tension");
 
 							morphTimeoutID = requestAnimationFrame(function() {
-								morph(element, d, initialTension);
+								morph(element, dancer, initialTension);
 							});
 						})
 						.on("mouseout", function() {
 							window.cancelAnimationFrame(morphTimeoutID);
-						})
+						});
 				});
 			});
 		},
