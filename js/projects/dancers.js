@@ -13,7 +13,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			$("#view").html(projectTemplate(data));
 
-			var maxTension = 2,
+			var maxTension = 0.7,
 				minTension = -2;
 
 			var line = d3.svg.line()
