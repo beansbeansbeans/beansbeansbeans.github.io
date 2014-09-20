@@ -98,6 +98,12 @@
   height: 142px;
 }
 
+#project-dancers path {
+  fill: none;
+  stroke: #7096ad;
+  stroke-width: 2;
+}
+
 #project-pixels #border {
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;

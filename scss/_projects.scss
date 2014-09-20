@@ -47,6 +47,14 @@
 	}
 }
 
+#project-dancers {
+	path {
+		fill: none;
+		stroke: $blue;
+		stroke-width: 2;
+	}
+}
+
 #project-pixels {
 	#border {
 		@include box-sizing(content-box);
