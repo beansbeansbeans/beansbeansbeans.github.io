@@ -5,7 +5,7 @@ define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRe
 				title: "shoes", 
 				length: 77,
 				detail: "A productive day",
-				date: "September 20, 2013",
+				date: "September 20, 2014",
 				logContents: ""
 			};
 
