@@ -50,8 +50,23 @@
 #project-dancers {
 	path {
 		fill: none;
-		stroke: $blue;
-		stroke-width: 2;
+		stroke: rgba($blue, 1);
+		stroke-width: 3;
+	}
+	.dancer {
+		opacity: 0;
+		&.on {
+			@include animation(dancer 5s linear infinite);
+		}
+	}
+}
+
+@include keyframe(dancer) {
+	3%, 5% {
+		opacity: 1
+	}
+	15% {
+		opacity: 0
 	}
 }
 

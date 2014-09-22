@@ -101,9 +101,54 @@
 #project-dancers path {
   fill: none;
   stroke: #7096ad;
-  stroke-width: 2;
+  stroke-width: 3;
+}
+#project-dancers .dancer {
+  opacity: 0;
+}
+#project-dancers .dancer.on {
+  -webkit-animation: dancer 5s linear infinite;
+  -moz-animation: dancer 5s linear infinite;
+  -o-animation: dancer 5s linear infinite;
+  animation: dancer 5s linear infinite;
 }
 
+@-webkit-keyframes dancer {
+  3%, 5% {
+    opacity: 1;
+  }
+
+  15% {
+    opacity: 0;
+  }
+}
+@-moz-keyframes dancer {
+  3%, 5% {
+    opacity: 1;
+  }
+
+  15% {
+    opacity: 0;
+  }
+}
+@-o-keyframes dancer {
+  3%, 5% {
+    opacity: 1;
+  }
+
+  15% {
+    opacity: 0;
+  }
+}
+@keyframes dancer {
+  3%, 5% {
+    opacity: 1;
+  }
+
+  15% {
+    opacity: 0;
+  }
+}
 #project-pixels #border {
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;

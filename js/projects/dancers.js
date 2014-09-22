@@ -13,8 +13,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			$("#view").html(projectTemplate(data));
 
-			var maxTension = 0.7,
-				minTension = -2;
+			var maxTension = 1,
+				minTension = -0;
 
 			var line = d3.svg.line()
 				.interpolate("cardinal");
@@ -42,7 +42,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			d3.json("/js/projects/dancers.json", function(data) {
 				data.forEach(function(dancer) {
-					var dancerGroup = svg.append("g");
+					var dancerGroup = svg.append("g")
+						.attr("class", "dancer");
+
 					dancer.forEach(function(path) {
 						dancerGroup.append("path")
 							.attr("d", line.tension(maxTension)(path));
@@ -61,6 +63,19 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 							window.cancelAnimationFrame(morphTimeoutID);
 						});
 				});
+
+				var delay = 0;
+
+				d3.selectAll(".dancer")[0].forEach(function(d, i) {
+					(function(time) {
+						setTimeout(function() {
+							d3.select(d).attr("class", "dancer on");
+						}, time);
+					})(delay);
+
+					delay += 100;
+				})
+
 			});
 		},
 		destroy: function() {
