@@ -114,38 +114,38 @@
 }
 
 @-webkit-keyframes dancer {
-  3%, 5% {
+  3%, 3.5% {
     opacity: 1;
   }
 
-  15% {
+  6% {
     opacity: 0;
   }
 }
 @-moz-keyframes dancer {
-  3%, 5% {
+  3%, 3.5% {
     opacity: 1;
   }
 
-  15% {
+  6% {
     opacity: 0;
   }
 }
 @-o-keyframes dancer {
-  3%, 5% {
+  3%, 3.5% {
     opacity: 1;
   }
 
-  15% {
+  6% {
     opacity: 0;
   }
 }
 @keyframes dancer {
-  3%, 5% {
+  3%, 3.5% {
     opacity: 1;
   }
 
-  15% {
+  6% {
     opacity: 0;
   }
 }

@@ -1,6 +1,10 @@
 define(['templates/log_index'], function(logIndex) {
 	var data = [
 		{
+			title: "boyhood",
+			description: "September 22, 2014"
+		},
+		{
 			title: "shoes",
 			description: "September 20, 2014"
 		},
@@ -28,9 +32,6 @@ define(['templates/log_index'], function(logIndex) {
 	var log = {
 		initialize: function() {
 			$("#view").html(logIndex(data));
-		},
-		teardown: function() {
-
 		}
 	}
 	return log;

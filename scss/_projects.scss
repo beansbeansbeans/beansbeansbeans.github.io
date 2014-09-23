@@ -62,10 +62,10 @@
 }
 
 @include keyframe(dancer) {
-	3%, 5% {
+	3%, 3.5% {
 		opacity: 1
 	}
-	15% {
+	6% {
 		opacity: 0
 	}
 }
