@@ -4,7 +4,7 @@ return Handlebars.template({"compiler":[5,">= 2.0.0"],"main":function(depth0,hel
     + escapeExpression(((helper = helpers.title || (depth0 && depth0.title)),(typeof helper === functionType ? helper.call(depth0, {"name":"title","hash":{},"data":data}) : helper)))
     + "\">\n\n	<a href=\"#log\" class=\"back\">back</a>\n	<div class=\"header\">\n		<div class=\"title\">"
     + escapeExpression(((helper = helpers.detail || (depth0 && depth0.detail)),(typeof helper === functionType ? helper.call(depth0, {"name":"detail","hash":{},"data":data}) : helper)))
-    + "</div>\n		<div class=\"blurb\">Posted: "
+    + "</div>\n		<div class=\"blurb\">"
     + escapeExpression(((helper = helpers.date || (depth0 && depth0.date)),(typeof helper === functionType ? helper.call(depth0, {"name":"date","hash":{},"data":data}) : helper)))
     + "</div>\n	</div>\n	<div class=\"log-contents\">\n		";
   stack1 = ((helper = helpers.logContents || (depth0 && depth0.logContents)),(typeof helper === functionType ? helper.call(depth0, {"name":"logContents","hash":{},"data":data}) : helper));

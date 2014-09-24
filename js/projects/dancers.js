@@ -40,6 +40,22 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					});
 				};
 
+			var animateDancers = function() {
+				console.log("animating dancers");
+				var delay = 0;
+
+				d3.selectAll(".dancer")[0].forEach(function(d, i) {
+					d3.select(d).attr("class", "dancer");
+
+					(function(time) {
+						setTimeout(function() {
+							d3.select(d).attr("class", "dancer on");
+						}, time);
+					})(delay);
+					delay += 100;
+				});
+			}
+
 			d3.json("/js/projects/dancers.json", function(data) {
 				data.forEach(function(dancer) {
 					var dancerGroup = svg.append("g")
@@ -64,17 +80,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						});
 				});
 
-				var delay = 0;
-
-				d3.selectAll(".dancer")[0].forEach(function(d, i) {
-					(function(time) {
-						setTimeout(function() {
-							d3.select(d).attr("class", "dancer on");
-						}, time);
-					})(delay);
-
-					delay += 100;
-				})
+				animateDancers();
+				
+				var interval = setInterval(animateDancers, 7000);
 
 			});
 		},

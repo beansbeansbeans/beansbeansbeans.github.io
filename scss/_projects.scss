@@ -56,7 +56,7 @@
 	.dancer {
 		opacity: 0;
 		&.on {
-			@include animation(dancer 5s linear infinite);
+			@include animation(dancer 4s linear forwards);
 		}
 	}
 }

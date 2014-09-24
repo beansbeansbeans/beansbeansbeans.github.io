@@ -107,10 +107,10 @@
   opacity: 0;
 }
 #project-dancers .dancer.on {
-  -webkit-animation: dancer 5s linear infinite;
-  -moz-animation: dancer 5s linear infinite;
-  -o-animation: dancer 5s linear infinite;
-  animation: dancer 5s linear infinite;
+  -webkit-animation: dancer 4s linear forwards;
+  -moz-animation: dancer 4s linear forwards;
+  -o-animation: dancer 4s linear forwards;
+  animation: dancer 4s linear forwards;
 }
 
 @-webkit-keyframes dancer {
