@@ -82,7 +82,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 				animateDancers();
 
-				var interval = setInterval(animateDancers, 10000);
+				var interval = setInterval(animateDancers, 15000);
 
 			});
 		},
