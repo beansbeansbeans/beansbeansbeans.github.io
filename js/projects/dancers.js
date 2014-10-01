@@ -76,7 +76,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 							});
 						})
 						.on("mouseout", function() {
-							window.cancelAnimationFrame(morphTimeoutID);
+							window.cancelAnimationFrame(self.rafID);
 						});
 				});
 
