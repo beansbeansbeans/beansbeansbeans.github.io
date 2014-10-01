@@ -1,6 +1,7 @@
 define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 	var dancers = {
 		rafID: null,
+		intervalID: null,
 		initialize: function() {
 			var data = {
 				identifier: "dancers",
@@ -25,8 +26,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					.attr("height", 500)
 				.append("g");
 
-			var morphTimeoutID = null,
-				morph = function(element, data, initialTension) {
+			var morph = function(element, data, initialTension) {
 					var newTension = ((initialTension - 0.01) < minTension ? minTension : initialTension - 0.01);
 
 					element.attr("data-tension", newTension);
@@ -35,13 +35,12 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						d3.select(d).attr("d", line.tension(newTension)(data[i]));
 					});
 
-					morphTimeoutID = requestAnimationFrame(function() {
+					this.rafID = requestAnimationFrame(function() {
 						morph(element, data, newTension);
 					});
-				};
+				}.bind(this);
 
 			var animateDancers = function() {
-				console.log("animating dancers");
 				var delay = 0;
 
 				d3.selectAll(".dancer")[0].forEach(function(d, i) {
@@ -57,6 +56,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			}
 
 			d3.json("/js/projects/dancers.json", function(data) {
+				var self = this;
 				data.forEach(function(dancer) {
 					var dancerGroup = svg.append("g")
 						.attr("class", "dancer");
@@ -71,7 +71,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 							var element = d3.select(this),
 								initialTension = element.attr("data-tension");
 
-							morphTimeoutID = requestAnimationFrame(function() {
+							self.rafID = requestAnimationFrame(function() {
 								morph(element, dancer, initialTension);
 							});
 						})
@@ -82,12 +82,13 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 				animateDancers();
 
-				var interval = setInterval(animateDancers, 15000);
+				this.intervalID = setInterval(animateDancers, 13500);
 
-			});
+			}.bind(this));
 		},
 		destroy: function() {
-
+			clearInterval(this.intervalID);
+			window.cancelAnimationFrame(this.rafID);
 		}
 	};
 	return dancers;
