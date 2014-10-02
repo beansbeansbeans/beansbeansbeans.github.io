@@ -59,7 +59,7 @@
 	}
 	.dancer {
 		opacity: 0;
-		@include transition(opacity 500ms);
+		@include transition(opacity 150ms);
 		&.on {
 			opacity: 1;
 			@include animation(dancer 4s linear forwards);

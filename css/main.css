@@ -109,10 +109,10 @@
 }
 #project-dancers .dancer {
   opacity: 0;
-  -moz-transition: opacity 500ms;
-  -o-transition: opacity 500ms;
-  -webkit-transition: opacity 500ms;
-  transition: opacity 500ms;
+  -moz-transition: opacity 150ms;
+  -o-transition: opacity 150ms;
+  -webkit-transition: opacity 150ms;
+  transition: opacity 150ms;
 }
 #project-dancers .dancer.on {
   opacity: 1;

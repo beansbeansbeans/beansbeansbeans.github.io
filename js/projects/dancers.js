@@ -12,9 +12,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem animi esse eligendi iste omnis nisi quidem itaque doloremque distinctio beatae?"
 			};
 
-			var manipulating = false;
-
-			var boundingBoxes = [];
+			var manipulating = false,
+				pressed = false,
+				boundingBoxes = [];
 
 			$("#view").html(projectTemplate(data));
 
@@ -29,49 +29,79 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					.attr("id", "dancerGroup")
 					.attr("width", $(window).width())
 					.attr("height", 500)
-				.append("g")
-					.on("mouseup", function() {
-						console.log("mouse up");
-						// this.intervalID = setInterval(animateDancers, 13500);
-						// manipulating = false;
-					});
+				.append("g");
 
-			$("#dancerGroup").on("click", function(e) {
+			$("#dancerGroup").on("mousedown", function(e) {
+				clearInterval(this.intervalID);
+				d3.selectAll(".dancer").attr("class", "dancer");
+				manipulating = true;
+				pressed = true;
+				
+				fan(getClosestIndex(e.offsetX), true);
+
+			}.bind(this)).on("mouseup", function(e) {
+				pressed = false;
+				manipulating = false;
+			}).on("mousemove", function(e) {
+				if(pressed) {
+					fan(getClosestIndex(e.offsetX), false);
+				}
+			});
+
+			var getClosestIndex = function(offsetX) {
 				var closest = null,
-					closestFrameIndex,
-					goal = e.offsetX;
+					closestFrameIndex;
 
 				boundingBoxes.forEach(function(box, index) {
 					var midPoint = box.x + box.width / 2;
-					if(closest == null || Math.abs(midPoint - goal) < Math.abs(closest - goal)) {
+					if(closest == null || Math.abs(midPoint - offsetX) < Math.abs(closest - offsetX)) {
 						closest = midPoint;
 						closestFrameIndex = index;
 					}
 				});
 
-				clearInterval(this.intervalID);
+				return closestFrameIndex;
+			}
 
-				d3.selectAll(".dancer").attr("class", "dancer");
-				manipulating = true;
-				fan(closestFrameIndex);
-			}.bind(this));
-
-			var fan = function(start) {
+			var fan = function(start, stagger) {
 				var opacity = 1,
 					index = 1,
 					left = start,
-					right = start;
+					right = start,
+					delay = 0;
 
-				while(opacity > 0.05) {
-					(function(o, i, l, r) {
-						setTimeout(function() {
-							$(".dancer:eq(" + l + ")").css("opacity", o);
-							$(".dancer:eq(" + r + ")").css("opacity", o);
-						}, 50 * i);
-					})(opacity, index, left, right);
+				var easeOut = function (t) {
+				    var b = 0, c = 300, d = 10;
+					t /= d;
+					return -c * t*(t-2) + b;
+				};
 
-					opacity = Math.pow(0.55, index);
+				$(".dancer").css("opacity", 0);
 
+				while(opacity > 0.001) {
+					if(stagger) {
+						(function(o, i, l, r, d) {
+							setTimeout(function() {
+								if(l >= 0) {
+									$(".dancer:eq(" + l + ")").css("opacity", o);
+								}
+								if(r < boundingBoxes.length) {
+									$(".dancer:eq(" + r + ")").css("opacity", o);
+								}
+							}, d);
+						})(opacity, index, left, right, delay);
+
+						delay = easeOut(index);
+					} else {
+						if(left >= 0) {
+							$(".dancer:eq(" + left + ")").css("opacity", opacity);
+						}
+						if(right < boundingBoxes.length) {
+							$(".dancer:eq(" + right + ")").css("opacity", opacity);
+						}
+					}
+
+					opacity = Math.pow(0.58, index);
 					index++;
 					left--;
 					right++;
