@@ -105,10 +105,10 @@
 }
 #project-dancers .dancer {
   opacity: 0;
-  -moz-transition: opacity 250ms;
-  -o-transition: opacity 250ms;
-  -webkit-transition: opacity 250ms;
-  transition: opacity 250ms;
+  -moz-transition: opacity 500ms;
+  -o-transition: opacity 500ms;
+  -webkit-transition: opacity 500ms;
+  transition: opacity 500ms;
 }
 #project-dancers .dancer.on {
   -webkit-animation: dancer 4s linear forwards;
@@ -129,7 +129,7 @@
     opacity: 0.2;
   }
 
-  20% {
+  20%, 100% {
     opacity: 0;
   }
 }
@@ -142,7 +142,7 @@
     opacity: 0.2;
   }
 
-  20% {
+  20%, 100% {
     opacity: 0;
   }
 }
@@ -155,7 +155,7 @@
     opacity: 0.2;
   }
 
-  20% {
+  20%, 100% {
     opacity: 0;
   }
 }
@@ -168,7 +168,7 @@
     opacity: 0.2;
   }
 
-  20% {
+  20%, 100% {
     opacity: 0;
   }
 }

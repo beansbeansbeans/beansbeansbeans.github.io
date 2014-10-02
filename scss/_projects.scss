@@ -55,8 +55,9 @@
 	}
 	.dancer {
 		opacity: 0;
-		@include transition(opacity 250ms);
+		@include transition(opacity 500ms);
 		&.on {
+			opacity: 1;
 			@include animation(dancer 4s linear forwards);
 		}
 		&.active {
@@ -72,7 +73,7 @@
 	6% {
 		opacity: 0.2
 	}
-	20% {
+	20%, 100% {
 		opacity: 0;
 	}
 }
