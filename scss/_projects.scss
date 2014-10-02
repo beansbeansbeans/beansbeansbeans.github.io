@@ -55,8 +55,12 @@
 	}
 	.dancer {
 		opacity: 0;
+		@include transition(opacity 250ms);
 		&.on {
 			@include animation(dancer 4s linear forwards);
+		}
+		&.active {
+			opacity: 0.5;
 		}
 	}
 }
