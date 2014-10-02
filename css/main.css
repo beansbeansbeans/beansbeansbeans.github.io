@@ -98,6 +98,10 @@
   height: 142px;
 }
 
+#project-dancers .project-contents {
+  margin-top: 1.5625em;
+  margin-bottom: 1.5625em;
+}
 #project-dancers path {
   fill: none;
   stroke: #7096ad;
@@ -111,6 +115,7 @@
   transition: opacity 500ms;
 }
 #project-dancers .dancer.on {
+  opacity: 1;
   -webkit-animation: dancer 4s linear forwards;
   -moz-animation: dancer 4s linear forwards;
   -o-animation: dancer 4s linear forwards;

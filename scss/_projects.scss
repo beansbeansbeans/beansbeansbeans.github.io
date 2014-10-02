@@ -48,6 +48,10 @@
 }
 
 #project-dancers {
+	.project-contents {
+		@include leader(5);
+		@include trailer(5);
+	}
 	path {
 		fill: none;
 		stroke: rgba($blue, 1);

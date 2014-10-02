@@ -50,6 +50,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				});
 
 				clearInterval(this.intervalID);
+
 				d3.selectAll(".dancer").attr("class", "dancer");
 				manipulating = true;
 				fan(closestFrameIndex);
@@ -61,7 +62,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					left = start,
 					right = start;
 
-				while(opacity > 0.1) {
+				while(opacity > 0.05) {
 					(function(o, i, l, r) {
 						setTimeout(function() {
 							$(".dancer:eq(" + l + ")").css("opacity", o);
@@ -69,7 +70,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						}, 50 * i);
 					})(opacity, index, left, right);
 
-					opacity -= 0.1;
+					opacity = Math.pow(0.55, index);
+
 					index++;
 					left--;
 					right++;
@@ -138,6 +140,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 							window.cancelAnimationFrame(self.rafID);
 						});
 				});
+
+				d3.select("#dancerGroup").attr("width", boundingBoxes[boundingBoxes.length - 1].x + boundingBoxes[boundingBoxes.length - 1].width + 75);
 
 				animateDancers();
 
