@@ -1,7 +1,7 @@
 define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 	var dancers = {
 		rafID: null,
-		intervalID: null,
+		timeoutID: null,
 		initialize: function() {
 			var data = {
 				identifier: "dancers",
@@ -12,39 +12,40 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem animi esse eligendi iste omnis nisi quidem itaque doloremque distinctio beatae?"
 			};
 
-			var manipulating = false,
-				pressed = false,
-				boundingBoxes = [];
-
 			$("#view").html(projectTemplate(data));
 
-			var maxTension = 1,
-				minTension = -0;
-
-			var line = d3.svg.line()
-				.interpolate("cardinal");
-
-			var svg = d3.select("#project-dancers .project-contents")
-				.append("svg")
-					.attr("id", "dancerGroup")
-					.attr("width", $(window).width())
-					.attr("height", 500)
-				.append("g");
+			var manipulating = false,
+				pressed = false,
+				boundingBoxes = [],
+				maxTension = 1,
+				minTension = -0,
+				currentFrame = 0,
+				danceInterval = 13500,
+				line = d3.svg.line().interpolate("cardinal"),
+				svg = d3.select("#project-dancers .project-contents")
+					.append("svg")
+						.attr("id", "dancerGroup")
+						.attr("width", $(window).width())
+						.attr("height", 500)
+					.append("g");
 
 			$("#dancerGroup").on("mousedown", function(e) {
-				clearInterval(this.intervalID);
+				clearTimeout(this.timeoutID);
 				d3.selectAll(".dancer").attr("class", "dancer");
 				manipulating = true;
 				pressed = true;
+				currentFrame = getClosestIndex(e.offsetX);
 				
-				fan(getClosestIndex(e.offsetX), true);
-
+				fan(currentFrame, true);
 			}.bind(this)).on("mouseup", function(e) {
 				pressed = false;
 				manipulating = false;
-			}).on("mousemove", function(e) {
+				$(".dancer").css("opacity", 0);
+				animateDancers(currentFrame);
+			}.bind(this)).on("mousemove", function(e) {
 				if(pressed) {
-					fan(getClosestIndex(e.offsetX), false);
+					currentFrame = getClosestIndex(e.offsetX);
+					fan(currentFrame, false);
 				}
 			});
 
@@ -68,13 +69,12 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					index = 1,
 					left = start,
 					right = start,
-					delay = 0;
-
-				var easeOut = function (t) {
-				    var b = 0, c = 300, d = 10;
-					t /= d;
-					return -c * t*(t-2) + b;
-				};
+					delay = 0,
+					easeOut = function (t) {
+					    var b = 0, c = 300, d = 10;
+						t /= d;
+						return -c * t*(t-2) + b;
+					};
 
 				$(".dancer").css("opacity", 0);
 
@@ -122,24 +122,30 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				});
 			}.bind(this);
 
-			var animateDancers = function() {
-				var delay = 0;
+			var animateDancers = function(startIndex) {
+				console.log("animate dancers being called");
+				if(!manipulating) {
+					var delay = 0,
+						start = startIndex || 0;
 
-				d3.selectAll(".dancer")[0].forEach(function(d, i) {
-					d3.select(d).attr("class", "dancer");
+					d3.selectAll(".dancer")[0].forEach(function(d, i) {
+						d3.select(d).attr("class", "dancer");
 
-					(function(time) {
-						setTimeout(function() {
-							if(!manipulating) {
-								d3.select(d).attr("class", "dancer on");
-							}
-						}, time);
-					})(delay);
-					delay += 100;
-				});
-			}
-
-			window.boxes = boundingBoxes;
+						if(i > start) {
+							(function(time, element) {
+								setTimeout(function() {
+									if(!manipulating) {
+										d3.select(element).attr("class", "dancer on");
+									}
+								}, time);
+							})(delay, d);
+							delay += 100;
+						}
+					});
+					
+					this.timeoutID = setTimeout(animateDancers, danceInterval);
+				}
+			}.bind(this);
 
 			d3.json("/js/projects/dancers.json", function(data) {
 				var self = this;
@@ -175,13 +181,12 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 				animateDancers();
 
-				this.intervalID = setInterval(animateDancers, 13500);
-
 			}.bind(this));
 		},
 		destroy: function() {
-			clearInterval(this.intervalID);
 			window.cancelAnimationFrame(this.rafID);
+			window.clearTimeout(this.timeoutID);
+			this.onPage = false;
 		}
 	};
 	return dancers;
