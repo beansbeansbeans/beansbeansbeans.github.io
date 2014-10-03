@@ -18,9 +18,13 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			var manipulating = false,
 				pressed = false,
 				boundingBoxes = [],
+				progressData = [],
 				maxTension = 1,
 				minTension = -0,
 				currentFrame = 0,
+				previousFrame,
+				morphCount = 0,
+				rafCount = 0,
 				danceInterval = 115,
 				self = this,
 				line = d3.svg.line().interpolate("cardinal"),
@@ -42,7 +46,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				currentFrame = getClosestIndex(e.offsetX);
 				
 				fan(currentFrame, true);
+				this.rafID = requestAnimationFrame(morph);
 			}.bind(this)).on("mouseup", function(e) {
+				window.cancelAnimationFrame(self.rafID);
 				pressed = false;
 				manipulating = false;
 				$(".dancer").css("opacity", 0);
@@ -98,26 +104,65 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						$(".dancer:eq(" + right + ")").css("opacity", opacity);
 					}
 
-					opacity = Math.pow(0.58, index);
-					index++;
 					left = (left - 1 < 0) ? 0 : left - 1;
 					right = (right + 1 > boundingBoxes.length) ? boundingBoxes.length : right + 1;
+					opacity = Math.pow(0.58, index);
+					index++;
 				}
 			};
 
-			var morph = function(element, data, initialTension) {
-				var newTension = ((initialTension - 0.01) < minTension ? minTension : initialTension - 0.01);
+			var morph = function() {
+				// var newTension = ((initialTension - 0.01) < minTension ? minTension : initialTension - 0.01);
 
-				element.attr("data-tension", newTension);
+				// element.attr("data-tension", newTension);
 
-				element.selectAll("path")[0].forEach(function(d, i) {
-					d3.select(d).attr("d", line.tension(newTension)(data[i]));
-				});
+				// element.selectAll("path")[0].forEach(function(d, i) {
+				// 	d3.select(d).attr("d", line.tension(newTension)(data[i]));
+				// });
 
-				this.rafID = requestAnimationFrame(function() {
-					morph(element, data, newTension);
-				});
+				// this.rafID = requestAnimationFrame(function() {
+				// 	morph(element, data, newTension);
+				// });
+				
+				if(Math.floor(rafCount) % 20 === 0) {
+					console.log("=====================");
+				
+					if(previousFrame !== currentFrame) {
+						console.log("CHANGED FRAMES");
+						morphCount = 0;
+					} else {
+						morphCount++;
+						console.log(morphCount);
+					}
+
+					for(i=1; i<morphCount; i++) {
+						console.log("passing...");
+						console.log("morphing frame (current frame): " + currentFrame);
+						progressData[currentFrame] = progressData[currentFrame] + 1;
+						for(j=i; j>0; j--) {
+							console.log("morphing frame: " + (currentFrame - j));
+							console.log("morphing frame: " + (currentFrame + j));
+							if(currentFrame - j > 0) {
+								progressData[currentFrame - j] = progressData[currentFrame - j] + 1;
+							}
+							progressData[currentFrame + j] = progressData[currentFrame + j] + 1;
+						}
+					}
+
+					update();
+				}
+
+				previousFrame = currentFrame;
+				rafCount++;
+				this.rafID = requestAnimationFrame(morph);
 			}.bind(this);
+
+			window.progress = progressData;
+
+			var update = function() {
+				console.log("rebound data");
+				var dancer = svg.selectAll(".dancer").data(progress);
+			};
 
 			var animateDancers = function(startIndex) {
 				if(!manipulating) {
@@ -159,18 +204,20 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						width: dancerGroup.node().getBBox().width
 					});
 
-					dancerGroup.attr("data-tension", maxTension)
-						.on("mouseover", function() {
-							var element = d3.select(this),
-								initialTension = element.attr("data-tension");
+					progressData.push(0);
 
-							self.rafID = requestAnimationFrame(function() {
-								morph(element, dancer, initialTension);
-							});
-						})
-						.on("mouseout", function() {
-							window.cancelAnimationFrame(self.rafID);
-						});
+					dancerGroup.attr("data-tension", maxTension)
+						// .on("mouseover", function() {
+						// 	var element = d3.select(this),
+						// 		initialTension = element.attr("data-tension");
+
+						// 	self.rafID = requestAnimationFrame(function() {
+						// 		morph(element, dancer, initialTension);
+						// 	});
+						// })
+						// .on("mouseout", function() {
+						// 	window.cancelAnimationFrame(self.rafID);
+						// });
 				});
 
 				d3.select("#dancerGroup").attr("width", boundingBoxes[boundingBoxes.length - 1].x + boundingBoxes[boundingBoxes.length - 1].width + 75);
