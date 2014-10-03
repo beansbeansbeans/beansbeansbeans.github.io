@@ -2,6 +2,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 	var dancers = {
 		rafID: null,
 		timeoutID: null,
+		framesTimeoutIDs: [],
 		initialize: function() {
 			var data = {
 				identifier: "dancers",
@@ -20,7 +21,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				maxTension = 1,
 				minTension = -0,
 				currentFrame = 0,
-				danceInterval = 13500,
+				danceInterval = 115,
+				self = this,
 				line = d3.svg.line().interpolate("cardinal"),
 				svg = d3.select("#project-dancers .project-contents")
 					.append("svg")
@@ -31,6 +33,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			$("#dancerGroup").on("mousedown", function(e) {
 				clearTimeout(this.timeoutID);
+				this.framesTimeoutIDs.forEach(function(d) {
+					window.clearTimeout(d);
+				});
 				d3.selectAll(".dancer").attr("class", "dancer");
 				manipulating = true;
 				pressed = true;
@@ -123,7 +128,6 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			}.bind(this);
 
 			var animateDancers = function(startIndex) {
-				console.log("animate dancers being called");
 				if(!manipulating) {
 					var delay = 0,
 						start = startIndex || 0;
@@ -132,18 +136,18 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						d3.select(d).attr("class", "dancer");
 
 						if(i > start) {
-							(function(time, element) {
-								setTimeout(function() {
+							(function(time, element, index) {
+								self.framesTimeoutIDs[index] = setTimeout(function() {
 									if(!manipulating) {
 										d3.select(element).attr("class", "dancer on");
 									}
 								}, time);
-							})(delay, d);
+							})(delay, d, i);
 							delay += 100;
 						}
 					});
 					
-					this.timeoutID = setTimeout(animateDancers, danceInterval);
+					this.timeoutID = setTimeout(animateDancers, danceInterval * ( boundingBoxes.length - start));
 				}
 			}.bind(this);
 
@@ -186,6 +190,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 		destroy: function() {
 			window.cancelAnimationFrame(this.rafID);
 			window.clearTimeout(this.timeoutID);
+			this.framesTimeoutIDs.forEach(function(d) {
+				window.clearTimeout(d);
+			});
 			this.onPage = false;
 		}
 	};
