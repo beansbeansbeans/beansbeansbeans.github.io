@@ -87,29 +87,21 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					if(stagger) {
 						(function(o, i, l, r, d) {
 							setTimeout(function() {
-								if(l >= 0) {
-									$(".dancer:eq(" + l + ")").css("opacity", o);
-								}
-								if(r < boundingBoxes.length) {
-									$(".dancer:eq(" + r + ")").css("opacity", o);
-								}
+								$(".dancer:eq(" + l + ")").css("opacity", o);
+								$(".dancer:eq(" + r + ")").css("opacity", o);
 							}, d);
 						})(opacity, index, left, right, delay);
 
 						delay = easeOut(index);
 					} else {
-						if(left >= 0) {
-							$(".dancer:eq(" + left + ")").css("opacity", opacity);
-						}
-						if(right < boundingBoxes.length) {
-							$(".dancer:eq(" + right + ")").css("opacity", opacity);
-						}
+						$(".dancer:eq(" + left + ")").css("opacity", opacity);
+						$(".dancer:eq(" + right + ")").css("opacity", opacity);
 					}
 
 					opacity = Math.pow(0.58, index);
 					index++;
-					left--;
-					right++;
+					left = (left - 1 < 0) ? 0 : left - 1;
+					right = (right + 1 > boundingBoxes.length) ? boundingBoxes.length : right + 1;
 				}
 			};
 
