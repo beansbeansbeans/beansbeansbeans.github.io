@@ -4,10 +4,10 @@ define(['lib/d3', 'underscore', 'templates/project_detail'], function(d3, _, pro
 			var data = {
 				identifier: "hiveplot",
 				title: "Hiveplot",
-				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, perspiciatis!",
+				blurb: "This is a visualization of dependencies in a CSS library. Each node represents a variable, mixin, or class, and each line represents a dependency. Hover over any node to see its name and dependencies.",
 				projectContents: '<div id="hiveplot"><div id="changeTransition"><div class="collapser">Sort nodes <span>&#x25BC;</span></div><ul><li><a data-sort="natural" class="active">Natural</a></li><li><a data-sort="import">Import count</a></li></ul></div><div id="filters"><div class="collapser">Filter nodes <span>&#x25BC;</span></div><ul></ul></div><div id="chart"></div></div>',
-				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, cumque!",
-				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, veritatis consequatur suscipit labore minima quisquam numquam nemo harum, inventore laboriosam."
+				caption: "Built with d3js, a hiveplot graph plugin for d3js, and scalable vector graphics.",
+				description: "This visualization is based on <a href='http://bost.ocks.org/mike/hive/' target='_blank'>Mike Bostock's implementation</a>.<br/><br/>Each node represents a variable, mixin, or class, and each line represents a dependency. You can hover over any node to see its name and dependencies. Nodes on the vertical axis have no dependents, nodes on the lower left-hand axis have no dependencies, and nodes on the lower right-hand axes have both. <br/><br/>By default, nodes are listed in the order of their appearance in the library. You can change this by selecting 'Import count' in the 'Sort nodes' dropdown menu, which will list nodes in the order of their dependencies count.<br/><br/>By default, nodes representing all stylistic categories (font-size, color, etc.) are shown. You can change this by unchecking categories in the 'Filter nodes' dropdown menu."
 			};
 
 			$("#view").html(projectTemplate(data));
