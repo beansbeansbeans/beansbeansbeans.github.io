@@ -142,14 +142,15 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			var tensionScale = d3.scale.linear().domain([0, 200]).range([maxTension, minTension]),
 				colorScale = d3.scale.linear().domain([0, 200]).interpolate(d3.interpolateHsl).range(['#7096ad', '#6F76BA']),
-				strokeScale = d3.scale.linear().domain([0, 200]).range([2, 5]);
+				strokeScale = d3.scale.linear().domain([0, 400]).range([2, 5]);
+
 
 			var update = function() {
 				var dancer = svg.selectAll(".dancer").data(progress)
 					.attr("data-test", function(d, i) {
 						if(d3.select(this).attr("data-opacity") > 0) {
 							d3.select(this).selectAll("path")[0].forEach(function(path, index) {
-								d3.select(path).attr("d", d < 200 ? line.tension(tensionScale(d))(pathData[i][index]) : line.tension(tensionScale(200))(pathData[i][index])).style("stroke", d < 200 ? colorScale(d) : colorScale(200)).style("stroke-width", d < 200 ? strokeScale(d) : strokeScale(200));
+								d3.select(path).attr("d", d < 200 ? line.tension(tensionScale(d))(pathData[i][index]) : line.tension(tensionScale(200))(pathData[i][index])).style("stroke", d < 200 ? colorScale(d) : colorScale(200)).style("stroke-width", d < 400 ? strokeScale(d) : strokeScale(400));
 							});
 						}
 					});
