@@ -7,7 +7,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			var data = {
 				identifier: "dancers",
 				title: "Dancers",
-				blurb: "This is an animation of a ballet dancer performing a grand allegro. Drag along the dancer's path to warp her figure.",
+				blurb: "This is a ballet dancer performing an interlaced throw. Drag along the dancer's path to warp her figure.",
 				projectContents: '',
 				caption: "Built with d3js and scalable vector graphics.",
 				description: "The longer you drag over the frames, the thicker, slacker, and bluer they become. I tried to cap the distortion at a point where the dancer was still nice looking."

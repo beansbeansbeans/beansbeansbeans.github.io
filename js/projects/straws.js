@@ -143,10 +143,10 @@ define(['templates/project_detail'], function(projectTemplate) {
 			var data = {
 				identifier: "straws",
 				title: "Straws",
-				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta quibusdam voluptatibus aperiam doloribus vero, repudiandae officia odio consectetur sequi?",
+				blurb: "These are some straws and bubbles inside a glass. The glass tips from side to side with your device's accelerometer, or when you hover over the big black arrows.",
 				projectContents: '<div id="glass"><div id="glassBack"></div><div id="glassOutline"><div id="bubbleContainer"></div></div></div><div id="plus"></div><div id="minus"></div>',
-				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, laboriosam.",
-				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium iste eius vero quasi debitis molestiae omnis ea quas. Quibusdam, est."
+				caption: "Build with JavaScript and CSS keyframe animations.",
+				description: "I wanted to build an effect involving straws in a tippable, water-filled glass where the above-water portions of the straws would be rendered photorealistically, but the refracted portions would be rendered with code in a dramatically distorted way. But after building the foundation for the effect - the straws and the tippable, water-filled glass - I thought the refraction element might be too much."
 			},
 			self = this;
 
