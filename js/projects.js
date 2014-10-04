@@ -22,7 +22,7 @@ define(['templates/project_index'], function(projectIndex) {
 		},
 		{
 			title: "spotlights",
-			description: "A light-sensitive bouncy ball."
+			description: "A light-sensitive bouncing ball."
 		},
 		{
 			title: "hiveplot",

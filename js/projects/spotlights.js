@@ -5,10 +5,10 @@ define(['lib/d3', 'underscore', 'templates/project_detail'], function(d3, _, pro
 			var data = {
 				identifier: "spotlights", 
 				title: "Spotlights", 
-				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, enim.",
+				blurb: "These are some spotlights and a bouncing ball. Adjust the sliders to change the pattern of light.",
 				projectContents: "<div id='sliders'></div><div id='scene'></div>",
-				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque aliquid nostrum quasi veniam, voluptatibus est obcaecati ipsam eum fugit necessitatibus!",
-				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi quam optio id eius doloremque aliquid excepturi pariatur dicta tempore at amet beatae asperiores quae fugit veniam, aspernatur illum aut culpa impedit cumque neque enim tenetur, dolorem dolorum eos! Eveniet, illum."
+				caption: "Built with d3js and scalable vector graphics.",
+				description: "I thought it would be cool to represent overlapping regions of light with arbitrary colors. In this scene I chose different shades of blue and gray to represent one, two, three, or four overlapping regions of light."
 			}
 
 			$("#view").html(projectTemplate(data));
