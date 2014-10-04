@@ -49,6 +49,7 @@ require(['jquery', 'router', 'loader'], function($, Router, Loader) {
                 $("html").removeClass("loading");
                 module.initialize();
             }
+            $(document).scrollTop(0);
         };
 
     router.registerRoute('projects/{projectid}', function(id) {
