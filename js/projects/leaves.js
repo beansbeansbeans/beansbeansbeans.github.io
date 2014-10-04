@@ -4,10 +4,10 @@ define(['templates/project_detail'], function(projectTemplate) {
 			var data = {
 				identifier: "leaves",
 				title: "Leaves",
-				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, perspiciatis!",
+				blurb: "These are line drawings of leaves floating back and forth. Drag the panels up or down to distort the leaves.",
 				projectContents: '<div id="scene"><canvas id="canvas_0"></canvas><canvas id="canvas_1"></canvas><canvas id="canvas_2"></canvas><canvas id="canvas_3"></canvas><canvas id="canvas_4"></canvas><canvas id="canvas_5"></canvas></div>',
-				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, cumque!",
-				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, veritatis consequatur suscipit labore minima quisquam numquam nemo harum, inventore laboriosam."
+				caption: "Built with JavaScript and the canvas element.",
+				description: "I thought it would be cool to manipulate screens - as in, the rectangles inside of which videos or animations play. I thought if you broke a screen into pieces you might still be able to process the video or animation as a whole, but depending on the content each piece of the screen might be interesting to look at by itself.<br/><br/>I ended up implementing the effect with five canvas elements. I originally rendered the leaves with the PaperJS library, but due to performance issues I ended up rewriting it using the Canvas API directly. Performance is terrific in Firefox, decent in Chrome Canary, but pretty awful in stable Chrome due to idiosynchracies in its implementation of the Canvas API's drawImage method."
 			};
 
 			$("#view").html(projectTemplate(data));
