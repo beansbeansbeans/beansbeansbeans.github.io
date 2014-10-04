@@ -99,8 +99,22 @@
 }
 
 #project-dancers .project-contents {
+  position: relative;
   margin-top: 1.5625em;
   margin-bottom: 1.5625em;
+}
+#project-dancers .project-contents:before {
+  content: "";
+  position: absolute;
+  background-image: url(../images/floor.png);
+  background-repeat: no-repeat;
+  width: 1018px;
+  height: 35px;
+  left: 50%;
+  margin-left: -509px;
+  top: 350px;
+  z-index: -1;
+  opacity: 0.8;
 }
 #project-dancers path {
   fill: none;
