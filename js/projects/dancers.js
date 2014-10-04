@@ -7,10 +7,10 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			var data = {
 				identifier: "dancers",
 				title: "Dancers",
-				blurb: "This is an animation of a ballet dancer demonstrating a grand allegro. Drag along the dancer's path to warp her figure.",
+				blurb: "This is an animation of a ballet dancer performing a grand allegro. Drag along the dancer's path to warp her figure.",
 				projectContents: '',
 				caption: "Built with d3js and scalable vector graphics.",
-				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem animi esse eligendi iste omnis nisi quidem itaque doloremque distinctio beatae?"
+				description: "The longer you drag over the frames, the thicker, slacker, and bluer they become. I tried to cap the distortion at a point where the dancer was still nice looking."
 			};
 
 			$("#view").html(projectTemplate(data));

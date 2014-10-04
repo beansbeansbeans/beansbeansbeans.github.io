@@ -9,10 +9,11 @@ return Handlebars.template({"compiler":[5,">= 2.0.0"],"main":function(depth0,hel
     + "</div>\n	</div>\n	<div class=\"project-contents\">\n		";
   stack1 = ((helper = helpers.projectContents || (depth0 && depth0.projectContents)),(typeof helper === functionType ? helper.call(depth0, {"name":"projectContents","hash":{},"data":data}) : helper));
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  return buffer + "\n	</div>\n	<div class=\"caption\">"
+  buffer += "\n	</div>\n	<div class=\"caption\">"
     + escapeExpression(((helper = helpers.caption || (depth0 && depth0.caption)),(typeof helper === functionType ? helper.call(depth0, {"name":"caption","hash":{},"data":data}) : helper)))
-    + "</div>\n	<div class=\"description\">"
-    + escapeExpression(((helper = helpers.description || (depth0 && depth0.description)),(typeof helper === functionType ? helper.call(depth0, {"name":"description","hash":{},"data":data}) : helper)))
-    + "</div>\n\n</div>";
+    + "</div>\n	<div class=\"description\">";
+  stack1 = ((helper = helpers.description || (depth0 && depth0.description)),(typeof helper === functionType ? helper.call(depth0, {"name":"description","hash":{},"data":data}) : helper));
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  return buffer + "</div>\n\n</div>";
 },"useData":true});
 });
