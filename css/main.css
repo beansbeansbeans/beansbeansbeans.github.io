@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url(http://fonts.googleapis.com/css?family=Merriweather:400,300italic);
 @font-face {
   font-family: Brandon;
   font-weight: 300;
@@ -101,7 +102,7 @@
 #project-dancers .project-contents {
   position: relative;
   margin-top: 1.5625em;
-  margin-bottom: 1.5625em;
+  margin-bottom: 2.5em;
 }
 #project-dancers .project-contents:before {
   content: "";
@@ -4758,9 +4759,8 @@ html {
   line-height: 1.11111em;
 }
 
-.medium-text, nav li .description, .log .back,
-.project .back, .log .header .blurb,
-.project .header .blurb, .project .description, #homepage .description {
+.medium-text, .log .back,
+.project .back {
   font-size: 1.5em;
   line-height: 1.25em;
 }
@@ -4774,6 +4774,32 @@ html {
 .project .header .title, #homepage h1 {
   font-size: 3.375em;
   line-height: 1.11111em;
+}
+
+.body-small-text, .project .caption {
+  font-family: Merriweather;
+  font-size: 0.875em;
+  line-height: 1.42857em;
+}
+
+.body-medium-text, nav li .description, .log .description,
+.project .description, .log .header .blurb,
+.project .header .blurb, #homepage .description {
+  font-family: Merriweather;
+  font-size: 1.125em;
+  line-height: 1.66667em;
+}
+
+.body-large-text, .log .header .blurb {
+  font-family: Merriweather;
+  font-size: 1.5em;
+  line-height: 1.66667em;
+}
+
+.body-extra-large-text {
+  font-family: Merriweather;
+  font-size: 3.375em;
+  line-height: 1.2963em;
 }
 
 html:not(.loading) #loader {
@@ -5153,8 +5179,8 @@ nav li .title {
   margin-bottom: 0.55556em;
 }
 nav li .description {
-  color: #93939c;
-  font-weight: 400;
+  color: #a0a0a8;
+  font-weight: 300;
   font-style: italic;
 }
 
@@ -5192,8 +5218,9 @@ nav li .description {
 }
 .log .header .blurb,
 .project .header .blurb {
-  color: #93939c;
+  color: #a0a0a8;
   font-style: italic;
+  font-weight: 300;
 }
 
 .project .project-contents {
@@ -5201,9 +5228,13 @@ nav li .description {
   margin-bottom: 3.125em;
 }
 .project .caption {
-  color: #93939c;
+  font-weight: 300;
+  color: #a0a0a8;
   font-style: italic;
   margin-bottom: 6.25em;
+}
+.project .description {
+  text-align: left;
 }
 .project .header .title {
   text-transform: uppercase;
@@ -5219,8 +5250,9 @@ nav li .description {
 #homepage .description {
   width: 600px;
   margin: 0 auto;
-  color: #93939c;
-  font-weight: 400;
+  color: #a0a0a8;
+  font-weight: 300;
+  font-style: italic;
 }
 #homepage #top-container {
   margin: 0 auto;

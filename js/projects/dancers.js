@@ -7,9 +7,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			var data = {
 				identifier: "dancers",
 				title: "Dancers",
-				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam explicabo repellat odit natus odio? Quia exercitationem adipisci nemo alias pariatur!",
+				blurb: "This is an animation of a ballet dancer demonstrating a grand allegro. Drag along the dancer's path to warp her figure.",
 				projectContents: '',
-				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, ex!",
+				caption: "Built with d3js and scalable vector graphics.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem animi esse eligendi iste omnis nisi quidem itaque doloremque distinctio beatae?"
 			};
 

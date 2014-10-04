@@ -12,7 +12,7 @@ return Handlebars.template({"compiler":[5,">= 2.0.0"],"main":function(depth0,hel
   return buffer + "\n	</div>\n	<div class=\"caption\">"
     + escapeExpression(((helper = helpers.caption || (depth0 && depth0.caption)),(typeof helper === functionType ? helper.call(depth0, {"name":"caption","hash":{},"data":data}) : helper)))
     + "</div>\n	<div class=\"description\">"
-    + escapeExpression(((helper = helpers.caption || (depth0 && depth0.caption)),(typeof helper === functionType ? helper.call(depth0, {"name":"caption","hash":{},"data":data}) : helper)))
+    + escapeExpression(((helper = helpers.description || (depth0 && depth0.description)),(typeof helper === functionType ? helper.call(depth0, {"name":"description","hash":{},"data":data}) : helper)))
     + "</div>\n\n</div>";
 },"useData":true});
 });

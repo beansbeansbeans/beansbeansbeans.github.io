@@ -17,6 +17,25 @@ $text-map: (
 	)
 );
 
+$body-text-map: (
+	small: (
+		font-size: 14px,
+		lines: 4
+	),
+	medium: (
+		font-size: 18px,
+		lines: 6
+	),
+	large: (
+		font-size: 24px,
+		lines: 8
+	),
+	extra-large: (
+		font-size: 54px,
+		lines: 14
+	)
+);
+
 @import "compass";
 @import "library";
 @import "vars";
@@ -24,11 +43,20 @@ $text-map: (
 @import "straws";
 @import "log";
 
+@import url(http://fonts.googleapis.com/css?family=Merriweather:400,300italic);
+
 @include establish-baseline;
 
 @each $text-size, $text in $text-map {
 	.#{$text-size}-text {
 		@include adjust-font-size-to(map-get(map-get($text-map, $text-size), font-size), map-get(map-get($text-map, $text-size), lines));
+	}
+}
+
+@each $text-size, $text in $body-text-map {
+	.body-#{$text-size}-text {
+		font-family: Merriweather;
+		@include adjust-font-size-to(map-get(map-get($body-text-map, $text-size), font-size), map-get(map-get($body-text-map, $text-size), lines));
 	}
 }
 
@@ -191,9 +219,9 @@ nav {
 			@include trailer($font-size: map-get(map-get($text-map, large), font-size), $lines: 4)
 		}
 		.description {
-			@extend .medium-text;
-			color: $gray;
-			font-weight: 400;
+			@extend .body-medium-text;
+			color: $color-body-text-gray;
+			font-weight: 300;
 			font-style: italic;
 		}
 	}
@@ -223,6 +251,9 @@ nav {
 			margin-right: .5em;
 		}
 	}
+	.description {
+		@extend .body-medium-text;
+	}
 	.header {
 		.title {
 			@extend .extra-large-text;
@@ -230,18 +261,17 @@ nav {
 			@include trailer($font-size: map-get(map-get($text-map, extra-large), font-size), $lines: 8);
 		}
 		.blurb {
-			color: $gray;
+			color: $color-body-text-gray;
 			font-style: italic;
-			@extend .medium-text;
+			@extend .body-medium-text;
+			font-weight: 300;
 		}
 	}
 }
 
-// log detail
-
 .log {
-	.log-contents {
-
+	.header .blurb {
+		@extend .body-large-text;
 	}
 }
 
@@ -255,13 +285,15 @@ nav {
 	}
 
 	.caption {
-		color: $gray;
+		@extend .body-small-text;
+		font-weight: 300;
+		color: $color-body-text-gray;
 		font-style: italic;
 		@include trailer(20);
 	}
 
 	.description {
-		@extend .medium-text;
+		text-align: left;
 	}
 
 	.header .title {
@@ -284,11 +316,12 @@ $frame-height: 419px;
 		text-transform: uppercase;
 	}
 	.description {
-		@extend .medium-text;
+		@extend .body-medium-text;
 		width: $content-width;
 		margin: 0 auto;
-		color: $gray;
-		font-weight: 400;
+		color: $color-body-text-gray;
+		font-weight: 300;
+		font-style: italic;
 	}
 	#top-container {
 		margin: 0 auto;

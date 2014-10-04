@@ -1,5 +1,3 @@
-82
-
 define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRenderer) {
     var boyhood = {
         initialize: function() {

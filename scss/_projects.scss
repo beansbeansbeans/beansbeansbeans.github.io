@@ -51,7 +51,7 @@
 	.project-contents {
 		position: relative;
 		@include leader(5);
-		@include trailer(5);
+		@include trailer(8);
 		&:before {
 			content: "";
 			position: absolute;
