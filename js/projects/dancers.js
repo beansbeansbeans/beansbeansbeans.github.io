@@ -141,7 +141,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			window.progress = progressData;
 
 			var tensionScale = d3.scale.linear().domain([0, 200]).range([maxTension, minTension]),
-				colorScale = d3.scale.linear().domain([0, 200]).interpolate(d3.interpolateHsl).range(['#7096ad', '#6F76BA']),
+				colorScale = d3.scale.linear().domain([0, 200]).interpolate(d3.interpolateRgb).range(['#7096ad', '#00303e']),
 				strokeScale = d3.scale.linear().domain([0, 400]).range([2, 5]);
 
 
