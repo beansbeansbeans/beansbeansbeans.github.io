@@ -45,8 +45,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				manipulating = true;
 				pressed = true;
 				currentFrame = getClosestIndex(e.offsetX);
-				
-				fan(currentFrame, true);
+				fan(currentFrame);
 				this.rafID = requestAnimationFrame(morph);
 			}.bind(this)).on("mouseup", function(e) {
 				window.cancelAnimationFrame(self.rafID);
@@ -57,7 +56,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			}.bind(this)).on("mousemove", function(e) {
 				if(pressed) {
 					currentFrame = getClosestIndex(e.offsetX);
-					fan(currentFrame, false);
+					fan(currentFrame);
 				}
 			});
 
@@ -76,12 +75,11 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				return closestFrameIndex;
 			}
 
-			var fan = function(start, stagger) {
+			var fan = function(start) {
 				var opacity = 1,
 					index = 1,
 					left = start,
 					right = start,
-					delay = 0,
 					easeOut = function (t) {
 					    var b = 0, c = 300, d = 10;
 						t /= d;
@@ -91,19 +89,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				$(".dancer").css("opacity", 0).attr("data-opacity", 0);
 
 				while(opacity > 0.001) {
-					if(stagger) {
-						(function(o, i, l, r, d) {
-							setTimeout(function() {
-								$(".dancer:eq(" + l + ")").css("opacity", o).attr("data-opacity", o);
-								$(".dancer:eq(" + r + ")").css("opacity", o).attr("data-opacity", o);
-							}, d);
-						})(opacity, index, left, right, delay);
-
-						delay = easeOut(index);
-					} else {
-						$(".dancer:eq(" + left + ")").css("opacity", opacity).attr("data-opacity", opacity);
-						$(".dancer:eq(" + right + ")").css("opacity", opacity).attr("data-opacity", opacity);
-					}
+					$(".dancer:eq(" + left + ")").css("opacity", opacity).attr("data-opacity", opacity);
+					$(".dancer:eq(" + right + ")").css("opacity", opacity).attr("data-opacity", opacity);
 
 					left = (left - 1 < 0) ? 0 : left - 1;
 					right = (right + 1 > boundingBoxes.length) ? boundingBoxes.length : right + 1;
@@ -145,7 +132,6 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			var tensionScale = d3.scale.linear().domain([0, 200]).range([maxTension, minTension]),
 				colorScale = d3.scale.linear().domain([0, 200]).interpolate(d3.interpolateRgb).range(['#7096ad', '#00303e']),
 				strokeScale = d3.scale.linear().domain([0, 400]).range([2, 5]);
-
 
 			var update = function() {
 				var dancer = svg.selectAll(".dancer").data(progress)
