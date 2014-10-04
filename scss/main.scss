@@ -294,6 +294,13 @@ nav {
 
 	.description {
 		text-align: left;
+		a {
+			color: $blue;
+			@include transition(all 250ms);
+			&:hover {
+				color: $pale-blue;
+			}
+		}
 	}
 
 	.header .title {

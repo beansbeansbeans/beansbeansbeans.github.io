@@ -5,10 +5,10 @@ define(['fisheye', 'lib/d3', 'templates/project_detail'], function(fisheye, d3, 
 			var data = {
 				identifier: "pixels",
 				title: "Pixels",
-				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, perspiciatis!",
+				blurb: "This is an animation of a turning head. Hover over any pixel within the animation to magnify it.",
 				projectContents: '<div id="border"><div id="movie"></div></div>',
-				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, cumque!",
-				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, veritatis consequatur suscipit labore minima quisquam numquam nemo harum, inventore laboriosam."
+				caption: "Built with d3js, a fisheye distortion plugin for d3js, and scalable vector graphics.",
+				description: "I wanted to try to apply a <a href='http://bost.ocks.org/mike/fisheye/' target='_blank'>Cartesian distortion effect</a> to a pixellated image."
 			};
 
 			$("#view").html(projectTemplate(data));

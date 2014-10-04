@@ -5236,6 +5236,16 @@ nav li .description {
 .project .description {
   text-align: left;
 }
+.project .description a {
+  color: #7096ad;
+  -moz-transition: all 250ms;
+  -o-transition: all 250ms;
+  -webkit-transition: all 250ms;
+  transition: all 250ms;
+}
+.project .description a:hover {
+  color: #c1d1de;
+}
 .project .header .title {
   text-transform: uppercase;
 }
