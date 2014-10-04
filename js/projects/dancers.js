@@ -112,13 +112,15 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				}
 			};
 
-			var morph = function() {				
-				if(Math.floor(rafCount) % 20 === 0) {
+			var morph = function() {	
+				if(Math.floor(rafCount) % 25 === 0) {
 					if(previousFrame !== currentFrame) {
 						morphCount = 0;
 					} else {
 						morphCount++;
 					}
+
+					progressData[currentFrame] = progressData[currentFrame] + 1;
 
 					for(i=1; i<morphCount; i++) {
 						progressData[currentFrame] = progressData[currentFrame] + 1;
