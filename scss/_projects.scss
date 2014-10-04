@@ -54,8 +54,8 @@
 	}
 	path {
 		fill: none;
-		stroke: rgba($blue, 1);
-		stroke-width: 3;
+		stroke: $blue;
+		stroke-width: 2;
 	}
 	.dancer {
 		opacity: 0;
@@ -74,10 +74,10 @@
 	3%, 3.5% {
 		opacity: 1
 	}
-	6% {
+	5% {
 		opacity: 0.2
 	}
-	20%, 100% {
+	15%, 100% {
 		opacity: 0;
 	}
 }

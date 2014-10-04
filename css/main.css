@@ -105,7 +105,7 @@
 #project-dancers path {
   fill: none;
   stroke: #7096ad;
-  stroke-width: 3;
+  stroke-width: 2;
 }
 #project-dancers .dancer {
   opacity: 0;
@@ -130,11 +130,11 @@
     opacity: 1;
   }
 
-  6% {
+  5% {
     opacity: 0.2;
   }
 
-  20%, 100% {
+  15%, 100% {
     opacity: 0;
   }
 }
@@ -143,11 +143,11 @@
     opacity: 1;
   }
 
-  6% {
+  5% {
     opacity: 0.2;
   }
 
-  20%, 100% {
+  15%, 100% {
     opacity: 0;
   }
 }
@@ -156,11 +156,11 @@
     opacity: 1;
   }
 
-  6% {
+  5% {
     opacity: 0.2;
   }
 
-  20%, 100% {
+  15%, 100% {
     opacity: 0;
   }
 }
@@ -169,11 +169,11 @@
     opacity: 1;
   }
 
-  6% {
+  5% {
     opacity: 0.2;
   }
 
-  20%, 100% {
+  15%, 100% {
     opacity: 0;
   }
 }
