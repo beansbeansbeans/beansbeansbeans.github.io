@@ -363,7 +363,7 @@
 		width: rhythm($lines: 10, $font-size: map-get(map-get($text-map, large), font-size));
 		height: rhythm($lines: 10, $font-size: map-get(map-get($text-map, large), font-size));
 		margin: 0 15px;
-		@include trailer($lines: 20, $font-size: map-get(map-get($text-map, large), font-size));
+		@include trailer($lines: 12, $font-size: map-get(map-get($text-map, large), font-size));
 		@include border-radius(5px);
 		text-align: center;
 		@include adjust-font-size-to(map-get(map-get($text-map, large), font-size), $lines: 9.75);

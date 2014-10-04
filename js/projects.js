@@ -5,16 +5,16 @@ define(['templates/project_index'], function(projectIndex) {
 			description: "A ballet dancer with morphing frames."
 		},
 		{
-			title: "straws",
-			description: "Straws resting inside an unstable glass."
-		},
-		{
 			title: "notes",
 			description: "A random melody maker."
 		},
 		{
 			title: "pixels",
 			description: "A face made of warpable pixels."
+		},
+		{
+			title: "straws",
+			description: "Straws resting inside an unstable glass."
 		},
 		{
 			title: "leaves",
