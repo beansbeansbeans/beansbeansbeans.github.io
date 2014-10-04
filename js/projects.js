@@ -2,31 +2,31 @@ define(['templates/project_index'], function(projectIndex) {
 	var data = [
 		{
 			title: "dancers",
-			description: "Animation of a ballet dancer with manipulable frames."
+			description: "A ballet dancer with morphing frames."
 		},
 		{
 			title: "straws",
-			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet porro, natus excepturi."
+			description: "Straws resting inside an unstable glass."
 		},
 		{
 			title: "notes",
-			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam at dicta a itaque."
-		},
-		{
-			title: "leaves",
-			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem fugit veritatis, aliquid?"
+			description: "A random melody maker."
 		},
 		{
 			title: "pixels",
-			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, perferendis!"
+			description: "A face made of warpable pixels."
 		},
 		{
-			title: "hiveplot",
-			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non explicabo porro id perferendis, officia alias!"
+			title: "leaves",
+			description: "Leaves floating on top of sliding panes."
 		},
 		{
 			title: "spotlights",
-			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, temporibus!"
+			description: "A light-sensitive bouncy ball."
+		},
+		{
+			title: "hiveplot",
+			description: "A dependency graph visualization."
 		}
 	];
 	var projects = {
