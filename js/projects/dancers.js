@@ -29,12 +29,19 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				danceInterval = 115,
 				self = this,
 				line = d3.svg.line().interpolate("cardinal"),
+				widthScale = d3.scale.linear().domain([320, 2000]).range([1, 0.5]),
+				svgWidth = ($(window).width() > 2000) ? 1000 : widthScale($(window).width()) * $(window).width(),
 				svg = d3.select("#project-dancers .project-contents")
 					.append("svg")
 						.attr("id", "dancerGroup")
-						.attr("width", $(window).width())
-						.attr("height", 500)
+						.attr("width", svgWidth)
+						.attr("height", svgWidth / 2)
 					.append("g");
+
+			$(".project-contents").css({
+				width: svgWidth,
+				height: svgWidth / 2
+			});
 
 			$("#dancerGroup").on("mousedown", function(e) {
 				clearTimeout(this.timeoutID);
@@ -188,7 +195,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					progressData.push(0);
 				});
 
-				d3.select("#dancerGroup").attr("width", boundingBoxes[boundingBoxes.length - 1].x + boundingBoxes[boundingBoxes.length - 1].width + 75);
+				d3.select("#dancerGroup").attr("viewBox", "0 0 " + parseInt(boundingBoxes[boundingBoxes.length - 1].x + boundingBoxes[boundingBoxes.length - 1].width + 75, 10) + " 500");
 
 				animateDancers();
 

@@ -90,18 +90,24 @@
 #project-dancers {
 	.project-contents {
 		position: relative;
+		margin-left: auto;
+		margin-right: auto;
 		@include leader(5);
 		@include trailer(8);
+		@include mobile-only {
+			@include leader(2);
+			@include trailer(4);
+		}
 		&:before {
 			content: "";
 			position: absolute;
 			background-image: url(../images/floor.png);
 			background-repeat: no-repeat;
-			width: 1018px;
-			height: 35px;
-			left: 50%;
-			margin-left: -509px;
-			top: 350px;
+			background-size: 100%;
+			width: 100%;
+			height: 7%;
+			left: 0;
+			top: 70%;
 			z-index: -1;
 			opacity: 0.9;
 		}

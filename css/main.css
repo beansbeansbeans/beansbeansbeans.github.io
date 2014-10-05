@@ -157,19 +157,27 @@
 
 #project-dancers .project-contents {
   position: relative;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 1.5625em;
   margin-bottom: 2.5em;
+}
+@media (max-width: 640px) {
+  #project-dancers .project-contents {
+    margin-top: 0.625em;
+    margin-bottom: 1.25em;
+  }
 }
 #project-dancers .project-contents:before {
   content: "";
   position: absolute;
   background-image: url(../images/floor.png);
   background-repeat: no-repeat;
-  width: 1018px;
-  height: 35px;
-  left: 50%;
-  margin-left: -509px;
-  top: 350px;
+  background-size: 100%;
+  width: 100%;
+  height: 7%;
+  left: 0;
+  top: 70%;
   z-index: -1;
   opacity: 0.9;
 }
