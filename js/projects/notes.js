@@ -62,7 +62,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			var data = {
 				identifier: "notes",
 				title: "Notes",
-				blurb: "This is an interactive visualization of a melody. Color represents frequency and width represents duration. Swipe back and forth to create new melodies.",
+				blurb: "Color represents frequency and width represents duration. Swipe back and forth to create new melodies.",
 				projectContents: '',
 				caption: "Built with d3js and CSS transforms.",
 				description: "I had an idea for an effect where you would scrub forward and backward along a track of music and then be able to play back your scrubbing exactly as it had happened, allowing you to hear the points where you had lingered on a note or blazed through a section, which might be a cool piece of music in itself. The other half of the effect would be that you could then scrub through the outcome of your original scrubbing, and you could repeat this cycle as many times as you wanted, ending up with an extremely distorted version of the original track. <br/><br/>I ended up implementing the effect with a randomly generated sequence of frequencies (from the Javanese pentatonic scale) rather than a track of music because I thought it would make for a simpler visualization."
