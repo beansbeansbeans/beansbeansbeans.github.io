@@ -64,6 +64,7 @@
 @media (max-width: 640px) {
   #project_index li .image {
     background-image: url(../images/projects_sprite_mobile.jpg);
+    margin-bottom: 1.25em;
   }
 }
 #project_index li[data-project-id="dancers"] .image {
@@ -73,8 +74,9 @@
 }
 @media (max-width: 640px) {
   #project_index li[data-project-id="dancers"] .image {
-    width: 124px;
-    height: 91px;
+    width: 106px;
+    height: 78px;
+    margin-bottom: 1.5625em;
   }
 }
 #project_index li[data-project-id="straws"] .image {
@@ -84,9 +86,9 @@
 }
 @media (max-width: 640px) {
   #project_index li[data-project-id="straws"] .image {
-    background-position: 0 -637px;
-    width: 139px;
-    height: 87px;
+    background-position: 0 -553px;
+    width: 120px;
+    height: 66px;
   }
 }
 #project_index li[data-project-id="notes"] .image {
@@ -97,9 +99,9 @@
 }
 @media (max-width: 640px) {
   #project_index li[data-project-id="notes"] .image {
-    background-position: 0 -307px;
-    width: 89px;
-    height: 134px;
+    background-position: 0 -273px;
+    width: 77px;
+    height: 104px;
   }
 }
 #project_index li[data-project-id="leaves"] .image {
@@ -109,9 +111,9 @@
 }
 @media (max-width: 640px) {
   #project_index li[data-project-id="leaves"] .image {
-    background-position: 0 -193px;
-    width: 86px;
-    height: 116px;
+    background-position: 0 -168px;
+    width: 74px;
+    height: 96px;
   }
 }
 #project_index li[data-project-id="pixels"] .image {
@@ -121,9 +123,9 @@
 }
 @media (max-width: 640px) {
   #project_index li[data-project-id="pixels"] .image {
-    background-position: 0 -455px;
-    width: 111px;
-    height: 63px;
+    background-position: 0px -390px;
+    width: 95px;
+    height: 53px;
   }
 }
 #project_index li[data-project-id="hiveplot"] .image {
@@ -134,9 +136,9 @@
 }
 @media (max-width: 640px) {
   #project_index li[data-project-id="hiveplot"] .image {
-    width: 89px;
-    height: 88px;
-    background-position: 0 -96px;
+    width: 75px;
+    height: 73px;
+    background-position: 0 -85px;
     left: 7px;
   }
 }
@@ -147,9 +149,9 @@
 }
 @media (max-width: 640px) {
   #project_index li[data-project-id="spotlights"] .image {
-    background-position: 0 -531px;
-    width: 88px;
-    height: 100px;
+    background-position: 0 -457px;
+    width: 76px;
+    height: 83px;
   }
 }
 
@@ -5520,6 +5522,12 @@ body {
   margin-top: 8.33333em;
   margin-bottom: 2.77778em;
 }
+@media (max-width: 640px) {
+  #signature {
+    margin-top: 7.14286em;
+    margin-bottom: 1.78571em;
+  }
+}
 
 #loader {
   -moz-transition: opacity 100ms;
@@ -5557,6 +5565,12 @@ body {
   -o-animation: loader10m 2s ease-in-out infinite;
   animation: loader10m 2s ease-in-out infinite;
 }
+@media (max-width: 640px) {
+  #loader .animation {
+    top: 53%;
+    top: calc(50% + 30px);
+  }
+}
 #loader .animation, #loader .animation:before, #loader .animation:after {
   position: absolute;
   -moz-border-radius: 50%;
@@ -5564,6 +5578,12 @@ body {
   border-radius: 50%;
   width: 15px;
   height: 15px;
+}
+@media (max-width: 640px) {
+  #loader .animation, #loader .animation:before, #loader .animation:after {
+    width: 10px;
+    height: 10px;
+  }
 }
 #loader .animation:before, #loader .animation:after {
   content: "";
@@ -5576,12 +5596,22 @@ body {
   -o-animation: loader10g 2s ease-in-out infinite;
   animation: loader10g 2s ease-in-out infinite;
 }
+@media (max-width: 640px) {
+  #loader .animation:before {
+    left: -18px;
+  }
+}
 #loader .animation:after {
   left: 25px;
   -webkit-animation: loader10d 2s ease-in-out infinite;
   -moz-animation: loader10d 2s ease-in-out infinite;
   -o-animation: loader10d 2s ease-in-out infinite;
   animation: loader10d 2s ease-in-out infinite;
+}
+@media (max-width: 640px) {
+  #loader .animation:after {
+    left: 18px;
+  }
 }
 
 @-webkit-keyframes loader10g {
@@ -5814,8 +5844,14 @@ body {
 
 #menu_wrapper {
   margin-bottom: 6.25em;
-  display: inline-block;
   margin-top: 2.5em;
+  display: inline-block;
+}
+@media (max-width: 640px) {
+  #menu_wrapper {
+    margin-bottom: 3.125em;
+    margin-top: 1.25em;
+  }
 }
 #menu_wrapper #menu {
   text-transform: uppercase;
@@ -5834,10 +5870,23 @@ body {
   padding-right: 1.11111em;
   outline: none !important;
 }
+@media (max-width: 640px) {
+  #menu_wrapper #menu .link {
+    padding-top: 0.71429em;
+    padding-bottom: 0.71429em;
+    padding-left: 1.07143em;
+    padding-right: 1.07143em;
+  }
+}
 #menu_wrapper #menu .link.active {
   color: white;
   background: #00303e;
   margin: 0 0.55556em;
+}
+@media (max-width: 640px) {
+  #menu_wrapper #menu .link.active {
+    margin: 0 0.35714em;
+  }
 }
 
 nav {
@@ -5852,19 +5901,37 @@ nav {
 nav li:not(:first-of-type) a {
   padding-top: 4.6875em;
 }
+@media (max-width: 640px) {
+  nav li:not(:first-of-type) a {
+    padding-top: 1.875em;
+  }
+}
 nav li a {
   border-bottom-color: #c8c8cd;
   border-bottom-width: 0.0625em;
   border-bottom-style: dotted;
   padding-bottom: 4.625em;
+  border-bottom-width: 1px !important;
   display: inline-block;
   width: 100%;
+}
+@media (max-width: 640px) {
+  nav li a {
+    border-bottom-width: 0.0625em;
+    border-bottom-style: dotted;
+    padding-bottom: 1.8125em;
+  }
 }
 nav li a .title {
   color: #00303e;
   font-weight: 600;
   text-transform: uppercase;
   margin-bottom: 0.55556em;
+}
+@media (max-width: 640px) {
+  nav li a .title {
+    margin-bottom: 0.38462em;
+  }
 }
 nav li a .description {
   color: #a0a0a8;
@@ -5876,6 +5943,13 @@ nav li a .description {
 .project,
 #homepage {
   padding-bottom: 6.25em;
+}
+@media (max-width: 640px) {
+  .log,
+  .project,
+  #homepage {
+    padding-bottom: 3.125em;
+  }
 }
 .log .header,
 .log .caption,
@@ -5911,6 +5985,13 @@ nav li a .description {
   display: inline-block;
   margin-bottom: 0.625em;
 }
+@media (max-width: 640px) {
+  .log .back,
+  .project .back,
+  #homepage .back {
+    margin-bottom: 0.5em;
+  }
+}
 .log .back:before,
 .project .back:before,
 #homepage .back:before {
@@ -5923,6 +6004,13 @@ nav li a .description {
 #homepage .header .title {
   font-weight: 600;
   margin-bottom: 0.74074em;
+}
+@media (max-width: 640px) {
+  .log .header .title,
+  .project .header .title,
+  #homepage .header .title {
+    margin-bottom: 0.52632em;
+  }
 }
 .log .header .blurb,
 .project .header .blurb,
@@ -5941,6 +6029,11 @@ nav li a .description {
   color: #a0a0a8;
   font-style: italic;
   margin-bottom: 6.25em;
+}
+@media (max-width: 640px) {
+  .project .caption {
+    margin-bottom: 3.125em;
+  }
 }
 .project .description {
   text-align: left;
@@ -5966,6 +6059,11 @@ nav li a .description {
   text-align: center;
   margin-top: 3.75em;
   position: relative;
+}
+@media (max-width: 640px) {
+  #homepage #top-container {
+    margin-top: 2.5em;
+  }
 }
 #homepage #top {
   margin: 0 auto;
