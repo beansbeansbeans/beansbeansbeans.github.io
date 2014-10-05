@@ -155,6 +155,12 @@
   }
 }
 
+#project-dancers {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
 #project-dancers .project-contents {
   position: relative;
   margin-left: auto;
