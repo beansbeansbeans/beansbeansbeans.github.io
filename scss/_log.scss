@@ -1,4 +1,7 @@
 .log {
+	.header .blurb {
+		@extend .body-large-text;
+	}
 	.title {
 		text-transform: lowercase;
 	}

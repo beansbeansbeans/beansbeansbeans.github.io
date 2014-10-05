@@ -4760,7 +4760,8 @@ html {
 }
 
 .medium-text, .log .back,
-.project .back {
+.project .back,
+#homepage .back {
   font-size: 1.5em;
   line-height: 1.25em;
 }
@@ -4771,7 +4772,8 @@ html {
 }
 
 .extra-large-text, #loader .text, .log .header .title,
-.project .header .title, #homepage h1 {
+.project .header .title,
+#homepage .header .title {
   font-size: 3.375em;
   line-height: 1.11111em;
 }
@@ -4782,9 +4784,8 @@ html {
   line-height: 1.42857em;
 }
 
-.body-medium-text, nav li .description, .log .description,
-.project .description, .log .header .blurb,
-.project .header .blurb, #homepage .description {
+.body-medium-text, nav li .description, .project .description, .project .header .blurb,
+#homepage .header .blurb {
   font-family: Merriweather;
   font-size: 1.125em;
   line-height: 1.66667em;
@@ -4802,6 +4803,20 @@ html {
   line-height: 1.2963em;
 }
 
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 html:not(.loading) #loader {
   opacity: 0;
 }
@@ -4816,20 +4831,6 @@ body {
   padding: 0;
   margin: 0;
   color: #00303e;
-}
-
-li {
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-* {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
 }
 
 #stash {
@@ -5191,7 +5192,8 @@ nav li .description {
 }
 
 .log,
-.project {
+.project,
+#homepage {
   padding-bottom: 6.25em;
 }
 .log .header,
@@ -5199,12 +5201,16 @@ nav li .description {
 .log .description,
 .project .header,
 .project .caption,
-.project .description {
+.project .description,
+#homepage .header,
+#homepage .caption,
+#homepage .description {
   width: 600px;
   margin: 0 auto;
 }
 .log .back,
-.project .back {
+.project .back,
+#homepage .back {
   font-style: italic;
   font-weight: 500;
   color: #93939c;
@@ -5212,18 +5218,21 @@ nav li .description {
   margin-bottom: 0.625em;
 }
 .log .back:before,
-.project .back:before {
+.project .back:before,
+#homepage .back:before {
   content: "←";
   display: inline-block;
   margin-right: .5em;
 }
 .log .header .title,
-.project .header .title {
+.project .header .title,
+#homepage .header .title {
   font-weight: 600;
   margin-bottom: 0.74074em;
 }
 .log .header .blurb,
-.project .header .blurb {
+.project .header .blurb,
+#homepage .header .blurb {
   color: #a0a0a8;
   font-style: italic;
   font-weight: 300;
@@ -5252,25 +5261,12 @@ nav li .description {
 .project .description a:hover {
   color: #c1d1de;
 }
-.project .header .title {
+
+.project .header .title,
+#homepage .header .title {
   text-transform: uppercase;
 }
 
-#homepage {
-  text-align: center;
-  padding-bottom: 6.25em;
-}
-#homepage h1 {
-  font-weight: 600;
-  text-transform: uppercase;
-}
-#homepage .description {
-  width: 600px;
-  margin: 0 auto;
-  color: #a0a0a8;
-  font-weight: 300;
-  font-style: italic;
-}
 #homepage #top-container {
   margin: 0 auto;
   text-align: center;

@@ -6,7 +6,7 @@ define([], function() {
 			"shadow.png"
 		],
 		initialize: function() {
-			$("#view").html("<div id='homepage'><h1>Hello</h1><div class='description'>This top spins forever.</div><div id='top-container'><div id='top'></div><div id='shadow'></div></div></div>");
+			$("#view").html("<div id='homepage'><div class='header'><div class='title'>Hello</div><div class='blurb'>This top spins forever.</div></div><div id='top-container'><div id='top'></div><div id='shadow'></div></div></div>");
 
 			var counter = 0,
 				frameCount = 25,
