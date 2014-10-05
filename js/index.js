@@ -30,18 +30,27 @@ require(['jquery', 'router', 'loader'], function($, Router, Loader) {
     var router = new Router(),
         initialize = function(module) {
             if(module.needsLoading) {
+                var el, imageCounter = 0, enoughTime = false,
+                loaderTimeoutID = setTimeout(function() {
+                    enoughTime = true;
+                    if(imageCounter == module.preloadAssets.length) {
+                        loadModule();
+                    }
+                }, 1000),
+                loadModule = function() {
+                    module.needsLoading = false;
+                    $("html").removeClass("loading");
+                    module.initialize();
+                }
                 $("html").addClass("loading");
-                var el, imageCounter = 0;
                 module.preloadAssets.forEach(function(d) {
                     el = document.createElement('img');
                     el.setAttribute('src', 'images/' + d);
                     $("#stash").append(el);
                     $(el).on("load", function() {
                         imageCounter++;
-                        if(imageCounter == module.preloadAssets.length) {
-                            module.needsLoading = false;
-                            $("html").removeClass("loading");
-                            module.initialize();
+                        if(imageCounter == module.preloadAssets.length && enoughTime == true) {
+                            loadModule();
                         }
                     })
                 })
