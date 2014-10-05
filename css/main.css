@@ -4766,7 +4766,7 @@ html {
   line-height: 1.25em;
 }
 
-.large-text, #project-notes .canvas .text, nav li .title {
+.large-text, #project-notes .canvas .text, nav li a .title {
   font-size: 2.25em;
   line-height: 1.25em;
 }
@@ -4784,7 +4784,7 @@ html {
   line-height: 1.42857em;
 }
 
-.body-medium-text, nav li .description, .project .description, .project .header .blurb,
+.body-medium-text, nav li a .description, .project .description, .project .header .blurb,
 #homepage .header .blurb {
   font-family: Merriweather;
   font-size: 1.125em;
@@ -5172,20 +5172,24 @@ nav {
   width: 600px;
   margin: 0 auto;
 }
-nav li {
-  margin-bottom: 4.6875em;
+nav li:not(:first-of-type) a {
+  padding-top: 4.6875em;
+}
+nav li a {
   border-bottom-color: #c8c8cd;
   border-bottom-width: 0.0625em;
   border-bottom-style: dotted;
   padding-bottom: 4.625em;
+  display: inline-block;
+  width: 100%;
 }
-nav li .title {
+nav li a .title {
   color: #00303e;
   font-weight: 600;
   text-transform: uppercase;
   margin-bottom: 0.55556em;
 }
-nav li .description {
+nav li a .description {
   color: #a0a0a8;
   font-weight: 300;
   font-style: italic;
