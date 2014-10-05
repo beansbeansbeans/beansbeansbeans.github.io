@@ -31,6 +31,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				line = d3.svg.line().interpolate("cardinal"),
 				widthScale = d3.scale.linear().domain([320, 2000]).range([1, 0.5]),
 				svgWidth = ($(window).width() > 2000) ? 1000 : widthScale($(window).width()) * $(window).width(),
+				viewBoxWidth;
 				svg = d3.select("#project-dancers .project-contents")
 					.append("svg")
 						.attr("id", "dancerGroup")
@@ -43,7 +44,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				height: svgWidth / 2
 			});
 
-			$("#dancerGroup").on("mousedown", function(e) {
+			$("#dancerGroup").on("mousedown touchstart", function(e) {
 				clearTimeout(this.timeoutID);
 				this.framesTimeoutIDs.forEach(function(d) {
 					window.clearTimeout(d);
@@ -51,21 +52,30 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				d3.selectAll(".dancer").attr("class", "dancer");
 				manipulating = true;
 				pressed = true;
-				currentFrame = getClosestIndex(e.offsetX);
+				currentFrame = getClosestIndex(getXVal(e));
 				fan(currentFrame);
 				this.rafID = requestAnimationFrame(morph);
-			}.bind(this)).on("mouseup", function(e) {
+			}.bind(this)).on("mouseup touchend", function(e) {
 				window.cancelAnimationFrame(self.rafID);
 				pressed = false;
 				manipulating = false;
 				$(".dancer").css("opacity", 0);
 				animateDancers(currentFrame);
-			}.bind(this)).on("mousemove", function(e) {
+			}.bind(this)).on("mousemove touchmove", function(e) {
 				if(pressed) {
-					currentFrame = getClosestIndex(e.offsetX);
+					currentFrame = getClosestIndex(getXVal(e));
 					fan(currentFrame);
 				}
 			});
+
+			var getXVal = function(e) {
+				var factor = viewBoxWidth / svgWidth;
+				if(e.originalEvent.targetTouches) {
+					return e.originalEvent.targetTouches[0].pageX * factor;
+				} else {
+					return e.offsetX * factor;
+				}
+			};
 
 			var getClosestIndex = function(offsetX) {
 				var closest = null,
@@ -195,7 +205,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					progressData.push(0);
 				});
 
-				d3.select("#dancerGroup").attr("viewBox", "0 0 " + parseInt(boundingBoxes[boundingBoxes.length - 1].x + boundingBoxes[boundingBoxes.length - 1].width + 75, 10) + " 500");
+				viewBoxWidth = parseInt(boundingBoxes[boundingBoxes.length - 1].x + boundingBoxes[boundingBoxes.length - 1].width + 75, 10);
+
+				d3.select("#dancerGroup").attr("viewBox", "0 0 " + viewBoxWidth + " 500");
 
 				animateDancers();
 
