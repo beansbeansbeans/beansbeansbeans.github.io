@@ -32,6 +32,7 @@ define(['templates/project_index'], function(projectIndex) {
 	var projects = {
 		needsLoading: true,
 		preloadAssets: [ "projects_sprite.jpg" ],
+		mobilePreloadAssets: [ "projects_sprite_mobile.jpg" ],
 		initialize: function() {
 			$("#view").html(projectIndex(data));
 		}

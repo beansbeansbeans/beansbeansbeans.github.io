@@ -17,6 +17,25 @@ $text-map: (
 	)
 );
 
+$mobile-text-map: (
+	small: (
+		font-size: 14px,
+		lines: 4
+	),
+	medium: (
+		font-size: 20px,
+		lines: 5
+	),
+	large: (
+		font-size: 26px,
+		lines: 6
+	),
+	extra-large: (
+		font-size: 38px,
+		lines: 9
+	)
+);
+
 $body-text-map: (
 	small: (
 		font-size: 14px,
@@ -36,6 +55,25 @@ $body-text-map: (
 	)
 );
 
+$mobile-body-text-map: (
+	small: (
+		font-size: 12px,
+		lines: 3
+	),
+	medium: (
+		font-size: 16px,
+		lines: 5
+	),
+	large: (
+		font-size: 22px,
+		lines: 8
+	),
+	extra-large: (
+		font-size: 28px,
+		lines: 10
+	)
+);
+
 @import "compass";
 @import "library";
 @import "vars";
@@ -50,6 +88,9 @@ $body-text-map: (
 @each $text-size, $text in $text-map {
 	.#{$text-size}-text {
 		@include adjust-font-size-to(map-get(map-get($text-map, $text-size), font-size), map-get(map-get($text-map, $text-size), lines));
+		@include mobile-only {
+			@include adjust-font-size-to(map-get(map-get($mobile-text-map, $text-size), font-size), map-get(map-get($mobile-text-map, $text-size), lines));
+		}
 	}
 }
 
@@ -57,6 +98,9 @@ $body-text-map: (
 	.body-#{$text-size}-text {
 		font-family: Merriweather;
 		@include adjust-font-size-to(map-get(map-get($body-text-map, $text-size), font-size), map-get(map-get($body-text-map, $text-size), lines));
+		@include mobile-only {
+			@include adjust-font-size-to(map-get(map-get($mobile-body-text-map, $text-size), font-size), map-get(map-get($mobile-body-text-map, $text-size), lines));
+		}
 	}
 }
 
@@ -81,6 +125,8 @@ html {
 			opacity: 0;	
 		}
 	}
+	overflow-x: hidden;
+	max-width: 100%;
 }
 
 body {
@@ -210,7 +256,7 @@ body {
 }
 
 nav {
-	width: $content-width;
+	@include content-width();
 	margin: 0 auto;
 	li {
 		&:not(:first-of-type) a {
@@ -247,7 +293,7 @@ nav {
 	.header,
 	.caption,
 	.description {
-		width: $content-width;
+		@include content-width();
 		margin: 0 auto;
 	}
 	.back {
@@ -334,15 +380,25 @@ $frame-height: 419px;
 		@include size($frame-width, $frame-height);
 		background-image: url(../images/top.png);
 		background-size: $frame-count * $frame-width $frame-height;
+		@include mobile-only {
+			@include size(179px, 293px);
+			background-image: url(../images/top_mobile.png);
+			background-size: $frame-count * 179px 293px;
+		}
 	}
 	#shadow {
+		@include size(360px, 103px);
 		background-image: url(../images/shadow.png);
-		width: 360px;
-		height: 103px;
+		top: 350px;
+		margin-left: -10px;
+		@include mobile-only {
+			@include size(253px, 72px);
+			background-image: url(../images/shadow_mobile.png);
+			top: 250px;
+			margin-left: -3px;
+		}
 		position: absolute;
 		z-index: -1;
 		left: 50%;
-		top: 350px;
-		margin-left: -10px;
 	}
 }

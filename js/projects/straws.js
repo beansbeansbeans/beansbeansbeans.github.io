@@ -10,6 +10,14 @@ define(['templates/project_detail'], function(projectTemplate) {
 			"straw_pink.png",
 			"straw_purple.png"
 		],
+		mobilePreloadAssets: [
+			"glass_back_mobile.png",
+			"glass_mobile.png",
+			"straw_blue_mobile.png",
+			"straw_green_mobile.png",
+			"straw_pink_mobile.png",
+			"straw_purple_mobile.png"
+		],
 		glassWidth: 450,
 		glassHeight: 425,
 		orientation: 0,
@@ -148,9 +156,18 @@ define(['templates/project_detail'], function(projectTemplate) {
 				caption: "Build with JavaScript and CSS keyframe animations.",
 				description: "I wanted to build an effect involving straws in a tippable, water-filled glass where the above-water portions of the straws would be rendered photorealistically, but the refracted portions would be rendered with code in a dramatically distorted way. But after building the foundation for the effect - the straws and the tippable, water-filled glass - I thought the refraction element might be too much."
 			},
-			self = this;
+			self = this,
+			strawWidth = 25,
+			strawHeight = 615;
 
 			$("#view").html(projectTemplate(data));
+
+			if($(window).width() <= mobile_landscape) {
+				this.glassWidth = 184;
+				this.glassHeight = 170;
+				strawWidth = 12;
+				strawHeight = 300;
+			}
 
 			this.maxOrientation = 45;
 
@@ -244,26 +261,26 @@ define(['templates/project_detail'], function(projectTemplate) {
 			}
 
 			this.strawArray.push(new Straw({
-				width: 25,
-				height: 600,
+				width: strawWidth,
+				height: strawHeight,
 				color: "green"
 			}));
 
 			this.strawArray.push(new Straw({
-				width: 25,
-				height: 650,
+				width: strawWidth,
+				height: strawHeight,
 				color: "pink"
 			}));
 
 			this.strawArray.push(new Straw({
-				width: 25,
-				height: 625,
+				width: strawWidth,
+				height: strawHeight,
 				color: "blue"
 			}));
 
 			this.strawArray.push(new Straw({
-				width: 25,
-				height: 675,
+				width: strawWidth,
+				height: strawHeight,
 				color: "purple"
 			}));
 

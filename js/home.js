@@ -5,6 +5,10 @@ define([], function() {
 			"top.png",
 			"shadow.png"
 		],
+		mobilePreloadAssets: [
+			"top_mobile.png",
+			"shadow_mobile.png"
+		],
 		initialize: function() {
 			$("#view").html("<div id='homepage'><div class='header'><div class='title'>Hello</div><div class='blurb'>This top spins forever.</div></div><div id='top-container'><div id='top'></div><div id='shadow'></div></div></div>");
 
@@ -14,6 +18,11 @@ define([], function() {
 				shadowWidth = 362,
 				frameInterval = 4,
 				self = this;
+
+			if($(window).width() <= mobile_landscape) {
+				frameWidth = 179;
+				shadowWidth = 253;
+			}
 
 			function animate(timestamp) {
 

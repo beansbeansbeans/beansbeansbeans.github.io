@@ -6,43 +6,81 @@
 			margin-right: auto;
 			position: relative;
 			@include trailer(5);
+			@include mobile-only {
+				background-image: url(../images/projects_sprite_mobile.jpg);
+			}
 		}
 		&[data-project-id="dancers"] .image {
 			width: 178px; 
 			height: 130px;
 			@include trailer(8);
+			@include mobile-only {
+				width: 124px;
+				height: 91px;
+			}
 		}
 		&[data-project-id="straws"] .image {
 			background-position: 0 -914px; 
 			width: 209px; 
 			height: 128px;
+			@include mobile-only {
+				background-position: 0 -637px;
+				width: 139px;
+				height: 87px;
+			}
 		}
 		&[data-project-id="notes"] .image {
 			background-position: 0 -456px; 
 			width: 128px; 
 			height: 174px;
 			@include trailer(7);
+			@include mobile-only {
+				background-position: 0 -307px;
+				width: 89px;
+				height: 134px;
+			}
 		}
 		&[data-project-id="leaves"] .image {
 			background-position: 0 -281px; 
 			width: 128px; 
 			height: 169px;
+			@include mobile-only {
+				background-position: 0 -193px;
+				width: 86px;
+				height: 116px;
+			}
 		}
 		&[data-project-id="pixels"] .image {
 			background-position: 0 -650px; 
 			width: 158px; 
 			height: 112px;
+			@include mobile-only {
+				background-position: 0 -455px;
+				width: 111px;
+				height: 63px;
+			}
 		}
 		&[data-project-id="hiveplot"] .image {
 			width: 128px; 
 			height: 126px;
 			background-position: 0 -139px;
 			left: 14px;
+			@include mobile-only {
+				width: 89px;
+				height: 88px;
+				background-position: 0 -96px;
+				left: 7px;
+			}
 		}
 		&[data-project-id="spotlights"] .image {
 			background-position: 0 -763px; 
 			width: 128px; 
 			height: 142px;
+			@include mobile-only {
+				background-position: 0 -531px;
+				width: 88px;
+				height: 100px;
+			}
 		}
 	}
 }

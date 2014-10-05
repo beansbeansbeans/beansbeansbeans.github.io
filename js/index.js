@@ -21,6 +21,8 @@ var requestAnimationFrame = window.requestAnimationFrame ||
                             window.webkitRequestAnimationFrame ||
                             window.mozRequestAnimationFrame;
 
+var mobile_landscape = 640;
+
 define("d3.global", ["d3"], function(_) {
 	d3 = _;
 });
@@ -30,7 +32,7 @@ require(['jquery', 'router', 'loader'], function($, Router, Loader) {
     var router = new Router(),
         initialize = function(module) {
             if(module.needsLoading) {
-                var el, imageCounter = 0, enoughTime = false,
+                var el, imageCounter = 0, enoughTime = false, assets,
                 loaderTimeoutID = setTimeout(function() {
                     enoughTime = true;
                     if(imageCounter == module.preloadAssets.length) {
@@ -43,7 +45,13 @@ require(['jquery', 'router', 'loader'], function($, Router, Loader) {
                     module.initialize();
                 }
                 $("html").addClass("loading");
-                module.preloadAssets.forEach(function(d) {
+                assets = module.preloadAssets
+
+                if($(window).width() < mobile_landscape) {
+                    assets = module.mobilePreloadAssets;
+                }
+
+                assets.forEach(function(d) {
                     el = document.createElement('img');
                     el.setAttribute('src', 'images/' + d);
                     $("#stash").append(el);
