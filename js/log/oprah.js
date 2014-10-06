@@ -3,6 +3,12 @@ define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRe
         initialize: function() {
             var data = {
                 title: "oprah",
+                overrides: [
+                    {
+                        index: 0,
+                        width: 1700
+                    }
+                ],
                 length: 83,
                 detail: "A good day",
                 date: "October 5, 2014",

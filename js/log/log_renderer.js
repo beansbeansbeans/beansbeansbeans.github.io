@@ -29,13 +29,27 @@ define(['log/glyphs'], function(glyphs) {
 
     var renderer = {
         initialize: function(data) {
+            if(data.overrides) {
+                this.overrides = data.overrides;
+            }
             this.id = data.title;
             length = data.length;
             $("#controls #time .total").text(Math.floor(length / 60) + ":" + ((Math.floor(length % 60) < 10) ? "0" + Math.floor(length % 60) : Math.floor(length % 60)));
             this.canvasWidth = $(window).width() * 0.65;
 
-            var naturalWordWidth = this.id.split("").reduce(function(prev, current) {
-                return prev + glyphs.letters[current].width;
+            var naturalWordWidth = this.id.split("").reduce(function(prev, current, index) {
+                var letterWidth = glyphs.letters[current].width;
+
+                if(data.overrides) {
+                    data.overrides.forEach(function(override) {
+                        if(override.index == index) {
+                            letterWidth = override.width;
+                            return false;
+                        }
+                    });
+                }
+
+                return prev + letterWidth;
             }, 0) + 500;
 
             this.scaleFactor = (this.canvasWidth / naturalWordWidth).toFixed(3);
@@ -78,7 +92,19 @@ define(['log/glyphs'], function(glyphs) {
                 });
 
                 if(i>0) {
-                    this.letterCtx.translate(glyphs.letters[lettersArr[i-1]].width, 0);
+                    if(this.overrides) {
+                        var override = this.overrides.filter(function(override) {
+                            return override.index == i - 1;
+                        });
+
+                        if(override.length) {
+                            this.letterCtx.translate(override[0].width, 0);
+                        } else {
+                            this.letterCtx.translate(glyphs.letters[lettersArr[i-1]].width, 0);
+                        }
+                    } else {
+                        this.letterCtx.translate(glyphs.letters[lettersArr[i-1]].width, 0);
+                    }
                 }
 
                 cPathData.forEach(function(d, i) {
