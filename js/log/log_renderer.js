@@ -32,10 +32,12 @@ define(['log/glyphs'], function(glyphs) {
             if(data.overrides) {
                 this.overrides = data.overrides;
             }
+
+            var wordXStretch = 0.65; // % of window width taken up by words
             this.id = data.title;
             length = data.length;
             $("#controls #time .total").text(Math.floor(length / 60) + ":" + ((Math.floor(length % 60) < 10) ? "0" + Math.floor(length % 60) : Math.floor(length % 60)));
-            this.canvasWidth = $(window).width() * 0.65;
+            this.canvasWidth = $(window).width() * wordXStretch * 2;
 
             var naturalWordWidth = this.id.split("").reduce(function(prev, current, index) {
                 var letterWidth = glyphs.letters[current].width;
@@ -52,6 +54,13 @@ define(['log/glyphs'], function(glyphs) {
                 return prev + letterWidth;
             }, 0) + 500;
 
+            var transformOriginX = parseInt(($(window).width() - (wordXStretch * $(window).width())), 10) + "px";
+            $(".canvas-wrapper").css({
+                mozTransformOrigin: transformOriginX + " 0px",
+                webkitTransformOrigin: transformOriginX + " 0px",
+                transformOrigin: transformOriginX + " 0px"
+            });
+
             this.scaleFactor = (this.canvasWidth / naturalWordWidth).toFixed(3);
 
             this.canvasHeight = glyphs.height * this.scaleFactor * 1.5;
@@ -63,6 +72,7 @@ define(['log/glyphs'], function(glyphs) {
             window.cancelAnimationFrame(this.requestID);
             ticker.pause();
             ticker.setPosition(0);
+            this.overrides = [];
         },
         drawSVGInCanvas: function(letters) {
             var lettersArr = letters.split("");
@@ -127,7 +137,7 @@ define(['log/glyphs'], function(glyphs) {
         renderLetters: function() {
             $(".canvas-wrapper").css({
                 width: this.canvasWidth,
-                height: this.canvasHeight
+                height: this.canvasHeight / 2
             });
 
             this.letterCanvas = $("#letters"),
@@ -136,10 +146,10 @@ define(['log/glyphs'], function(glyphs) {
             this.letterCanvas[0].width = this.canvasWidth;
             this.letterCanvas[0].height = this.canvasHeight;
 
-            this.letterCtx.shadowOffsetX = 10;
-            this.letterCtx.shadowOffsetY = 10;
+            this.letterCtx.shadowOffsetX = 12;
+            this.letterCtx.shadowOffsetY = 12;
             this.letterCtx.shadowBlur = 20;
-            this.letterCtx.shadowColor = "rgba(0, 0, 0, 0.5)";
+            this.letterCtx.shadowColor = "rgba(0, 0, 0, 0.4)";
 
             this.letterCtx.fillStyle = "white";
 
@@ -169,12 +179,12 @@ define(['log/glyphs'], function(glyphs) {
             canvas[0].width = this.canvasWidth;
             canvas[0].height = this.canvasHeight;
 
-            ctx.shadowOffsetX = 12;
-            ctx.shadowOffsetY = 5;
+            ctx.shadowOffsetX = 10;
+            ctx.shadowOffsetY = 6;
             ctx.shadowBlur = 12;
-            ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+            ctx.shadowColor = "rgba(0, 0, 0, 0.4)";
 
-            ctx.lineWidth = 5;
+            ctx.lineWidth = 8;
             ctx.strokeStyle = "#fff9ef";
 
             audio.src = "audio/" + this.id + ".ogg";
@@ -212,7 +222,7 @@ define(['log/glyphs'], function(glyphs) {
                         buffer = 10,
                         bottomBuffer = Math.floor(self.canvasHeight * 0.2),
                         space = 5,
-                        offset = 100,
+                        offset = 0,
                         numBars = Math.round(self.canvasWidth / buffer),
                         ptsArr = [];
 
@@ -221,7 +231,7 @@ define(['log/glyphs'], function(glyphs) {
                     ctx.clearRect(0, 0, self.canvasWidth, self.canvasHeight);
 
                     for (var i=0; i<numBars; ++i) {
-                        var magnitude = freqByteData[i + offset];
+                        var magnitude = 2 * freqByteData[i + offset];
                         ptsArr.push(i*(space + buffer));
                         ptsArr.push(self.canvasHeight - magnitude - bottomBuffer);
                     }
@@ -243,7 +253,7 @@ define(['log/glyphs'], function(glyphs) {
             }
             function getCurvePoints(pts) {
             	var tension = 0.5,
-            			numOfSegments = 16;
+        			numOfSegments = 16;
 
             	var _pts = [], res = [],
             			x, y,
