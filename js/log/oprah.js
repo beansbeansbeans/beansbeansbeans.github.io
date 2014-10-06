@@ -7,6 +7,14 @@ define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRe
                     {
                         index: 0,
                         width: 1700
+                    },
+                    {
+                        index: 2,
+                        width: 1700
+                    },
+                    {
+                        index: 3,
+                        width: 1600
                     }
                 ],
                 length: 83,
