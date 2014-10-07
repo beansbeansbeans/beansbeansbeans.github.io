@@ -459,7 +459,7 @@
 }
 @media (max-width: 640px) {
   #project-notes .project-contents {
-    margin-top: 3.75em;
+    margin-top: 4.375em;
     margin-bottom: 3.75em;
   }
 }
@@ -594,8 +594,6 @@
 }
 #project-notes .canvas .particle {
   position: absolute;
-  width: 35px;
-  height: 35px;
   border: solid 2px #fff9ef;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;

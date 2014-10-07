@@ -69,7 +69,9 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			},
 			widthScale = d3.scale.linear().domain([320, 2000]).range([0.75, 0.35]),
 			bufferScale = d3.scale.linear().domain([300, 1000]).range([4, 12]),
-			iconScale = d3.scale.linear().domain([300, 1000]).range([1, 1.5]);
+			iconScale = d3.scale.linear().domain([300, 1000]).range([1, 1.5]),
+			particleSizeScale = d3.scale.linear().domain([300, 1000]).range([20, 45]),
+			particleIncrementScale = d3.scale.linear().domain([300, 1000]).range([14, 38]);
 
 			$("#view").html(projectTemplate(data));
 			
@@ -370,7 +372,9 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					segments = [],
 					counter = 0,
 					segmentIndex = 0,
-					rafID = null;
+					rafID = null,
+					increment = Math.round(particleIncrementScale(containerWidth)),
+					size = Math.round(particleSizeScale(containerWidth));
 
 				setTimeout(function() {
 					rafID = requestAnimationFrame(swipe);
@@ -401,7 +405,9 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 
 					$("<div class='particle'></div>").appendTo(".canvas").css({
 						top: currentLocation.y,
-						left: currentLocation.x
+						left: currentLocation.x,
+						width: size,
+						height: size
 					});
 
 					if(counter > segments[segmentIndex].length) {
@@ -409,7 +415,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 						counter = 0;
 					}
 
-					counter += 25;
+					counter += increment;
 					rafID = requestAnimationFrame(swipe);
 				}
 			}

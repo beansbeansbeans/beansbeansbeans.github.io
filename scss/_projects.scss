@@ -463,8 +463,6 @@
 		}
 		.particle {
 			position: absolute;
-			width: 35px;
-			height: 35px;
 			border: solid 2px $white;
 			@include border-radius(50%);
 			background: $blue;
@@ -472,6 +470,9 @@
 		}
 	}
 }
+
+// 2 scales: particle size, and resolution
+// counter!
 
 @include keyframe(fadeIn) {
 	100% {
