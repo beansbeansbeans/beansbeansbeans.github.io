@@ -66,18 +66,21 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				projectContents: '',
 				caption: "Built with d3js and CSS transforms.",
 				description: "I had an idea for an effect where you would scrub forward and backward along a track of music and then be able to play back your scrubbing exactly as it had happened, allowing you to hear the points where you had lingered on a note or blazed through a section, which might be a cool piece of music in itself. The other half of the effect would be that you could then scrub through the outcome of your original scrubbing, and you could repeat this cycle as many times as you wanted, ending up with an extremely distorted version of the original track. <br/><br/>I ended up implementing the effect with a randomly generated sequence of frequencies (from the Javanese pentatonic scale) rather than a track of music because I thought it would make for a simpler visualization."
-			};
+			},
+			widthScale = d3.scale.linear().domain([320, 2000]).range([0.75, 0.35]),
+			bufferScale = d3.scale.linear().domain([300, 1000]).range([4, 12]),
+			iconScale = d3.scale.linear().domain([300, 1000]).range([1, 1.5]);
 
 			$("#view").html(projectTemplate(data));
 			
 			var keyboard = [],
-				buffer = 8,
 				playTime = 5,
 				oscillator,
 				context,
 				gainNode,
-				containerWidth = 600,
-				containerHeight = 200,
+				containerWidth = widthScale($(window).width()) * $(window).width(),
+				containerHeight = containerWidth / 3,
+				buffer = bufferScale(containerWidth),
 				remix = [],
 				mouseX,
 				mouseY,
@@ -153,9 +156,8 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 					.attr("class", "keyboard")
 					.attr("width", containerWidth)
 					.attr("height", containerHeight);
-				$(".project-contents").after('<div class="icon help">' + helpIcon + '</div>');
-				$(".project-contents").after('<div class="icon refresh">' + refreshIcon + '</div>');
-				$(".project-contents").after('<div class="icon player">' + playIcon + '</div>');
+				$(".project-contents").after('<div class="icons"></div>');
+				$('.icons').append('<div class="icon player">' + playIcon + '</div><div class="icon refresh">' + refreshIcon + '</div><div class="icon help">' + helpIcon + '</div>');
 				
 				context = new AudioContext();
 				oscillator = context.createOscillator();

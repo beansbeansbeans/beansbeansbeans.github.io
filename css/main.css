@@ -457,6 +457,12 @@
   margin-top: 6.25em;
   margin-bottom: 6.25em;
 }
+@media (max-width: 640px) {
+  #project-notes .project-contents {
+    margin-top: 3.75em;
+    margin-bottom: 3.75em;
+  }
+}
 #project-notes .keyboard,
 #project-notes .canvas {
   -moz-transform: translateZ(200px);
@@ -522,6 +528,18 @@
 #project-notes svg .note {
   display: inline-block;
 }
+#project-notes .icons {
+  margin-bottom: 1.66667em;
+}
+@media (max-width: 640px) {
+  #project-notes .icons {
+    -moz-transform: scale(0.75);
+    -ms-transform: scale(0.75);
+    -webkit-transform: scale(0.75);
+    transform: scale(0.75);
+    margin-bottom: 1.11111em;
+  }
+}
 #project-notes .icon {
   -moz-transition: all 250ms;
   -o-transition: all 250ms;
@@ -534,7 +552,6 @@
   width: 1.38889em;
   height: 1.38889em;
   margin: 0 15px;
-  margin-bottom: 1.66667em;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;

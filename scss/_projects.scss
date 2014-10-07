@@ -349,6 +349,10 @@
 		@include perspective(1000px);
 		@include leader(20);
 		@include trailer(20);
+		@include mobile-only {
+			@include leader(14);
+			@include trailer(12);
+		}
 	}	
 	.keyboard,
 	.canvas {
@@ -404,6 +408,14 @@
 		}
 	}
 
+	.icons {
+		@include trailer($lines: 12, $font-size: map-get(map-get($text-map, large), font-size));
+		@include mobile-only {
+			@include transform(scale(0.75));
+			@include trailer($lines: 8, $font-size: map-get(map-get($text-map, large), font-size));
+		}
+	}
+
 	.icon {
 		@include transition(all 250ms);
 		display: inline-block;
@@ -413,7 +425,6 @@
 		width: rhythm($lines: 10, $font-size: map-get(map-get($text-map, large), font-size));
 		height: rhythm($lines: 10, $font-size: map-get(map-get($text-map, large), font-size));
 		margin: 0 15px;
-		@include trailer($lines: 12, $font-size: map-get(map-get($text-map, large), font-size));
 		@include border-radius(5px);
 		text-align: center;
 		@include adjust-font-size-to(map-get(map-get($text-map, large), font-size), $lines: 9.75);

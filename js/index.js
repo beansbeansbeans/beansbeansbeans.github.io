@@ -38,7 +38,7 @@ require(['jquery', 'router', 'loader'], function($, Router, Loader) {
                     if(imageCounter == module.preloadAssets.length) {
                         loadModule();
                     }
-                }, 1000),
+                }, 750),
                 loadModule = function() {
                     module.needsLoading = false;
                     $("html").removeClass("loading");
