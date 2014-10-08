@@ -147,20 +147,16 @@
 }
 
 #project-pixels {
-	#border {
-		@include box-sizing(padding-box);
-		border: solid 2px $dark-blue;
-		@include border-radius(5px);
-	}
-
-	#border, #movie {
+	#movie {
 		margin-left: auto;
 		margin-right: auto;
+		svg {
+			overflow: visible;
+		}
+		rect { 
+			pointer-events: all;
+		} 
 	}
-
-	rect { 
-		pointer-events: all;
-	} 
 }
 
 #project-hiveplot {

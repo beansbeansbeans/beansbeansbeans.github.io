@@ -262,20 +262,14 @@
     opacity: 0;
   }
 }
-#project-pixels #border {
-  -moz-box-sizing: padding-box;
-  -webkit-box-sizing: padding-box;
-  box-sizing: padding-box;
-  border: solid 2px #00303e;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-}
-#project-pixels #border, #project-pixels #movie {
+#project-pixels #movie {
   margin-left: auto;
   margin-right: auto;
 }
-#project-pixels rect {
+#project-pixels #movie svg {
+  overflow: visible;
+}
+#project-pixels #movie rect {
   pointer-events: all;
 }
 
