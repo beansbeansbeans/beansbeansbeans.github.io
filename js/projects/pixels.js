@@ -19,6 +19,16 @@ define(['fisheye', 'lib/d3', 'templates/project_detail'], function(fisheye, d3, 
 				pixelWidth,
 				transitionDuration = 500;
 
+			$("#movie").css({
+				width: size,
+				height: size
+			});
+
+			$("#border").css({
+				width: size + 50,
+				height: size + 25
+			});
+
 			d3.json("/js/projects/pixels.json", function(nodes) {
 				data = nodes;
 

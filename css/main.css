@@ -266,8 +266,6 @@
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
-  width: 550px;
-  height: 525px;
   padding-top: 25px;
   border: solid 2px #00303e;
   -moz-border-radius: 5px;
@@ -277,10 +275,6 @@
 #project-pixels #border, #project-pixels #movie {
   margin-left: auto;
   margin-right: auto;
-}
-#project-pixels #movie {
-  width: 500px;
-  height: 500px;
 }
 #project-pixels rect {
   pointer-events: all;
