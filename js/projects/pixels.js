@@ -15,7 +15,10 @@ define(['fisheye', 'lib/d3', 'templates/project_detail'], function(fisheye, d3, 
 
 			var data,
 				svg,
-				size = 500,
+				widthScale = d3.scale.linear().domain([320, 2000]).range([0.9, 0.3]),
+				paddingScale = d3.scale.linear().domain([300, 700]).range([10, 25]),
+				size = ($(window).width() > 2000) ? 0.35 * $(window).width() : widthScale($(window).width()) * $(window).width(),
+				padding = paddingScale(size),
 				pixelWidth,
 				transitionDuration = 500;
 
@@ -25,8 +28,9 @@ define(['fisheye', 'lib/d3', 'templates/project_detail'], function(fisheye, d3, 
 			});
 
 			$("#border").css({
-				width: size + 50,
-				height: size + 25
+				width: size + (padding * 2),
+				height: size + 4 + (padding * 2),
+				paddingTop: padding
 			});
 
 			d3.json("/js/projects/pixels.json", function(nodes) {
@@ -42,7 +46,7 @@ define(['fisheye', 'lib/d3', 'templates/project_detail'], function(fisheye, d3, 
 
 					var pixel = svg.selectAll(".pixel").data(data);
 					var itemsPerRow = 20;
-					pixelWidth = Math.floor(size / itemsPerRow);
+					pixelWidth = Math.round(size / itemsPerRow);
 
 					pixel.transition().duration(transitionDuration).delay(function(d, i) {
 						return Math.random() * transitionDuration

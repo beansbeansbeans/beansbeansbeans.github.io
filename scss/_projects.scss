@@ -148,8 +148,7 @@
 
 #project-pixels {
 	#border {
-		@include box-sizing(content-box);
-		padding-top: 25px;
+		@include box-sizing(padding-box);
 		border: solid 2px $dark-blue;
 		@include border-radius(5px);
 	}

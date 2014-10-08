@@ -263,10 +263,9 @@
   }
 }
 #project-pixels #border {
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box;
-  box-sizing: content-box;
-  padding-top: 25px;
+  -moz-box-sizing: padding-box;
+  -webkit-box-sizing: padding-box;
+  box-sizing: padding-box;
   border: solid 2px #00303e;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
