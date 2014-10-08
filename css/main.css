@@ -262,14 +262,14 @@
     opacity: 0;
   }
 }
-#project-pixels #movie {
+#project-pixels #movie, #project-pixels #border {
   margin-left: auto;
   margin-right: auto;
 }
-#project-pixels #movie svg {
+#project-pixels #movie svg, #project-pixels #border svg {
   overflow: visible;
 }
-#project-pixels #movie rect {
+#project-pixels #movie rect, #project-pixels #border rect {
   pointer-events: all;
 }
 
