@@ -96,19 +96,18 @@ define(['fisheye', 'lib/d3', 'templates/project_detail'], function(fisheye, d3, 
 			     xFisheye = fisheye.scale(d3.scale.identity).domain([0, width]).focus(width/2).distortion(1.25);
 			     yFisheye = fisheye.scale(d3.scale.identity).domain([0, height]).focus(height/2).distortion(1.25);
 
-			     var svg = d3.select("#movie");
+			     var svg = d3.select("#movie"),
+			     	focusCell = function(container) {
+				     	var mouse = d3.mouse(container);
+				     	xFisheye.focus(mouse[1]); 
+				     	yFisheye.focus(mouse[0]); 
+				     	redraw();
+			     	}
 
 			     boxTest = svg.selectAll(".pixel");
 
-			     svg.on("mousemove", function() {
-
-			     	var mouse = d3.mouse(this);
-			     	xFisheye.focus(mouse[1]); 
-			     	yFisheye.focus(mouse[0]); 
-			     	redraw();
-
-			     });
-
+			     svg.on("mousemove", function() { focusCell(this); });
+			     svg.on("touchmove", function() { focusCell(this); });
 			 };
 
 			 function defaultDraw() {
