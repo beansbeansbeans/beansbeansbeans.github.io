@@ -22,7 +22,9 @@ define(['fisheye', 'lib/d3', 'templates/project_detail'], function(fisheye, d3, 
 
 			$("#movie, #border").css({
 				width: size,
-				height: size
+				height: size,
+				marginLeft: "auto",
+				marginRight: "auto"
 			});
 
 			d3.json("/js/projects/pixels.json", function(nodes) {
