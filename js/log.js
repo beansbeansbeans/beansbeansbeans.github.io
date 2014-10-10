@@ -12,18 +12,18 @@ define(['templates/log_index'], function(logIndex) {
 			title: "posterboard",
 			description: "September 30, 2014"
 		},
-		{
-			title: "video",
-			description: "September 29, 2014"
-		},
+		// {
+		// 	title: "video",
+		// 	description: "September 29, 2014"
+		// },
 		{
 			title: "boyhood",
 			description: "September 22, 2014"
 		},
-		{
-			title: "shoes",
-			description: "September 20, 2014"
-		},
+		// {
+		// 	title: "shoes",
+		// 	description: "September 20, 2014"
+		// },
 		{
 			title: "anxiety",
 			description: "September 12, 2014"
