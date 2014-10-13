@@ -157,8 +157,9 @@
 
 #project-lips path {
   fill: none;
-  stroke: #000;
-  stroke-width: 1.5px;
+  stroke: red;
+  stroke-linecap: round;
+  stroke-width: 3px;
 }
 
 #project-dancers {
