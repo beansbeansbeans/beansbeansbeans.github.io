@@ -13,7 +13,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			$("#view").html(projectTemplate(data));
 
 			var width = 960,
-				height = 500;
+				height = 500,
+				frameDur = 2000;
 
 			var svg = d3.select(".project-contents").append("svg")
 				.attr("width", width)
@@ -42,15 +43,15 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				svg.append("path")
 					.attr("transform", "translate(0,0) scale(2,2)")
 					.attr("d", path[0])
-					.call(transition, 0, 1, index);
+					.call(transition, 0, 1, index, (0.5 * frameDur / pathData.length) + index * frameDur / pathData.length);
 			});
 
-			function transition(path, startIndex, destIndex, pathIndex) {
+			function transition(path, startIndex, destIndex, pathIndex, duration) {
 				path.transition()
-					.duration(2000)
+					.duration(duration)
 					.ease("linear")
 					.attrTween("d", pathTween(pathData[pathIndex][destIndex], 1))
-					.each("end", function() { d3.select(this).call(transition, destIndex, (destIndex + 1) % pathData[pathIndex].length, pathIndex); });
+					.each("end", function() { d3.select(this).call(transition, destIndex, (destIndex + 1) % pathData[pathIndex].length, pathIndex, frameDur); });
 			}
 
 			function pathTween(d1, precision) {
