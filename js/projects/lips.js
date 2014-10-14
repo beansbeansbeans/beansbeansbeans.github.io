@@ -24,20 +24,20 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				[
 					{
 						raw: [
-							[ 126.8,118.9 ],
-							[ 7.5,-3.3, 2.1,-50, 5.7,-18.7 ],
-							[ 11.9,-1.9, 2.7,22.7, 7.9,12.5 ],
-							[ 2.9,-10.2, 22.7,21.4, 21.6,-2.3 ],
-							[ 8.1,14.2, -0.5,-11.2, 2.3,-22.5 ]
+							[ 126.8, 118.9 ],
+							[ 7.5, -3.3, 2.1, -50, 5.7, -18.7 ],
+							[ 11.9, -1.9, 2.7, 22.7, 7.9, 12.5 ],
+							[ 2.9, -10.2, 22.7, 21.4, 21.6, -2.3 ],
+							[ 8.1, 14.2, -0.5, -11.2, 2.3, -22.5 ]
 						]
 					},
 					{
 						raw: [
-							[ 126.8,118.9 ],
-							[ 9,-16.7, 2.1,-50, 7.2,-32.2 ],
-							[ 15.6,3.5, 2.7,22.7, 11.5,17.9 ],
-							[ 17.3,18.5, 2.9,-10.2, 18.5,42.1 ],
-							[ 7.1,1.5, -0.5,-11.2, 1.3,-35.2 ]
+							[ 126.8, 118.9 ],
+							[ 9, -16.7, 2.1, -50, 7.2, -32.2 ],
+							[ 15.6, 3.5, 2.7, 22.7, 11.5, 17.9 ],
+							[ 17.3, 18.5, 2.9, -10.2, 18.5, 42.1 ],
+							[ 7.1, 1.5, -0.5, -11.2, 1.3, -35.2 ]
 						]
 					}
 				]
@@ -46,11 +46,23 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			pathData.forEach(function(path, index) {
 				var dVal = path[0].d ? path[0].d : compileRaw(index, 0);
 
+				setActive(index, 0);
+
 				svg.append("path")
-					.attr("transform", "translate(0,0) scale(2,2)")
+					.attr("transform", "translate(0,0)")
 					.attr("d", dVal)
 					.call(transition, 0, 1, index, (0.5 * frameDur / path.length) + index * frameDur / path.length);
 			});
+
+			function setActive(index, frameIndex) {
+				pathData[index].forEach(function(frame, index) {
+					if(index === frameIndex) {
+						frame.active = true;
+					} else {
+						frame.active = false;
+					}
+				});
+			};
 
 			function compileRaw(index, frame) {
 				var d = "M",
@@ -70,6 +82,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			function transition(path, startIndex, destIndex, pathIndex, duration) {
 				var dVal = pathData[pathIndex][destIndex].d ? pathData[pathIndex][destIndex].d : compileRaw(pathIndex, destIndex);
+
+				setActive(pathIndex, destIndex);
+
 				path.transition()
 					.duration(duration)
 					.ease("linear")
@@ -102,6 +117,34 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					};
 				};
 			}
+
+			$("svg").on("click", function(e) {
+
+				var relativeX = e.pageX - $("svg").offset().left,
+					relativeY = e.pageY - $("svg").offset().top,
+					closest = null;
+
+				// get the closest point
+				pathData.forEach(function(path, pathIndex) {
+					path.forEach(function(frame, frameIndex) {
+						if(frame.active) {
+							frame.raw.forEach(function(point, pointIndex) {
+								var x = pointIndex === 0 ? point[0] : frame.raw[0][0] + point[0],
+									y = pointIndex === 0 ? point[1] : frame.raw[0][1] + point[1];
+
+								if(closest == null || (Math.abs(x - relativeX) + Math.abs(y - relativeY)) < (Math.abs(closest.point[0] - relativeX) + Math.abs(closest.point[1] - relativeY))) {
+									closest = {
+										pathIndex: pathIndex,
+										frameIndex: frameIndex,
+										pointIndex: pointIndex,
+										point: [x, y]
+									};
+								}
+							});
+						}
+					});
+				});
+			});
 		},
 		destroy: function() {
 
