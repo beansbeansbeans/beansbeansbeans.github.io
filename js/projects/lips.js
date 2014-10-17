@@ -5,7 +5,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				identifier: "lips",
 				title: "Lips",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum optio voluptates molestias ipsum, labore cum, inventore ab nisi nemo tempore.",
-				projectContents: '<button onclick="end()">end</button><div></div>',
+				projectContents: '<button onclick="end()">end</button><button onclick="test()">test</button><div></div>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate et pariatur minima, quidem, rerum sed.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum ipsam libero consequuntur sint id, quis qui adipisci maxime officia debitis nobis facilis ducimus, quaerat necessitatibus accusantium enim quam rem magni."
 			};
@@ -112,8 +112,22 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				};
 			}
 
-			function smoothOutControlPoint(index, frame, amount) {
-				// don't forget to call compileRaw() at the end
+			function smoothOutControlPoint(index, frame, point, amount) {
+				if(point == (pathData[index][frame].raw.length - 1)) {
+					point--;
+				} else if(point == 0) {
+					point++;
+				}
+
+				var controlPoint = pathData[index][frame].raw[point],
+					dest = [controlPoint[0], controlPoint[1]],
+					c1 = [controlPoint[2], controlPoint[3]],
+					c2 = [controlPoint[4], controlPoint[5]],
+					prevDest = [pathData[index][frame].raw[point - 1][0], pathData[index][frame].raw[point - 1][1]],
+					nextDest = [pathData[index][frame].raw[point + 1][0], pathData[index][frame].raw[point + 1][1]];
+
+				compileRaw(index, frame);
+				cachedAttrTweens[index][frame] = false;
 			}
 
 			$("svg").on("click", function(e) {
@@ -144,11 +158,14 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				});
 
 				console.log(closest);
+
+				smoothOutControlPoint(closest.pathIndex, (closest.frameIndex + 1) % pathData[closest.pathIndex].length, closest.pointIndex);
 			});
 
-			window.end = function() {
-				svg.selectAll("path").transition().each("end", function() {});
-			}
+			window.end = function() {svg.selectAll("path").transition().each("end", function() {}); }
+
+			window.test = function() {cachedAttrTweens[2][1] = false; }
+
 			window.d3 = d3;
 
 			window.cachedAttrTweens = cachedAttrTweens;
