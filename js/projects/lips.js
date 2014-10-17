@@ -5,7 +5,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				identifier: "lips",
 				title: "Lips",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum optio voluptates molestias ipsum, labore cum, inventore ab nisi nemo tempore.",
-				projectContents: '<div></div>',
+				projectContents: '<button onclick="end()">end</button><div></div>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate et pariatur minima, quidem, rerum sed.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum ipsam libero consequuntur sint id, quis qui adipisci maxime officia debitis nobis facilis ducimus, quaerat necessitatibus accusantium enim quam rem magni."
 			};
@@ -14,44 +14,24 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			var width = 960,
 				height = 500,
-				frameDur = 2000;
-
-			var svg = d3.select(".project-contents").append("svg")
+				frameDur = 2000,
+				svg = d3.select(".project-contents").append("svg")
 				.attr("width", width)
-				.attr("height", height);
+				.attr("height", height),
+				pathData;
 
-			var pathData = [
-				[
-					{
-						raw: [
-							[ 126.8, 118.9 ],
-							[ 7.5, -3.3, 2.1, -50, 5.7, -18.7 ],
-							[ 11.9, -1.9, 2.7, 22.7, 7.9, 12.5 ],
-							[ 2.9, -10.2, 22.7, 21.4, 21.6, -2.3 ],
-							[ 8.1, 14.2, -0.5, -11.2, 2.3, -22.5 ]
-						]
-					},
-					{
-						raw: [
-							[ 126.8, 118.9 ],
-							[ 9, -16.7, 2.1, -50, 7.2, -32.2 ],
-							[ 15.6, 3.5, 2.7, 22.7, 11.5, 17.9 ],
-							[ 17.3, 18.5, 2.9, -10.2, 18.5, 42.1 ],
-							[ 7.1, 1.5, -0.5, -11.2, 1.3, -35.2 ]
-						]
-					}
-				]
-			];
+			d3.json("/js/projects/lips.json", function(data) {
+				pathData = data;
+				data.forEach(function(path, index) {
+					var dVal = path[0].d ? path[0].d : compileRaw(index, 0);
 
-			pathData.forEach(function(path, index) {
-				var dVal = path[0].d ? path[0].d : compileRaw(index, 0);
+					setActive(index, 0);
 
-				setActive(index, 0);
-
-				svg.append("path")
-					.attr("transform", "translate(0,0)")
-					.attr("d", dVal)
-					.call(transition, 0, 1, index, (0.5 * frameDur / path.length) + index * frameDur / path.length);
+					svg.append("path")
+						.attr("transform", "translate(0,0)")
+						.attr("d", dVal)
+						.call(transition, 0, 1, index, (0.5 * frameDur / path.length) + index * frameDur / path.length);
+				});
 			});
 
 			function setActive(index, frameIndex) {
@@ -113,9 +93,15 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					});
 
 					return function(t) {
-						return t < 1 ? "M" + points.map(function(p) { return p(t); }).join("L") : d1;
+						return t < 1 ? "M" + points.map(function(p) { 
+							return p(t); 
+						}).join("L") : d1;
 					};
 				};
+			}
+
+			function smoothOutControlPoint(index, frame, amount) {
+				// don't forget to call compileRaw() at the end
 			}
 
 			$("svg").on("click", function(e) {
@@ -144,7 +130,14 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						}
 					});
 				});
+
+				console.log(closest);
 			});
+
+			window.end = function() {
+				svg.selectAll("path").transition().each("end", function() {});
+			}
+			window.d3 = d3;
 		},
 		destroy: function() {
 
