@@ -19,7 +19,33 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				.attr("width", width)
 				.attr("height", height),
 				pathData,
-				cachedAttrTweens = [];
+				cachedAttrTweens = [],
+				mediator = function() {
+					var channels = [];
+					return {
+						subscribe: function(channel, callback) {
+							if(!channels[channel]) {
+								channels[channel] = [];
+							}
+
+							channels[channel].push(callback);
+						},
+						publish: function(channel) {
+							if(!channels[channel]) {
+								channels[channel] = [];
+								return false;
+							}
+
+							var args = Array.prototype.slice.call(arguments, 1);
+							for(var i=0, l=channels[channel].length; i < l; i++) {
+								var subscription = channels[channel][i];
+								subscription.apply(subscription.context, args);
+							}
+
+							channels[channel] = [];
+						}
+					}
+				}();
 
 			d3.json("/js/projects/lips.json", function(data) {
 				pathData = data;
@@ -63,6 +89,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			}
 
 			function transition(path, startIndex, destIndex, pathIndex, duration) {
+
+				mediator.publish(pathIndex + "_" + destIndex);
+
 				var dVal = pathData[pathIndex][destIndex].d ? pathData[pathIndex][destIndex].d : compileRaw(pathIndex, destIndex);
 
 				setActive(pathIndex, destIndex);
@@ -164,10 +193,31 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				cachedAttrTweens[index][frame] = false;
 				cachedAttrTweens[index][frame + 1] = false;
 
-				// while the path is tweening to the frame containing the altered control point, we want to remove all control points at that index across frames of that path
-				// 
-				// perhaps this can be achieved through a mini-mediator
+				mediator.subscribe(index + "_" + frame, function() {
+					removeControlPoint(index, point);
+				});
 			}
+
+			function removeControlPoint(index, pointIndex) {
+				pathData[index].forEach(function(frame, frameIndex) {
+					var absFrame = getAbsoluteCoordinate(frame.raw);
+
+					absFrame.splice(pointIndex, 1);
+					frame.raw.splice(pointIndex, 1);
+
+					frame.raw.forEach(function(point, pointIndex) {
+						if(pointIndex > 0) {
+							point[0] = absFrame[pointIndex][0] - absFrame[pointIndex - 1][0];
+							point[1] = absFrame[pointIndex][1] - absFrame[pointIndex - 1][1];
+						}
+					});
+
+					compileRaw(index, frameIndex);
+					cachedAttrTweens[index][frameIndex] = false;
+				});
+			}
+
+			window.removeControlPoint = removeControlPoint;
 
 			$("svg").on("click", function(e) {
 
