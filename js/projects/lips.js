@@ -83,7 +83,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			}
 
 			function pathTween(path, d1, precision) {
-				// var points;
+				var points;
 
 				return function() {
 					var path0 = path,
@@ -98,13 +98,13 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					while ((i += dt) < 1) distances.push(i);
 					distances.push(1);
 
-					// if(!points) {
+					if(!points) {
 						var points = distances.map(function(t) {
 							var p0 = path0.getPointAtLength(t * n0),
 								p1 = path1.getPointAtLength(t * n1);
 							return d3.interpolate([p0.x, p0.y], [p1.x, p1.y]);
 						});
-					// }
+					}
 
 					return function(t) {
 						return t < 1 ? "M" + points.map(function(p) { 
@@ -161,7 +161,6 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				controlPoint[5] = 0;
 
 				compileRaw(index, frame);
-				cachedAttrTweens[index][frame - 1] = false;
 				cachedAttrTweens[index][frame] = false;
 				cachedAttrTweens[index][frame + 1] = false;
 
