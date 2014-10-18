@@ -21,6 +21,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				.attr("height", height),
 				pathData,
 				cachedAttrTweens = [],
+				animProp,
+				keyframeProp,
+				noTouch = false,
 				mediator = function() {
 					var channels = [];
 					return {
@@ -47,6 +50,17 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						}
 					}
 				}();
+
+			['', 'webkit', 'moz'].every(function(prefix) {
+				var property = prefix.length ? prefix + "Animation" : "animation";
+
+				if(typeof document.body.style[property] !== "undefined") {
+					keyframeProp = "@" + (prefix.length ? "-" + prefix + "-" : "") + "keyframes";
+					animProp = property;
+					return false;
+				}
+				return true
+			});
 
 			d3.json("/js/projects/lips.json", function(data) {
 				pathData = data;
@@ -101,9 +115,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 				setActive(pathIndex, destIndex);
 
-				if(!cachedAttrTweens[pathIndex]) {
-					cachedAttrTweens[pathIndex] = [];
-				}
+				if(!cachedAttrTweens[pathIndex]) {cachedAttrTweens[pathIndex] = [];}
 
 				if(!cachedAttrTweens[pathIndex][destIndex]) {
 					cachedAttrTweens[pathIndex][destIndex] = pathTween(path[0][0], dVal, 1);
@@ -172,7 +184,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				$("<path d='" + generatePathString(pathData[index][frame].raw.slice().splice(0, point)) + "' />").appendTo("#hidden-subpaths");
 
 				$("#hidden-svg-container").html($("#hidden-svg-container").html());
-				generateSnapKeyframes($("#hidden-svg-container path")[0].getTotalLength());
+				generateSnapKeyframes($("#hidden-svg-container path")[0].getTotalLength(), index);
 				$("#hidden-svg-container svg").html("");
 
 				var rawFrame = pathData[index][frame].raw,
@@ -228,17 +240,46 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				});
 			}
 
-			function generateSnapKeyframes(distance) {
+			function generateSnapKeyframes(distance, index) {
+				// here we also need to instute a check for upper limit - can't be longer than total length of path - 25
  				distance = distance < 25 ? 25 : distance;
+ 				distance = Math.round(distance);
 
-				console.log(distance);
+				var style = document.createElement('style'),
+					animName = 'snap';
+
+				style.textContent = '' + 
+					keyframeProp + " " + animName + ' {' +
+						'0% { ' +
+							'stroke-dasharray: ' + parseInt(distance + 13, 10) + ' 0 10000;' +
+						'}' +
+						'10% {' +
+							'stroke-dasharray: ' + distance + ' 25 10000;' +
+						'}' +
+						'100% {' +
+							'stroke-dasharray: ' + parseInt(distance + 13, 10) + ' 0 10000;' +
+						'}' +
+					'}';
+
+				document.head.appendChild(style);
+
+				$("#lips-svg-container path:eq(" + index + ")")[0].style[animProp] = animName + ' ' + frameDur * 2 + 'ms forwards';
+
+				setTimeout(function() {
+					document.head.removeChild(style);
+					$("#lips-svg-container path:eq(" + index + ")")[0].style[animProp] = "";
+					noTouch = false;
+				}, frameDur * 2);
 			}
 
 			$("#lips-svg-container").on("click", function(e) {
 
+				if(noTouch) { return false; }
+
 				var relativeX = e.pageX - $("#lips-svg-container").offset().left,
 					relativeY = e.pageY - $("#lips-svg-container").offset().top,
-					closest = null;
+					closest = null,
+					noTouch = true;
 
 				pathData.forEach(function(path, pathIndex) {
 					path.forEach(function(frame, frameIndex) {
@@ -262,16 +303,14 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 				if(closest) {
 					smoothOutControlPoint(closest.pathIndex, (closest.frameIndex + 2) % pathData[closest.pathIndex].length, closest.pointIndex);
+				} else {
+					noTouch = false;
 				}
 			});
 
 			window.end = function() {svg.selectAll("path").transition().each("end", function() {}); }
 
-			window.test = function() {cachedAttrTweens[2][1] = false; }
-
 			window.d3 = d3;
-
-			window.cachedAttrTweens = cachedAttrTweens;
 		},
 		destroy: function() {
 
