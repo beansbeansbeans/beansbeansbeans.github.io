@@ -5,7 +5,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				identifier: "lips",
 				title: "Lips",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum optio voluptates molestias ipsum, labore cum, inventore ab nisi nemo tempore.",
-				projectContents: '<button onclick="end()">end</button><button onclick="test()">test</button><div></div>',
+				projectContents: '<button onclick="end()">end</button><button onclick="test()">test</button><div id="hidden-svg-container"><svg id="hidden-subpaths"></svg></div>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate et pariatur minima, quidem, rerum sed.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum ipsam libero consequuntur sint id, quis qui adipisci maxime officia debitis nobis facilis ducimus, quaerat necessitatibus accusantium enim quam rem magni."
 			};
@@ -16,6 +16,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				height = 500,
 				frameDur = 1500,
 				svg = d3.select(".project-contents").append("svg")
+				.attr("id", "lips-svg-container")
 				.attr("width", width)
 				.attr("height", height),
 				pathData,
@@ -73,8 +74,13 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			};
 
 			function compileRaw(index, frame) {
-				var d = "M",
-					rawArr = pathData[index][frame].raw;
+				var rawArr = pathData[index][frame].raw;
+				pathData[index][frame].d = generatePathString(rawArr);
+				return generatePathString(rawArr);
+			}
+
+			function generatePathString(rawArr) {
+				var d = "M";
 
 				rawArr.forEach(function(point) {
 					if(point.length == 2) {
@@ -84,7 +90,6 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					}
 				});
 
-				pathData[index][frame].d = d;
 				return d;
 			}
 
@@ -164,6 +169,12 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					point++;
 				}
 
+				$("<path d='" + generatePathString(pathData[index][frame].raw.slice().splice(0, point)) + "' />").appendTo("#hidden-subpaths");
+
+				$("#hidden-svg-container").html($("#hidden-svg-container").html());
+				generateSnapKeyframes($("#hidden-svg-container path")[0].getTotalLength());
+				$("#hidden-svg-container svg").html("");
+
 				var rawFrame = pathData[index][frame].raw,
 					controlPoint = rawFrame[point],
 					absoluteFrame = getAbsoluteCoordinate(rawFrame),
@@ -217,17 +228,21 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				});
 			}
 
-			window.removeControlPoint = removeControlPoint;
+			function generateSnapKeyframes(distance) {
+ 				distance = distance < 25 ? 25 : distance;
 
-			$("svg").on("click", function(e) {
+				console.log(distance);
+			}
 
-				var relativeX = e.pageX - $("svg").offset().left,
-					relativeY = e.pageY - $("svg").offset().top,
+			$("#lips-svg-container").on("click", function(e) {
+
+				var relativeX = e.pageX - $("#lips-svg-container").offset().left,
+					relativeY = e.pageY - $("#lips-svg-container").offset().top,
 					closest = null;
 
 				pathData.forEach(function(path, pathIndex) {
 					path.forEach(function(frame, frameIndex) {
-						if(frame.active) {
+						if(frame.active && frame.raw.length > 2) {
 							frame.raw.forEach(function(point, pointIndex) {
 								var x = pointIndex === 0 ? point[0] : frame.raw[0][0] + point[0],
 									y = pointIndex === 0 ? point[1] : frame.raw[0][1] + point[1];
@@ -245,9 +260,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					});
 				});
 
-				console.log(closest);
-
-				smoothOutControlPoint(closest.pathIndex, (closest.frameIndex + 2) % pathData[closest.pathIndex].length, closest.pointIndex);
+				if(closest) {
+					smoothOutControlPoint(closest.pathIndex, (closest.frameIndex + 2) % pathData[closest.pathIndex].length, closest.pointIndex);
+				}
 			});
 
 			window.end = function() {svg.selectAll("path").transition().each("end", function() {}); }
