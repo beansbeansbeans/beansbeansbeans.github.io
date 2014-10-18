@@ -14,7 +14,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			var width = 960,
 				height = 500,
-				frameDur = 2000,
+				frameDur = 1500,
 				svg = d3.select(".project-contents").append("svg")
 				.attr("width", width)
 				.attr("height", height),
@@ -23,13 +23,14 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			d3.json("/js/projects/lips.json", function(data) {
 				pathData = data;
+				window.pathData = pathData;
 				data.forEach(function(path, index) {
 					var dVal = path[0].d ? path[0].d : compileRaw(index, 0);
 
 					setActive(index, 0);
 
 					svg.append("path")
-						.attr("transform", "translate(0,0) scale(3, 3)")
+						.attr("transform", "translate(0,0)")
 						.attr("d", dVal)
 						.call(transition, 0, 1, index, (0.5 * frameDur / path.length) + index * frameDur / path.length);
 				});
@@ -82,7 +83,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			}
 
 			function pathTween(path, d1, precision) {
-				var points;
+				// var points;
+
 				return function() {
 					var path0 = path,
 						path1 = path0.cloneNode(),
@@ -96,13 +98,13 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					while ((i += dt) < 1) distances.push(i);
 					distances.push(1);
 
-					if(!points) {
-						points = distances.map(function(t) {
+					// if(!points) {
+						var points = distances.map(function(t) {
 							var p0 = path0.getPointAtLength(t * n0),
 								p1 = path1.getPointAtLength(t * n1);
 							return d3.interpolate([p0.x, p0.y], [p1.x, p1.y]);
 						});
-					}
+					// }
 
 					return function(t) {
 						return t < 1 ? "M" + points.map(function(p) { 
@@ -112,6 +114,20 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				};
 			}
 
+			function getAbsoluteCoordinate(rawArr) {				
+				absRawArr = [];
+
+				rawArr.forEach(function(point, index) {
+					if(index === 0) {
+						absRawArr.push(point);
+					} else {
+						absRawArr.push([absRawArr[index - 1][0] + point[0], absRawArr[index - 1][1] + point[1]]);
+					}
+				});
+
+				return absRawArr;
+			}
+
 			function smoothOutControlPoint(index, frame, point, amount) {
 				if(point == (pathData[index][frame].raw.length - 1)) {
 					point--;
@@ -119,15 +135,39 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					point++;
 				}
 
-				var controlPoint = pathData[index][frame].raw[point],
-					dest = [controlPoint[0], controlPoint[1]],
-					c1 = [controlPoint[2], controlPoint[3]],
-					c2 = [controlPoint[4], controlPoint[5]],
-					prevDest = [pathData[index][frame].raw[point - 1][0], pathData[index][frame].raw[point - 1][1]],
-					nextDest = [pathData[index][frame].raw[point + 1][0], pathData[index][frame].raw[point + 1][1]];
+				var rawFrame = pathData[index][frame].raw,
+					controlPoint = rawFrame[point],
+					absoluteFrame = getAbsoluteCoordinate(rawFrame),
+					prevDest = [rawFrame[point - 1][0], rawFrame[point - 1][1]],
+					absPrevDest = absoluteFrame[point - 1],
+					nextDest = [rawFrame[point + 1][0], rawFrame[point + 1][1]],
+					absNextDest = absoluteFrame[point + 1],
+					slope = (-absNextDest[1] + absPrevDest[1]) / (absNextDest[0] - absPrevDest[0]),
+					intercept = -absNextDest[1] - slope * absNextDest[0],
+					absNewControlPoint = [];
+
+				absNewControlPoint[0] = absPrevDest[0] + (absNextDest[0] - absPrevDest[0]) / 2;
+				absNewControlPoint[1] = -1 * (slope * absNewControlPoint[0] + intercept);
+
+				controlPoint[0] = absNewControlPoint[0] - absPrevDest[0];
+				controlPoint[1] = absNewControlPoint[1] - absPrevDest[1];
+
+				rawFrame[point + 1][0] = absNextDest[0] - absNewControlPoint[0];
+				rawFrame[point + 1][1] = absNextDest[1] - absNewControlPoint[1];
+				
+				controlPoint[2] = 0;
+				controlPoint[3] = 0;
+				controlPoint[4] = 0;
+				controlPoint[5] = 0;
 
 				compileRaw(index, frame);
+				cachedAttrTweens[index][frame - 1] = false;
 				cachedAttrTweens[index][frame] = false;
+				cachedAttrTweens[index][frame + 1] = false;
+
+				// while the path is tweening to the frame containing the altered control point, we want to remove all control points at that index across frames of that path
+				// 
+				// perhaps this can be achieved through a mini-mediator
 			}
 
 			$("svg").on("click", function(e) {
@@ -136,7 +176,6 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					relativeY = e.pageY - $("svg").offset().top,
 					closest = null;
 
-				// get the closest point
 				pathData.forEach(function(path, pathIndex) {
 					path.forEach(function(frame, frameIndex) {
 						if(frame.active) {
@@ -159,7 +198,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 				console.log(closest);
 
-				smoothOutControlPoint(closest.pathIndex, (closest.frameIndex + 1) % pathData[closest.pathIndex].length, closest.pointIndex);
+				smoothOutControlPoint(closest.pathIndex, (closest.frameIndex + 2) % pathData[closest.pathIndex].length, closest.pointIndex);
 			});
 
 			window.end = function() {svg.selectAll("path").transition().each("end", function() {}); }
