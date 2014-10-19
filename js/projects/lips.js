@@ -93,6 +93,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			function compileRaw(index, frame) {
 				var rawArr = pathData[index][frame].raw;
 				pathData[index][frame].d = generatePathString(rawArr);
+				pathData[index][frame].compiled = 0;
 				return generatePathString(rawArr);
 			}
 
@@ -111,7 +112,6 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			}
 
 			function transition(path, startIndex, destIndex, pathIndex, duration) {
-
 				mediator.publish(pathIndex + "_" + destIndex);
 
 				var dVal = pathData[pathIndex][destIndex].d ? pathData[pathIndex][destIndex].d : compileRaw(pathIndex, destIndex);
@@ -120,7 +120,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 				if(!cachedAttrTweens[pathIndex]) {cachedAttrTweens[pathIndex] = [];}
 
-				if(!cachedAttrTweens[pathIndex][destIndex]) {
+				pathData[pathIndex][destIndex].compiled++;
+
+				if(!cachedAttrTweens[pathIndex][destIndex] || pathData[pathIndex][destIndex].compiled < 3) {
 					cachedAttrTweens[pathIndex][destIndex] = pathTween(path[0][0], dVal, 1);
 				}
 
@@ -148,7 +150,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					distances.push(1);
 
 					if(!points) {
-						var points = distances.map(function(t) {
+						points = distances.map(function(t) {
 							var p0 = path0.getPointAtLength(t * n0),
 								p1 = path1.getPointAtLength(t * n1);
 							return d3.interpolate([p0.x, p0.y], [p1.x, p1.y]);
@@ -157,7 +159,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 					return function(t) {
 						return t < 1 ? "M" + points.map(function(p) { 
-							return p(t); 
+							var point = p(t);
+
+							return [point[0].toFixed(2), point[1].toFixed(1)]; 
 						}).join("L") : d1;
 					};
 				};
@@ -245,8 +249,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					});
 
 					compileRaw(index, frameIndex);
-					cachedAttrTweens[index][frameIndex] = false;
 				});
+
+				cachedAttrTweens[index] = false;
 			}
 
 			function generateSnapKeyframes(distance, index, limit) {
