@@ -250,10 +250,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			}
 
 			function generateSnapKeyframes(distance, index, limit) {
-				// here we also need to instute a check for upper limit - can't be longer than total length of path - 25
  				distance = distance < popGap ? popGap : distance;
- 				distance = (distance + popGap) > limit ? limit - popGap : distance;
- 				distance = Math.round(distance);
+ 				distance = (distance + popGap + 25) > limit ? limit - popGap - 25 : distance;
+ 				distance = Math.round(distance) + 25;
 
 				var style = document.createElement('style'),
 					animName = 'snap';
