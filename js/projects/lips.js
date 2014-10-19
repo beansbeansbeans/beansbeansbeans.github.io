@@ -181,10 +181,11 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					point++;
 				}
 
+				var totalLength = $("#lips-svg-container path:eq(" + index + ")")[0].getTotalLength();
 				$("<path d='" + generatePathString(pathData[index][frame].raw.slice().splice(0, point)) + "' />").appendTo("#hidden-subpaths");
 
 				$("#hidden-svg-container").html($("#hidden-svg-container").html());
-				generateSnapKeyframes($("#hidden-svg-container path")[0].getTotalLength(), index);
+				generateSnapKeyframes($("#hidden-svg-container path")[0].getTotalLength(), index, totalLength);
 				$("#hidden-svg-container svg").html("");
 
 				var rawFrame = pathData[index][frame].raw,
@@ -240,9 +241,10 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				});
 			}
 
-			function generateSnapKeyframes(distance, index) {
+			function generateSnapKeyframes(distance, index, limit) {
 				// here we also need to instute a check for upper limit - can't be longer than total length of path - 25
  				distance = distance < 25 ? 25 : distance;
+ 				distance = (distance + 25) > limit ? limit - 25 : distance;
  				distance = Math.round(distance);
 
 				var style = document.createElement('style'),
@@ -253,7 +255,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						'0% { ' +
 							'stroke-dasharray: ' + parseInt(distance + 13, 10) + ' 0 10000;' +
 						'}' +
-						'10% {' +
+						'10%, 35% {' +
 							'stroke-dasharray: ' + distance + ' 25 10000;' +
 						'}' +
 						'100% {' +
