@@ -155,20 +155,26 @@
   }
 }
 
+#project-lips svg {
+  overflow: visible;
+}
 #project-lips path {
   fill: none;
   stroke: red;
   stroke-linecap: round;
-  stroke-width: 3px;
+  stroke-width: 5px;
 }
 #project-lips .project-contents {
   position: relative;
 }
 #project-lips #hidden-svg-container, #project-lips #pop-svg-container {
   position: absolute;
+  pointer-events: none;
+}
+#project-lips #hidden-svg-container {
+  opacity: 0;
 }
 #project-lips #pop-svg-container {
-  pointer-events: none;
   top: 0;
   left: 0;
   right: 0;
