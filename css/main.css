@@ -161,6 +161,21 @@
   stroke-linecap: round;
   stroke-width: 3px;
 }
+#project-lips .project-contents {
+  position: relative;
+}
+#project-lips #hidden-svg-container, #project-lips #pop-svg-container {
+  position: absolute;
+}
+#project-lips #pop-svg-container {
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+#project-lips #pop-svg-container path {
+  stroke: blue;
+}
 
 #project-dancers {
   -webkit-touch-callout: none;

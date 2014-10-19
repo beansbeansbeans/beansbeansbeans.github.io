@@ -5,7 +5,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				identifier: "lips",
 				title: "Lips",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum optio voluptates molestias ipsum, labore cum, inventore ab nisi nemo tempore.",
-				projectContents: '<button onclick="end()">end</button><button onclick="test()">test</button><div id="hidden-svg-container"><svg id="hidden-subpaths"></svg></div>',
+				projectContents: '<button onclick="end()">end</button><button onclick="test()">test</button><div id="hidden-svg-container"><svg id="hidden-subpaths"></svg></div><div id="pop-svg-container"><svg id="pop-svg"><path d="M4.4,10c0.8,1.2,13.5,9,14-6.9"/><path d="M2.5,11.9c3.8,1.9,12.5,1.7,10.2,14.8"/><path d="M13.3,29c0.2-4.6,8.6-6.8,15-1"/><path d="M19.3,1.9c-0.4,4.6,8.9,15,13.5,9"/><path d="M29.6,29c-2.5-3.5-4.4-12.7,6.2-17.7"/></svg></div>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate et pariatur minima, quidem, rerum sed.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum ipsam libero consequuntur sint id, quis qui adipisci maxime officia debitis nobis facilis ducimus, quaerat necessitatibus accusantium enim quam rem magni."
 			};
@@ -61,6 +61,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				}
 				return true
 			});
+
+			$("#pop-svg-container svg").attr("width", width).attr("height", height);
 
 			d3.json("/js/projects/lips.json", function(data) {
 				pathData = data;
@@ -304,6 +306,10 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				});
 
 				if(closest) {
+					var fragment = $("<svg id='pop-svg' width='" + width + "' height='" + height + "' viewBox='" + -closest.point[0] + " " + -closest.point[1] + " " + width + " " + height + "'>" + $("#pop-svg").html() + "</svg>");
+					$("#pop-svg-container").html("");
+					fragment.appendTo($("#pop-svg-container"));
+					$("#pop-svg-container").html($("#pop-svg-container").html());
 					smoothOutControlPoint(closest.pathIndex, (closest.frameIndex + 2) % pathData[closest.pathIndex].length, closest.pointIndex);
 				} else {
 					noTouch = false;

@@ -94,6 +94,21 @@
 	  stroke-linecap: round;
 	  stroke-width: 3px;
 	}
+	.project-contents {
+		position: relative;
+	}
+	#hidden-svg-container, #pop-svg-container {
+		position: absolute;
+	}
+	#pop-svg-container {
+		pointer-events: none;
+		top: 0;
+		left: 0;
+		right: 0;
+		path {
+			stroke: blue;
+		}
+	}
 }
 
 #project-dancers {
