@@ -24,6 +24,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				animProp,
 				keyframeProp,
 				noTouch = false,
+				popGap = 80,
 				mediator = function() {
 					var channels = [];
 					return {
@@ -183,13 +184,6 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					point++;
 				}
 
-				var totalLength = $("#lips-svg-container path:eq(" + index + ")")[0].getTotalLength();
-				$("<path d='" + generatePathString(pathData[index][frame].raw.slice().splice(0, point)) + "' />").appendTo("#hidden-subpaths");
-
-				$("#hidden-svg-container").html($("#hidden-svg-container").html());
-				generateSnapKeyframes($("#hidden-svg-container path")[0].getTotalLength(), index, totalLength);
-				$("#hidden-svg-container svg").html("");
-
 				var rawFrame = pathData[index][frame].raw,
 					controlPoint = rawFrame[point],
 					absoluteFrame = getAbsoluteCoordinate(rawFrame),
@@ -200,6 +194,18 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					slope = (-absNextDest[1] + absPrevDest[1]) / (absNextDest[0] - absPrevDest[0]),
 					intercept = -absNextDest[1] - slope * absNextDest[0],
 					absNewControlPoint = [];
+
+				var fragment = $("<svg id='pop-svg' width='" + width + "' height='" + height + "' viewBox='" + -absoluteFrame[point][0] + " " + -absoluteFrame[point][1] + " " + width + " " + height + "'>" + $("#pop-svg").html() + "</svg>");
+				$("#pop-svg-container").html("");
+				fragment.appendTo($("#pop-svg-container"));
+				$("#pop-svg-container").html($("#pop-svg-container").html());
+
+				var totalLength = $("#lips-svg-container path:eq(" + index + ")")[0].getTotalLength();
+				$("<path d='" + generatePathString(pathData[index][frame].raw.slice().splice(0, point + 1)) + "' />").appendTo("#hidden-subpaths");
+
+				$("#hidden-svg-container").html($("#hidden-svg-container").html());
+				generateSnapKeyframes($("#hidden-svg-container path")[0].getTotalLength(), index, totalLength);
+				$("#hidden-svg-container svg").html("");
 
 				absNewControlPoint[0] = absPrevDest[0] + (absNextDest[0] - absPrevDest[0]) / 2;
 				absNewControlPoint[1] = -1 * (slope * absNewControlPoint[0] + intercept);
@@ -245,8 +251,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			function generateSnapKeyframes(distance, index, limit) {
 				// here we also need to instute a check for upper limit - can't be longer than total length of path - 25
- 				distance = distance < 25 ? 25 : distance;
- 				distance = (distance + 25) > limit ? limit - 25 : distance;
+ 				distance = distance < popGap ? popGap : distance;
+ 				distance = (distance + popGap) > limit ? limit - popGap : distance;
  				distance = Math.round(distance);
 
 				var style = document.createElement('style'),
@@ -255,13 +261,13 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				style.textContent = '' + 
 					keyframeProp + " " + animName + ' {' +
 						'0% { ' +
-							'stroke-dasharray: ' + parseInt(distance + 13, 10) + ' 0 10000;' +
+							'stroke-dasharray: ' + parseInt(distance + popGap/2, 10) + ' 0 10000;' +
 						'}' +
-						'10%, 35% {' +
-							'stroke-dasharray: ' + distance + ' 25 10000;' +
+						'10%, 75% {' +
+							'stroke-dasharray: ' + distance + ' ' + popGap + ' 10000;' +
 						'}' +
 						'100% {' +
-							'stroke-dasharray: ' + parseInt(distance + 13, 10) + ' 0 10000;' +
+							'stroke-dasharray: ' + parseInt(distance + popGap/2, 10) + ' 0 10000;' +
 						'}' +
 					'}';
 
@@ -288,9 +294,10 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				pathData.forEach(function(path, pathIndex) {
 					path.forEach(function(frame, frameIndex) {
 						if(frame.active && frame.raw.length > 2) {
+							var absFrame = getAbsoluteCoordinate(frame.raw);
 							frame.raw.forEach(function(point, pointIndex) {
-								var x = pointIndex === 0 ? point[0] : frame.raw[0][0] + point[0],
-									y = pointIndex === 0 ? point[1] : frame.raw[0][1] + point[1];
+								var x = absFrame[pointIndex][0],
+									y = absFrame[pointIndex][1];
 
 								if(closest == null || (Math.abs(x - relativeX) + Math.abs(y - relativeY)) < (Math.abs(closest.point[0] - relativeX) + Math.abs(closest.point[1] - relativeY))) {
 									closest = {
@@ -306,10 +313,6 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				});
 
 				if(closest) {
-					var fragment = $("<svg id='pop-svg' width='" + width + "' height='" + height + "' viewBox='" + -closest.point[0] + " " + -closest.point[1] + " " + width + " " + height + "'>" + $("#pop-svg").html() + "</svg>");
-					$("#pop-svg-container").html("");
-					fragment.appendTo($("#pop-svg-container"));
-					$("#pop-svg-container").html($("#pop-svg-container").html());
 					smoothOutControlPoint(closest.pathIndex, (closest.frameIndex + 2) % pathData[closest.pathIndex].length, closest.pointIndex);
 				} else {
 					noTouch = false;
