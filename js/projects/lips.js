@@ -23,8 +23,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				cachedAttrTweens = [],
 				animProp,
 				keyframeProp,
-				noTouch = false,
 				popGap = 80,
+				isKeyframing = [],
 				mediator = function() {
 					var channels = [];
 					return {
@@ -72,6 +72,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					var dVal = path[0].d ? path[0].d : compileRaw(index, 0);
 
 					setActive(index, 0);
+					isKeyframing[index] = false;
 
 					svg.append("path")
 						.attr("transform", "translate(0,0)")
@@ -259,10 +260,15 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
  				distance = (distance + popGap + 25) > limit ? limit - popGap - 25 : distance;
  				distance = Math.round(distance) + 25;
 
-				var style = document.createElement('style'),
-					animName = 'snap';
+ 				var style = document.querySelector("style"),
+ 					animName = 'snap_' + Date.now();
 
-				style.textContent = '' + 
+ 				if(!style) {
+ 					style = document.createElement('style');
+ 					document.head.appendChild(style);
+ 				}
+
+				style.textContent = style.innerHTML + 
 					keyframeProp + " " + animName + ' {' +
 						'0% { ' +
 							'stroke-dasharray: ' + parseInt(distance + popGap/2, 10) + ' 0 10000;' +
@@ -275,51 +281,46 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						'}' +
 					'}';
 
-				document.head.appendChild(style);
-
 				$("#lips-svg-container path:eq(" + index + ")")[0].style[animProp] = animName + ' ' + frameDur * 2 + 'ms forwards';
 
 				setTimeout(function() {
-					document.head.removeChild(style);
 					$("#lips-svg-container path:eq(" + index + ")")[0].style[animProp] = "";
-					noTouch = false;
+					isKeyframing[index] = false;
 				}, frameDur * 2);
 			}
 
 			$("#lips-svg-container").on("click", function(e) {
 
-				if(noTouch) { return false; }
-
 				var relativeX = e.pageX - $("#lips-svg-container").offset().left,
 					relativeY = e.pageY - $("#lips-svg-container").offset().top,
-					closest = null,
-					noTouch = true;
+					closest = null;
 
 				pathData.forEach(function(path, pathIndex) {
-					path.forEach(function(frame, frameIndex) {
-						if(frame.active && frame.raw.length > 2) {
-							var absFrame = getAbsoluteCoordinate(frame.raw);
-							frame.raw.forEach(function(point, pointIndex) {
-								var x = absFrame[pointIndex][0],
-									y = absFrame[pointIndex][1];
+					if(!isKeyframing[pathIndex]) {
+						path.forEach(function(frame, frameIndex) {
+							if(frame.active && frame.raw.length > 2) {
+								var absFrame = getAbsoluteCoordinate(frame.raw);
+								frame.raw.forEach(function(point, pointIndex) {
+									var x = absFrame[pointIndex][0],
+										y = absFrame[pointIndex][1];
 
-								if(closest == null || (Math.abs(x - relativeX) + Math.abs(y - relativeY)) < (Math.abs(closest.point[0] - relativeX) + Math.abs(closest.point[1] - relativeY))) {
-									closest = {
-										pathIndex: pathIndex,
-										frameIndex: frameIndex,
-										pointIndex: pointIndex,
-										point: [x, y]
-									};
-								}
-							});
-						}
-					});
+									if(closest == null || (Math.abs(x - relativeX) + Math.abs(y - relativeY)) < (Math.abs(closest.point[0] - relativeX) + Math.abs(closest.point[1] - relativeY))) {
+										closest = {
+											pathIndex: pathIndex,
+											frameIndex: frameIndex,
+											pointIndex: pointIndex,
+											point: [x, y]
+										};
+									}
+								});
+							}
+						});
+					}
 				});
 
 				if(closest) {
 					smoothOutControlPoint(closest.pathIndex, (closest.frameIndex + 2) % pathData[closest.pathIndex].length, closest.pointIndex);
-				} else {
-					noTouch = false;
+					isKeyframing[closest.pathIndex] = true;
 				}
 			});
 
