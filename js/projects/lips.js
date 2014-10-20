@@ -18,9 +18,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				height = 500,
 				frameDur = 1500,
 				svg = d3.select(".project-contents").append("svg")
-				.attr("id", "lips-svg-container")
-				.attr("width", width)
-				.attr("height", height),
+					.attr("id", "lips-svg-container")
+					.attr("width", width)
+					.attr("height", height),
 				pathData,
 				cachedAttrTweens = [],
 				animProp,
@@ -318,7 +318,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						'0% { ' +
 							'stroke-dasharray: ' + parseInt(distance + popGap/2, 10) + ' 0 10000;' +
 						'}' +
-						'10%, 75% {' +
+						'40%, 55% {' +
 							'stroke-dasharray: ' + distance + ' ' + popGap + ' 10000;' +
 						'}' +
 						'100% {' +
@@ -326,13 +326,13 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						'}' +
 					'}';
 
-				$("#lips-svg-container path:eq(" + index + ")")[0].style[animProp] = animName + ' ' + frameDur * 2 + 'ms forwards';
+				$("#lips-svg-container path:eq(" + index + ")")[0].style[animProp] = animName + ' ' + frameDur * 1.5 + 'ms forwards';
 
 				var timerID = setTimeout(function() {
 					$("#lips-svg-container path:eq(" + index + ")")[0].style[animProp] = "";
 					isKeyframing[index] = false;
-				}, frameDur * 2);
-				
+				}, frameDur * 1.5);
+
 				self.timers.push(timerID);
 			}
 
