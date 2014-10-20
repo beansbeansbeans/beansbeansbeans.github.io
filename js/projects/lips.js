@@ -1,18 +1,20 @@
 define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 	var lips = {
+		timers: [],
 		initialize: function() {
 			var data = {
 				identifier: "lips",
 				title: "Lips",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum optio voluptates molestias ipsum, labore cum, inventore ab nisi nemo tempore.",
-				projectContents: '<button onclick="end()">end</button><button onclick="test()">test</button><div id="hidden-svg-container"><svg id="hidden-subpaths"></svg></div><div id="pop-svg-container"><svg id="pop-svg"><path d="M4.4,10c0.8,1.2,13.5,9,14-6.9"/><path d="M2.5,11.9c3.8,1.9,12.5,1.7,10.2,14.8"/><path d="M13.3,29c0.2-4.6,8.6-6.8,15-1"/><path d="M19.3,1.9c-0.4,4.6,8.9,15,13.5,9"/><path d="M29.6,29c-2.5-3.5-4.4-12.7,6.2-17.7"/></svg></div>',
+				projectContents: '<button onclick="end()">end</button><button onclick="test()">test</button><div id="hidden-svg-container"><svg id="hidden-subpaths"></svg></div><div id="pop-svg-container"><svg id="pop-svg"></svg></div>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate et pariatur minima, quidem, rerum sed.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum ipsam libero consequuntur sint id, quis qui adipisci maxime officia debitis nobis facilis ducimus, quaerat necessitatibus accusantium enim quam rem magni."
 			};
 
 			$("#view").html(projectTemplate(data));
 
-			var width = 960,
+			var self = this,
+				width = 960,
 				height = 500,
 				frameDur = 1500,
 				svg = d3.select(".project-contents").append("svg")
@@ -25,6 +27,29 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				keyframeProp,
 				popGap = 80,
 				isKeyframing = [],
+				popShape = [
+					{
+						start: [4.4,10],
+						control: [0.8,1.2,13.5,9,14,-6.9]
+					},
+					{
+						start: [2.5,11.9],
+						control: [3.8,1.9,12.5,1.7,10.2,14.8]
+					},
+					{
+						start: [13.3,29],
+						control: [0.2,-4.6,8.6,-6.8,15,-1]
+					},
+					{
+						start: [19.3,1.9],
+						control: [-0.4,4.6,8.9,15,13.5,9]
+					},
+					{
+						start: [29.6,29],
+						control: [-2.5,-3.5,-4.4,-12.7,6.2,-17.7]
+					}
+				],
+				popAnimDur = 2000,
 				mediator = function() {
 					var channels = [];
 					return {
@@ -200,10 +225,30 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					intercept = -absNextDest[1] - slope * absNextDest[0],
 					absNewControlPoint = [];
 
-				var fragment = $("<svg id='pop-svg' width='" + width + "' height='" + height + "' viewBox='" + -absoluteFrame[point][0] + " " + -absoluteFrame[point][1] + " " + width + " " + height + "'>" + $("#pop-svg").html() + "</svg>");
-				$("#pop-svg-container").html("");
-				fragment.appendTo($("#pop-svg-container"));
+				var popString = "",
+					popStringID = "pop_" + Date.now();
+
+				popString += "<g id=" + popStringID + ">";
+
+				popShape.forEach(function(path) {
+					popString += "<path d='M" + parseInt(path.start[0] + absoluteFrame[point][0], 10) + "," + parseInt(path.start[1] + absoluteFrame[point][1], 10) + "c";
+					path.control.forEach(function(controlPoint, controlPointIndex) {
+						var delimiter = (controlPointIndex == (path.control.length - 1)) ? "" : ",";
+						popString += controlPoint + delimiter;
+					});
+					popString += "'></path>";
+				});
+
+				popString += "</g>";
+
+				$(popString).appendTo($("#pop-svg-container svg"));
 				$("#pop-svg-container").html($("#pop-svg-container").html());
+
+				var timerID = setTimeout(function() {
+					$("#" + popStringID).remove();
+				}, popAnimDur);
+
+				self.timers.push(timerID);
 
 				var totalLength = $("#lips-svg-container path:eq(" + index + ")")[0].getTotalLength();
 				$("<path d='" + generatePathString(pathData[index][frame].raw.slice().splice(0, point + 1)) + "' />").appendTo("#hidden-subpaths");
@@ -283,10 +328,12 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 				$("#lips-svg-container path:eq(" + index + ")")[0].style[animProp] = animName + ' ' + frameDur * 2 + 'ms forwards';
 
-				setTimeout(function() {
+				var timerID = setTimeout(function() {
 					$("#lips-svg-container path:eq(" + index + ")")[0].style[animProp] = "";
 					isKeyframing[index] = false;
 				}, frameDur * 2);
+				
+				self.timers.push(timerID);
 			}
 
 			$("#lips-svg-container").on("click", function(e) {
@@ -329,7 +376,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			window.d3 = d3;
 		},
 		destroy: function() {
-
+			this.timers.forEach(function(id) {
+				clearTimeout(id);
+			});
 		}
 	};
 
