@@ -123,7 +123,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				pathData[pathIndex][destIndex].compiled++;
 
 				if(!cachedAttrTweens[pathIndex][destIndex] || pathData[pathIndex][destIndex].compiled < 3) {
-					cachedAttrTweens[pathIndex][destIndex] = pathTween(path[0][0], dVal, 1);
+					cachedAttrTweens[pathIndex][destIndex] = pathTween(path[0][0], dVal, 4);
 				}
 
 				path.transition()
