@@ -25,7 +25,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				cachedAttrTweens = [],
 				animProp,
 				keyframeProp,
-				popGap = 80,
+				popGap = 200,
 				isKeyframing = [],
 				popShape = [
 					{
@@ -187,7 +187,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						return t < 1 ? "M" + points.map(function(p) { 
 							var point = p(t);
 
-							return [point[0].toFixed(2), point[1].toFixed(1)]; 
+							return [point[0].toFixed(1), point[1].toFixed(1)]; 
 						}).join("L") : d1;
 					};
 				};
@@ -207,25 +207,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				return absRawArr;
 			}
 
-			function smoothOutControlPoint(index, frame, point, amount) {
-				if(point == (pathData[index][frame].raw.length - 1)) {
-					point--;
-				} else if(point == 0) {
-					point++;
-				}
-
-				var rawFrame = pathData[index][frame].raw,
-					controlPoint = rawFrame[point],
-					absoluteFrame = getAbsoluteCoordinate(rawFrame),
-					prevDest = [rawFrame[point - 1][0], rawFrame[point - 1][1]],
-					absPrevDest = absoluteFrame[point - 1],
-					nextDest = [rawFrame[point + 1][0], rawFrame[point + 1][1]],
-					absNextDest = absoluteFrame[point + 1],
-					slope = (-absNextDest[1] + absPrevDest[1]) / (absNextDest[0] - absPrevDest[0]),
-					intercept = -absNextDest[1] - slope * absNextDest[0],
-					absNewControlPoint = [];
-
-				var popString = "",
+			function addPop(index, frame, point) {
+				var absoluteFrame = getAbsoluteCoordinate(pathData[index][frame].raw),
+					popString = "",
 					popStringID = "pop_" + Date.now();
 
 				popString += "<g id=" + popStringID + ">";
@@ -249,6 +233,19 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				}, popAnimDur);
 
 				self.timers.push(timerID);
+			}
+
+			function smoothOutControlPoint(index, frame, point, amount) {
+				var rawFrame = pathData[index][frame].raw,
+					controlPoint = rawFrame[point],
+					absoluteFrame = getAbsoluteCoordinate(rawFrame),
+					prevDest = [rawFrame[point - 1][0], rawFrame[point - 1][1]],
+					absPrevDest = absoluteFrame[point - 1],
+					nextDest = [rawFrame[point + 1][0], rawFrame[point + 1][1]],
+					absNextDest = absoluteFrame[point + 1],
+					slope = (-absNextDest[1] + absPrevDest[1]) / (absNextDest[0] - absPrevDest[0]),
+					intercept = -absNextDest[1] - slope * absNextDest[0],
+					absNewControlPoint = [];
 
 				var totalLength = $("#lips-svg-container path:eq(" + index + ")")[0].getTotalLength();
 				$("<path d='" + generatePathString(pathData[index][frame].raw.slice().splice(0, point + 1)) + "' />").appendTo("#hidden-subpaths");
@@ -318,7 +315,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						'0% { ' +
 							'stroke-dasharray: ' + parseInt(distance + popGap/2, 10) + ' 0 10000;' +
 						'}' +
-						'40%, 55% {' +
+						'25% {' +
 							'stroke-dasharray: ' + distance + ' ' + popGap + ' 10000;' +
 						'}' +
 						'100% {' +
@@ -326,12 +323,12 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						'}' +
 					'}';
 
-				$("#lips-svg-container path:eq(" + index + ")")[0].style[animProp] = animName + ' ' + frameDur * 1.5 + 'ms forwards';
+				$("#lips-svg-container path:eq(" + index + ")")[0].style[animProp] = animName + ' ' + frameDur * 1 + 'ms forwards';
 
 				var timerID = setTimeout(function() {
 					$("#lips-svg-container path:eq(" + index + ")")[0].style[animProp] = "";
 					isKeyframing[index] = false;
-				}, frameDur * 1.5);
+				}, frameDur * 1);
 
 				self.timers.push(timerID);
 			}
@@ -366,6 +363,13 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				});
 
 				if(closest) {
+					if(closest.pointIndex == (pathData[closest.pathIndex][closest.frameIndex].raw.length - 1)) {
+						closest.pointIndex--;
+					} else if(closest.pointIndex == 0) {
+						closest.pointIndex++;
+					}
+
+					addPop(closest.pathIndex, closest.frameIndex, closest.pointIndex);
 					smoothOutControlPoint(closest.pathIndex, (closest.frameIndex + 2) % pathData[closest.pathIndex].length, closest.pointIndex);
 					isKeyframing[closest.pathIndex] = true;
 				}
