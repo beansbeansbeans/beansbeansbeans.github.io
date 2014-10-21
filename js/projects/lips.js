@@ -6,7 +6,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				identifier: "lips",
 				title: "Lips",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum optio voluptates molestias ipsum, labore cum, inventore ab nisi nemo tempore.",
-				projectContents: '<button onclick="end()">end</button><button onclick="test()">test</button><div id="hidden-svg-container"><svg id="hidden-subpaths"></svg></div><div id="pop-svg-container"><svg id="pop-svg"></svg></div>',
+				projectContents: '<button onclick="end()">end</button><button onclick="test()">test</button><div id="hidden-svg-container"><svg id="hidden-subpaths"></svg></div>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate et pariatur minima, quidem, rerum sed.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum ipsam libero consequuntur sint id, quis qui adipisci maxime officia debitis nobis facilis ducimus, quaerat necessitatibus accusantium enim quam rem magni."
 			};
@@ -27,29 +27,6 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				keyframeProp,
 				popGap = 200,
 				isKeyframing = [],
-				popShape = [
-					{
-						start: [4.4,10],
-						control: [0.8,1.2,13.5,9,14,-6.9]
-					},
-					{
-						start: [2.5,11.9],
-						control: [3.8,1.9,12.5,1.7,10.2,14.8]
-					},
-					{
-						start: [13.3,29],
-						control: [0.2,-4.6,8.6,-6.8,15,-1]
-					},
-					{
-						start: [19.3,1.9],
-						control: [-0.4,4.6,8.9,15,13.5,9]
-					},
-					{
-						start: [29.6,29],
-						control: [-2.5,-3.5,-4.4,-12.7,6.2,-17.7]
-					}
-				],
-				popAnimDur = 2000,
 				mediator = function() {
 					var channels = [];
 					return {
@@ -207,34 +184,6 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				return absRawArr;
 			}
 
-			function addPop(index, frame, point) {
-				var absoluteFrame = getAbsoluteCoordinate(pathData[index][frame].raw),
-					popString = "",
-					popStringID = "pop_" + Date.now();
-
-				popString += "<g id=" + popStringID + ">";
-
-				popShape.forEach(function(path) {
-					popString += "<path d='M" + parseInt(path.start[0] + absoluteFrame[point][0], 10) + "," + parseInt(path.start[1] + absoluteFrame[point][1], 10) + "c";
-					path.control.forEach(function(controlPoint, controlPointIndex) {
-						var delimiter = (controlPointIndex == (path.control.length - 1)) ? "" : ",";
-						popString += controlPoint + delimiter;
-					});
-					popString += "'></path>";
-				});
-
-				popString += "</g>";
-
-				$(popString).appendTo($("#pop-svg-container svg"));
-				$("#pop-svg-container").html($("#pop-svg-container").html());
-
-				var timerID = setTimeout(function() {
-					$("#" + popStringID).remove();
-				}, popAnimDur);
-
-				self.timers.push(timerID);
-			}
-
 			function smoothOutControlPoint(index, frame, point, amount) {
 				var rawFrame = pathData[index][frame].raw,
 					controlPoint = rawFrame[point],
@@ -300,7 +249,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			function generateSnapKeyframes(distance, index, limit) {
  				distance = distance < popGap ? popGap : distance;
  				distance = (distance + popGap + 25) > limit ? limit - popGap - 25 : distance;
- 				distance = Math.round(distance) + 25;
+ 				distance = Math.round(distance) - 25;
 
  				var style = document.querySelector("style"),
  					animName = 'snap_' + Date.now();
@@ -323,12 +272,12 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						'}' +
 					'}';
 
-				$("#lips-svg-container path:eq(" + index + ")")[0].style[animProp] = animName + ' ' + frameDur * 1 + 'ms forwards';
+				$("#lips-svg-container path:eq(" + index + ")")[0].style[animProp] = animName + ' ' + frameDur * 2 + 'ms forwards';
 
 				var timerID = setTimeout(function() {
 					$("#lips-svg-container path:eq(" + index + ")")[0].style[animProp] = "";
 					isKeyframing[index] = false;
-				}, frameDur * 1);
+				}, frameDur * 2);
 
 				self.timers.push(timerID);
 			}
@@ -369,8 +318,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						closest.pointIndex++;
 					}
 
-					addPop(closest.pathIndex, closest.frameIndex, closest.pointIndex);
-					smoothOutControlPoint(closest.pathIndex, (closest.frameIndex + 2) % pathData[closest.pathIndex].length, closest.pointIndex);
+					smoothOutControlPoint(closest.pathIndex, closest.frameIndex, closest.pointIndex);
 					isKeyframing[closest.pathIndex] = true;
 				}
 			});
