@@ -90,7 +90,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						if(pointIndex !== 0 && pointIndex !== absoluteFrame.length - 1) {
 							svg.append("circle")
 								.attr("data-path", index)
-								.attr("data-index", pointIndex - 1)
+								.attr("data-index", pointIndex)
 								.attr("cx", point[0])
 								.attr("cy", point[1])
 								.attr("r", 5)
@@ -133,7 +133,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			function popTransition(circle, startIndex, destIndex, pathIndex, duration) {
 				var absoluteFrame = pathData[pathIndex][destIndex].absolute,
-					pointIndex = +circle.attr("data-index") + 1;
+					pointIndex = circle.attr("data-index");
 
 				circle.transition()
 					.duration(duration)
@@ -257,7 +257,18 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				});
 			}
 
+			function initPop(index, pointIndex) {
+				$("[data-path='" + index + "'][data-index='" + pointIndex + "']").remove();
+			}
+
 			function removeControlPoint(index, pointIndex) {
+				$("[data-path='" + index + "']").each(function(i, d) {
+					var index = $(d).attr("data-index")
+					if(index > pointIndex) {
+						$(d).attr("data-index", index - 1);
+					}
+				});
+
 				pathData[index].forEach(function(frame, frameIndex) {
 					var absFrame = frame.absolute;
 
@@ -272,6 +283,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					});
 
 					compileRaw(index, frameIndex);
+					frame.absolute = getAbsoluteCoordinate(pathData[index][frameIndex].raw);
 				});
 
 				cachedAttrTweens[index] = false;
@@ -349,6 +361,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						closest.pointIndex++;
 					}
 
+					initPop(closest.pathIndex, closest.pointIndex);
 					smoothOutControlPoint(closest.pathIndex, closest.frameIndex, closest.pointIndex);
 					isKeyframing[closest.pathIndex] = true;
 				}
