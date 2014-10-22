@@ -69,9 +69,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			d3.json("/js/projects/lips.json", function(data) {
 				pathData = data;
-				window.pathData = pathData;
 				data.forEach(function(path, index) {
-					var dVal = path[0].d ? path[0].d : compileRaw(index, 0);
+					var dVal = path[0].d ? path[0].d : compileRaw(index, 0),
+						absoluteFrame = getAbsoluteCoordinate(path[0].raw);
 
 					setActive(index, 0);
 					isKeyframing[index] = false;
@@ -80,6 +80,17 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						.attr("transform", "translate(0,0)")
 						.attr("d", dVal)
 						.call(transition, 0, 1, index, (0.5 * frameDur / path.length) + index * frameDur / path.length);
+
+					absoluteFrame.forEach(function(point, pointIndex) {
+						if(pointIndex !== 0 && pointIndex !== absoluteFrame.length - 1) {
+							svg.append("circle")
+								.attr("data-path", index)
+								.attr("data-index", pointIndex - 1)
+								.attr("cx", point[0])
+								.attr("cy", point[1])
+								.attr("r", 5);
+						}
+					});
 				});
 			});
 
@@ -126,7 +137,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				pathData[pathIndex][destIndex].compiled++;
 
 				if(!cachedAttrTweens[pathIndex][destIndex] || pathData[pathIndex][destIndex].compiled < 3) {
-					cachedAttrTweens[pathIndex][destIndex] = pathTween(path[0][0], dVal, 4);
+					cachedAttrTweens[pathIndex][destIndex] = pathTween(path[0][0], dVal, 4, pathIndex, startIndex);
 				}
 
 				path.transition()
@@ -136,8 +147,22 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					.each("end", function() { d3.select(this).call(transition, destIndex, (destIndex + 1) % pathData[pathIndex].length, pathIndex, frameDur); });
 			}
 
-			function pathTween(path, d1, precision) {
-				var points;
+			function pathTween(path, d1, precision, pathIndex, startIndex) {
+				var points,
+					index = pathIndex,
+					frameIndex = startIndex,
+					absoluteFrame = getAbsoluteCoordinate(pathData[index][frameIndex].raw),
+					controlPointIndices = [];
+
+				absoluteFrame.forEach(function(point, index) {
+					if(index !== 0 && index !== absoluteFrame.length - 1) {
+						controlPointIndices.push({
+							referencePoint: [point[0], point[1]],
+							point: null,
+							closestIndex: null
+						});
+					}
+				});
 
 				return function() {
 					var path0 = path,
@@ -153,16 +178,30 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					distances.push(1);
 
 					if(!points) {
-						points = distances.map(function(t) {
+						points = distances.map(function(t, index) {
 							var p0 = path0.getPointAtLength(t * n0),
 								p1 = path1.getPointAtLength(t * n1);
+
+							controlPointIndices.forEach(function(point) {
+								if(point.closestIndex == null || ((Math.abs(p0.x - point.referencePoint[0]) + Math.abs(p0.y - point.referencePoint[1])) < (Math.abs(point.point[0] - point.referencePoint[0]) + (Math.abs(point.point[1] - point.referencePoint[1]))))) {
+									point.point = [p0.x, p0.y];
+									point.closestIndex = index;
+								}
+							});
+
 							return d3.interpolate([p0.x, p0.y], [p1.x, p1.y]);
 						});
 					}
 
 					return function(t) {
-						return t < 1 ? "M" + points.map(function(p) { 
+						return t < 1 ? "M" + points.map(function(p, pointIndex) { 
 							var point = p(t);
+
+							controlPointIndices.forEach(function(controlPoint, controlPointIndex) {
+								if(pointIndex == controlPoint.closestIndex) {
+									$("[data-path='" + index + "'][data-index='" + controlPointIndex + "']").attr("cx", point[0]).attr("cy", point[1]);
+								}
+							});
 
 							return [point[0].toFixed(1), point[1].toFixed(1)]; 
 						}).join("L") : d1;
