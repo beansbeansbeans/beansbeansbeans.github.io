@@ -70,8 +70,12 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			d3.json("/js/projects/lips.json", function(data) {
 				pathData = data;
 				data.forEach(function(path, index) {
-					var dVal = path[0].d ? path[0].d : compileRaw(index, 0),
-						absoluteFrame = getAbsoluteCoordinate(path[0].raw),
+					path.forEach(function(frame, frameIndex) {
+						pathData[index][frameIndex].absolute = getAbsoluteCoordinate(pathData[index][frameIndex].raw);
+					});
+
+					var dVal = compileRaw(index, 0),
+						absoluteFrame = path[0].absolute,
 						delay = (0.5 * frameDur / path.length) + index * frameDur / path.length;
 
 					setActive(index, 0);
@@ -128,7 +132,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			}
 
 			function popTransition(circle, startIndex, destIndex, pathIndex, duration) {
-				var absoluteFrame = getAbsoluteCoordinate(pathData[pathIndex][destIndex].raw),
+				var absoluteFrame = pathData[pathIndex][destIndex].absolute,
 					pointIndex = +circle.attr("data-index") + 1;
 
 				circle.transition()
@@ -214,7 +218,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			function smoothOutControlPoint(index, frame, point, amount) {
 				var rawFrame = pathData[index][frame].raw,
 					controlPoint = rawFrame[point],
-					absoluteFrame = getAbsoluteCoordinate(rawFrame),
+					absoluteFrame = pathData[index][frame].absolute,
 					prevDest = [rawFrame[point - 1][0], rawFrame[point - 1][1]],
 					absPrevDest = absoluteFrame[point - 1],
 					nextDest = [rawFrame[point + 1][0], rawFrame[point + 1][1]],
@@ -255,7 +259,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			function removeControlPoint(index, pointIndex) {
 				pathData[index].forEach(function(frame, frameIndex) {
-					var absFrame = getAbsoluteCoordinate(frame.raw);
+					var absFrame = frame.absolute;
 
 					absFrame.splice(pointIndex, 1);
 					frame.raw.splice(pointIndex, 1);
@@ -319,7 +323,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					if(!isKeyframing[pathIndex]) {
 						path.forEach(function(frame, frameIndex) {
 							if(frame.active && frame.raw.length > 2) {
-								var absFrame = getAbsoluteCoordinate(frame.raw);
+								var absFrame = frame.absolute;
 								frame.raw.forEach(function(point, pointIndex) {
 									var x = absFrame[pointIndex][0],
 										y = absFrame[pointIndex][1];
