@@ -71,7 +71,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				pathData = data;
 				data.forEach(function(path, index) {
 					var dVal = path[0].d ? path[0].d : compileRaw(index, 0),
-						absoluteFrame = getAbsoluteCoordinate(path[0].raw);
+						absoluteFrame = getAbsoluteCoordinate(path[0].raw),
+						delay = (0.5 * frameDur / path.length) + index * frameDur / path.length;
 
 					setActive(index, 0);
 					isKeyframing[index] = false;
@@ -79,7 +80,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					svg.append("path")
 						.attr("transform", "translate(0,0)")
 						.attr("d", dVal)
-						.call(transition, 0, 1, index, (0.5 * frameDur / path.length) + index * frameDur / path.length);
+						.call(transition, 0, 1, index, delay);
 
 					absoluteFrame.forEach(function(point, pointIndex) {
 						if(pointIndex !== 0 && pointIndex !== absoluteFrame.length - 1) {
@@ -88,7 +89,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 								.attr("data-index", pointIndex - 1)
 								.attr("cx", point[0])
 								.attr("cy", point[1])
-								.attr("r", 5);
+								.attr("r", 5)
+								.call(popTransition, 0, 1, index, delay);
 						}
 					});
 				});
@@ -125,6 +127,20 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				return d;
 			}
 
+			function popTransition(circle, startIndex, destIndex, pathIndex, duration) {
+				var absoluteFrame = getAbsoluteCoordinate(pathData[pathIndex][destIndex].raw),
+					pointIndex = +circle.attr("data-index") + 1;
+
+				circle.transition()
+					.duration(duration)
+					.ease("linear")
+					.attr("cx", absoluteFrame[pointIndex][0])
+					.attr("cy", absoluteFrame[pointIndex][1])
+					.each("end", function() {
+						d3.select(this).call(popTransition, destIndex, (destIndex + 1) % pathData[pathIndex].length, pathIndex, frameDur);
+					});
+			}
+
 			function transition(path, startIndex, destIndex, pathIndex, duration) {
 				mediator.publish(pathIndex + "_" + destIndex);
 
@@ -148,28 +164,13 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			}
 
 			function pathTween(path, d1, precision, pathIndex, startIndex) {
-				var points,
-					index = pathIndex,
-					frameIndex = startIndex,
-					absoluteFrame = getAbsoluteCoordinate(pathData[index][frameIndex].raw),
-					controlPointIndices = [];
-
-				absoluteFrame.forEach(function(point, index) {
-					if(index !== 0 && index !== absoluteFrame.length - 1) {
-						controlPointIndices.push({
-							referencePoint: [point[0], point[1]],
-							point: null,
-							closestIndex: null
-						});
-					}
-				});
+				var points;
 
 				return function() {
 					var path0 = path,
 						path1 = path0.cloneNode(),
 						n0 = path0.getTotalLength(),
 						n1 = (path1.setAttribute("d", d1), path1).getTotalLength(),
-
 						distances = [0], 
 						i = 0, 
 						dt = precision / Math.max(n0, n1);
@@ -182,13 +183,6 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 							var p0 = path0.getPointAtLength(t * n0),
 								p1 = path1.getPointAtLength(t * n1);
 
-							controlPointIndices.forEach(function(point) {
-								if(point.closestIndex == null || ((Math.abs(p0.x - point.referencePoint[0]) + Math.abs(p0.y - point.referencePoint[1])) < (Math.abs(point.point[0] - point.referencePoint[0]) + (Math.abs(point.point[1] - point.referencePoint[1]))))) {
-									point.point = [p0.x, p0.y];
-									point.closestIndex = index;
-								}
-							});
-
 							return d3.interpolate([p0.x, p0.y], [p1.x, p1.y]);
 						});
 					}
@@ -196,12 +190,6 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					return function(t) {
 						return t < 1 ? "M" + points.map(function(p, pointIndex) { 
 							var point = p(t);
-
-							controlPointIndices.forEach(function(controlPoint, controlPointIndex) {
-								if(pointIndex == controlPoint.closestIndex) {
-									$("[data-path='" + index + "'][data-index='" + controlPointIndex + "']").attr("cx", point[0]).attr("cy", point[1]);
-								}
-							});
 
 							return [point[0].toFixed(1), point[1].toFixed(1)]; 
 						}).join("L") : d1;
