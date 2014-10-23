@@ -93,7 +93,10 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 								.attr("data-index", pointIndex)
 								.attr("cx", point[0])
 								.attr("cy", point[1])
-								.attr("r", 5)
+								.attr("r", 15)
+								.style("fill", "#ffffff")
+								.style("stroke", "red")
+								.style("stroke-width", 8)
 								.call(popTransition, 0, 1, index, delay);
 						}
 					});
@@ -227,11 +230,35 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					intercept = -absNextDest[1] - slope * absNextDest[0],
 					absNewControlPoint = [];
 
-				var totalLength = $("#lips-svg-container path:eq(" + index + ")")[0].getTotalLength();
-				$("<path d='" + generatePathString(pathData[index][frame].raw.slice().splice(0, point + 1)) + "' />").appendTo("#hidden-subpaths");
+				var subPathData,
+					currentControlX = $("[data-path='" + index + "'][data-index='" + point + "']").attr("cx"),
+					totalPathData = $("#lips-svg-container path:eq(" + index + ")").attr("d").split("L").map(function(rawPoint) {
+					return rawPoint.split(",");
+				});
+
+				totalPathData.every(function(coordinate, coordinateIndex) {
+					if(coordinateIndex > 0) {
+						if(+coordinate[0] < currentControlX) {
+							return true;
+						} else {
+							subPathData = totalPathData.slice().splice(0, coordinateIndex);
+							return false;
+						}
+					} else {return true;}
+				});
+
+				subPathData = subPathData.map(function(coordinate, coordinateIndex) {
+					if(coordinateIndex > 0) {
+						return "L" + coordinate.join(",");
+					} else {
+						return coordinate.join(",");
+					}
+				}).join("");
+
+				$("<path d='" + subPathData + "' />").appendTo("#hidden-subpaths");
 
 				$("#hidden-svg-container").html($("#hidden-svg-container").html());
-				generateSnapKeyframes($("#hidden-svg-container path")[0].getTotalLength(), index, totalLength);
+				generateSnapKeyframes($("#hidden-svg-container path")[0].getTotalLength(), index);
 				$("#hidden-svg-container svg").html("");
 
 				absNewControlPoint[0] = absPrevDest[0] + (absNextDest[0] - absPrevDest[0]) / 2;
@@ -289,10 +316,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				cachedAttrTweens[index] = false;
 			}
 
-			function generateSnapKeyframes(distance, index, limit) {
- 				distance = distance < popGap ? popGap : distance;
- 				distance = (distance + popGap + 25) > limit ? limit - popGap - 25 : distance;
- 				distance = Math.round(distance) - 25;
+			function generateSnapKeyframes(distance, index) {
+ 				distance = Math.round(distance);
 
  				var style = document.querySelector("style"),
  					animName = 'snap_' + Date.now();
@@ -305,13 +330,13 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				style.textContent = style.innerHTML + 
 					keyframeProp + " " + animName + ' {' +
 						'0% { ' +
-							'stroke-dasharray: ' + parseInt(distance + popGap/2, 10) + ' 0 10000;' +
+							'stroke-dasharray: ' + distance + ' 0 10000;' +
 						'}' +
 						'25% {' +
-							'stroke-dasharray: ' + distance + ' ' + popGap + ' 10000;' +
+							'stroke-dasharray: ' + parseInt(distance - popGap/2, 10) + ' ' + popGap + ' 10000;' +
 						'}' +
 						'100% {' +
-							'stroke-dasharray: ' + parseInt(distance + popGap/2, 10) + ' 0 10000;' +
+							'stroke-dasharray: ' + distance + ' 0 10000;' +
 						'}' +
 					'}';
 
@@ -361,8 +386,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						closest.pointIndex++;
 					}
 
-					initPop(closest.pathIndex, closest.pointIndex);
 					smoothOutControlPoint(closest.pathIndex, closest.frameIndex, closest.pointIndex);
+					initPop(closest.pathIndex, closest.pointIndex);
 					isKeyframing[closest.pathIndex] = true;
 				}
 			});
