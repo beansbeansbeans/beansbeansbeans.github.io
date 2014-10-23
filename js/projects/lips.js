@@ -138,14 +138,17 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				var absoluteFrame = pathData[pathIndex][destIndex].absolute,
 					pointIndex = circle.attr("data-index");
 
-				circle.transition()
-					.duration(duration)
-					.ease("linear")
-					.attr("cx", absoluteFrame[pointIndex][0])
-					.attr("cy", absoluteFrame[pointIndex][1])
-					.each("end", function() {
-						d3.select(this).call(popTransition, destIndex, (destIndex + 1) % pathData[pathIndex].length, pathIndex, frameDur);
-					});
+				if(pointIndex && absoluteFrame[pointIndex]) {
+					circle.transition()
+						.duration(duration)
+						.ease("linear")
+						.attr("cx", absoluteFrame[pointIndex][0])
+						.attr("cy", absoluteFrame[pointIndex][1])
+						.each("end", function() {
+							d3.select(this).call(popTransition, destIndex, (destIndex + 1) % pathData[pathIndex].length, pathIndex, frameDur);
+						});
+				}
+
 			}
 
 			function transition(path, startIndex, destIndex, pathIndex, duration) {
@@ -318,6 +321,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			function generateSnapKeyframes(distance, index) {
  				distance = Math.round(distance);
+ 				if((distance - popGap / 2) < 0) {
+ 					distance = (popGap / 2);
+ 				}
 
  				var style = document.querySelector("style"),
  					animName = 'snap_' + Date.now();
