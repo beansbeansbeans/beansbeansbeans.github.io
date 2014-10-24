@@ -115,6 +115,18 @@
 			stroke: blue;
 		}
 	}
+	.burst {
+		@include animation(burst 2s forwards);
+	}
+}
+
+@include keyframe(burst) {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
 }
 
 #project-dancers {

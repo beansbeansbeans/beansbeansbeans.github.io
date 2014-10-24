@@ -62,16 +62,18 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 					absoluteFrame.forEach(function(point, pointIndex) {
 						if(pointIndex !== 0 && pointIndex !== absoluteFrame.length - 1) {
-							svg.append("circle")
+							var g = svg.append("g")
 								.attr("data-path", index)
 								.attr("data-index", pointIndex)
-								.attr("cx", point[0])
-								.attr("cy", point[1])
+								.attr("transform", "translate(" + point[0] + "," + point[1] + ")");
+							
+							g.append("circle")
 								.attr("r", 15)
 								.style("fill", "#ffffff")
 								.style("stroke", "red")
 								.style("stroke-width", 8)
-								.call(popTransition, 0, 1, index, delay);
+
+							g.call(popTransition, 0, 1, index, delay);
 						}
 					});
 				});
@@ -108,16 +110,15 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				return d;
 			}
 
-			function popTransition(circle, startIndex, destIndex, pathIndex, duration) {
+			function popTransition(group, startIndex, destIndex, pathIndex, duration) {
 				var absoluteFrame = pathData[pathIndex][destIndex].absolute,
-					pointIndex = circle.attr("data-index");
+					pointIndex = group.attr("data-index");
 
 				if(pointIndex && absoluteFrame[pointIndex]) {
-					circle.transition()
+					group.transition()
 						.duration(duration)
 						.ease("linear")
-						.attr("cx", absoluteFrame[pointIndex][0])
-						.attr("cy", absoluteFrame[pointIndex][1])
+						.attr("transform", "translate(" + absoluteFrame[pointIndex][0] + "," + absoluteFrame[pointIndex][1] + ")")
 						.each("end", function() {
 							d3.select(this).call(popTransition, destIndex, (destIndex + 1) % pathData[pathIndex].length, pathIndex, frameDur);
 						});
@@ -257,7 +258,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			}
 
 			function initPop(index, pointIndex) {
-				$("[data-path='" + index + "'][data-index='" + pointIndex + "']").remove();
+				$("[data-path='" + index + "'][data-index='" + pointIndex + "']").attr("class", "burst").attr("data-path", "").attr("data-index", "");
 			}
 
 			function removeControlPoint(index, pointIndex) {
@@ -361,7 +362,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						closest.pointIndex++;
 					}
 
-					var currentControlX = $("[data-path='" + closest.pathIndex + "'][data-index='" + closest.pointIndex + "']").attr("cx");
+					var currentControlX = $("[data-path='" + closest.pathIndex + "'][data-index='" + closest.pointIndex + "']").attr("transform");
+					currentControlX = currentControlX.split(",")[0].slice(10);
 
 					initPop(closest.pathIndex, closest.pointIndex);
 					smoothOutControlPoint(closest.pathIndex, closest.frameIndex, closest.pointIndex, currentControlX);
