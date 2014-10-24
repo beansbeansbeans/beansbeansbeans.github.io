@@ -107,24 +107,95 @@
 	#hidden-svg-container {
 		opacity: 0;
 	}
-	#pop-svg-container {
-		top: 0;
-		left: 0;
-		right: 0;
+	.controlPoint {
+		&, circle, g {
+			@include transition(all 250ms);
+		}
+		circle {
+			fill: white;
+			stroke: red;
+			stroke-width: 8px;
+		}
 		path {
-			stroke: blue;
+			fill: none;
+			stroke-width: 1px;
+			@include transform(translate3d(-8px, -8px, 0));
+			opacity: 0;
 		}
 	}
 	.burst {
-		@include animation(burst 2s forwards);
+		g {
+			@include transform(scale(6));
+		}
+		circle {
+			stroke-width: 1px;
+			@include transform(scale(0.01));
+		}
+		path {}
+		path:nth-of-type(1) { // left, then clockwise
+			@include animation(path-1-burst 1s forwards);
+		}
+		path:nth-of-type(3) {
+			@include animation(path-3-burst 1s forwards);
+		}
+		path:nth-of-type(5) {
+			@include animation(path-5-burst 1s forwards);
+		}
+		path:nth-of-type(4) {
+			@include animation(path-4-burst 1s forwards);
+		}
+		path:nth-of-type(2) {
+			@include animation(path-2-burst 1s forwards);
+		}
 	}
 }
 
-@include keyframe(burst) {
-	from {
+@include keyframe(path-1-burst) {
+	35% {
 		opacity: 1;
 	}
-	to {
+	100% {
+		@include transform(translate3d(-12px, -8px, 0));
+		opacity: 0;
+	}
+}
+
+@include keyframe(path-3-burst) {
+	35% {
+		opacity: 1;
+	}
+	100% {
+		@include transform(translate3d(-10px, -10px, 0));
+		opacity: 0;
+	}
+}
+
+@include keyframe(path-5-burst) {
+	35% {
+		opacity: 1;
+	}
+	100% {
+		@include transform(translate3d(-6px, -10px, 0));
+		opacity: 0;
+	}
+}
+
+@include keyframe(path-4-burst) {
+	35% {
+		opacity: 1;
+	}
+	100% {
+		@include transform(translate3d(-6px, -6px, 0));
+		opacity: 0;
+	}
+}
+
+@include keyframe(path-2-burst) {
+	35% {
+		opacity: 1;
+	}
+	100% {
+		@include transform(translate3d(-10px, -6px, 0));
 		opacity: 0;
 	}
 }

@@ -17,6 +17,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				width = 960,
 				height = 500,
 				frameDur = 1500,
+				popDur = 1000,
 				svg = d3.select(".project-contents").append("svg")
 					.attr("id", "lips-svg-container")
 					.attr("width", width)
@@ -63,15 +64,19 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					absoluteFrame.forEach(function(point, pointIndex) {
 						if(pointIndex !== 0 && pointIndex !== absoluteFrame.length - 1) {
 							var g = svg.append("g")
+								.attr("class", "controlPoint")
 								.attr("data-path", index)
 								.attr("data-index", pointIndex)
 								.attr("transform", "translate(" + point[0] + "," + point[1] + ")");
+
+							var nestedG = g.append("g");
 							
-							g.append("circle")
-								.attr("r", 15)
-								.style("fill", "#ffffff")
-								.style("stroke", "red")
-								.style("stroke-width", 8)
+							nestedG.append("circle").attr("r", 15);
+							nestedG.append("path").attr("d", "M2.3,9.6c-4.5-2.1-1.7-7.3,3.2-7.2");
+							nestedG.append("path").attr("d", "M2,9.5c-1.3,5.2,3,5.4,5.1,4.9");
+							nestedG.append("path").attr("d", "M5.4,3.4c1.1-5.7,7.8-3,7.1-0.5");
+							nestedG.append("path").attr("d", "M6.9,14.1c0.6,4.7,8.6,0.4,5.9-3.4");
+							nestedG.append("path").attr("d", "M11.4,10.2c6,0.5,5.1-8.1,1.2-6.9");
 
 							g.call(popTransition, 0, 1, index, delay);
 						}
@@ -207,7 +212,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					absNewControlPoint = [];
 
 				var subPathData,
-					totalPathData = $("#lips-svg-container path:eq(" + index + ")").attr("d").split("L").map(function(rawPoint) {
+					totalPathData = $("#lips-svg-container > path:eq(" + index + ")").attr("d").split("L").map(function(rawPoint) {
 					return rawPoint.split(",");
 				});
 
@@ -258,7 +263,15 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			}
 
 			function initPop(index, pointIndex) {
-				$("[data-path='" + index + "'][data-index='" + pointIndex + "']").attr("class", "burst").attr("data-path", "").attr("data-index", "");
+				var el = $("[data-path='" + index + "'][data-index='" + pointIndex + "']"),
+					currentClass = el.attr("class");
+				el.attr("class", currentClass + " burst").attr("data-path", "").attr("data-index", "");
+
+				var timerID = setTimeout(function() {
+					el.remove();
+				}, popDur);
+
+				self.timers.push(timerID);
 			}
 
 			function removeControlPoint(index, pointIndex) {
@@ -316,7 +329,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						'}' +
 					'}';
 
-				$("#lips-svg-container path:eq(" + index + ")")[0].style[animProp] = animName + ' ' + frameDur * 2 + 'ms forwards';
+				$("#lips-svg-container > path:eq(" + index + ")")[0].style[animProp] = animName + ' ' + frameDur * 2 + 'ms forwards';
 
 				var timerID = setTimeout(function() {
 					$("#lips-svg-container path:eq(" + index + ")")[0].style[animProp] = "";
