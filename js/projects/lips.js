@@ -26,33 +26,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				animProp,
 				keyframeProp,
 				popGap = 200,
-				isKeyframing = [],
-				mediator = function() {
-					var channels = [];
-					return {
-						subscribe: function(channel, callback) {
-							if(!channels[channel]) {
-								channels[channel] = [];
-							}
-
-							channels[channel].push(callback);
-						},
-						publish: function(channel) {
-							if(!channels[channel]) {
-								channels[channel] = [];
-								return false;
-							}
-
-							var args = Array.prototype.slice.call(arguments, 1);
-							for(var i=0, l=channels[channel].length; i < l; i++) {
-								var subscription = channels[channel][i];
-								subscription.apply(subscription.context, args);
-							}
-
-							channels[channel] = [];
-						}
-					}
-				}();
+				isKeyframing = [];
 
 			['', 'webkit', 'moz'].every(function(prefix) {
 				var property = prefix.length ? prefix + "Animation" : "animation";
@@ -152,8 +126,6 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			}
 
 			function transition(path, startIndex, destIndex, pathIndex, duration) {
-				mediator.publish(pathIndex + "_" + destIndex);
-
 				var dVal = pathData[pathIndex][destIndex].d ? pathData[pathIndex][destIndex].d : compileRaw(pathIndex, destIndex);
 
 				setActive(pathIndex, destIndex);
@@ -221,7 +193,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				return absRawArr;
 			}
 
-			function smoothOutControlPoint(index, frame, point, amount) {
+			function smoothOutControlPoint(index, frame, point, currentControlX) {
 				var rawFrame = pathData[index][frame].raw,
 					controlPoint = rawFrame[point],
 					absoluteFrame = pathData[index][frame].absolute,
@@ -234,7 +206,6 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					absNewControlPoint = [];
 
 				var subPathData,
-					currentControlX = $("[data-path='" + index + "'][data-index='" + point + "']").attr("cx"),
 					totalPathData = $("#lips-svg-container path:eq(" + index + ")").attr("d").split("L").map(function(rawPoint) {
 					return rawPoint.split(",");
 				});
@@ -282,9 +253,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				cachedAttrTweens[index][frame] = false;
 				cachedAttrTweens[index][frame + 1] = false;
 
-				mediator.subscribe(index + "_" + frame, function() {
-					removeControlPoint(index, point);
-				});
+				removeControlPoint(index, point);
 			}
 
 			function initPop(index, pointIndex) {
@@ -392,8 +361,10 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						closest.pointIndex++;
 					}
 
-					smoothOutControlPoint(closest.pathIndex, closest.frameIndex, closest.pointIndex);
+					var currentControlX = $("[data-path='" + closest.pathIndex + "'][data-index='" + closest.pointIndex + "']").attr("cx");
+
 					initPop(closest.pathIndex, closest.pointIndex);
+					smoothOutControlPoint(closest.pathIndex, closest.frameIndex, closest.pointIndex, currentControlX);
 					isKeyframing[closest.pathIndex] = true;
 				}
 			});
