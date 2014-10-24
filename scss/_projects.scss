@@ -108,7 +108,7 @@
 		opacity: 0;
 	}
 	.controlPoint {
-		&, circle, g {
+		&, circle, .cloud, .word {
 			@include transition(all 250ms);
 		}
 		circle {
@@ -117,35 +117,59 @@
 			stroke-width: 8px;
 		}
 		path {
+			opacity: 0;
+		}
+		.spoke {
 			fill: none;
 			stroke-width: 1px;
 			@include transform(translate3d(-8px, -8px, 0));
-			opacity: 0;
+		}
+		.glyph {
+			fill: red;
+			stroke: white;
+			stroke-width: 50px;
+		}
+		.word {
+			path:nth-of-type(1) {
+				@include transform(rotateX(180deg) scale(0.01) translate3d(-1100px, -300px, 0));
+			}
+			path:nth-of-type(2) {
+				@include transform(rotateX(180deg) scale(0.01) translate3d(-500px, -300px, 0));
+			}
+			path:nth-of-type(3) {
+				@include transform(rotateX(180deg) scale(0.01) translate3d(400px, -300px, 0));
+			}
 		}
 	}
 	.burst {
-		g {
+		.cloud, .word {
 			@include transform(scale(6));
 		}
-		circle {
-			stroke-width: 1px;
-			@include transform(scale(0.01));
+		.cloud {
+			circle {
+				stroke-width: 1px;
+				@include transform(scale(0.01));
+			}
+			path:nth-of-type(1) { // left, then clockwise
+				@include animation(path-1-burst 750ms forwards);
+			}
+			path:nth-of-type(3) {
+				@include animation(path-3-burst 750ms forwards);
+			}
+			path:nth-of-type(5) {
+				@include animation(path-5-burst 750ms forwards);
+			}
+			path:nth-of-type(4) {
+				@include animation(path-4-burst 750ms forwards);
+			}
+			path:nth-of-type(2) {
+				@include animation(path-2-burst 750ms forwards);
+			}
 		}
-		path {}
-		path:nth-of-type(1) { // left, then clockwise
-			@include animation(path-1-burst 1s forwards);
-		}
-		path:nth-of-type(3) {
-			@include animation(path-3-burst 1s forwards);
-		}
-		path:nth-of-type(5) {
-			@include animation(path-5-burst 1s forwards);
-		}
-		path:nth-of-type(4) {
-			@include animation(path-4-burst 1s forwards);
-		}
-		path:nth-of-type(2) {
-			@include animation(path-2-burst 1s forwards);
+		.word {
+			path {
+				@include animation(glyph-1-burst 750ms forwards);
+			}
 		}
 	}
 }
@@ -155,7 +179,7 @@
 		opacity: 1;
 	}
 	100% {
-		@include transform(translate3d(-12px, -8px, 0));
+		@include transform(translate3d(-14px, -8px, 0));
 		opacity: 0;
 	}
 }
@@ -165,7 +189,7 @@
 		opacity: 1;
 	}
 	100% {
-		@include transform(translate3d(-10px, -10px, 0));
+		@include transform(translate3d(-11px, -11px, 0));
 		opacity: 0;
 	}
 }
@@ -175,7 +199,7 @@
 		opacity: 1;
 	}
 	100% {
-		@include transform(translate3d(-6px, -10px, 0));
+		@include transform(translate3d(-5px, -11px, 0));
 		opacity: 0;
 	}
 }
@@ -185,7 +209,7 @@
 		opacity: 1;
 	}
 	100% {
-		@include transform(translate3d(-6px, -6px, 0));
+		@include transform(translate3d(-5px, -5px, 0));
 		opacity: 0;
 	}
 }
@@ -195,7 +219,16 @@
 		opacity: 1;
 	}
 	100% {
-		@include transform(translate3d(-10px, -6px, 0));
+		@include transform(translate3d(-11px, -5px, 0));
+		opacity: 0;
+	}
+}
+
+@include keyframe(glyph-1-burst) {
+	35% {
+		opacity: 1;
+	}
+	100% {
 		opacity: 0;
 	}
 }
