@@ -108,6 +108,12 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 				toothData = data.teeth;
 				toothData[0].forEach(function(tooth, index) {
+					// here, depending on the index, the the teeth will have very different transforms applied to them.
+					// 
+					// (1) the first half will be flipped upside down
+					// (2) the teeth approaching the edges of the mouth will be smaller
+					// (3) all teeth will be randomly sized
+					
 					teethSVG.append("path")
 						.attr("d", generatePathString(toothPathData))
 						.attr("transform", "translate(" + tooth[0] + "," + tooth[1] + ")")
@@ -152,7 +158,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					.ease("linear")
 					.attr("transform", "translate(" + toothData[destIndex][toothIndex][0] + "," + toothData[destIndex][toothIndex][1] + ")")
 					.each("end", function() {
-						d3.select(this).call(toothTransition, (destIndex + 1) % toothData[destIndex].length, toothIndex);
+						d3.select(this).call(toothTransition, (destIndex + 1) % toothData.length, toothIndex);
 					});
 			}
 
