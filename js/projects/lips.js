@@ -47,8 +47,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			$("#pop-svg-container svg").attr("width", width).attr("height", height);
 
 			d3.json("/js/projects/lips.json", function(data) {
-				pathData = data;
-				data.forEach(function(path, index) {
+				pathData = data.lips;
+				data.lips.forEach(function(path, index) {
 					path.forEach(function(frame, frameIndex) {
 						pathData[index][frameIndex].absolute = getAbsoluteCoordinate(pathData[index][frameIndex].raw);
 					});
