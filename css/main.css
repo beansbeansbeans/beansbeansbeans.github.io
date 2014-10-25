@@ -275,6 +275,9 @@
   -o-animation: glyph-3-burst 750ms forwards;
   animation: glyph-3-burst 750ms forwards;
 }
+#project-lips #teeth-svg-container {
+  z-index: -1;
+}
 #project-lips #teeth-svg-container path {
   stroke: blue;
   stroke-width: 1px;

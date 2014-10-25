@@ -176,6 +176,7 @@
 		}
 	}
 	#teeth-svg-container {
+		z-index: -1;
 		path {
 			stroke: blue;
 			stroke-width: 1px;
