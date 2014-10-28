@@ -167,7 +167,7 @@
 }
 #project-lips #lips-svg-container path {
   stroke: red;
-  stroke-width: 10px;
+  stroke-width: 5px;
 }
 #project-lips #lips-svg-container .controlPoint, #project-lips #lips-svg-container .controlPoint circle, #project-lips #lips-svg-container .controlPoint .cloud, #project-lips #lips-svg-container .controlPoint .word {
   -moz-transition: all 250ms;
@@ -178,7 +178,7 @@
 #project-lips #lips-svg-container .controlPoint circle {
   fill: white;
   stroke: red;
-  stroke-width: 8px;
+  stroke-width: 5px;
 }
 #project-lips #lips-svg-container .controlPoint path {
   opacity: 0;

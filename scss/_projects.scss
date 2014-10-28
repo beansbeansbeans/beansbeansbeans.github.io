@@ -101,7 +101,7 @@
 	#lips-svg-container {
 		path {
 		  stroke: red;
-		  stroke-width: 10px;
+		  stroke-width: 5px;
 		}
 		.controlPoint {
 			&, circle, .cloud, .word {
@@ -110,7 +110,7 @@
 			circle {
 				fill: white;
 				stroke: red;
-				stroke-width: 8px;
+				stroke-width: 5px;
 			}
 			path {
 				opacity: 0;
