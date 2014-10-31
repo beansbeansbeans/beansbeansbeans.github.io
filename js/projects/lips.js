@@ -15,34 +15,23 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			var self = this,
 				width = 960,
-				height = 500,
+				height = 1000,
 				frameDur = 1500,
 				popDur = 1000,
 				popLetters = {
 					"p": "M715 471q14 -55 -5 -109.5t-62.5 -102.5t-105.5 -85.5t-133.5 -60.5t-146.5 -27.5t-144 15.5q-9 -13 -15 -25.5t-12 -25.5q-13 -31 -32 -43t-39 -7.5t-37.5 24.5t-27.5 52q-11 32 -8.5 86t18.5 115t46 120.5t75 101.5q49 46 112.5 73t130 37.5t131.5 5.5t118.5 -23.5 t90 -49t46.5 -71.5zM170 190q13 -7 40 -8.5t59.5 2.5t66.5 12.5t61 20.5t42.5 27t11.5 32q-3 11 -21 17t-45 5.5t-59.5 -7.5t-62.5 -20t-55 -33.5t-38 -47.5z",
 					"o": "M817 451q17 -69 -4 -133t-68.5 -118t-115.5 -96.5t-144 -68t-154 -33t-145.5 8t-119 56t-74.5 111.5q-28 85 -10 154.5t66 122t120 88.5t153 54.5t163 19t151.5 -17.5t118.5 -55t63 -93zM270 136q9 -19 36 -25t62 -1.5t73 18t69.5 33t51 43t17.5 49.5q-3 30 -30.5 41 t-66 7t-81 -20t-76 -39t-51 -51t-4.5 -55z"
 				},
-				teethSVG = d3.select(".project-contents").append("svg")
-					.attr("id", "teeth-svg-container")
-					.attr("width", width)
-					.attr("height", height),
 				svg = d3.select(".project-contents").append("svg")
 					.attr("id", "lips-svg-container")
 					.attr("width", width)
 					.attr("height", height),
 				pathData,
-				toothData,
 				cachedAttrTweens = [],
 				animProp,
 				keyframeProp,
 				popGap = 200,
-				isKeyframing = [],
-				toothPathData = [
-					[17.5, 51],
-					[-16, -47.7, 5.9, 2.4, -21.2, -41],
-					[53.6, 2.1, 5.7, -7.5, 52.9, -3.5],
-					[-7.8, 45.4, 1.2, 10.3, -9.7, 41.5]
-				];
+				isKeyframing = [];
 
 			['', 'webkit', 'moz'].every(function(prefix) {
 				var property = prefix.length ? prefix + "Animation" : "animation";
@@ -70,6 +59,16 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 					setActive(index, 0);
 					isKeyframing[index] = false;
+
+					if(index == 2) {
+						svg.append("svg:image")
+							.attr("id", "flowers")
+							.attr("x", 0)
+							.attr("y", 0)
+							.attr("width", width)
+							.attr("height", height)
+							.attr("xlink:href", "/images/flowers.png");
+					}
 
 					svg.append("path")
 						.attr("transform", "translate(0,0)")
@@ -105,20 +104,6 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						}
 					});
 				});
-
-				toothData = data.teeth;
-				toothData[0].forEach(function(tooth, index) {
-					// here, depending on the index, the the teeth will have very different transforms applied to them.
-					// 
-					// (1) the first half will be flipped upside down
-					// (2) the teeth approaching the edges of the mouth will be smaller
-					// (3) all teeth will be randomly sized
-					
-					// teethSVG.append("path")
-					// 	.attr("d", generatePathString(toothPathData))
-					// 	.attr("transform", "translate(" + tooth[0] + "," + tooth[1] + ")")
-					// 	.call(toothTransition, 1, index);
-				});
 			});
 
 			function setActive(index, frameIndex) {
@@ -150,16 +135,6 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				});
 
 				return d;
-			}
-
-			function toothTransition(tooth, destIndex, toothIndex) {
-				tooth.transition()
-					.duration(frameDur)
-					.ease("linear")
-					.attr("transform", "translate(" + toothData[destIndex][toothIndex][0] + "," + toothData[destIndex][toothIndex][1] + ")")
-					.each("end", function() {
-						d3.select(this).call(toothTransition, (destIndex + 1) % toothData.length, toothIndex);
-					});
 			}
 
 			function popTransition(group, startIndex, destIndex, pathIndex, duration) {

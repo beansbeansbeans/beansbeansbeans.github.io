@@ -90,6 +90,13 @@
 #project-lips {
 	svg {
 		overflow: visible;
+		position: relative;
+		#flowers {
+			position: absolute;
+			left: 0;
+			top: 0;
+			background: red;
+		}
 	}
 	.project-contents {
 		position: relative;

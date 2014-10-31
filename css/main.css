@@ -157,6 +157,13 @@
 
 #project-lips svg {
   overflow: visible;
+  position: relative;
+}
+#project-lips svg #flowers {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: red;
 }
 #project-lips .project-contents {
   position: relative;
