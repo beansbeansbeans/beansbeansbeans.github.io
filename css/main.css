@@ -186,14 +186,14 @@
 }
 #project-lips #lips-svg-container .controlPoint .spoke {
   fill: none;
-  stroke-width: 1px;
+  stroke-width: .5px;
   -moz-transform: translate3d(-8px, -8px, 0);
   -ms-transform: translate3d(-8px, -8px, 0);
   -webkit-transform: translate3d(-8px, -8px, 0);
   transform: translate3d(-8px, -8px, 0);
 }
 #project-lips #lips-svg-container .controlPoint .glyph {
-  fill: red;
+  fill: #A6191E;
   stroke: white;
   stroke-width: 50px;
 }
