@@ -91,12 +91,6 @@
 	svg {
 		overflow: visible;
 		position: relative;
-		#flowers {
-			position: absolute;
-			left: 0;
-			top: 0;
-			background: red;
-		}
 	}
 	.project-contents {
 		position: relative;
@@ -107,17 +101,17 @@
 	}
 	#lips-svg-container {
 		path {
-		  stroke: red;
-		  stroke-width: 5px;
+		  stroke: #A6191E;
+		  stroke-width: 4px;
 		}
 		.controlPoint {
 			&, circle, .cloud, .word {
 				@include transition(all 250ms);
 			}
 			circle {
-				fill: white;
-				stroke: red;
-				stroke-width: 5px;
+				fill: #A6191E;
+				stroke: #A6191E;
+				stroke-width: 4px;
 			}
 			path {
 				opacity: 0;

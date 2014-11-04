@@ -4,9 +4,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 		initialize: function() {
 			var data = {
 				identifier: "lips",
-				title: "Lips",
+				title: "Skirt",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum optio voluptates molestias ipsum, labore cum, inventore ab nisi nemo tempore.",
-				projectContents: '<button onclick="end()">end</button><button onclick="test()">test</button><div id="hidden-svg-container"><svg id="hidden-subpaths"></svg></div>',
+				projectContents: '<div id="hidden-svg-container"><svg id="hidden-subpaths"></svg></div>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate et pariatur minima, quidem, rerum sed.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum ipsam libero consequuntur sint id, quis qui adipisci maxime officia debitis nobis facilis ducimus, quaerat necessitatibus accusantium enim quam rem magni."
 			};
@@ -14,8 +14,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			$("#view").html(projectTemplate(data));
 
 			var self = this,
-				width = 960,
-				height = 1000,
+				width = 460,
+				height = 800,
 				frameDur = 1500,
 				popDur = 1000,
 				popLetters = {
@@ -60,15 +60,18 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					setActive(index, 0);
 					isKeyframing[index] = false;
 
-					if(index == 2) {
+					if(index == 1) {
 						svg.append("svg:image")
 							.attr("id", "flowers")
 							.attr("x", 0)
 							.attr("y", 0)
 							.attr("width", width)
 							.attr("height", height)
-							.attr("xlink:href", "/images/flowers.png");
+							.attr("xlink:href", "/images/herringbone.png");
 					}
+
+					svg.append("rect");
+					svg.append("rect");
 
 					svg.append("path")
 						.attr("transform", "translate(0,0)")
@@ -83,7 +86,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 								.attr("transform", "translate(" + point[0] + "," + point[1] + ")");
 
 							var cloud = g.append("g").attr("class", "cloud");
-							cloud.append("circle").attr("r", 12);
+							cloud.append("circle").attr("r", 0);
 							cloud.append("path").attr("class", "spoke")
 								.attr("d", "M2.3,9.6c-4.5-2.1-1.7-7.3,3.2-7.2");
 							cloud.append("path").attr("class", "spoke")
@@ -163,7 +166,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				pathData[pathIndex][destIndex].compiled++;
 
 				if(!cachedAttrTweens[pathIndex][destIndex] || pathData[pathIndex][destIndex].compiled < 3) {
-					cachedAttrTweens[pathIndex][destIndex] = pathTween(path[0][0], dVal, 4, pathIndex, startIndex);
+					cachedAttrTweens[pathIndex][destIndex] = pathTween(path[0][0], dVal, 8, pathIndex, startIndex);
 				}
 
 				path.transition()
