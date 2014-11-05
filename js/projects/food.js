@@ -44,7 +44,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				return true
 			});
 
-			$("#pop-svg-container svg").attr("width", width).attr("height", height);
+			$("#pop-svg-container svg, #hidden-svg-container svg").attr("width", width).attr("height", height);
 
 			d3.json("/js/projects/food.json", function(data) {
 				pathData = data.letters;
