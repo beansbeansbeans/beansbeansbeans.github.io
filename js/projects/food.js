@@ -210,7 +210,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				return absRawArr;
 			}
 
-			function smoothOutControlPoint(index, frame, point, currentControlX) {
+			function smoothOutControlPoint(index, frame, point, currentControlCoord) {
 				var rawFrame = pathData[index][frame].raw,
 					controlPoint = rawFrame[point],
 					absoluteFrame = pathData[index][frame].absolute,
@@ -220,23 +220,25 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					absNextDest = absoluteFrame[point + 1],
 					slope = (-absNextDest[1] + absPrevDest[1]) / (absNextDest[0] - absPrevDest[0]),
 					intercept = -absNextDest[1] - slope * absNextDest[0],
-					absNewControlPoint = [];
+					absNewControlPoint = [],
+					closest = null;
 
 				var subPathData,
 					totalPathData = $("#food-svg-container > path:eq(" + index + ")").attr("d").split("L").map(function(rawPoint) {
 					return rawPoint.split(",");
 				});
 
-				totalPathData.every(function(coordinate, coordinateIndex) {
+				totalPathData.forEach(function(coordinate, coordinateIndex) {
 					if(coordinateIndex > 0) {
-						if(+coordinate[0] < currentControlX) {
-							return true;
-						} else {
+						var x = +coordinate[0],
+							y = +coordinate[1];
+
+						if(closest == null || (Math.abs(x - currentControlCoord[0]) + Math.abs(y - currentControlCoord[1])) < (Math.abs(closest[0] - currentControlCoord[0]) + Math.abs(closest[1] - currentControlCoord[1]))) {
+							closest = [x, y];
 							subPathData = totalPathData.slice().splice(0, coordinateIndex);
-							return false;
 						}
-					} else {return true;}
-				});
+					}
+				})
 
 				subPathData = subPathData.map(function(coordinate, coordinateIndex) {
 					if(coordinateIndex > 0) {
@@ -386,11 +388,12 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						closest.pointIndex++;
 					}
 
-					var currentControlX = $("[data-path='" + closest.pathIndex + "'][data-index='" + closest.pointIndex + "']").attr("transform");
-					currentControlX = currentControlX.split(",")[0].slice(10);
+					var transformData = $("[data-path='" + closest.pathIndex + "'][data-index='" + closest.pointIndex + "']").attr("transform"),
+						currentControlX = transformData.split(",")[0].slice(10),
+						currentControlY = transformData.split(",")[1].substring(0, transformData.split(",")[1].length - 1);
 
 					initPop(closest.pathIndex, closest.pointIndex);
-					smoothOutControlPoint(closest.pathIndex, closest.frameIndex, closest.pointIndex, currentControlX);
+					smoothOutControlPoint(closest.pathIndex, closest.frameIndex, closest.pointIndex, [currentControlX, currentControlY]);
 					isKeyframing[closest.pathIndex] = true;
 				}
 			});
