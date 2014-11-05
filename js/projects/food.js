@@ -1,10 +1,10 @@
 define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
-	var lips = {
+	var food = {
 		timers: [],
 		initialize: function() {
 			var data = {
-				identifier: "lips",
-				title: "Lips",
+				identifier: "food",
+				title: "Food",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum optio voluptates molestias ipsum, labore cum, inventore ab nisi nemo tempore.",
 				projectContents: '<div id="hidden-svg-container"><svg id="hidden-subpaths"></svg></div>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate et pariatur minima, quidem, rerum sed.",
@@ -23,7 +23,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					"o": "M817 451q17 -69 -4 -133t-68.5 -118t-115.5 -96.5t-144 -68t-154 -33t-145.5 8t-119 56t-74.5 111.5q-28 85 -10 154.5t66 122t120 88.5t153 54.5t163 19t151.5 -17.5t118.5 -55t63 -93zM270 136q9 -19 36 -25t62 -1.5t73 18t69.5 33t51 43t17.5 49.5q-3 30 -30.5 41 t-66 7t-81 -20t-76 -39t-51 -51t-4.5 -55z"
 				},
 				svg = d3.select(".project-contents").append("svg")
-					.attr("id", "lips-svg-container")
+					.attr("id", "food-svg-container")
 					.attr("width", width)
 					.attr("height", height),
 				pathData,
@@ -46,9 +46,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			$("#pop-svg-container svg").attr("width", width).attr("height", height);
 
-			d3.json("/js/projects/lips.json", function(data) {
-				pathData = data.lips;
-				data.lips.forEach(function(path, index) {
+			d3.json("/js/projects/food.json", function(data) {
+				pathData = data.letters;
+				data.letters.forEach(function(path, index) {
 					path.forEach(function(frame, frameIndex) {
 						pathData[index][frameIndex].absolute = getAbsoluteCoordinate(pathData[index][frameIndex].raw);
 					});
@@ -223,7 +223,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					absNewControlPoint = [];
 
 				var subPathData,
-					totalPathData = $("#lips-svg-container > path:eq(" + index + ")").attr("d").split("L").map(function(rawPoint) {
+					totalPathData = $("#food-svg-container > path:eq(" + index + ")").attr("d").split("L").map(function(rawPoint) {
 					return rawPoint.split(",");
 				});
 
@@ -340,20 +340,20 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						'}' +
 					'}';
 
-				$("#lips-svg-container > path:eq(" + index + ")")[0].style[animProp] = animName + ' ' + frameDur + 'ms forwards';
+				$("#food-svg-container > path:eq(" + index + ")")[0].style[animProp] = animName + ' ' + frameDur + 'ms forwards';
 
 				var timerID = setTimeout(function() {
-					$("#lips-svg-container path:eq(" + index + ")")[0].style[animProp] = "";
+					$("#food-svg-container path:eq(" + index + ")")[0].style[animProp] = "";
 					isKeyframing[index] = false;
 				}, frameDur);
 
 				self.timers.push(timerID);
 			}
 
-			$("#lips-svg-container").on("click", function(e) {
+			$("#food-svg-container").on("click", function(e) {
 
-				var relativeX = e.pageX - $("#lips-svg-container").offset().left,
-					relativeY = e.pageY - $("#lips-svg-container").offset().top,
+				var relativeX = e.pageX - $("#food-svg-container").offset().left,
+					relativeY = e.pageY - $("#food-svg-container").offset().top,
 					closest = null;
 
 				pathData.forEach(function(path, pathIndex) {
@@ -406,5 +406,5 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 		}
 	};
 
-	return lips;
+	return food;
 })
