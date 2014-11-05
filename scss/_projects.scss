@@ -108,6 +108,11 @@
 			&, circle, .cloud, .word {
 				@include transition(all 250ms);
 			}
+			&:hover circle {
+				@include transform(scale(1.35));
+				-webkit-filter: drop-shadow( -5px -5px 5px #000 );
+				filter: drop-shadow( -5px -5px 5px #000 );
+			}
 			circle {
 				fill: #A6191E;
 				stroke: #A6191E;

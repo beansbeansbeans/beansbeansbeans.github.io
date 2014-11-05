@@ -176,6 +176,14 @@
   -webkit-transition: all 250ms;
   transition: all 250ms;
 }
+#project-food #food-svg-container .controlPoint:hover circle {
+  -moz-transform: scale(1.35);
+  -ms-transform: scale(1.35);
+  -webkit-transform: scale(1.35);
+  transform: scale(1.35);
+  -webkit-filter: drop-shadow(-5px -5px 5px black);
+  filter: drop-shadow(-5px -5px 5px black);
+}
 #project-food #food-svg-container .controlPoint circle {
   fill: #A6191E;
   stroke: #A6191E;
