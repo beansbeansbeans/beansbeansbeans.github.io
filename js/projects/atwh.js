@@ -73,7 +73,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 								.attr("transform", "translate(" + point[0] + "," + point[1] + ")");
 
 							var cloud = g.append("g").attr("class", "cloud");
-							cloud.append("circle").attr("r", 15);
+							cloud.append("circle").attr("r", 10);
 							cloud.append("path").attr("class", "spoke")
 								.attr("d", "M2.3,9.6c-4.5-2.1-1.7-7.3,3.2-7.2");
 							cloud.append("path").attr("class", "spoke")
