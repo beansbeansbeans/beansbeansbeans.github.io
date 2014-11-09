@@ -1,6 +1,10 @@
 define(['templates/log_index'], function(logIndex) {
 	var data = [
 		{
+			title: "Miranda",
+			description: "November 9, 2014"
+		},
+		{
 			title: "Mutinous",
 			description: "November 5, 2014"
 		},
