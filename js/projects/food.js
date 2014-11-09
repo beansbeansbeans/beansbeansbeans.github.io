@@ -57,8 +57,6 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						absoluteFrame = path[0].absolute,
 						delay = (0.5 * frameDur / path.length) + index * frameDur / path.length;
 
-					delay = 0;
-
 					setActive(index, 0);
 					isKeyframing[index] = false;
 
