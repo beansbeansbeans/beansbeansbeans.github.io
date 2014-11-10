@@ -1,6 +1,10 @@
 define(['templates/project_index'], function(projectIndex) {
 	var data = [
 		{
+			title: "food",
+			description: "Words made of manipulable paths."
+		},
+		{
 			title: "dancers",
 			description: "A ballet dancer with morphing frames."
 		},
