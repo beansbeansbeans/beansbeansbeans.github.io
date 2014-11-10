@@ -177,6 +177,8 @@
 }
 #project-food .project-contents {
   position: relative;
+  margin-top: 2.1875em;
+  margin-bottom: 7.8125em;
 }
 #project-food path {
   fill: none;

@@ -108,6 +108,8 @@
 	}
 	.project-contents {
 		position: relative;
+		@include leader(7);
+		@include trailer(25);
 	}
 	path {
 	  fill: none;

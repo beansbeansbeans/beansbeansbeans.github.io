@@ -2,7 +2,7 @@ define(['templates/project_index'], function(projectIndex) {
 	var data = [
 		{
 			title: "food",
-			description: "Words made of manipulable paths."
+			description: "Words made of simplifiable paths."
 		},
 		{
 			title: "dancers",

@@ -5,10 +5,10 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			var data = {
 				identifier: "food",
 				title: "Food",
-				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum optio voluptates molestias ipsum, labore cum, inventore ab nisi nemo tempore.",
+				blurb: "These are some SVG path elements forming the words 'food', 'not', and 'friend'. Click the red dots to change the shapes of the paths.",
 				projectContents: '<div id="hidden-svg-container"><svg id="hidden-subpaths"></svg></div>',
-				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate et pariatur minima, quidem, rerum sed.",
-				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum ipsam libero consequuntur sint id, quis qui adipisci maxime officia debitis nobis facilis ducimus, quaerat necessitatibus accusantium enim quam rem magni."
+				caption: "Built with d3js and scalable vector graphics.",
+				description: "This is built with three SVG path elements that transition between shapes representing the words 'food', 'not', and 'friend'. The dots represent the cubic bezier control points that dictate the shapes of the paths through sets of SVG curveto commands. If you click on a control point, the path will transition into the simplified shape created by removing that control point from the path's set of curveto commands."
 			};
 
 			$("#view").html(projectTemplate(data));
