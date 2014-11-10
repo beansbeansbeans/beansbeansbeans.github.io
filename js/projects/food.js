@@ -16,7 +16,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			var self = this,
 				width = 960,
 				height = 500,
-				frameDur = 1500,
+				frameDur = 1250,
 				popDur = 1000,
 				popLetters = {
 					"p": "M715 471q14 -55 -5 -109.5t-62.5 -102.5t-105.5 -85.5t-133.5 -60.5t-146.5 -27.5t-144 15.5q-9 -13 -15 -25.5t-12 -25.5q-13 -31 -32 -43t-39 -7.5t-37.5 24.5t-27.5 52q-11 32 -8.5 86t18.5 115t46 120.5t75 101.5q49 46 112.5 73t130 37.5t131.5 5.5t118.5 -23.5 t90 -49t46.5 -71.5zM170 190q13 -7 40 -8.5t59.5 2.5t66.5 12.5t61 20.5t42.5 27t11.5 32q-3 11 -21 17t-45 5.5t-59.5 -7.5t-62.5 -20t-55 -33.5t-38 -47.5z",
@@ -152,7 +152,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				pathData[pathIndex][destIndex].compiled++;
 
 				if(!cachedAttrTweens[pathIndex][destIndex] || pathData[pathIndex][destIndex].compiled < 3) {
-					cachedAttrTweens[pathIndex][destIndex] = pathTween(path[0][0], dVal, 8, pathIndex, startIndex);
+					cachedAttrTweens[pathIndex][destIndex] = pathTween(path[0][0], dVal, 14, pathIndex, startIndex);
 				}
 
 				path.transition()
