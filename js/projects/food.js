@@ -21,6 +21,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				widthScale = d3.scale.linear().domain([400, 2000]).range([0.95, 0.5]),
 				svgWidth = windowWidth < 400 ? (0.95 * windowWidth) : (windowWidth > 2000 ? 0.5 * windowWidth : widthScale(windowWidth) * windowWidth),
 				svgHeight = Math.round(heightRatio * svgWidth),
+				sizeAdjustment = +(svgWidth / width).toFixed(3),
 				frameDur = 1250,
 				popDur = 1000,
 				popLetters = {
@@ -369,8 +370,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 							if(frame.active && frame.raw.length > 2) {
 								var absFrame = frame.absolute;
 								frame.raw.forEach(function(point, pointIndex) {
-									var x = absFrame[pointIndex][0],
-										y = absFrame[pointIndex][1];
+									var x = absFrame[pointIndex][0] * sizeAdjustment,
+										y = absFrame[pointIndex][1] * sizeAdjustment;
 
 									if(closest == null || (Math.abs(x - relativeX) + Math.abs(y - relativeY)) < (Math.abs(closest.point[0] - relativeX) + Math.abs(closest.point[1] - relativeY))) {
 										closest = {
@@ -402,10 +403,6 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					isKeyframing[closest.pathIndex] = true;
 				}
 			});
-
-			window.end = function() {svg.selectAll("path").transition().each("end", function() {}); }
-
-			window.d3 = d3;
 		},
 		destroy: function() {
 			this.timers.forEach(function(id) {
