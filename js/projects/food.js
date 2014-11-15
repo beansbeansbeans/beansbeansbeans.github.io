@@ -21,6 +21,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				widthScale = d3.scale.linear().domain([400, 2000]).range([0.95, 0.5]),
 				svgWidth = windowWidth < 400 ? (0.95 * windowWidth) : (windowWidth > 2000 ? 0.5 * windowWidth : widthScale(windowWidth) * windowWidth),
 				svgHeight = Math.round(heightRatio * svgWidth),
+				precision = windowWidth < 400 ? 24 : (windowWidth > 2000 ? 12 : widthScale(windowWidth) * 24),
 				sizeAdjustment = +(svgWidth / width).toFixed(3),
 				frameDur = 1250,
 				popDur = 1000,
@@ -158,7 +159,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				pathData[pathIndex][destIndex].compiled++;
 
 				if(!cachedAttrTweens[pathIndex][destIndex] || pathData[pathIndex][destIndex].compiled < 3) {
-					cachedAttrTweens[pathIndex][destIndex] = pathTween(path[0][0], dVal, 14, pathIndex, startIndex);
+					cachedAttrTweens[pathIndex][destIndex] = pathTween(path[0][0], dVal, precision, pathIndex, startIndex);
 				}
 
 				path.transition()
