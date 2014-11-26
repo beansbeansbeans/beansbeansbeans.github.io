@@ -1,0 +1,136 @@
+#project-hiveplot {
+	#changeTransition, #filters {
+		display: inline-block;
+		@include leader(2);
+		position: relative;
+		.collapser:hover {
+			cursor: pointer;
+			background-color: #2185C5
+		}
+		ul {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			margin-top: 3px;
+			border: solid 1px #ddd;
+			border-radius: 5px;
+			padding-left: 0;
+			li:first-of-type a {
+				border-radius: 5px 5px 0 0
+			}
+			li:last-of-type a {
+				border-radius: 0 0 5px 5px
+			}
+			a.active:after {
+				content: "✓";
+				display: block;
+				right: 10px;
+				top: 0;
+				position: absolute;
+			}
+		}
+		&.open ul {
+			li {
+				&:not(:last-of-type) a {
+					border-bottom: solid 1px #ddd
+				}
+				a {
+					background: white;
+					width: 100%;
+					display: inline-block;
+					padding-left: 15px;
+					padding-right: 10px;
+					font-size: 16px;
+					line-height: 40px;
+					color: #3E454C !important;
+					text-align: left !important;
+					position: relative;
+					&:hover {
+						background-color: #FFF6E5;
+					}	
+				}
+			}
+		}
+		&:not(.open) ul {
+			display: none;
+		}
+	}
+
+	#changeTransition {
+		margin-right: rhythm(4);
+	}
+
+	#hiveplot {
+		.collapser {
+			font-size: 18px;
+			color: #FFF6E5;
+			border-radius: 5px;
+			background-color: #3E454C;
+			padding-left: 25px;
+			padding-right: 25px;
+			line-height: 45px;
+			@include transition(250ms all);
+			span {
+				font-size: 8px; 
+				vertical-align: middle;
+				display: inline-block;
+				margin-left: .5em;
+			}
+		}
+		#chart {
+			margin-top: 40px;
+			margin-left: 200px;
+		}
+		text {
+			font-family: Helvetica;
+			font-weight: 300
+		}
+		.axis {
+			stroke: #888;
+			stroke-width: 1.5px;
+		}
+		.node {
+			rect, text, polygon {
+				display: none;
+			}
+			text {
+				font-size: 13px;
+			}
+			circle {
+				stroke: #000	
+			}
+			&.active {
+				rect, text, polygon {
+					display: block;
+				}
+				circle {
+					fill: #3e454c !important
+				}
+				rect, polygon {
+					opacity: 1 !important;
+					fill: #222 !important
+				}
+			}
+			&:hover {
+				cursor: default;
+			}
+		}
+		.link {
+			fill: none;
+			stroke: #999;
+			stroke-width: 1.5px;
+			stroke-opacity: .3;
+			text {
+				display: none;
+			}
+			path {
+				@include transition(250ms all);
+			}
+			&.active {
+				stroke: black;
+				stroke-opacity: 1
+			}
+		}
+	}
+}

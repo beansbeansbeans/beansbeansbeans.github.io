@@ -5,7 +5,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 				identifier: "spinny",
 				title: "Spinny",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, voluptatibus.",
-				projectContents: '<div></div>',
+				projectContents: '<div id="left_wing"></div><div id="between_wings"></div><div id="right_wing"></div>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, fugit.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, nobis inventore id sequi non quam mollitia natus eum assumenda placeat."
 			};

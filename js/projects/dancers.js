@@ -145,11 +145,11 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			}.bind(this);
 
 			var tensionScale = d3.scale.linear().domain([0, 200]).range([maxTension, minTension]),
-				colorScale = d3.scale.linear().domain([0, 200]).interpolate(d3.interpolateRgb).range(['#7096ad', '#00303e']),
-				strokeScale = d3.scale.linear().domain([0, 400]).range([2, 5]);
+				colorScale = d3.scale.linear().domain([0, 200]).interpolate(d3.interpolateRgb).range(['#7096ad', '#000000']),
+				strokeScale = d3.scale.linear().domain([0, 200]).range([2, 5]);
 
 			var update = function() {
-				var dancer = svg.selectAll(".dancer").data(progress)
+				var dancer = svg.selectAll(".dancer").data(progressData)
 					.attr("data-test", function(d, i) {
 						if(d3.select(this).attr("data-opacity") > 0) {
 							d3.select(this).selectAll("path")[0].forEach(function(path, index) {

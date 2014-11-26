@@ -1,0 +1,148 @@
+#project-notes {
+	.project-contents {
+		position: relative;
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+		@include perspective(1000px);
+		@include leader(20);
+		@include trailer(20);
+		@include mobile-only {
+			@include leader(14);
+			@include trailer(12);
+		}
+	}	
+	.keyboard,
+	.canvas {
+		@include transform(translateZ(200px));
+	}
+	.keyboard {
+		z-index: 1;
+		opacity: 1;
+		position: relative;
+		@include transition(all 300ms);
+		cursor: default;
+		overflow: visible;
+		&.dim .key rect {
+			opacity: 0.1;
+		}
+		&:hover .key rect, &.remixing .key rect {
+			opacity: 0.2;
+		}
+		&.fade rect {
+			opacity: 0 !important;
+		}
+		&.bright rect {
+			opacity: 1 !important;
+		}
+		.key {
+			rect {
+				@include transition(all 200ms);
+				@include transform-origin(center);
+				&.active {
+					opacity: 0.9;
+					@include transform(scale(1, 1.3));
+				}
+				&.half-active {
+					opacity: 0.4;
+					@include transform(scale(1, 1.075));
+				}
+			}
+		}
+	}
+
+	.refreshing-notes & {
+		.keyboard, .player {
+			pointer-events: none;
+		}
+	}
+
+	svg {
+		position: absolute;
+		left: 0;
+		top: 0;
+		.note {
+			display: inline-block;
+		}
+	}
+
+	.icons {
+		@include trailer($lines: 12, $font-size: map-get(map-get($text-map, large), font-size));
+		@include mobile-only {
+			@include transform(scale(0.75));
+			@include trailer($lines: 8, $font-size: map-get(map-get($text-map, large), font-size));
+		}
+	}
+
+	.icon {
+		@include transition(all 250ms);
+		display: inline-block;
+		cursor: pointer;
+		overflow: hidden;
+		text-transform: uppercase;
+		width: rhythm($lines: 10, $font-size: map-get(map-get($text-map, large), font-size));
+		height: rhythm($lines: 10, $font-size: map-get(map-get($text-map, large), font-size));
+		margin: 0 15px;
+		@include border-radius(5px);
+		text-align: center;
+		@include adjust-font-size-to(map-get(map-get($text-map, large), font-size), $lines: 9.75);
+		&.player svg {
+			margin-top: -8px;
+			margin-left: -7px;
+		}
+		&.refresh svg {
+			margin-top: 1px;
+			margin-left: 1px;
+		}
+		&.help svg {
+			margin-top: 2px;
+			margin-left: 2px;
+		}
+		&:hover {
+			opacity: 0.6;
+		}
+
+	}
+
+	.canvas {
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 1;
+		text-align: center;
+		.text {
+			position: relative;
+			text-transform: uppercase;
+			@extend .large-text;
+			font-weight: 700;
+			z-index: 1;
+			opacity: 0;
+			@include animation(fadeIn .25s .5s forwards);
+		}
+		.particle {
+			position: absolute;
+			border: solid 2px $white;
+			@include border-radius(50%);
+			background: $blue;
+			@include animation(swipe 1.5s forwards);
+		}
+	}
+}
+
+// 2 scales: particle size, and resolution
+// counter!
+
+@include keyframe(fadeIn) {
+	100% {
+		opacity: 1;
+	}
+}
+
+@include keyframe(swipe) {
+	0% {
+		opacity: 0.9;
+	}
+	100% {
+		opacity: 0;
+	}
+}

@@ -1,0 +1,191 @@
+#project-food {
+	svg {
+		overflow: visible;
+		position: relative;
+	}
+	.project-contents {
+		position: relative;
+		@include leader(7);
+		@include trailer(25);
+	}
+	path {
+	  fill: none;
+	  stroke-linecap: round;
+	}
+	#food-svg-container {
+		path {
+		  stroke: #A6191E;
+		  stroke-width: 4px;
+		}
+		.controlPoint {
+			&, circle, .cloud, .word {
+				@include transition(all 250ms);
+			}
+			&:hover circle {
+				@include transform(scale(1.35));
+				-webkit-filter: drop-shadow( -5px -5px 5px #000 );
+				filter: drop-shadow( -5px -5px 5px #000 );
+			}
+			circle {
+				fill: #A6191E;
+				stroke: #A6191E;
+				stroke-width: 4px;
+			}
+			path {
+				opacity: 0;
+			}
+			.spoke {
+				fill: none;
+				stroke-width: .5px;
+				@include transform(translate3d(-8px, -8px, 0));
+			}
+			.glyph {
+				fill: #A6191E;
+				stroke: white;
+				stroke-width: 50px;
+			}
+			.word {
+				path:nth-of-type(1) {
+					@include transform(rotateX(180deg) scale(0.0075) translate3d(-1200px, -300px, 0));
+				}
+				path:nth-of-type(2) {
+					@include transform(rotateX(180deg) scale(0.0075) translate3d(-500px, -300px, 0));
+				}
+				path:nth-of-type(3) {
+					@include transform(rotateX(180deg) scale(0.0075) translate3d(400px, -300px, 0));
+				}
+			}
+		}
+		.burst {
+			.cloud, .word {
+				@include transform(scale(6));
+			}
+			.cloud {
+				circle {
+					stroke-width: 1px;
+					@include transform(scale(0.01));
+				}
+				path:nth-of-type(1) { // left, then clockwise
+					@include animation(path-1-burst 750ms forwards);
+				}
+				path:nth-of-type(3) {
+					@include animation(path-3-burst 750ms forwards);
+				}
+				path:nth-of-type(5) {
+					@include animation(path-5-burst 750ms forwards);
+				}
+				path:nth-of-type(4) {
+					@include animation(path-4-burst 750ms forwards);
+				}
+				path:nth-of-type(2) {
+					@include animation(path-2-burst 750ms forwards);
+				}
+			}
+			.word {
+				path:nth-of-type(1) {
+					@include animation(glyph-1-burst 750ms forwards);
+				}
+				path:nth-of-type(2) {
+					@include animation(glyph-2-burst 750ms forwards);
+				}
+				path:nth-of-type(3) {
+					@include animation(glyph-3-burst 750ms forwards);
+				}
+			}
+		}
+	}
+	#teeth-svg-container {
+		z-index: -1;
+		path {
+			stroke: blue;
+			stroke-width: 1px;
+		}
+	}
+	#hidden-svg-container, #pop-svg-container, #teeth-svg-container {
+		position: absolute;
+		pointer-events: none;
+	}
+	#hidden-svg-container {
+		opacity: 0;
+	}
+}
+
+@include keyframe(path-1-burst) {
+	35% {
+		opacity: 1;
+	}
+	100% {
+		@include transform(translate3d(-14px, -8px, 0));
+		opacity: 0;
+	}
+}
+
+@include keyframe(path-3-burst) {
+	35% {
+		opacity: 1;
+	}
+	100% {
+		@include transform(translate3d(-11px, -11px, 0));
+		opacity: 0;
+	}
+}
+
+@include keyframe(path-5-burst) {
+	35% {
+		opacity: 1;
+	}
+	100% {
+		@include transform(translate3d(-5px, -11px, 0));
+		opacity: 0;
+	}
+}
+
+@include keyframe(path-4-burst) {
+	35% {
+		opacity: 1;
+	}
+	100% {
+		@include transform(translate3d(-5px, -5px, 0));
+		opacity: 0;
+	}
+}
+
+@include keyframe(path-2-burst) {
+	35% {
+		opacity: 1;
+	}
+	100% {
+		@include transform(translate3d(-11px, -5px, 0));
+		opacity: 0;
+	}
+}
+
+@include keyframe(glyph-1-burst) {
+	35% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		@include transform(rotateX(180deg) rotateZ(20deg) scale(0.0075) translate3d(-1300px, -50px, 0));
+	}
+}
+
+@include keyframe(glyph-2-burst) {
+	35% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		@include transform(rotateX(180deg) scale(0.0075) translate3d(-500px, -250px, 0));
+	}
+}
+
+@include keyframe(glyph-3-burst) {
+	35% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		@include transform(rotateX(180deg) rotateZ(-20deg) scale(0.0075) translate3d(500px, -50px, 0));
+	}
+}
