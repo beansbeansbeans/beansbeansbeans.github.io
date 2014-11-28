@@ -25,7 +25,10 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				frame: undefined,
 				offset: 0,
 				timestamp: undefined,
-				ticker: undefined
+				ticker: undefined,
+				target: undefined,
+				timeConstant: 125,
+				rafID: undefined
 			},
 			globeConfig = {
 				length: 24,
@@ -108,11 +111,26 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			window.stop = function() {
 				window.cancelAnimationFrame(this.rafID);
+				window.cancelAnimationFrame(spinState.rafID);
 			}.bind(this);
 
 			var scroll = function(x) {
 				spinState.offset = x;
 				globe.css("background-position", (x * globeConfig.width) + "px");
+			}
+
+			var autoScroll = function() {
+				var elapsed,
+					delta;
+
+				if(spinState.amplitude) {
+					elapsed = Date.now() - spinState.timestamp;
+					delta = spinState.amplitude * Math.exp(-elapsed / spinState.timeConstant);
+					if(delta > 10 || delta < -10) {
+						scroll(Math.round(spinState.target - delta));
+						spinState.rafID = requestAnimationFrame(autoScroll);
+					}
+				}
 			}
 
 			var track = function() {
@@ -147,7 +165,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				spinState.frame = spinState.offset;
 				spinState.timestamp = Date.now();
 				clearInterval(spinState.ticker);
-				ticker = setInterval(track, 100);
+				spinState.ticker = setInterval(track, 100);
 
 				e.preventDefault();
 				e.stopPropagation();
@@ -174,6 +192,19 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			var release = function(e) {
 				spinState.pressed = false;
+
+				clearInterval(spinState.ticker);
+				spinState.target = spinState.offset;
+				if(spinState.velocity > 10 || spinState.velocity < -10) {
+					spinState.amplitude = 1.2 * spinState.velocity;
+					spinState.target = spinState.offset + spinState.amplitude;
+				}
+				spinState.amplitude = spinState.target - spinState.offset;
+				spinState.rafID = requestAnimationFrame(autoScroll);
+
+				e.preventDefault();
+				e.stopPropagation();
+				return false;
 			}
 
 			if (typeof window.ontouchstart !== 'undefined') {
