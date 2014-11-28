@@ -106,18 +106,22 @@
 		white-space: nowrap;
 	}
 	#left_wing, #right_wing, #between_wings {
-		border: solid 1px red;
 		display: inline-block;
 		margin: none;
+		@include background-size(100% auto);
 	}
 	#left_wing {
-
+		background-image: url(../images/project_spinny/left_pane.jpg);
 	}
 	#right_wing {
-
+		background-image: url(../images/project_spinny/right_pane.jpg);
 	}
 	#between_wings {
-
+		background-image: url(../images/project_spinny/main_pane.jpg);
+		position: relative;
+		#spinny_globe {
+			position: absolute;
+		}
 	}
 }
 

@@ -420,7 +420,7 @@ nav {
 
 $frame-count: 24;
 $frame-width: 256px;
-$frame-height: 419px;
+$frame-height: 397px;
 
 #homepage {
 	#top-container {
@@ -435,18 +435,18 @@ $frame-height: 419px;
 	#top {
 		margin: 0 auto;
 		@include size($frame-width, $frame-height);
-		background-image: url(../images/top.png);
+		background-image: url(../images/top.jpg);
 		background-size: $frame-count * $frame-width $frame-height;
 		@include mobile-only {
 			@include size(179px, 293px);
-			background-image: url(../images/top_mobile.png);
+			background-image: url(../images/top_mobile.jpg);
 			background-size: $frame-count * 179px 293px;
 		}
 	}
 	#shadow {
 		@include size(360px, 103px);
 		background-image: url(../images/shadow.png);
-		top: 350px;
+		top: 353px;
 		margin-left: -10px;
 		@include mobile-only {
 			@include size(253px, 72px);
@@ -455,7 +455,6 @@ $frame-height: 419px;
 			margin-left: -3px;
 		}
 		position: absolute;
-		z-index: -1;
 		left: 50%;
 	}
 }

@@ -175,9 +175,25 @@
   white-space: nowrap;
 }
 #project-spinny #left_wing, #project-spinny #right_wing, #project-spinny #between_wings {
-  border: solid 1px red;
   display: inline-block;
   margin: none;
+  -moz-background-size: 100% auto;
+  -o-background-size: 100% auto;
+  -webkit-background-size: 100% auto;
+  background-size: 100% auto;
+}
+#project-spinny #left_wing {
+  background-image: url(../images/project_spinny/left_pane.jpg);
+}
+#project-spinny #right_wing {
+  background-image: url(../images/project_spinny/right_pane.jpg);
+}
+#project-spinny #between_wings {
+  background-image: url(../images/project_spinny/main_pane.jpg);
+  position: relative;
+}
+#project-spinny #between_wings #spinny_globe {
+  position: absolute;
 }
 
 #project-dancers {
@@ -6675,15 +6691,15 @@ nav li a .description {
 #homepage #top {
   margin: 0 auto;
   width: 256px;
-  height: 419px;
-  background-image: url(../images/top.png);
-  background-size: 6144px 419px;
+  height: 397px;
+  background-image: url(../images/top.jpg);
+  background-size: 6144px 397px;
 }
 @media (max-width: 640px) {
   #homepage #top {
     width: 179px;
     height: 293px;
-    background-image: url(../images/top_mobile.png);
+    background-image: url(../images/top_mobile.jpg);
     background-size: 4296px 293px;
   }
 }
@@ -6691,10 +6707,9 @@ nav li a .description {
   width: 360px;
   height: 103px;
   background-image: url(../images/shadow.png);
-  top: 350px;
+  top: 353px;
   margin-left: -10px;
   position: absolute;
-  z-index: -1;
   left: 50%;
 }
 @media (max-width: 640px) {

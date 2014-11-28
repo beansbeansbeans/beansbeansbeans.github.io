@@ -2,11 +2,11 @@ define([], function() {
 	var home = {
 		needsLoading: true,
 		preloadAssets: [
-			"top.png",
+			"top.jpg",
 			"shadow.png"
 		],
 		mobilePreloadAssets: [
-			"top_mobile.png",
+			"top_mobile.jpg",
 			"shadow_mobile.png"
 		],
 		initialize: function() {
