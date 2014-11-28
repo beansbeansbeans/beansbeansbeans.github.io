@@ -1,3 +1,5 @@
+// OPTIMIZATIONS: Consider bundling drag handler into rAF callback!
+
 define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 	var spinny = {
 		initialize: function() {
@@ -15,6 +17,16 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			widthScale = d3.scale.linear().domain([320, 2000]).range([1.0, 0.5]).clamp(true),
 			paneHeightRatio = 0.54,
 			paneWidth = Math.round(widthScale(windowWidth) * adjustedWindowWidth),
+			spinState = {
+				pressed: false,
+				reference: undefined,
+				velocity: undefined,
+				amplitude: undefined,
+				frame: undefined,
+				offset: 0,
+				timestamp: undefined,
+				ticker: undefined
+			},
 			globeConfig = {
 				length: 24,
 				width: 256,
@@ -97,6 +109,81 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			window.stop = function() {
 				window.cancelAnimationFrame(this.rafID);
 			}.bind(this);
+
+			var scroll = function(x) {
+				spinState.offset = x;
+				globe.css("background-position", (x * globeConfig.width) + "px");
+			}
+
+			var track = function() {
+				var now,
+					elapsed,
+					delta,
+					v;
+
+				now = Date.now();
+				elapsed = now - spinState.timestamp;
+				spinState.timestamp = now;
+				delta = spinState.offset - spinState.frame;
+				spinState.frame = spinState.offset;
+
+				v = 1000 * delta / (1 + elapsed);
+				spinState.velocity = 0.8 * v + 0.2 * spinState.velocity;
+			}
+
+			var xpos = function(e) {
+		        if (e.targetTouches && (e.targetTouches.length >= 1)) {
+		            return e.targetTouches[0].clientX;
+		        }
+
+		        return e.clientX;
+		    }
+
+			var tap = function(e) {
+				spinState.pressed = true;
+				spinState.reference = xpos(e);
+
+				spinState.velocity = spinState.amplitude = 0;
+				spinState.frame = spinState.offset;
+				spinState.timestamp = Date.now();
+				clearInterval(spinState.ticker);
+				ticker = setInterval(track, 100);
+
+				e.preventDefault();
+				e.stopPropagation();
+				return false;
+			}
+
+			var drag = function(e) {
+				var x,
+					delta;
+
+				if(spinState.pressed) {
+					x = xpos(e);
+					delta = spinState.reference - x;
+					if(delta > 2 || delta < -2) {
+						spinState.reference = x;
+						scroll(spinState.offset + delta);
+					}
+				}
+
+				e.preventDefault();
+				e.stopPropagation();
+				return false;
+			}
+
+			var release = function(e) {
+				spinState.pressed = false;
+			}
+
+			if (typeof window.ontouchstart !== 'undefined') {
+	            window.addEventListener('touchstart', tap);
+	            window.addEventListener('touchmove', drag);
+	            window.addEventListener('touchend', release);
+	        }
+	        window.addEventListener('mousedown', tap);
+	        window.addEventListener('mousemove', drag);
+	        window.addEventListener('mouseup', release);
 		},
 		destroy: function() {
 			window.cancelAnimationFrame(this.rafID);
