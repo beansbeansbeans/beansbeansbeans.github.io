@@ -101,6 +101,26 @@
 	}
 }
 
+#project-spinny {
+	.project-contents {
+		white-space: nowrap;
+	}
+	#left_wing, #right_wing, #between_wings {
+		border: solid 1px red;
+		display: inline-block;
+		margin: none;
+	}
+	#left_wing {
+
+	}
+	#right_wing {
+
+	}
+	#between_wings {
+
+	}
+}
+
 #project-dancers {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;

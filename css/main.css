@@ -171,6 +171,15 @@
   }
 }
 
+#project-spinny .project-contents {
+  white-space: nowrap;
+}
+#project-spinny #left_wing, #project-spinny #right_wing, #project-spinny #between_wings {
+  border: solid 1px red;
+  display: inline-block;
+  margin: none;
+}
+
 #project-dancers {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -287,135 +296,6 @@
 }
 #project-pixels #movie rect, #project-pixels #border rect {
   pointer-events: all;
-}
-
-#project-hiveplot #changeTransition, #project-hiveplot #filters {
-  display: inline-block;
-  margin-top: 0.625em;
-  position: relative;
-}
-#project-hiveplot #changeTransition .collapser:hover, #project-hiveplot #filters .collapser:hover {
-  cursor: pointer;
-  background-color: #2185c5;
-}
-#project-hiveplot #changeTransition ul, #project-hiveplot #filters ul {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  margin-top: 3px;
-  border: solid 1px #ddd;
-  border-radius: 5px;
-  padding-left: 0;
-}
-#project-hiveplot #changeTransition ul li:first-of-type a, #project-hiveplot #filters ul li:first-of-type a {
-  border-radius: 5px 5px 0 0;
-}
-#project-hiveplot #changeTransition ul li:last-of-type a, #project-hiveplot #filters ul li:last-of-type a {
-  border-radius: 0 0 5px 5px;
-}
-#project-hiveplot #changeTransition ul a.active:after, #project-hiveplot #filters ul a.active:after {
-  content: "✓";
-  display: block;
-  right: 10px;
-  top: 0;
-  position: absolute;
-}
-#project-hiveplot #changeTransition.open ul li:not(:last-of-type) a, #project-hiveplot #filters.open ul li:not(:last-of-type) a {
-  border-bottom: solid 1px #dddddd;
-}
-#project-hiveplot #changeTransition.open ul li a, #project-hiveplot #filters.open ul li a {
-  background: white;
-  width: 100%;
-  display: inline-block;
-  padding-left: 15px;
-  padding-right: 10px;
-  font-size: 16px;
-  line-height: 40px;
-  color: #3E454C !important;
-  text-align: left !important;
-  position: relative;
-}
-#project-hiveplot #changeTransition.open ul li a:hover, #project-hiveplot #filters.open ul li a:hover {
-  background-color: #FFF6E5;
-}
-#project-hiveplot #changeTransition:not(.open) ul, #project-hiveplot #filters:not(.open) ul {
-  display: none;
-}
-#project-hiveplot #changeTransition {
-  margin-right: 1.25em;
-}
-#project-hiveplot #hiveplot .collapser {
-  font-size: 18px;
-  color: #FFF6E5;
-  border-radius: 5px;
-  background-color: #3E454C;
-  padding-left: 25px;
-  padding-right: 25px;
-  line-height: 45px;
-  -moz-transition: 250ms all;
-  -o-transition: 250ms all;
-  -webkit-transition: 250ms all;
-  transition: 250ms all;
-}
-#project-hiveplot #hiveplot .collapser span {
-  font-size: 8px;
-  vertical-align: middle;
-  display: inline-block;
-  margin-left: .5em;
-}
-#project-hiveplot #hiveplot #chart {
-  margin-top: 40px;
-  margin-left: 200px;
-}
-#project-hiveplot #hiveplot text {
-  font-family: Helvetica;
-  font-weight: 300;
-}
-#project-hiveplot #hiveplot .axis {
-  stroke: #888;
-  stroke-width: 1.5px;
-}
-#project-hiveplot #hiveplot .node rect, #project-hiveplot #hiveplot .node text, #project-hiveplot #hiveplot .node polygon {
-  display: none;
-}
-#project-hiveplot #hiveplot .node text {
-  font-size: 13px;
-}
-#project-hiveplot #hiveplot .node circle {
-  stroke: black;
-}
-#project-hiveplot #hiveplot .node.active rect, #project-hiveplot #hiveplot .node.active text, #project-hiveplot #hiveplot .node.active polygon {
-  display: block;
-}
-#project-hiveplot #hiveplot .node.active circle {
-  fill: #3e454c !important;
-}
-#project-hiveplot #hiveplot .node.active rect, #project-hiveplot #hiveplot .node.active polygon {
-  opacity: 1 !important;
-  fill: #222222 !important;
-}
-#project-hiveplot #hiveplot .node:hover {
-  cursor: default;
-}
-#project-hiveplot #hiveplot .link {
-  fill: none;
-  stroke: #999;
-  stroke-width: 1.5px;
-  stroke-opacity: .3;
-}
-#project-hiveplot #hiveplot .link text {
-  display: none;
-}
-#project-hiveplot #hiveplot .link path {
-  -moz-transition: 250ms all;
-  -o-transition: 250ms all;
-  -webkit-transition: 250ms all;
-  transition: 250ms all;
-}
-#project-hiveplot #hiveplot .link.active {
-  stroke: black;
-  stroke-opacity: 1;
 }
 
 #project-leaves canvas {
@@ -5917,6 +5797,135 @@
     opacity: 0;
   }
 }
+#project-hiveplot #changeTransition, #project-hiveplot #filters {
+  display: inline-block;
+  margin-top: 0.625em;
+  position: relative;
+}
+#project-hiveplot #changeTransition .collapser:hover, #project-hiveplot #filters .collapser:hover {
+  cursor: pointer;
+  background-color: #2185c5;
+}
+#project-hiveplot #changeTransition ul, #project-hiveplot #filters ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 3px;
+  border: solid 1px #ddd;
+  border-radius: 5px;
+  padding-left: 0;
+}
+#project-hiveplot #changeTransition ul li:first-of-type a, #project-hiveplot #filters ul li:first-of-type a {
+  border-radius: 5px 5px 0 0;
+}
+#project-hiveplot #changeTransition ul li:last-of-type a, #project-hiveplot #filters ul li:last-of-type a {
+  border-radius: 0 0 5px 5px;
+}
+#project-hiveplot #changeTransition ul a.active:after, #project-hiveplot #filters ul a.active:after {
+  content: "✓";
+  display: block;
+  right: 10px;
+  top: 0;
+  position: absolute;
+}
+#project-hiveplot #changeTransition.open ul li:not(:last-of-type) a, #project-hiveplot #filters.open ul li:not(:last-of-type) a {
+  border-bottom: solid 1px #dddddd;
+}
+#project-hiveplot #changeTransition.open ul li a, #project-hiveplot #filters.open ul li a {
+  background: white;
+  width: 100%;
+  display: inline-block;
+  padding-left: 15px;
+  padding-right: 10px;
+  font-size: 16px;
+  line-height: 40px;
+  color: #3E454C !important;
+  text-align: left !important;
+  position: relative;
+}
+#project-hiveplot #changeTransition.open ul li a:hover, #project-hiveplot #filters.open ul li a:hover {
+  background-color: #FFF6E5;
+}
+#project-hiveplot #changeTransition:not(.open) ul, #project-hiveplot #filters:not(.open) ul {
+  display: none;
+}
+#project-hiveplot #changeTransition {
+  margin-right: 1.25em;
+}
+#project-hiveplot #hiveplot .collapser {
+  font-size: 18px;
+  color: #FFF6E5;
+  border-radius: 5px;
+  background-color: #3E454C;
+  padding-left: 25px;
+  padding-right: 25px;
+  line-height: 45px;
+  -moz-transition: 250ms all;
+  -o-transition: 250ms all;
+  -webkit-transition: 250ms all;
+  transition: 250ms all;
+}
+#project-hiveplot #hiveplot .collapser span {
+  font-size: 8px;
+  vertical-align: middle;
+  display: inline-block;
+  margin-left: .5em;
+}
+#project-hiveplot #hiveplot #chart {
+  margin-top: 40px;
+  margin-left: 200px;
+}
+#project-hiveplot #hiveplot text {
+  font-family: Helvetica;
+  font-weight: 300;
+}
+#project-hiveplot #hiveplot .axis {
+  stroke: #888;
+  stroke-width: 1.5px;
+}
+#project-hiveplot #hiveplot .node rect, #project-hiveplot #hiveplot .node text, #project-hiveplot #hiveplot .node polygon {
+  display: none;
+}
+#project-hiveplot #hiveplot .node text {
+  font-size: 13px;
+}
+#project-hiveplot #hiveplot .node circle {
+  stroke: black;
+}
+#project-hiveplot #hiveplot .node.active rect, #project-hiveplot #hiveplot .node.active text, #project-hiveplot #hiveplot .node.active polygon {
+  display: block;
+}
+#project-hiveplot #hiveplot .node.active circle {
+  fill: #3e454c !important;
+}
+#project-hiveplot #hiveplot .node.active rect, #project-hiveplot #hiveplot .node.active polygon {
+  opacity: 1 !important;
+  fill: #222222 !important;
+}
+#project-hiveplot #hiveplot .node:hover {
+  cursor: default;
+}
+#project-hiveplot #hiveplot .link {
+  fill: none;
+  stroke: #999;
+  stroke-width: 1.5px;
+  stroke-opacity: .3;
+}
+#project-hiveplot #hiveplot .link text {
+  display: none;
+}
+#project-hiveplot #hiveplot .link path {
+  -moz-transition: 250ms all;
+  -o-transition: 250ms all;
+  -webkit-transition: 250ms all;
+  transition: 250ms all;
+}
+#project-hiveplot #hiveplot .link.active {
+  stroke: black;
+  stroke-opacity: 1;
+}
+
 .log .title {
   text-transform: lowercase;
 }
