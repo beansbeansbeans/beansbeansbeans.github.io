@@ -27,7 +27,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				timestamp: undefined,
 				ticker: undefined,
 				target: undefined,
-				timeConstant: 125,
+				timeConstant: 325,
 				rafID: undefined
 			},
 			globeConfig = {
@@ -116,7 +116,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			var scroll = function(x) {
 				spinState.offset = x;
-				globe.css("background-position", (x * globeConfig.width) + "px");
+				globe.css("background-position", ((x % globeConfig.length) * globeConfig.width) + "px");
 			}
 
 			var autoScroll = function() {
@@ -195,7 +195,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 				clearInterval(spinState.ticker);
 				spinState.target = spinState.offset;
-				if(spinState.velocity > 10 || spinState.velocity < -10) {
+				if(spinState.velocity > 2 || spinState.velocity < -2) {
 					spinState.amplitude = 1.2 * spinState.velocity;
 					spinState.target = spinState.offset + spinState.amplitude;
 				}

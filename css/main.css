@@ -194,6 +194,7 @@
 }
 #project-spinny #between_wings #spinny_globe {
   position: absolute;
+  /* transform: scale(0.25); */
 }
 
 #project-dancers {
