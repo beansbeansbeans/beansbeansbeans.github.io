@@ -126,8 +126,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					proceed = true;
 
 				if(spinState.amplitude) {
-					if(spinState.counter % Math.round(60 / globeConfig.length) == 0) {
-						elapsed = (Date.now() - spinState.timestamp) / Math.round(60 / globeConfig.length);
+					if(spinState.counter % Math.ceil(60 / globeConfig.length) == 0) {
+						elapsed = (Date.now() - spinState.timestamp) / Math.ceil(60 / globeConfig.length);
 						delta = spinState.amplitude * Math.exp(-elapsed / spinState.timeConstant);
 						if(delta > 2 || delta < -2) {
 							scroll(Math.round(spinState.target - delta));
@@ -163,7 +163,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 		            return e.targetTouches[0].clientX;
 		        }
 
-		        return e.clientX;
+		        return Math.round(0.8 * e.clientX);
 		    }
 
 			var tap = function(e) {
@@ -188,10 +188,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				if(spinState.pressed) {
 					x = xpos(e);
 					delta = spinState.reference - x;
-					if(delta > 2 || delta < -2) {
-						spinState.reference = x;
-						scroll(spinState.offset + delta);
-					}
+					spinState.reference = x;
+					scroll(spinState.offset + delta);
 				}
 
 				e.preventDefault();
