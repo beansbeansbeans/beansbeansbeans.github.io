@@ -187,7 +187,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 				if(spinState.pressed) {
 					x = xpos(e);
-					delta = spinState.reference - x;
+					delta = x - spinState.reference;
 					spinState.reference = x;
 					scroll(spinState.offset + delta);
 				}
@@ -203,7 +203,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				clearInterval(spinState.ticker);
 				spinState.target = spinState.offset;
 				if(spinState.velocity > 2 || spinState.velocity < -2) {
-					spinState.amplitude = 0.7 * spinState.velocity;
+					spinState.amplitude = 0.5 * spinState.velocity;
 					spinState.target = spinState.offset + spinState.amplitude;
 				}
 				spinState.amplitude = spinState.target - spinState.offset;
