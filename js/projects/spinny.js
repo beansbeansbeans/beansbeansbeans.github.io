@@ -28,7 +28,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				ticker: undefined,
 				target: undefined,
 				timeConstant: 125,
-				rafID: undefined
+				rafID: undefined,
+				counter: 0
 			},
 			globeConfig = {
 				length: 24,
@@ -121,14 +122,22 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			var autoScroll = function() {
 				var elapsed,
-					delta;
+					delta,
+					proceed = true;
 
 				if(spinState.amplitude) {
-					elapsed = Date.now() - spinState.timestamp;
-					delta = spinState.amplitude * Math.exp(-elapsed / spinState.timeConstant);
-					if(delta > 2 || delta < -2) {
-						scroll(Math.round(spinState.target - delta));
+					if(spinState.counter % Math.round(60 / globeConfig.length) == 0) {
+						elapsed = (Date.now() - spinState.timestamp) / Math.round(60 / globeConfig.length);
+						delta = spinState.amplitude * Math.exp(-elapsed / spinState.timeConstant);
+						if(delta > 2 || delta < -2) {
+							scroll(Math.round(spinState.target - delta));
+						} else {
+							proceed	= false;
+						}
+					}
+					if(proceed) {
 						spinState.rafID = requestAnimationFrame(autoScroll);
+						spinState.counter++;
 					}
 				}
 			}
