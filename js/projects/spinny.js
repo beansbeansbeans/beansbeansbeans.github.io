@@ -7,7 +7,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				identifier: "spinny",
 				title: "Spinny",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, voluptatibus.",
-				projectContents: '<div id="triptych"><div id="spinny_globe"></div></div>',
+				projectContents: '<div id="triptych"><div id="spinny_globe"></div><div id="phone_mask"></div></div>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, fugit.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, nobis inventore id sequi non quam mollitia natus eum assumenda placeat."
 			},
@@ -84,6 +84,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					height: 100 * ((animatable.width * animatable.heightRatio) / (nativePaneWidth * paneHeightRatio)) + "%"
 				});
 			});
+
+			$("#phone_mask").css("background-size", ((paneWidth / nativePaneWidth) * 232) + "px auto");
 
 			mainPane.css({
 				width: paneWidth,

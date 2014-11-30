@@ -120,6 +120,16 @@
 			background-repeat: no-repeat;
 			// @include transition(all 250ms);
 		}
+		#phone_mask {
+			background-image: url(../images/project_spinny/mask.png);
+			background-repeat: no-repeat;
+			position: absolute;
+			z-index: 100;
+			left: 43.57%;
+			top: 80.5%;
+			width: 7.7%;
+			height: 18.5%;
+		}
 	}
 }
 
