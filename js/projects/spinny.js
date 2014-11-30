@@ -43,11 +43,10 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					id: "candle",
 					length: 35,
 					currentFrame: 0,
-					width: 23,
-					animationWidth: 24,
+					width: 23.3,
 					heightRatio: 2.69,
-					left: 0.5,
-					top: 0.7
+					left: 0.395,
+					top: 0.601
 				}
 			],
 			counter = 0;
@@ -70,6 +69,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					position: "absolute",
 					left: (animatable.left * 100) + "%",
 					top: (animatable.top * 100) + "%",
+					backgroundSize: ((paneWidth / nativePaneWidth) * animatable.width * animatable.length) + "px auto",
 					backgroundImage: "url(../images/project_spinny/" + animatable.id + "_sprite.jpg)",
 					width: 100 * (animatable.width / nativePaneWidth) + "%",
 					height: 100 * ((animatable.width * animatable.heightRatio) / (nativePaneWidth * paneHeightRatio)) + "%"
