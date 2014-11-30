@@ -105,25 +105,20 @@
 	.project-contents {
 		white-space: nowrap;
 	}
-	#left_wing, #right_wing, #between_wings {
-		display: inline-block;
+	#triptych {
 		margin: none;
 		@include background-size(100% auto);
-	}
-	#left_wing, #right_wing {
-		background-position: 0 1px;
-	}
-	#left_wing {
-		background-image: url(../images/project_spinny/left_pane.jpg);
-	}
-	#right_wing {
-		background-image: url(../images/project_spinny/right_pane.jpg);
-	}
-	#between_wings {
-		background-image: url(../images/project_spinny/main_pane.jpg);
-		position: relative;
+		background-position: -33.33% 0;
+		background-image: url(../images/project_spinny/tryptich_composite.jpg);
+		position: absolute;
+		left: 50%;
+		background-repeat: no-repeat;
 		#spinny_globe {
 			position: absolute;
+		}
+		[data-animatable] {
+			background-repeat: no-repeat;
+			// @include transition(all 250ms);
 		}
 	}
 }

@@ -7,15 +7,15 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				identifier: "spinny",
 				title: "Spinny",
 				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, voluptatibus.",
-				projectContents: '<div id="left_wing"></div><div id="between_wings"><div id="spinny_globe"></div></div><div id="right_wing"></div>',
+				projectContents: '<div id="triptych"><div id="spinny_globe"></div></div>',
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, fugit.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, nobis inventore id sequi non quam mollitia natus eum assumenda placeat."
 			},
-			nativePaneWidth = 1000,
+			nativePaneWidth = 3003,
 			windowWidth = $(window).width(),
 			adjustedWindowWidth = windowWidth < 2000 ? windowWidth : 2000,
-			widthScale = d3.scale.linear().domain([320, 2000]).range([1.0, 0.5]).clamp(true),
-			paneHeightRatio = 0.56,
+			widthScale = d3.scale.linear().domain([320, 2000]).range([3.0, 1.5]).clamp(true),
+			paneHeightRatio = 0.18748,
 			paneWidth = Math.round(widthScale(windowWidth) * adjustedWindowWidth),
 			spinState = {
 				pressed: false,
@@ -40,20 +40,12 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			},
 			animatables = [
 				{
-					id: "phone",
-					length: 17,
-					currentFrame: 0,
-					width: 39,
-					heightRatio: 1.87,
-					left: 0.3,
-					top: 0.3
-				},
-				{
 					id: "candle",
-					length: 10,
+					length: 35,
 					currentFrame: 0,
-					width: 49,
-					heightRatio: 1.38,
+					width: 23,
+					animationWidth: 24,
+					heightRatio: 2.69,
 					left: 0.5,
 					top: 0.7
 				}
@@ -62,9 +54,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			$("#view").html(projectTemplate(data));
 
-			var mainPane = $("#between_wings"),
-				leftPane = $("#left_wing"),
-				rightPane = $("#right_wing"),
+			var mainPane = $("#triptych"),
 				globe = $("#spinny_globe");
 
 			globe.css({
@@ -86,19 +76,18 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				});
 			});
 
-			$("#left_wing, #between_wings, #right_wing").each(function(idx, el) {
-				$(el).css({
-					width: paneWidth,
-					height: Math.round(paneWidth * paneHeightRatio)
-				});
+			mainPane.css({
+				width: paneWidth,
+				height: Math.round(paneWidth * paneHeightRatio),
+				marginLeft: -0.5 * paneWidth
 			});
 
-			leftPane.css("margin-left", -(paneWidth - (adjustedWindowWidth * 0.5 - paneWidth * 0.5)) + 0.5 * (windowWidth - adjustedWindowWidth));
+			$("#project-spinny .project-contents").css("height", Math.round(paneWidth * paneHeightRatio));
 
 			var animate = function() {
-				if(counter % 60 == 0) {
+				if(counter % 2 == 0) {
 					animatables.forEach(function(animatable) {
-						$("[data-animatable=" + animatable.id + "]").css("background-position", (animatable.currentFrame * (100 / animatable.length)) + "%");
+						$("[data-animatable=" + animatable.id + "]").css("background-position", (animatable.currentFrame * (100 / (animatable.length - 1))) + "%");
 
 						animatable.currentFrame = (animatable.currentFrame + 1) % animatable.length;
 					});

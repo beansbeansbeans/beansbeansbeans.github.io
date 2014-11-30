@@ -174,29 +174,23 @@
 #project-spinny .project-contents {
   white-space: nowrap;
 }
-#project-spinny #left_wing, #project-spinny #right_wing, #project-spinny #between_wings {
-  display: inline-block;
+#project-spinny #triptych {
   margin: none;
   -moz-background-size: 100% auto;
   -o-background-size: 100% auto;
   -webkit-background-size: 100% auto;
   background-size: 100% auto;
-}
-#project-spinny #left_wing, #project-spinny #right_wing {
-  background-position: 0 1px;
-}
-#project-spinny #left_wing {
-  background-image: url(../images/project_spinny/left_pane.jpg);
-}
-#project-spinny #right_wing {
-  background-image: url(../images/project_spinny/right_pane.jpg);
-}
-#project-spinny #between_wings {
-  background-image: url(../images/project_spinny/main_pane.jpg);
-  position: relative;
-}
-#project-spinny #between_wings #spinny_globe {
+  background-position: -33.33% 0;
+  background-image: url(../images/project_spinny/tryptich_composite.jpg);
   position: absolute;
+  left: 50%;
+  background-repeat: no-repeat;
+}
+#project-spinny #triptych #spinny_globe {
+  position: absolute;
+}
+#project-spinny #triptych [data-animatable] {
+  background-repeat: no-repeat;
 }
 
 #project-dancers {
