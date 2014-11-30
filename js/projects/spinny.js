@@ -15,7 +15,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			windowWidth = $(window).width(),
 			adjustedWindowWidth = windowWidth < 2000 ? windowWidth : 2000,
 			widthScale = d3.scale.linear().domain([320, 2000]).range([1.0, 0.5]).clamp(true),
-			paneHeightRatio = 0.54,
+			paneHeightRatio = 0.56,
 			paneWidth = Math.round(widthScale(windowWidth) * adjustedWindowWidth),
 			spinState = {
 				pressed: false,

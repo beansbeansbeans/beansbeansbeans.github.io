@@ -110,6 +110,9 @@
 		margin: none;
 		@include background-size(100% auto);
 	}
+	#left_wing, #right_wing {
+		background-position: 0 1px;
+	}
 	#left_wing {
 		background-image: url(../images/project_spinny/left_pane.jpg);
 	}

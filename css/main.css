@@ -182,6 +182,9 @@
   -webkit-background-size: 100% auto;
   background-size: 100% auto;
 }
+#project-spinny #left_wing, #project-spinny #right_wing {
+  background-position: 0 1px;
+}
 #project-spinny #left_wing {
   background-image: url(../images/project_spinny/left_pane.jpg);
 }
@@ -194,7 +197,6 @@
 }
 #project-spinny #between_wings #spinny_globe {
   position: absolute;
-  /* transform: scale(0.25); */
 }
 
 #project-dancers {
