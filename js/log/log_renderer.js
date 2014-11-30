@@ -1,4 +1,4 @@
-define(['log/glyphs'], function(glyphs) {
+define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
 
     var ticker = (function() {
             var playPosition = 0,
@@ -64,6 +64,7 @@ define(['log/glyphs'], function(glyphs) {
             this.scaleFactor = (this.canvasWidth / naturalWordWidth).toFixed(3);
 
             this.canvasHeight = glyphs.height * this.scaleFactor * 1.5;
+            this.magnitudeScale = d3.scale.linear().domain([350, 650]).range([1, 2])(this.canvasHeight).toFixed(2);
 
             this.renderLetters();
             this.renderVis();
@@ -231,7 +232,7 @@ define(['log/glyphs'], function(glyphs) {
                     ctx.clearRect(0, 0, self.canvasWidth, self.canvasHeight);
 
                     for (var i=0; i<numBars; ++i) {
-                        var magnitude = 2 * freqByteData[i + offset];
+                        var magnitude = self.magnitudeScale * freqByteData[i + offset];
                         ptsArr.push(i*(space + buffer));
                         ptsArr.push(self.canvasHeight - magnitude - bottomBuffer);
                     }
