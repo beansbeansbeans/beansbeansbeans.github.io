@@ -47,6 +47,15 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					heightRatio: 2.69,
 					left: 0.395,
 					top: 0.601
+				},
+				{
+					id: "phone",
+					length: 102,
+					currentFrame: 0,
+					width: 134,
+					heightRatio: 0.3134,
+					left: 0.458, 
+					top: 0.852
 				}
 			],
 			counter = 0;
@@ -85,7 +94,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			$("#project-spinny .project-contents").css("height", Math.round(paneWidth * paneHeightRatio));
 
 			var animate = function() {
-				if(counter % 2 == 0) {
+				if(counter % 4 == 0) {
 					animatables.forEach(function(animatable) {
 						$("[data-animatable=" + animatable.id + "]").css("background-position", (animatable.currentFrame * (100 / (animatable.length - 1))) + "%");
 
