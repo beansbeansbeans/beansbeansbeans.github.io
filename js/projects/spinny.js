@@ -14,7 +14,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			nativePaneWidth = 1000,
 			windowWidth = $(window).width(),
 			adjustedWindowWidth = windowWidth < 2000 ? windowWidth : 2000,
-			widthScale = d3.scale.linear().domain([320, 2000]).range([1.0, 0.5]).clamp(true),
+			widthScale = d3.scale.linear().domain([320, 2000]).range([1.0, 0.4]).clamp(true),
 			paneHeightRatio = 0.563,
 			paneWidth = Math.round(widthScale(windowWidth) * adjustedWindowWidth),
 			spinState = {
@@ -32,11 +32,11 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				counter: 0
 			},
 			globeConfig = {
-				length: 24,
-				width: 256,
-				heightRatio: 1.55,
-				left: 0.66,
-				top: 0.25
+				length: 122,
+				width: 360,
+				heightRatio: 1,
+				left: 0.5182,
+				top: 0.044
 			},
 			animatables = [
 				{
@@ -67,6 +67,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			globe.css({
 				backgroundImage: "url(../images/project_spinny/globe_sprite.jpg)",
+				backgroundSize: ((paneWidth / nativePaneWidth) * globeConfig.width * globeConfig.length) + "px auto",
 				width: 100 * (globeConfig.width / nativePaneWidth) + "%",
 				height: 100 * ((globeConfig.width * globeConfig.heightRatio) / (nativePaneWidth * paneHeightRatio)) + "%",
 				top: (globeConfig.top * 100) + "%",
@@ -117,7 +118,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			var scroll = function(x) {
 				spinState.offset = x;
-				globe.css("background-position", ((x % globeConfig.length) * globeConfig.width) + "px");
+				globe.css("background-position", ((x % globeConfig.length) * (100 / (globeConfig.length - 1))) + "%");
 			}
 
 			var autoScroll = function() {
@@ -189,7 +190,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					x = xpos(e);
 					delta = x - spinState.reference;
 					spinState.reference = x;
-					scroll(spinState.offset + delta);
+					// scroll(spinState.offset + delta);
+					scroll(spinState.offset - delta);
 				}
 
 				e.preventDefault();

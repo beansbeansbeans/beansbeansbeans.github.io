@@ -190,15 +190,14 @@
   position: absolute;
   z-index: -1;
   background: white;
-  left: -9px;
-  top: -9px;
-  right: -9px;
-  bottom: -7px;
+  left: -10px;
+  top: -10px;
+  right: -10px;
+  bottom: -10px;
   border: solid 3px #00303e;
 }
 #project-spinny #triptych #spinny_globe {
   position: absolute;
-  display: none;
 }
 #project-spinny #triptych [data-animatable] {
   background-repeat: no-repeat;
