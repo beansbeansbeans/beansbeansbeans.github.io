@@ -46,7 +46,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					width: 23.3,
 					heightRatio: 2.69,
 					left: 0.185,
-					top: 0.6
+					top: 0.6005
 				},
 				{
 					id: "phone",
@@ -87,7 +87,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			});
 
 			$("#phone_mask").css("background-size", ((paneWidth / nativePaneWidth) * 232) + "px auto");
-			$("#globe_mask").css("background-size", ((paneWidth / nativePaneWidth) * 613) + "px auto");
+			$("#globe_mask").css("background-size", ((paneWidth / nativePaneWidth) * 601) + "px auto");
 
 			mainPane.css({
 				width: paneWidth,
