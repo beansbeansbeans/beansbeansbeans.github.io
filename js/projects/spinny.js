@@ -68,7 +68,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			$("#view").html(projectTemplate(data));
 
 			var mainPane = $("#triptych"),
-				globe = $("#spinny_globe");
+				globe = $("#spinny_globe"),
+				container = $("#project-spinny #triptych");
 
 			globe.css({
 				backgroundImage: "url(../images/project_spinny/globe_sprite.jpg)",
@@ -223,13 +224,14 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			}
 
 			if (typeof window.ontouchstart !== 'undefined') {
-	            window.addEventListener('touchstart', tap);
-	            window.addEventListener('touchmove', drag);
-	            window.addEventListener('touchend', release);
+	            container[0].addEventListener('touchstart', tap);
+	            container[0].addEventListener('touchmove', drag);
+	            container[0].addEventListener('touchend', release);
+	        } else {
+		        container[0].addEventListener('mousedown', tap);
+		        container[0].addEventListener('mousemove', drag);
+		        container[0].addEventListener('mouseup', release);
 	        }
-	        window.addEventListener('mousedown', tap);
-	        window.addEventListener('mousemove', drag);
-	        window.addEventListener('mouseup', release);
 		},
 		destroy: function() {
 			window.cancelAnimationFrame(this.rafID);
