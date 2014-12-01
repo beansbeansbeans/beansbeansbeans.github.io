@@ -1,7 +1,12 @@
-// OPTIMIZATIONS: Consider bundling drag handler into rAF callback!
-
 define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 	var spinny = {
+		needsLoading: true,
+		preloadAssets: [
+			"project_spinny/globe_sprite.jpg"
+		],
+		mobilePreloadAssets: [
+			"project_spinny/globe_sprite.jpg"
+		],
 		initialize: function() {
 			var data = {
 				identifier: "spinny",

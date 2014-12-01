@@ -1,6 +1,6 @@
 define(['templates/project_detail'], function(projectTemplate) {
 	var straws = {
-		needsPreloading: true,
+		needsLoading: true,
 		preloadAssets: [
 			"arrow.png",
 			"glass_back.png",

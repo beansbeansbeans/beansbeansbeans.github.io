@@ -32,24 +32,25 @@ require(['jquery', 'router', 'loader'], function($, Router, Loader) {
     var router = new Router(),
         initialize = function(module) {
             if(module.needsLoading) {
-                var el, imageCounter = 0, enoughTime = false, assets,
-                loaderTimeoutID = setTimeout(function() {
-                    enoughTime = true;
-                    if(imageCounter == module.preloadAssets.length) {
-                        loadModule();
-                    }
-                }, 750),
-                loadModule = function() {
-                    module.needsLoading = false;
-                    $("html").removeClass("loading");
-                    module.initialize();
-                }
-                $("html").addClass("loading");
-                assets = module.preloadAssets
+                var el, imageCounter = 0, enoughTime = false, assets = module.preloadAssets;
 
                 if($(window).width() < mobile_landscape) {
                     assets = module.mobilePreloadAssets;
                 }
+                
+                var loaderTimeoutID = setTimeout(function() {
+                        enoughTime = true;
+                        if(imageCounter == assets.length) {
+                            loadModule();
+                        }
+                    }, 750),
+                    loadModule = function() {
+                        module.needsLoading = false;
+                        $("html").removeClass("loading");
+                        module.initialize();
+                    };
+
+                $("html").addClass("loading");
 
                 assets.forEach(function(d) {
                     el = document.createElement('img');
@@ -57,11 +58,11 @@ require(['jquery', 'router', 'loader'], function($, Router, Loader) {
                     $("#stash").append(el);
                     $(el).on("load", function() {
                         imageCounter++;
-                        if(imageCounter == module.preloadAssets.length && enoughTime == true) {
+                        if(imageCounter == assets.length && enoughTime == true) {
                             loadModule();
                         }
-                    })
-                })
+                    });
+                });
             } else {
                 $("html").removeClass("loading");
                 module.initialize();
