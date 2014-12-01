@@ -11,11 +11,11 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, fugit.",
 				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, nobis inventore id sequi non quam mollitia natus eum assumenda placeat."
 			},
-			nativePaneWidth = 3003,
+			nativePaneWidth = 1000,
 			windowWidth = $(window).width(),
 			adjustedWindowWidth = windowWidth < 2000 ? windowWidth : 2000,
-			widthScale = d3.scale.linear().domain([320, 2000]).range([3.0, 1.5]).clamp(true),
-			paneHeightRatio = 0.18748,
+			widthScale = d3.scale.linear().domain([320, 2000]).range([1.0, 0.5]).clamp(true),
+			paneHeightRatio = 0.563,
 			paneWidth = Math.round(widthScale(windowWidth) * adjustedWindowWidth),
 			spinState = {
 				pressed: false,
@@ -45,8 +45,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					currentFrame: 0,
 					width: 23.3,
 					heightRatio: 2.69,
-					left: 0.395,
-					top: 0.601
+					left: 0.185,
+					top: 0.6
 				},
 				{
 					id: "phone",
@@ -54,7 +54,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					currentFrame: 0,
 					width: 134,
 					heightRatio: 0.3134,
-					left: 0.458, 
+					left: 0.372, 
 					top: 0.852
 				}
 			],
@@ -96,7 +96,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			$("#project-spinny .project-contents").css("height", Math.round(paneWidth * paneHeightRatio));
 
 			var animate = function() {
-				if(counter % 4 == 0) {
+				if(counter % 5 == 0) {
 					animatables.forEach(function(animatable) {
 						$("[data-animatable=" + animatable.id + "]").css("background-position", (animatable.currentFrame * (100 / (animatable.length - 1))) + "%");
 

@@ -180,11 +180,21 @@
   -o-background-size: 100% auto;
   -webkit-background-size: 100% auto;
   background-size: 100% auto;
-  background-position: -33.33% 0;
-  background-image: url(../images/project_spinny/tryptich_composite.jpg);
+  background-image: url(../images/project_spinny/main_pane.jpg);
   position: absolute;
   left: 50%;
   background-repeat: no-repeat;
+}
+#project-spinny #triptych:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background: white;
+  left: -9px;
+  top: -9px;
+  right: -9px;
+  bottom: -7px;
+  border: solid 3px #00303e;
 }
 #project-spinny #triptych #spinny_globe {
   position: absolute;
@@ -197,9 +207,9 @@
   background-repeat: no-repeat;
   position: absolute;
   z-index: 100;
-  left: 43.57%;
-  top: 80.5%;
-  width: 7.7%;
+  left: 30.687%;
+  top: 80.6%;
+  width: 23%;
   height: 18.5%;
 }
 
