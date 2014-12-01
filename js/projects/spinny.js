@@ -37,7 +37,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				counter: 0
 			},
 			globeConfig = {
-				length: 122,
+				length: 61,
 				width: 360,
 				heightRatio: 1,
 				left: 0.5182,
