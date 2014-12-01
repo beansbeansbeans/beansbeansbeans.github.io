@@ -120,7 +120,6 @@
 	#triptych {
 		margin: none;
 		@include background-size(100% auto);
-		background-image: url(../images/project_spinny/main_pane.jpg);
 		position: absolute;
 		left: 50%;
 		background-repeat: no-repeat;
@@ -142,7 +141,6 @@
 			background-repeat: no-repeat;
 		}
 		#phone_mask {
-			background-image: url(../images/project_spinny/mask.png);
 			background-repeat: no-repeat;
 			position: absolute;
 			z-index: 100;
@@ -152,7 +150,6 @@
 			height: 18.5%;
 		}
 		#globe_mask {
-			background-image: url(../images/project_spinny/globe_mask.png);
 			background-repeat: no-repeat;
 			position: absolute;
 			z-index: 100;

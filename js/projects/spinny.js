@@ -5,7 +5,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			"project_spinny/globe_sprite.jpg"
 		],
 		mobilePreloadAssets: [
-			"project_spinny/globe_sprite.jpg"
+			"project_spinny/globe_sprite_mobile.jpg"
 		],
 		initialize: function() {
 			var data = {
@@ -63,7 +63,13 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					top: 0.852
 				}
 			],
-			counter = 0;
+			counter = 0,
+			fileSuffix = "";
+
+			if($(window).width() < mobile_landscape) {
+                fileSuffix = "_mobile";
+                nativePaneWidth = 625;
+            }
 
 			$("#view").html(projectTemplate(data));
 
@@ -71,8 +77,12 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				globe = $("#spinny_globe"),
 				container = $("#project-spinny #triptych");
 
+			container.css("background-image", "url(../images/project_spinny/main_pane" + fileSuffix + ".jpg)");
+			$("#phone_mask").css("background-image", "url(../images/project_spinny/mask" + fileSuffix + ".png)");
+			$("#globe_mask").css("background-image", "url(../images/project_spinny/globe_mask" + fileSuffix + ".png)");
+
 			globe.css({
-				backgroundImage: "url(../images/project_spinny/globe_sprite.jpg)",
+				backgroundImage: "url(../images/project_spinny/globe_sprite" + fileSuffix + ".jpg)",
 				backgroundSize: ((paneWidth / nativePaneWidth) * globeConfig.width * globeConfig.length) + "px auto",
 				width: 100 * (globeConfig.width / nativePaneWidth) + "%",
 				height: 100 * ((globeConfig.width * globeConfig.heightRatio) / (nativePaneWidth * paneHeightRatio)) + "%",
@@ -86,14 +96,14 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					left: (animatable.left * 100) + "%",
 					top: (animatable.top * 100) + "%",
 					backgroundSize: ((paneWidth / nativePaneWidth) * animatable.width * animatable.length) + "px auto",
-					backgroundImage: "url(../images/project_spinny/" + animatable.id + "_sprite.jpg)",
+					backgroundImage: "url(../images/project_spinny/" + animatable.id + "_sprite" + fileSuffix + ".jpg)",
 					width: 100 * (animatable.width / nativePaneWidth) + "%",
 					height: 100 * ((animatable.width * animatable.heightRatio) / (nativePaneWidth * paneHeightRatio)) + "%"
 				});
 			});
 
-			$("#phone_mask").css("background-size", ((paneWidth / nativePaneWidth) * 197) + "px auto");
-			$("#globe_mask").css("background-size", ((paneWidth / nativePaneWidth) * 511) + "px auto");
+			$("#phone_mask").css("background-size", ((paneWidth / nativePaneWidth) * (0.23176 * nativePaneWidth)) + "px auto");
+			$("#globe_mask").css("background-size", ((paneWidth / nativePaneWidth) * (0.60118 * nativePaneWidth)) + "px auto");
 
 			mainPane.css({
 				width: paneWidth,
