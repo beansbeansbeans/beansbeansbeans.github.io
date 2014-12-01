@@ -16,7 +16,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				caption: "Made with JavaScript.",
 				description: "I wanted to create an interactive photo-realistic scene."
 			},
-			nativePaneWidth = 1000,
+			nativePaneWidth = 850,
 			windowWidth = $(window).width(),
 			adjustedWindowWidth = windowWidth < 2000 ? windowWidth : 2000,
 			widthScale = d3.scale.linear().domain([320, 2000]).range([1.0, 0.4]).clamp(true),
@@ -38,7 +38,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			},
 			globeConfig = {
 				length: 61,
-				width: 360,
+				width: 306,
 				heightRatio: 1,
 				left: 0.5182,
 				top: 0.044
@@ -48,7 +48,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					id: "candle",
 					length: 35,
 					currentFrame: 0,
-					width: 23.3,
+					width: 19.83,
 					heightRatio: 2.69,
 					left: 0.185,
 					top: 0.6005
@@ -57,7 +57,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					id: "phone",
 					length: 102,
 					currentFrame: 0,
-					width: 134,
+					width: 113.9,
 					heightRatio: 0.3134,
 					left: 0.372, 
 					top: 0.852
@@ -92,8 +92,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				});
 			});
 
-			$("#phone_mask").css("background-size", ((paneWidth / nativePaneWidth) * 232) + "px auto");
-			$("#globe_mask").css("background-size", ((paneWidth / nativePaneWidth) * 601) + "px auto");
+			$("#phone_mask").css("background-size", ((paneWidth / nativePaneWidth) * 197) + "px auto");
+			$("#globe_mask").css("background-size", ((paneWidth / nativePaneWidth) * 511) + "px auto");
 
 			mainPane.css({
 				width: paneWidth,
