@@ -198,6 +198,7 @@
 }
 #project-spinny #triptych #spinny_globe {
   position: absolute;
+  display: none;
 }
 #project-spinny #triptych [data-animatable] {
   background-repeat: no-repeat;
