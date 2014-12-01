@@ -6,10 +6,10 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			var data = {
 				identifier: "spinny",
 				title: "Spinny",
-				blurb: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, voluptatibus.",
+				blurb: "Spin the globe.",
 				projectContents: '<div id="triptych"><div id="spinny_globe"></div><div id="phone_mask"></div><div id="globe_mask"></div></div>',
-				caption: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, fugit.",
-				description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, nobis inventore id sequi non quam mollitia natus eum assumenda placeat."
+				caption: "Made with JavaScript.",
+				description: "I wanted to create an interactive photo-realistic scene."
 			},
 			nativePaneWidth = 1000,
 			windowWidth = $(window).width(),
