@@ -139,6 +139,16 @@
 			width: 23%;
 			height: 18.5%;
 		}
+		#globe_mask {
+			background-image: url(../images/project_spinny/globe_mask.png);
+			background-repeat: no-repeat;
+			position: absolute;
+			z-index: 100;
+			width: 61.6%;
+			height: 71%;
+			left: 30.2%;
+			top: 1.5%;
+		}
 	}
 }
 
