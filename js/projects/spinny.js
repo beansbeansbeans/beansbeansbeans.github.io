@@ -119,7 +119,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			var scroll = function(x) {
 				spinState.offset = x;
-				globe.css("background-position", ((x % globeConfig.length) * (100 / (globeConfig.length - 1))) + "%");
+				globe.css("background-position", ((((x % globeConfig.length) * (100 / (globeConfig.length - 1)))) % 100) + "%");
 			}
 
 			var autoScroll = function() {
