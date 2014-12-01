@@ -38,7 +38,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			},
 			globeConfig = {
 				length: 61,
-				width: 306,
+				width: 0.36,
 				heightRatio: 1,
 				left: 0.5182,
 				top: 0.044
@@ -48,7 +48,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					id: "candle",
 					length: 35,
 					currentFrame: 0,
-					width: 19.83,
+					width: 0.02333,
 					heightRatio: 2.69,
 					left: 0.185,
 					top: 0.6005
@@ -57,7 +57,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					id: "phone",
 					length: 102,
 					currentFrame: 0,
-					width: 113.9,
+					width: 0.134,
 					heightRatio: 0.3134,
 					left: 0.372, 
 					top: 0.852
@@ -66,9 +66,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			counter = 0,
 			fileSuffix = "";
 
-			if($(window).width() < mobile_landscape) {
+			if($(window).width() <= mobile_landscape) {
                 fileSuffix = "_mobile";
-                nativePaneWidth = 625;
+                nativePaneWidth = 600;
             }
 
 			$("#view").html(projectTemplate(data));
@@ -83,9 +83,9 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			globe.css({
 				backgroundImage: "url(../images/project_spinny/globe_sprite" + fileSuffix + ".jpg)",
-				backgroundSize: ((paneWidth / nativePaneWidth) * globeConfig.width * globeConfig.length) + "px auto",
-				width: 100 * (globeConfig.width / nativePaneWidth) + "%",
-				height: 100 * ((globeConfig.width * globeConfig.heightRatio) / (nativePaneWidth * paneHeightRatio)) + "%",
+				backgroundSize: ((paneWidth / nativePaneWidth) * (globeConfig.width * nativePaneWidth) * globeConfig.length) + "px auto",
+				width: 100 * ((globeConfig.width * nativePaneWidth) / nativePaneWidth) + "%",
+				height: 100 * (((globeConfig.width * nativePaneWidth) * globeConfig.heightRatio) / (nativePaneWidth * paneHeightRatio)) + "%",
 				top: (globeConfig.top * 100) + "%",
 				left: (globeConfig.left * 100) + "%"
 			});
@@ -95,10 +95,10 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					position: "absolute",
 					left: (animatable.left * 100) + "%",
 					top: (animatable.top * 100) + "%",
-					backgroundSize: ((paneWidth / nativePaneWidth) * animatable.width * animatable.length) + "px auto",
+					backgroundSize: ((paneWidth / nativePaneWidth) * (animatable.width * nativePaneWidth) * animatable.length) + "px auto",
 					backgroundImage: "url(../images/project_spinny/" + animatable.id + "_sprite" + fileSuffix + ".jpg)",
-					width: 100 * (animatable.width / nativePaneWidth) + "%",
-					height: 100 * ((animatable.width * animatable.heightRatio) / (nativePaneWidth * paneHeightRatio)) + "%"
+					width: 100 * ((animatable.width * nativePaneWidth) / nativePaneWidth) + "%",
+					height: 100 * (((animatable.width * nativePaneWidth) * animatable.heightRatio) / (nativePaneWidth * paneHeightRatio)) + "%"
 				});
 			});
 
