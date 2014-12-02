@@ -16,7 +16,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				blurb: "Spin the globe.",
 				projectContents: '<div id="triptych"><div id="spinny_globe"></div><div id="phone_mask"></div><div id="globe_mask"></div></div>',
 				caption: "Built with JavaScript.",
-				description: "I wanted to make an interactive photorealistic scene."
+				description: "I wanted to make an interactive photorealistic scene. In this scene the globe is interactive - the user can spin it by dragging over it. I thought the presence of other animated elements (the candle and the phone) would enhance the scene by making the user feel like they were interacting with a video."
 			},
 			nativePaneWidth = 850,
 			windowWidth = $(window).width(),
