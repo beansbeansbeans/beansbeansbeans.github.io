@@ -1,3 +1,5 @@
+// the problem here is if the user drags their mouse out of the photo, release is not called
+
 define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 	var spinny = {
 		needsLoading: true,
@@ -218,35 +220,39 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				return false;
 			}
 
-			var release = function(e) {
-				spinState.pressed = false;
+			this.release = function(e) {
+				if(spinState.pressed) {
+					spinState.pressed = false;
 
-				clearInterval(spinState.ticker);
-				spinState.target = spinState.offset;
-				if(spinState.velocity > 2 || spinState.velocity < -2) {
-					spinState.amplitude = 0.25 * spinState.velocity;
-					spinState.target = spinState.offset + spinState.amplitude;
+					clearInterval(spinState.ticker);
+					spinState.target = spinState.offset;
+					if(spinState.velocity > 2 || spinState.velocity < -2) {
+						spinState.amplitude = 0.25 * spinState.velocity;
+						spinState.target = spinState.offset + spinState.amplitude;
+					}
+					spinState.amplitude = spinState.target - spinState.offset;
+					spinState.rafID = requestAnimationFrame(autoScroll);
+
+					e.preventDefault();
+					e.stopPropagation();
+					return false;
 				}
-				spinState.amplitude = spinState.target - spinState.offset;
-				spinState.rafID = requestAnimationFrame(autoScroll);
-
-				e.preventDefault();
-				e.stopPropagation();
-				return false;
 			}
 
 			if (typeof window.ontouchstart !== 'undefined') {
 	            container[0].addEventListener('touchstart', tap);
 	            container[0].addEventListener('touchmove', drag);
-	            container[0].addEventListener('touchend', release);
+	            window.addEventListener('touchend', this.release);
 	        } else {
 		        container[0].addEventListener('mousedown', tap);
 		        container[0].addEventListener('mousemove', drag);
-		        container[0].addEventListener('mouseup', release);
+		        window.addEventListener('mouseup', this.release);
 	        }
 		},
 		destroy: function() {
 			window.cancelAnimationFrame(this.rafID);
+			window.removeEventListener('touchend', this.release);
+			window.removeEventListener('mouseup', this.release);
 		}
 	};
 	return spinny;
