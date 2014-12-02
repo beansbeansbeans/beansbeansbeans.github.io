@@ -173,22 +173,93 @@
 				&[id="svg_left"] {
 					left: -10%;
 					top: -100%;
+					path {
+						@include animation(spinny-svg-left 1.5s 0.3s forwards);
+						stroke-dasharray: 250;
+						stroke-dashoffset: 250;
+					}
 				}
 				&[id="svg_right"] {
 					right: -10%;
 					top: 90%;
+					path {
+						@include animation(spinny-svg-right 1.5s 0.3s forwards);
+						stroke-dasharray: 300;
+						stroke-dashoffset: 300;
+					}
 				}
 			}
 			.cta {
+				opacity: 0;
 				@extend .large-text;
+				@include animation(spinny-cta 1.5s 0.3s forwards);
 			}
 			path {
+				opacity: 0;
 				stroke: $white;
 				fill: none;
 				stroke-width: 2px;
 				stroke-linecap: round;
 			}
 		}
+	}
+}
+
+@include keyframe(spinny-cta) {
+	0% {
+		opacity: 0;
+	}
+	25% {
+		opacity: 1;
+	}
+	85% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+@include keyframe(spinny-svg-left) {
+	0% {
+		opacity: 0;
+	}
+	25% {
+		opacity: 1;
+	}
+	55% {
+		stroke-dashoffset: 0;
+		opacity: 1;
+	}
+	85% {
+		opacity: 1;
+	}
+	100% {
+		stroke-dashoffset: 0;
+		opacity: 0;
+	}
+}
+
+@include keyframe(spinny-svg-right) {
+	0% {
+		opacity: 0;
+	}
+	20% {
+		opacity: 0;
+		stroke-dashoffset: 300;
+	}
+	50% {
+		opacity: 1;
+	}
+	75% {
+		stroke-dashoffset: 0;
+	}
+	85% {
+		opacity: 1;
+	}
+	100% {
+		stroke-dashoffset: 0;
+		opacity: 0;
 	}
 }
 

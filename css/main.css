@@ -251,17 +251,309 @@
   left: -10%;
   top: -100%;
 }
+#project-spinny #triptych #instructional svg[id="svg_left"] path {
+  -webkit-animation: spinny-svg-left 1.5s 0.3s forwards;
+  -moz-animation: spinny-svg-left 1.5s 0.3s forwards;
+  -o-animation: spinny-svg-left 1.5s 0.3s forwards;
+  animation: spinny-svg-left 1.5s 0.3s forwards;
+  stroke-dasharray: 250;
+  stroke-dashoffset: 250;
+}
 #project-spinny #triptych #instructional svg[id="svg_right"] {
   right: -10%;
   top: 90%;
 }
+#project-spinny #triptych #instructional svg[id="svg_right"] path {
+  -webkit-animation: spinny-svg-right 1.5s 0.3s forwards;
+  -moz-animation: spinny-svg-right 1.5s 0.3s forwards;
+  -o-animation: spinny-svg-right 1.5s 0.3s forwards;
+  animation: spinny-svg-right 1.5s 0.3s forwards;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+}
+#project-spinny #triptych #instructional .cta {
+  opacity: 0;
+  -webkit-animation: spinny-cta 1.5s 0.3s forwards;
+  -moz-animation: spinny-cta 1.5s 0.3s forwards;
+  -o-animation: spinny-cta 1.5s 0.3s forwards;
+  animation: spinny-cta 1.5s 0.3s forwards;
+}
 #project-spinny #triptych #instructional path {
+  opacity: 0;
   stroke: #fff9ef;
   fill: none;
   stroke-width: 2px;
   stroke-linecap: round;
 }
 
+@-webkit-keyframes spinny-cta {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+@-moz-keyframes spinny-cta {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+@-o-keyframes spinny-cta {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes spinny-cta {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes spinny-svg-left {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  55% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+@-moz-keyframes spinny-svg-left {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  55% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+@-o-keyframes spinny-svg-left {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  55% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+@keyframes spinny-svg-left {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  55% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+@-webkit-keyframes spinny-svg-right {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0;
+    stroke-dashoffset: 300;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  75% {
+    stroke-dashoffset: 0;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+@-moz-keyframes spinny-svg-right {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0;
+    stroke-dashoffset: 300;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  75% {
+    stroke-dashoffset: 0;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+@-o-keyframes spinny-svg-right {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0;
+    stroke-dashoffset: 300;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  75% {
+    stroke-dashoffset: 0;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+@keyframes spinny-svg-right {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0;
+    stroke-dashoffset: 300;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  75% {
+    stroke-dashoffset: 0;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
 #project-dancers {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
