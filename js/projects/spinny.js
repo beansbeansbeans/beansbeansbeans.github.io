@@ -14,7 +14,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				blurb: "Spin the globe.",
 				projectContents: '<div id="triptych"><div id="spinny_globe"></div><div id="phone_mask"></div><div id="globe_mask"></div></div>',
 				caption: "Made with JavaScript.",
-				description: "I wanted to create an interactive photo-realistic scene."
+				description: "I wanted to make an interactive photorealistic scene."
 			},
 			nativePaneWidth = 850,
 			windowWidth = $(window).width(),
