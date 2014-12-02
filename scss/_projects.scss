@@ -158,6 +158,37 @@
 			left: 30.284%;
 			top: 4.283%;
 		}
+		#instructional {
+			width: 44%;
+			height: 13%;
+			color: $white;
+			pointer-events: none;
+			position: absolute;
+			top: 31%;
+			right: 8%;			
+			z-index: 100;
+			svg {
+				overflow: visible;
+				position: absolute;
+				&[id="svg_left"] {
+					left: -10%;
+					top: -100%;
+				}
+				&[id="svg_right"] {
+					right: -10%;
+					top: 90%;
+				}
+			}
+			.cta {
+				@extend .large-text;
+			}
+			path {
+				stroke: $white;
+				fill: none;
+				stroke-width: 2px;
+				stroke-linecap: round;
+			}
+		}
 	}
 }
 

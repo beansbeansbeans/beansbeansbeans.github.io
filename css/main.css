@@ -233,6 +233,34 @@
   left: 30.284%;
   top: 4.283%;
 }
+#project-spinny #triptych #instructional {
+  width: 44%;
+  height: 13%;
+  color: #fff9ef;
+  pointer-events: none;
+  position: absolute;
+  top: 31%;
+  right: 8%;
+  z-index: 100;
+}
+#project-spinny #triptych #instructional svg {
+  overflow: visible;
+  position: absolute;
+}
+#project-spinny #triptych #instructional svg[id="svg_left"] {
+  left: -10%;
+  top: -100%;
+}
+#project-spinny #triptych #instructional svg[id="svg_right"] {
+  right: -10%;
+  top: 90%;
+}
+#project-spinny #triptych #instructional path {
+  stroke: #fff9ef;
+  fill: none;
+  stroke-width: 2px;
+  stroke-linecap: round;
+}
 
 #project-dancers {
   -webkit-touch-callout: none;
@@ -6058,12 +6086,12 @@ html {
   }
 }
 
-.large-text, #project-notes .canvas .text, nav li a .title {
+.large-text, #project-spinny #triptych #instructional .cta, #project-notes .canvas .text, nav li a .title {
   font-size: 2.25em;
   line-height: 1.25em;
 }
 @media (max-width: 640px) {
-  .large-text, #project-notes .canvas .text, nav li a .title {
+  .large-text, #project-spinny #triptych #instructional .cta, #project-notes .canvas .text, nav li a .title {
     font-size: 1.625em;
     line-height: 1.15385em;
   }

@@ -16,7 +16,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				identifier: "spinny",
 				title: "Spinny",
 				blurb: "Spin the globe.",
-				projectContents: '<div id="triptych"><div id="spinny_globe"></div><div id="phone_mask"></div><div id="globe_mask"></div></div>',
+				projectContents: '<div id="triptych"><div id="spinny_globe"></div><div id="phone_mask"></div><div id="globe_mask"></div><div id="instructional"><div class="cta">spin</div><svg id="svg_left"><path d="M69.4,71.9C-38.3,10.3,0.1-10.2,46.3,4.6"/></svg><svg id="svg_right"><path d="M91.2,0c42.3,34.6,58.3,96.2-84.1,16.2c-18.8-10.5,5.8,19.9,5.8,25.6S-0.3,16.7,4.5,13c2.6-1.9,16,0,26.3,0"/></svg></div></div>',
 				caption: "Built with JavaScript.",
 				description: "I wanted to make an interactive photorealistic scene. In this scene the globe is interactive - the user can spin it by dragging over it. I thought the presence of other animated elements (the candle and the phone) would enhance the scene by making the user feel like they were interacting with a video."
 			},
@@ -116,6 +116,16 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			});
 
 			$("#project-spinny .project-contents").css("height", Math.round(paneWidth * paneHeightRatio));
+
+			$("#project-spinny #svg_left").css({
+				width: (0.15 * paneWidth) + "px",
+				height: (0.25 * paneWidth * paneHeightRatio) + "px"
+			})[0].setAttribute("viewBox", "0 0 69 72");
+
+			$("#project-spinny #svg_right").css({
+				width: (0.23 * paneWidth) + "px",
+				height: (0.2 * paneWidth * paneHeightRatio) + "px"
+			})[0].setAttribute("viewBox", "0 0 121 55.4");
 
 			var animate = function() {
 				if(counter % 5 == 0) {
