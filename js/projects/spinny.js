@@ -178,10 +178,10 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 			var xpos = function(e) {
 		        if (e.targetTouches && (e.targetTouches.length >= 1)) {
-		            return e.targetTouches[0].clientX;
+		            return Math.round(0.25 * e.targetTouches[0].clientX);
 		        }
 
-		        return Math.round(0.8 * e.clientX);
+		        return Math.round(0.25 * e.clientX);
 		    }
 
 			var tap = function(e) {
@@ -222,7 +222,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				clearInterval(spinState.ticker);
 				spinState.target = spinState.offset;
 				if(spinState.velocity > 2 || spinState.velocity < -2) {
-					spinState.amplitude = 0.5 * spinState.velocity;
+					spinState.amplitude = 0.25 * spinState.velocity;
 					spinState.target = spinState.offset + spinState.amplitude;
 				}
 				spinState.amplitude = spinState.target - spinState.offset;
