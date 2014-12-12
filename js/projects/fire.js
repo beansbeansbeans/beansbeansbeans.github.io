@@ -9,12 +9,12 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				caption: "Built with JavaScript",
 				description: "This is a game."
 			},
-			numColumns = 10,
+			numColumns = 9,
 			numRows = 6,
 			widthFrame = 850,
 			widthOverHeight = 1.77,
-			numFrames = 2,
-			framesPerSecond = 10,
+			numFrames = 5,
+			framesPerSecond = 2,
 			cells = [];
 
 			$("#view").html(projectTemplate(data));
@@ -31,7 +31,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						width: cellWidth,
 						height: cellHeight,
 						backgroundPosition: (-j * cellWidth) + "px " + (-i * cellHeight) + "px"
-					});
+					}).attr("data-row", i).attr("data-column", j);
 
 					cells.push({
 						frame: 0,
@@ -39,6 +39,13 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 					});
 				}
 			}
+
+			frame.on("click", function(e) {
+				var row = +$(e.target).attr('data-row'),
+					column = +$(e.target).attr('data-column');
+
+				cells[parseInt((row * numColumns) + column)].direction = cells[parseInt((row * numColumns) + column)].direction * -1;
+			});
 
 			var rafCounter = 0,
 				cycle = function() {
@@ -48,7 +55,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 
 							cellEl.css("background-image", "url(../images/project_fire/" + cell.frame + ".jpg)");
 
-							cell.frame = (cell.frame + cell.direction) % numFrames;
+							cell.frame = (cell.frame + cell.direction + numFrames) % numFrames;
 						});
 					}
 					rafCounter++;
