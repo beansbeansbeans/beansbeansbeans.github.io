@@ -27,11 +27,15 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				var row = $("<div class='row'></div>");
 				row.appendTo(frame);
 				for(var j = 0; j < numColumns; j++) {
-					$("<div class='cell'></div>").appendTo(row).css({
+					var cell = $("<div class='cell'></div>");
+
+					cell.appendTo(row).css({
 						width: cellWidth,
 						height: cellHeight,
 						backgroundPosition: (-j * cellWidth) + "px " + (-i * cellHeight) + "px"
 					}).attr("data-row", i).attr("data-column", j);
+
+					$("<div class='indicator'></div>").appendTo(cell).css("transition", "transform " + 1000 / framesPerSecond + "ms linear")
 
 					cells.push({
 						frame: 0,
@@ -53,7 +57,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						cells.forEach(function(cell, cellIndex) {
 							var cellEl = frame.find(".row:eq(" + Math.floor(cellIndex / numColumns) + ")").find(".cell:eq(" + (cellIndex % numColumns) + ")");
 
-							cellEl.css("background-image", "url(../images/project_fire/" + cell.frame + ".jpg)");
+							cellEl.css("background-image", "url(../images/project_fire/" + cell.frame + ".jpg)").find(".indicator").css("transform", "translate3d(" + (cell.frame * cellWidth / (numFrames - 1)) + "px, 0, 0)");
 
 							cell.frame = (cell.frame + cell.direction + numFrames) % numFrames;
 						});

@@ -194,9 +194,21 @@
 #project-fire #frame .row .cell {
   display: inline-block;
   margin-bottom: 5px;
+  position: relative;
 }
 #project-fire #frame .row .cell:not(:last-of-type) {
   margin-right: 7px;
+}
+#project-fire #frame .row .cell .indicator {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background: #ec4911;
+  bottom: -5px;
+  left: -5px;
 }
 
 #project-spinny .project-contents {

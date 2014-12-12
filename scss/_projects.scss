@@ -121,8 +121,17 @@
 			.cell {
 				display: inline-block;
 				margin-bottom: 5px;
+				position: relative;
 				&:not(:last-of-type) {
 					margin-right: 7px;
+				}
+				.indicator {
+					position: absolute;
+					@include square(10px);
+					@include border-radius(50%);
+					background: $orange;
+					bottom: -5px;
+					left: -5px;
 				}
 			}
 		}
