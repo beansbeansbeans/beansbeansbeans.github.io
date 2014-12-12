@@ -113,6 +113,24 @@
 	}
 }
 
+#project-fire {
+	text-align: center;
+	#frame {
+		.row {
+			white-space: nowrap;
+			.cell {
+				display: inline-block;
+				border: solid 1px blue;
+				margin-bottom: 5px;
+				background-image: url(../images/project_fire/1.jpg);
+				&:not(:last-of-type) {
+					margin-right: 7px;
+				}
+			}
+		}
+	}
+}
+
 #project-spinny {
 	.project-contents {
 		white-space: nowrap;
