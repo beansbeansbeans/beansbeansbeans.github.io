@@ -102,22 +102,18 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 							var cellEl = frame.find(".row:eq(" + Math.floor(cellIndex / numColumns) + ")").find(".cell:eq(" + (cellIndex % numColumns) + ")");
 
 							if(cell.direction == 1) {
+								cellEl.find(".indicator").css("transform", "translate3d(" + (cell.frame * cellWidth / (numFrames - 1)) + "px, 0, 0)")
 								if(cell.frame == 0) {
 									cellEl.find(".indicator").css(animProp, rightAnimName + " " + (1000 / framesPerSecond) + "ms").css("transform", "none");
-								} else {
-									if(cell.frame == 1) {
-										cellEl.find(".indicator").css(animProp, "none");
-									}
-									cellEl.find(".indicator").css("transform", "translate3d(" + (cell.frame * cellWidth / (numFrames - 1)) + "px, 0, 0)")
+								} else if(cell.frame == 1) {
+									cellEl.find(".indicator").css(animProp, "none");
 								}
 							} else {
+								cellEl.find(".indicator").css("transform", "translate3d(-" + (((numFrames - 1) - cell.frame) * cellWidth / (numFrames - 1)) + "px, 0, 0)")
 								if(cell.frame == numFrames - 1) {
 									cellEl.find(".indicator").css(animProp, leftAnimName + " " + (1000 / framesPerSecond) + "ms").css("transform", "none");
-								} else {
-									if(cell.frame == numFrames - 2) {
-										cellEl.find(".indicator").css(animProp, "none");
-									}
-									cellEl.find(".indicator").css("transform", "translate3d(-" + (((numFrames - 1) - cell.frame) * cellWidth / (numFrames - 1)) + "px, 0, 0)")
+								} else if(cell.frame == numFrames - 2) {
+									cellEl.find(".indicator").css(animProp, "none");
 								}
 							}
 
