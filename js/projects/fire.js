@@ -48,7 +48,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 						width: cellWidth,
 						height: cellHeight,
 						backgroundPosition: (-j * cellWidth) + "px " + (-i * cellHeight) + "px"
-					}).attr("data-row", i).attr("data-column", j);
+					}).attr("data-row", i).attr("data-column", j).attr("data-direction", 1);
 
 					$("<div class='indicator'></div>").appendTo(cell).css("transition", "transform " + 1000 / framesPerSecond + "ms linear")
 
@@ -80,16 +80,18 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			style.textContent = style.innerHTML +
 				keyframeProp + " " + leftAnimName + ' {' +
 					'0% { ' + 
-						transformProp + ": translate3d(0, 0, 0); } " + 
+						transformProp + ": translate3d(-" + cellWidth + "px, 0, 0); } " + 
 					'50% { opacity: 0; ' +
-						transformProp + ": translate3d(0, 0, 0); } 51% {" +
-						transformProp + ": translate3d(" + cellWidth + "px, 0, 0) } 100% { opacity: 1; " +
-						transformProp + ": translate3d(" + cellWidth + "px, 0, 0) } }";
+						transformProp + ": translate3d(-" + cellWidth + "px, 0, 0); } 51% {" +
+						transformProp + ": translate3d(0, 0, 0) } 100% { opacity: 1; " +
+						transformProp + ": translate3d(0, 0, 0) } }";
 
 			frame.on("click", function(e) {
 				var row = +$(e.target).attr('data-row'),
 					column = +$(e.target).attr('data-column');
-				
+
+				$(e.target).attr("data-direction", cells[parseInt((row * numColumns) + column)].direction * -1);
+
 				cells[parseInt((row * numColumns) + column)].direction = cells[parseInt((row * numColumns) + column)].direction * -1;
 			});
 
@@ -115,7 +117,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 									if(cell.frame == numFrames - 2) {
 										cellEl.find(".indicator").css(animProp, "none");
 									}
-									cellEl.find(".indicator").css("transform", "translate3d(" + (cell.frame * cellWidth / (numFrames - 1)) + "px, 0, 0)")
+									cellEl.find(".indicator").css("transform", "translate3d(-" + (((numFrames - 1) - cell.frame) * cellWidth / (numFrames - 1)) + "px, 0, 0)")
 								}
 							}
 

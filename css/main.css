@@ -208,7 +208,12 @@
   border-radius: 50%;
   background: #ec4911;
   bottom: -5px;
+}
+#project-fire #frame .row .cell[data-direction="1"] .indicator {
   left: -5px;
+}
+#project-fire #frame .row .cell[data-direction="-1"] .indicator {
+  left: calc(100% - 5px);
 }
 
 #project-spinny .project-contents {

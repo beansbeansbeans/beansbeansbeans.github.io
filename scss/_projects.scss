@@ -131,7 +131,12 @@
 					@include border-radius(50%);
 					background: $orange;
 					bottom: -5px;
+				}
+				&[data-direction="1"] .indicator {
 					left: -5px;
+				}
+				&[data-direction="-1"] .indicator {
+					left: calc(100% - 5px);
 				}
 			}
 		}
