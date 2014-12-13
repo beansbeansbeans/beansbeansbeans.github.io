@@ -409,6 +409,8 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			this.timers.forEach(function(id) {
 				clearTimeout(id);
 			});
+
+			document.querySelector("style").innerHTML = "";
 		}
 	};
 
