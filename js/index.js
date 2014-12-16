@@ -64,7 +64,9 @@ require(['jquery', 'router', 'loader'], function($, Router, Loader) {
                     });
                 });
             } else {
-                $("html").removeClass("loading");
+                if(!module.selfLoading) {
+                    $("html").removeClass("loading");
+                }
                 module.initialize();
             }
             $(document).scrollTop(0);

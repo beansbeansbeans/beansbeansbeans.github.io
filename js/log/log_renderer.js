@@ -169,6 +169,35 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
             this.letterCtx.fill();
         },
         renderVis: function() {
+
+            // test
+            
+            var request = new XMLHttpRequest();
+
+            request.open('GET', "audio/pops.mp3", true);
+            request.responseType = 'arraybuffer';
+            request.onload = function() {
+                audioCtx.decodeAudioData(request.response, function(buffer) {
+                    scanSoundBuffer = buffer;
+        
+                    var source = audioCtx.createBufferSource();
+                    source.buffer = scanSoundBuffer;
+                    source.connect(audioCtx.destination);
+                    source.start(0);
+
+                    ticker.tick();
+
+                    source.connect(analyser);
+                    analyser.connect(audioCtx.destination);
+
+                    this.requestID = requestAnimationFrame(drawWave);
+                });
+            };
+
+            request.send();
+
+            // end test
+
             var canvas = $("#fft"),
                 ctx = canvas[0].getContext('2d'),
                 counter = 0,
@@ -188,13 +217,6 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
             ctx.lineWidth = 8;
             ctx.strokeStyle = "#fff9ef";
 
-            audio.src = "audio/" + this.id + ".ogg";
-            audio.controls = true;
-            audio.preload = true;
-            audio.autoplay = true;
-
-            $("#audio").append(audio);
-
             $("#controls #toggler").text("pause");
 
             $("#controls #toggler").on("click", function() {
@@ -209,13 +231,6 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
                     ticker.pause();
                 }
             });
-
-            ticker.tick();
-
-            source.connect(analyser);
-            analyser.connect(audioCtx.destination);
-
-            this.requestID = requestAnimationFrame(drawWave);
 
             function drawWave() {
                 if(counter%2 == 0) {

@@ -13,11 +13,11 @@ http.createServer(function(request, response) {
 			if (fs.statSync(filename).isDirectory()) filename += '/index.html';
 
 			fs.readFile(filename, "binary", function(err, file) {
-				if(request.url.indexOf(".ogg") > -1 ) {
+				if(request.url.indexOf(".mp3") > -1 ) {
 					var filePath = path.join(__dirname, request.url);
 				    var stat = fs.statSync(filePath);
 					response.writeHead(200, {
-						"Content-Type": "audio/ogg",
+						"Content-Type": "audio/mp3",
 						"Content-Length": stat.size
 					});
 					var readStream = fs.createReadStream(filePath);
