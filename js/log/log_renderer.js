@@ -35,7 +35,8 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
                 this.overrides = data.overrides;
             }
 
-            var wordXStretch = 0.65; // % of window width taken up by words
+            var widthScale = d3.scale.linear().domain([400, 2000]).range([0.95, 0.6]).clamp(true);
+            var wordXStretch = widthScale($(window).width()); // % of window width taken up by words
             this.id = data.title;
             length = data.length;
             $("#controls #time .total").text(Math.floor(length / 60) + ":" + ((Math.floor(length % 60) < 10) ? "0" + Math.floor(length % 60) : Math.floor(length % 60)));
