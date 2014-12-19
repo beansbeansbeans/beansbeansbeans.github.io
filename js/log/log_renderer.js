@@ -21,10 +21,11 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
             }
         })(),
         length,
-        audio = new Audio(),
+        startedAt,
+        buffer,
+        pausedAt = 0,
         audioCtx = window.webkitAudioContext ? new webkitAudioContext() : new AudioContext();
         analyser = audioCtx.createAnalyser(),
-        source = audioCtx.createMediaElementSource(audio),
         colors = ["#2BBFBD", "#F2B33D", "#F29B30", "#F22E2E", "#F2385A", "#F5A503", "#56D9CD", "#3AA1BF", "#FC4349", "#ec4911"];
 
     var renderer = {
@@ -169,20 +170,17 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
             this.letterCtx.fill();
         },
         renderVis: function() {
-
-            // test
-            
             var request = new XMLHttpRequest();
 
             request.open('GET', "audio/pops.mp3", true);
             request.responseType = 'arraybuffer';
             request.onload = function() {
-                audioCtx.decodeAudioData(request.response, function(buffer) {
-                    scanSoundBuffer = buffer;
-        
-                    var source = audioCtx.createBufferSource();
-                    source.buffer = scanSoundBuffer;
+                audioCtx.decodeAudioData(request.response, function(response) {  
+                    buffer = response;      
+                    source = audioCtx.createBufferSource();
+                    source.buffer = buffer;
                     source.connect(audioCtx.destination);
+                    startedAt = Date.now();
                     source.start(0);
 
                     ticker.tick();
@@ -195,8 +193,6 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
             };
 
             request.send();
-
-            // end test
 
             var canvas = $("#fft"),
                 ctx = canvas[0].getContext('2d'),
@@ -223,18 +219,27 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
                 isPlaying = !isPlaying;
                 if(isPlaying) {
                     $("#controls #toggler").text("pause");
-                    audio.play();
+
+                    source = audioCtx.createBufferSource();
+                    source.buffer = buffer;
+                    source.connect(audioCtx.destination);
+                    source.connect(analyser);
+                    analyser.connect(audioCtx.destination);
+                    startedAt = Date.now() - pausedAt;
+                    source.start(0, pausedAt / 1000);
+
                     ticker.tick();
                 } else {
                     $("#controls #toggler").text("play");
-                    audio.pause();
+                    source.stop(0);
+                    pausedAt = Date.now() - startedAt;
                     ticker.pause();
                 }
             });
 
             function drawWave() {
                 if(counter%2 == 0) {
-                    var freqByteData = new Uint8Array(analyser.frequencyBinCount);
+                    var freqByteData = new Uint8Array(analyser.frequencyBinCount),
                         buffer = 10,
                         bottomBuffer = Math.floor(self.canvasHeight * 0.2),
                         space = 5,
