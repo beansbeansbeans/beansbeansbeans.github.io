@@ -20,6 +20,7 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
                 }
             }
         })(),
+        iOS = ( navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false ),
         length,
         startedAt,
         buffer,
@@ -176,19 +177,26 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
             request.open('GET', "audio/" + this.id + ".mp3", true);
             request.responseType = 'arraybuffer';
             request.onload = function() {
-                audioCtx.decodeAudioData(request.response, function(response) { 
+                audioCtx.decodeAudioData(request.response, function(response) {
                     $("html").removeClass("loading"); 
                     buffer = response;      
                     source = audioCtx.createBufferSource();
                     source.buffer = buffer;
                     source.connect(audioCtx.destination);
-                    startedAt = Date.now();
-                    source.start(0);
 
-                    ticker.tick();
+                    if(!iOS) {
+                        isPlaying = true;
+                        startedAt = Date.now();
+                        source.start(0);
 
-                    source.connect(analyser);
-                    analyser.connect(audioCtx.destination);
+                        ticker.tick();
+
+                        source.connect(analyser);
+                        analyser.connect(audioCtx.destination);
+                    } else {
+                        isPlaying = false;
+                        $("#controls #toggler").text("play");
+                    }
 
                     this.requestID = requestAnimationFrame(drawWave);
                 });
@@ -200,7 +208,7 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
                 ctx = canvas[0].getContext('2d'),
                 counter = 0,
                 self = this,
-                isPlaying = true;
+                isPlaying;
 
             canvas.css("background-color", colors[Math.floor(Math.random() * colors.length)]);
 
