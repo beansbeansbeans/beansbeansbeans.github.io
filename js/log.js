@@ -60,10 +60,10 @@ define(['templates/log_index'], function(logIndex) {
 			title: "posterboard",
 			description: "September 30, 2014"
 		},
-		// {
-		// 	title: "video",
-		// 	description: "September 29, 2014"
-		// },
+		{
+			title: "video",
+			description: "September 29, 2014"
+		},
 		{
 			title: "boyhood",
 			description: "September 22, 2014"

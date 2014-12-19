@@ -1,5 +1,6 @@
 define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRenderer) {
     var miranda = {
+        selfLoading: true,
         initialize: function() {
             var data = {
                 title: "miranda",

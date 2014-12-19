@@ -74,6 +74,7 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
             window.cancelAnimationFrame(this.requestID);
             ticker.pause();
             ticker.setPosition(0);
+            source.stop(0);
             this.overrides = [];
         },
         drawSVGInCanvas: function(letters) {
@@ -172,10 +173,11 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
         renderVis: function() {
             var request = new XMLHttpRequest();
 
-            request.open('GET', "audio/pops.mp3", true);
+            request.open('GET', "audio/" + this.id + ".mp3", true);
             request.responseType = 'arraybuffer';
             request.onload = function() {
-                audioCtx.decodeAudioData(request.response, function(response) {  
+                audioCtx.decodeAudioData(request.response, function(response) { 
+                    $("html").removeClass("loading"); 
                     buffer = response;      
                     source = audioCtx.createBufferSource();
                     source.buffer = buffer;

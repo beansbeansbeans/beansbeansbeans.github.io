@@ -1,5 +1,6 @@
 define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRenderer) {
     var starbucks = {
+        selfLoading: true,
         initialize: function() {
             var data = {
                 title: "starbucks",
