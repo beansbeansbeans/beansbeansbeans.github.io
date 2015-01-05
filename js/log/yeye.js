@@ -10,7 +10,7 @@ define(['templates/log_detail', 'log/log_renderer'], function(logTemplate, logRe
                         width: 1365
                     }
                 ],
-                length: 58,
+                length: 42,
                 detail: "A stressful day",
                 date: "December 10, 2014",
                 logContents: ""
