@@ -258,7 +258,7 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
                         numBars = Math.round(self.canvasWidth / buffer),
                         ptsArr = [];
 
-                    analyser.getByteFrequencyData(freqByteData),
+                    analyser.getByteFrequencyData(freqByteData);
 
                     ctx.clearRect(0, 0, self.canvasWidth, self.canvasHeight);
 
