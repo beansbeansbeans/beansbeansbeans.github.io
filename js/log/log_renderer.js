@@ -179,7 +179,6 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
             request.responseType = 'arraybuffer';
             request.onload = function() {
                 audioCtx.decodeAudioData(request.response, function(response) {
-                    $("html").removeClass("loading"); 
                     buffer = response;      
                     source = audioCtx.createBufferSource();
                     source.buffer = buffer;
@@ -199,6 +198,7 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
                         $("#controls #toggler").text("play");
                     }
 
+                    $("html").removeClass("loading"); 
                     this.requestID = requestAnimationFrame(drawWave);
                 });
             };
