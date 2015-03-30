@@ -5,6 +5,10 @@ define(['templates/log_index'], function(logIndex) {
 			description: "March 22, 2015"
 		},
 		{
+			title: "pushpop",
+			description: "February 20, 2015"
+		},
+		{
 			title: "running",
 			description: "January 12, 2015"
 		},
