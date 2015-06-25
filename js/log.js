@@ -5,6 +5,10 @@ define(['templates/log_index'], function(logIndex) {
 			description: "June 13, 2015"
 		},
 		{
+			title: "okcupid",
+			description: "May 8, 2015"
+		},
+		{
 			title: "weights",
 			description: "May 1, 2015"
 		},
