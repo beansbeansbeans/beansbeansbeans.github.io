@@ -5,6 +5,32 @@
 	.title {
 		text-transform: lowercase;
 	}
+	.slider {
+		.label {
+			font-family: Brandon;
+			color: #888;
+			text-transform: lowercase;
+			font-style: italic;
+			font-size: 26px;
+			display: inline-block;
+		}
+		.bar {
+			position: relative;
+			display: inline-block;
+		  width: 120px;
+		  @include background-image(linear-gradient(to right, rgba($orange, 0.1), rgba(red, 0.1)));
+		  background-image: rgba($orange, 0.1);
+		  height: 20px;
+		  vertical-align: top;
+		  margin-left: 5px;
+		  .highlight {
+		  	position: absolute;
+				width: 7px;
+				height: 100%;
+				background: $orange;
+		  }
+		}
+	}
 	.canvas-wrapper {
 		@include leader(10);
 		@include trailer(5);

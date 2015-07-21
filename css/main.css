@@ -6334,6 +6334,32 @@
 .log .title {
   text-transform: lowercase;
 }
+.log .slider .label {
+  font-family: Brandon;
+  color: #888;
+  text-transform: lowercase;
+  font-style: italic;
+  font-size: 26px;
+  display: inline-block;
+}
+.log .slider .bar {
+  position: relative;
+  display: inline-block;
+  width: 120px;
+  background-image: -moz-linear-gradient(left, rgba(236, 73, 17, 0.1), rgba(255, 0, 0, 0.1));
+  background-image: -webkit-linear-gradient(left, rgba(236, 73, 17, 0.1), rgba(255, 0, 0, 0.1));
+  background-image: linear-gradient(to right, rgba(236, 73, 17, 0.1), rgba(255, 0, 0, 0.1));
+  background-image: rgba(236, 73, 17, 0.1);
+  height: 20px;
+  vertical-align: top;
+  margin-left: 5px;
+}
+.log .slider .bar .highlight {
+  position: absolute;
+  width: 7px;
+  height: 100%;
+  background: #ec4911;
+}
 .log .canvas-wrapper {
   margin-top: 3.125em;
   margin-bottom: 1.5625em;
