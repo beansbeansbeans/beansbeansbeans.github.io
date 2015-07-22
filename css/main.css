@@ -6369,10 +6369,14 @@
   margin-left: auto;
   margin-right: auto;
   position: relative;
+}
+.log .canvas-wrapper canvas {
   -moz-transform: scale(0.5);
   -ms-transform: scale(0.5);
   -webkit-transform: scale(0.5);
   transform: scale(0.5);
+  transform-origin: top left;
+  -webkit-transform-origin: top left;
 }
 .log #fft {
   background: #ec4911;

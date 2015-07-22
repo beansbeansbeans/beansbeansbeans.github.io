@@ -58,19 +58,13 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
                 return prev + letterWidth;
             }, 0);
 
-            var transformOriginX = parseInt(($(window).width() - (wordXStretch * $(window).width())), 10) + "px";
-            $(".canvas-wrapper").css({
-                mozTransformOrigin: transformOriginX + " 0px",
-                webkitTransformOrigin: transformOriginX + " 0px",
-                transformOrigin: transformOriginX + " 0px"
-            });
-
             this.scaleFactor = (this.canvasWidth / naturalWordWidth).toFixed(3);
 
             this.canvasHeight = glyphs.height * this.scaleFactor * 1.5;
             this.magnitudeScale = d3.scale.linear().domain([350, 650]).range([1, 2])(this.canvasHeight).toFixed(2);
 
             document.querySelector(".header").style.width = (wordXStretch * 100) + "%";
+            document.querySelector(".header").style.paddingRight = (this.canvasWidth / 150) + 'px';
 
             this.renderLetters();
             this.renderVis();
@@ -144,7 +138,7 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
         },
         renderLetters: function() {
             $(".canvas-wrapper").css({
-                width: this.canvasWidth,
+                width: this.canvasWidth / 2,
                 height: this.canvasHeight / 2
             });
 

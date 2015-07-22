@@ -40,7 +40,11 @@
 		margin-left: auto;
 		margin-right: auto;
 		position: relative;
-		@include transform(scale(0.5));
+		canvas {
+			@include transform(scale(0.5));
+			transform-origin: top left;
+			-webkit-transform-origin: top left;
+		}
 	}
 	#fft {
 		background: $orange;
