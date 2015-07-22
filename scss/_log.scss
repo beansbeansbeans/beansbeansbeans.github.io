@@ -2,6 +2,9 @@
 	.header .blurb {
 		@extend .body-large-text;
 	}
+	.header {
+		text-align: right;
+	}
 	.title {
 		text-transform: lowercase;
 	}

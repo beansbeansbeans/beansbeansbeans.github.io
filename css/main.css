@@ -6331,6 +6331,9 @@
   stroke-opacity: 1;
 }
 
+.log .header {
+  text-align: right;
+}
 .log .title {
   text-transform: lowercase;
 }

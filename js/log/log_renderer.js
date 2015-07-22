@@ -37,6 +37,7 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
 
             var widthScale = d3.scale.linear().domain([400, 2000]).range([0.95, 0.6]).clamp(true);
             var wordXStretch = widthScale($(window).width()); // % of window width taken up by words
+
             this.id = data.title;
             length = data.length;
             $("#controls #time .total").text(Math.floor(length / 60) + ":" + ((Math.floor(length % 60) < 10) ? "0" + Math.floor(length % 60) : Math.floor(length % 60)));
@@ -55,7 +56,7 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
                 }
 
                 return prev + letterWidth;
-            }, 0) + 500;
+            }, 0);
 
             var transformOriginX = parseInt(($(window).width() - (wordXStretch * $(window).width())), 10) + "px";
             $(".canvas-wrapper").css({
@@ -68,6 +69,8 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
 
             this.canvasHeight = glyphs.height * this.scaleFactor * 1.5;
             this.magnitudeScale = d3.scale.linear().domain([350, 650]).range([1, 2])(this.canvasHeight).toFixed(2);
+
+            document.querySelector(".header").style.width = (wordXStretch * 100) + "%";
 
             this.renderLetters();
             this.renderVis();
@@ -165,7 +168,7 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
             this.letterCtx.lineTo(0, this.canvasHeight);
             this.letterCtx.lineTo(this.canvasWidth, this.canvasHeight);
 
-            this.letterCtx.translate(250 * this.scaleFactor, glyphs.height * this.scaleFactor + 0.5*(this.canvasHeight - (glyphs.height * this.scaleFactor)));
+            this.letterCtx.translate(0, glyphs.height * this.scaleFactor + 0.5*(this.canvasHeight - (glyphs.height * this.scaleFactor)));
             this.letterCtx.scale(this.scaleFactor, -this.scaleFactor);
 
             this.drawSVGInCanvas(this.id);
