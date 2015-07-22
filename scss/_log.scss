@@ -35,8 +35,7 @@
 		}
 	}
 	.canvas-wrapper {
-		@include leader(10);
-		@include trailer(5);
+		@include leader(3);
 		margin-left: auto;
 		margin-right: auto;
 		position: relative;
