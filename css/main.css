@@ -6391,6 +6391,10 @@
 .log audio {
   display: none;
 }
+.log #previous[href="#log/"], .log #next[href="#log/"] {
+  pointer-events: none;
+  opacity: 0.2;
+}
 .log #previous svg, .log #next svg {
   width: 50px;
   height: 50px;
@@ -6401,10 +6405,10 @@
 }
 .log #previous svg path, .log #next svg path {
   stroke: #00303e;
-  -moz-transform: translate3d(7px, 7px, 0);
-  -ms-transform: translate3d(7px, 7px, 0);
-  -webkit-transform: translate3d(7px, 7px, 0);
-  transform: translate3d(7px, 7px, 0);
+  -moz-transform: translate3d(9px, 8px, 0) scale(0.9);
+  -ms-transform: translate3d(9px, 8px, 0) scale(0.9);
+  -webkit-transform: translate3d(9px, 8px, 0) scale(0.9);
+  transform: translate3d(9px, 8px, 0) scale(0.9);
 }
 .log #controls {
   margin-top: 1.5625em;
