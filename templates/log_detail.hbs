@@ -16,6 +16,12 @@
 		</div>
 		<div id="audio"></div>
 		<div id="controls">
+			{{#if previous}}
+				<a href="#log/{{previous}}" id="previous">previous</a>
+			{{/if}}
+			{{#if next}}
+				<a href="#log/{{next}}" id="next">next</a>
+			{{/if}}
 			<div id="toggler"></div>
 			<div id="time">
 				<div class="elapsed">0</div>
