@@ -3,12 +3,12 @@ return Handlebars.template({"1":function(depth0,helpers,partials,data) {
   var helper, functionType="function", escapeExpression=this.escapeExpression;
   return "\n				<a href=\"#log/"
     + escapeExpression(((helper = helpers.previous || (depth0 && depth0.previous)),(typeof helper === functionType ? helper.call(depth0, {"name":"previous","hash":{},"data":data}) : helper)))
-    + "\" id=\"previous\">previous</a>\n			";
+    + "\" id=\"previous\"><svg><path d=\"M21.871,9.814 15.684,16.001 21.871,22.188 18.335,25.725 8.612,16.001 18.335,6.276z\"></path></svg></a>\n			";
 },"3":function(depth0,helpers,partials,data) {
   var helper, functionType="function", escapeExpression=this.escapeExpression;
   return "\n				<a href=\"#log/"
     + escapeExpression(((helper = helpers.next || (depth0 && depth0.next)),(typeof helper === functionType ? helper.call(depth0, {"name":"next","hash":{},"data":data}) : helper)))
-    + "\" id=\"next\">next</a>\n			";
+    + "\" id=\"next\"><svg><path d=\"M10.129,22.186 16.316,15.999 10.129,9.812 13.665,6.276 23.389,15.999 13.665,25.725z\"></path></svg></a>\n			";
 },"compiler":[5,">= 2.0.0"],"main":function(depth0,helpers,partials,data) {
   var stack1, helper, functionType="function", escapeExpression=this.escapeExpression, buffer = "<div class=\"log\" id=\"log-"
     + escapeExpression(((helper = helpers.title || (depth0 && depth0.title)),(typeof helper === functionType ? helper.call(depth0, {"name":"title","hash":{},"data":data}) : helper)))
@@ -18,9 +18,9 @@ return Handlebars.template({"1":function(depth0,helpers,partials,data) {
   buffer += "\n		<div class=\"canvas-wrapper\">\n			<canvas id=\"fft\"></canvas>\n			<canvas id=\"letters\" ></canvas>\n		</div>\n		<div class=\"header\">\n			<div class=\"slider\">\n				<div class=\"label\">Guilt: </div>\n				<div class=\"bar\">\n					<div style=\"left: 20%;\" class=\"highlight\"></div>\n				</div>\n			</div>\n		</div>\n		<div id=\"audio\"></div>\n		<div id=\"controls\">\n			";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.previous), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n			";
+  buffer += "\n			<div id=\"toggler\"></div>\n			<div id=\"time\">\n				<div class=\"elapsed\">0</div>\n				/\n				<div class=\"total\"></div>\n			</div>\n			";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.next), {"name":"if","hash":{},"fn":this.program(3, data),"inverse":this.noop,"data":data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  return buffer + "\n			<div id=\"toggler\"></div>\n			<div id=\"time\">\n				<div class=\"elapsed\">0</div>\n				/\n				<div class=\"total\"></div>\n			</div>\n		</div>\n	</div>\n</div>\n";
+  return buffer + "\n		</div>\n	</div>\n</div>\n";
 },"useData":true});
 });

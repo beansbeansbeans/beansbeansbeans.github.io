@@ -17,10 +17,7 @@
 		<div id="audio"></div>
 		<div id="controls">
 			{{#if previous}}
-				<a href="#log/{{previous}}" id="previous">previous</a>
-			{{/if}}
-			{{#if next}}
-				<a href="#log/{{next}}" id="next">next</a>
+				<a href="#log/{{previous}}" id="previous"><svg><path d="M21.871,9.814 15.684,16.001 21.871,22.188 18.335,25.725 8.612,16.001 18.335,6.276z"></path></svg></a>
 			{{/if}}
 			<div id="toggler"></div>
 			<div id="time">
@@ -28,6 +25,9 @@
 				/
 				<div class="total"></div>
 			</div>
+			{{#if next}}
+				<a href="#log/{{next}}" id="next"><svg><path d="M10.129,22.186 16.316,15.999 10.129,9.812 13.665,6.276 23.389,15.999 13.665,25.725z"></path></svg></a>
+			{{/if}}
 		</div>
 	</div>
 </div>
