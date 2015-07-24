@@ -2,18 +2,37 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
 
     var ticker = (function() {
             var playPosition = 0,
-                interval;
+                interval, 
+                start = 0,
+                tickerRAFID,
+                pausedAt = 0,
+                circumference,
+                elapsed,
+                update = function() {
+                    elapsed = Date.now() - start + pausedAt;
+                    var ratio = elapsed / (length * 1000);
+                    $("circle").attr("stroke-dasharray", (ratio * circumference) + " 1000");
+                    if(ratio > 1) {
+                        $("#controls #toggler").removeClass("playing").addClass("paused");
+                        $("circle").attr("stroke-dasharray", "0 1000");
+                        pausedAt = 0;
+                        start = 0;
+                    } else {
+                        tickerRAFID = requestAnimationFrame(update);
+                    }
+                };
+
             return {
                 tick: function() {
-                    interval = setInterval(function() {
-                        playPosition++;
-                        if(playPosition <= length) {
-
-                        }
-                    }.bind(this), 1000);
-                }.bind(this),
+                    if(typeof circumference === 'undefined') { 
+                        circumference = 2 * $("circle").attr("r") * Math.PI;
+                    }
+                    start = Date.now();
+                    tickerRAFID = requestAnimationFrame(update);
+                },
                 pause: function() {
-                    clearInterval(interval);
+                    pausedAt = elapsed;
+                    window.cancelAnimationFrame(tickerRAFID);
                 },
                 setPosition: function(newPos) {
                     playPosition = newPos;
