@@ -6397,7 +6397,7 @@
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
-  border: solid 2px #00303e;
+  border: solid 1px #00303e;
 }
 .log #previous[href="#log/"], .log #next[href="#log/"] {
   pointer-events: none;
@@ -6405,10 +6405,10 @@
 }
 .log #previous svg path, .log #next svg path {
   stroke: #00303e;
-  -moz-transform: translate3d(9px, 8px, 0) scale(0.9);
-  -ms-transform: translate3d(9px, 8px, 0) scale(0.9);
-  -webkit-transform: translate3d(9px, 8px, 0) scale(0.9);
-  transform: translate3d(9px, 8px, 0) scale(0.9);
+  -moz-transform: translate3d(10px, 9px, 0) scale(0.9);
+  -ms-transform: translate3d(10px, 9px, 0) scale(0.9);
+  -webkit-transform: translate3d(10px, 9px, 0) scale(0.9);
+  transform: translate3d(10px, 9px, 0) scale(0.9);
 }
 .log #controls {
   margin-top: 1.5625em;
@@ -6420,26 +6420,41 @@
   display: inline-block;
 }
 .log #controls #toggler {
+  position: relative;
   cursor: pointer;
   margin-right: 10px;
   margin-left: 10px;
 }
+.log #controls #toggler circle {
+  fill: none;
+  stroke-width: 3px;
+  stroke: #00303e;
+}
+.log #controls #toggler .pause-mask {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 6px;
+  height: 30px;
+  background-color: white;
+  margin-left: -3px;
+}
 .log #controls #toggler #play_path {
-  -moz-transform: translate3d(9px, 7px, 0);
-  -ms-transform: translate3d(9px, 7px, 0);
-  -webkit-transform: translate3d(9px, 7px, 0);
-  transform: translate3d(9px, 7px, 0);
+  -moz-transform: translate3d(10px, 8px, 0);
+  -ms-transform: translate3d(10px, 8px, 0);
+  -webkit-transform: translate3d(10px, 8px, 0);
+  transform: translate3d(10px, 8px, 0);
 }
 .log #controls #toggler #pause_path {
-  -moz-transform: translate3d(9px, 9px, 0) scale(0.9);
-  -ms-transform: translate3d(9px, 9px, 0) scale(0.9);
-  -webkit-transform: translate3d(9px, 9px, 0) scale(0.9);
-  transform: translate3d(9px, 9px, 0) scale(0.9);
+  -moz-transform: translate3d(10px, 10px, 0) scale(0.9);
+  -ms-transform: translate3d(10px, 10px, 0) scale(0.9);
+  -webkit-transform: translate3d(10px, 10px, 0) scale(0.9);
+  transform: translate3d(10px, 10px, 0) scale(0.9);
 }
 .log #controls #toggler.playing #play_path {
   display: none;
 }
-.log #controls #toggler.paused #pause_path {
+.log #controls #toggler.paused #pause_path, .log #controls #toggler.paused .pause-mask {
   display: none;
 }
 

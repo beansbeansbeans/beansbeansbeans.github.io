@@ -8,7 +8,7 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
                     interval = setInterval(function() {
                         playPosition++;
                         if(playPosition <= length) {
-                            $("#controls #time .elapsed").text(Math.floor(playPosition / 60) + ":" + ((Math.floor(playPosition % 60) < 10) ? "0" + Math.floor(playPosition % 60) : Math.floor(playPosition % 60)));
+
                         }
                     }.bind(this), 1000);
                 }.bind(this),
