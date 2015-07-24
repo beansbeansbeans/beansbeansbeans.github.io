@@ -1,9 +1,7 @@
 define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
 
     var ticker = (function() {
-            var playPosition = 0,
-                interval, 
-                start = 0,
+            var start = 0,
                 tickerRAFID,
                 pausedAt = 0,
                 circumference,
@@ -23,6 +21,11 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
                 };
 
             return {
+                reset: function() {
+                    start = 0;
+                    pausedAt = 0;
+                    window.cancelAnimationFrame(tickerRAFID);
+                },
                 tick: function() {
                     if(typeof circumference === 'undefined') { 
                         circumference = 2 * $("circle").attr("r") * Math.PI;
@@ -33,9 +36,6 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
                 pause: function() {
                     pausedAt = elapsed;
                     window.cancelAnimationFrame(tickerRAFID);
-                },
-                setPosition: function(newPos) {
-                    playPosition = newPos;
                 }
             }
         })(),
@@ -90,7 +90,7 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
         destroy: function() {
             window.cancelAnimationFrame(this.requestID);
             ticker.pause();
-            ticker.setPosition(0);
+            ticker.reset();
             source.stop(0);
             this.overrides = [];
         },
