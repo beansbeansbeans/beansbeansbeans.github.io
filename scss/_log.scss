@@ -94,6 +94,9 @@
 				fill: none;
 				stroke-width: 3px;
 				stroke: $dark-blue;
+				@include transform(rotate(-90deg));
+				-webkit-transform-origin: 24px 24px;
+				transform-origin: 24px 24px;
 			}
 			.pause-mask {
 				position: absolute;
