@@ -40,7 +40,6 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
 
             this.id = data.title;
             length = data.length;
-            $("#controls #time .total").text(Math.floor(length / 60) + ":" + ((Math.floor(length % 60) < 10) ? "0" + Math.floor(length % 60) : Math.floor(length % 60)));
             this.canvasWidth = $(window).width() * wordXStretch * 2;
 
             var naturalWordWidth = this.id.split("").reduce(function(prev, current, index) {
@@ -192,7 +191,6 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
                         analyser.connect(audioCtx.destination);
                     } else {
                         isPlaying = false;
-                        $("#controls #toggler").text("play");
                     }
 
                     $("html").removeClass("loading"); 
@@ -221,12 +219,10 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
             ctx.lineWidth = 8;
             ctx.strokeStyle = "#fff9ef";
 
-            $("#controls #toggler").text("pause");
-
             $("#controls #toggler").on("click", function() {
                 isPlaying = !isPlaying;
                 if(isPlaying) {
-                    $("#controls #toggler").text("pause");
+                    $("#controls #toggler").addClass("playing").removeClass("paused");
 
                     source = audioCtx.createBufferSource();
                     source.buffer = buffer;
@@ -238,7 +234,7 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
 
                     ticker.tick();
                 } else {
-                    $("#controls #toggler").text("play");
+                    $("#controls #toggler").removeClass("playing").addClass("paused");
                     source.stop(0);
                     pausedAt = Date.now() - startedAt;
                     ticker.pause();

@@ -6391,17 +6391,17 @@
 .log audio {
   display: none;
 }
-.log #previous[href="#log/"], .log #next[href="#log/"] {
-  pointer-events: none;
-  opacity: 0.2;
-}
-.log #previous svg, .log #next svg {
+.log svg {
   width: 50px;
   height: 50px;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   border: solid 2px #00303e;
+}
+.log #previous[href="#log/"], .log #next[href="#log/"] {
+  pointer-events: none;
+  opacity: 0.2;
 }
 .log #previous svg path, .log #next svg path {
   stroke: #00303e;
@@ -6422,11 +6422,25 @@
 .log #controls #toggler {
   cursor: pointer;
   margin-right: 10px;
-  border: solid 2px #00303e;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  padding: 0 0.625em;
+  margin-left: 10px;
+}
+.log #controls #toggler #play_path {
+  -moz-transform: translate3d(9px, 7px, 0);
+  -ms-transform: translate3d(9px, 7px, 0);
+  -webkit-transform: translate3d(9px, 7px, 0);
+  transform: translate3d(9px, 7px, 0);
+}
+.log #controls #toggler #pause_path {
+  -moz-transform: translate3d(9px, 9px, 0) scale(0.9);
+  -ms-transform: translate3d(9px, 9px, 0) scale(0.9);
+  -webkit-transform: translate3d(9px, 9px, 0) scale(0.9);
+  transform: translate3d(9px, 9px, 0) scale(0.9);
+}
+.log #controls #toggler.playing #play_path {
+  display: none;
+}
+.log #controls #toggler.paused #pause_path {
+  display: none;
 }
 
 html {

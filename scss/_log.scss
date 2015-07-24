@@ -60,16 +60,18 @@
 	audio {
 		display: none;
 	}
+	svg {
+		width: 50px;
+		height: 50px;
+		@include border-radius(50%);
+		border: solid 2px $dark-blue;
+	}
 	#previous, #next {
 		&[href="#log/"] {
 			pointer-events: none;
 			opacity: 0.2;
 		}
 		svg {
-			width: 50px;
-			height: 50px;
-			@include border-radius(50%);
-			border: solid 2px $dark-blue;
 			path {
 				stroke: $dark-blue;
 				@include transform(translate3d(9px, 8px, 0) scale(.9));
@@ -86,9 +88,23 @@
 		#toggler {
 			cursor: pointer;
 			margin-right: 10px;
-			border: solid 2px $dark-blue;
-			@include border-radius(5px);
-			padding: 0 rhythm($lines: 3, $font-size: map-get(map-get($text-map, 'medium'), font-size));
+			margin-left: 10px;
+			#play_path {
+				@include transform(translate3d(9px, 7px, 0));
+			}
+			#pause_path {
+				@include transform(translate3d(9px, 9px, 0) scale(0.9));
+			}
+			&.playing {
+				#play_path {
+					display: none;
+				}
+			}
+			&.paused {
+				#pause_path {
+					display: none;
+				}
+			}
 		}
 	}
 }
