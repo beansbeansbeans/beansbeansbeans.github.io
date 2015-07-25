@@ -15,6 +15,7 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
                         $("circle").attr("stroke-dasharray", "0 1000");
                         pausedAt = 0;
                         start = 0;
+                        renderer.reset();
                     } else {
                         tickerRAFID = requestAnimationFrame(update);
                     }
@@ -44,11 +45,18 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
         startedAt,
         buffer,
         pausedAt = 0,
-        audioCtx = window.webkitAudioContext ? new webkitAudioContext() : new AudioContext();
+        isPlaying,
+        audioCtx = window.webkitAudioContext ? new webkitAudioContext() : new AudioContext(),
+        source,
         analyser = audioCtx.createAnalyser(),
         colors = ["#2BBFBD", "#F2B33D", "#F29B30", "#F22E2E", "#F2385A", "#F5A503", "#56D9CD", "#3AA1BF", "#FC4349", "#ec4911"];
 
     var renderer = {
+        reset: function() {
+            pausedAt = 0;
+            source.stop(0);
+            isPlaying = false;
+        },
         initialize: function(data) {
             if(data.overrides) {
                 this.overrides = data.overrides;
@@ -222,8 +230,7 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
             var canvas = $("#fft"),
                 ctx = canvas[0].getContext('2d'),
                 counter = 0,
-                self = this,
-                isPlaying;
+                self = this;
 
             canvas.css("background-color", colors[Math.floor(Math.random() * colors.length)]);
 
