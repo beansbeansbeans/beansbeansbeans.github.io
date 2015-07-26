@@ -21,7 +21,7 @@
 			position: relative;
 			display: inline-block;
 		  width: 120px;
-		  @include background-image(linear-gradient(to right, rgba($orange, 0.1), rgba(red, 0.1)));
+		  @include background-image(linear-gradient(to right, rgba(#e1bee7, 0.2), rgba(#4a148c, 0.2)));
 		  background-image: rgba($orange, 0.1);
 		  height: 20px;
 		  vertical-align: top;

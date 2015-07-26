@@ -232,9 +232,14 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
             var canvas = $("#fft"),
                 ctx = canvas[0].getContext('2d'),
                 counter = 0,
-                self = this;
+                self = this,
+                highlightColor = colors[Math.round((colors.length - 1) * this.guiltIndex)],
+                highlightWidth = $(".highlight").width(),
+                barWidth = $(".bar").width();
 
-            canvas.css("background-color", colors[Math.round((colors.length - 1) * this.guiltIndex)]);
+            canvas.css("background-color", highlightColor);
+            $(".highlight").css("background-color", highlightColor)
+                .css("left", (this.guiltIndex * (barWidth - highlightWidth)) + "px");
 
             canvas[0].width = this.canvasWidth;
             canvas[0].height = this.canvasHeight;

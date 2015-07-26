@@ -6349,9 +6349,9 @@
   position: relative;
   display: inline-block;
   width: 120px;
-  background-image: -moz-linear-gradient(left, rgba(236, 73, 17, 0.1), rgba(255, 0, 0, 0.1));
-  background-image: -webkit-linear-gradient(left, rgba(236, 73, 17, 0.1), rgba(255, 0, 0, 0.1));
-  background-image: linear-gradient(to right, rgba(236, 73, 17, 0.1), rgba(255, 0, 0, 0.1));
+  background-image: -moz-linear-gradient(left, rgba(225, 190, 231, 0.2), rgba(74, 20, 140, 0.2));
+  background-image: -webkit-linear-gradient(left, rgba(225, 190, 231, 0.2), rgba(74, 20, 140, 0.2));
+  background-image: linear-gradient(to right, rgba(225, 190, 231, 0.2), rgba(74, 20, 140, 0.2));
   background-image: rgba(236, 73, 17, 0.1);
   height: 20px;
   vertical-align: top;
