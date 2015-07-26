@@ -49,7 +49,8 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
         audioCtx = window.webkitAudioContext ? new webkitAudioContext() : new AudioContext(),
         source,
         analyser = audioCtx.createAnalyser(),
-        colors = ["#2BBFBD", "#F2B33D", "#F29B30", "#F22E2E", "#F2385A", "#F5A503", "#56D9CD", "#3AA1BF", "#FC4349", "#ec4911"];
+        colors = ["#e1bee7", "#ce93d8", "#ba68c8", "#ab47bc", "#9c27b0", "#7b1fa2", "#4a148c"];
+        // OLD colors (but i liked these, maybe try to revive) = ["#2BBFBD", "#F2B33D", "#F29B30", "#F22E2E", "#F2385A", "#F5A503", "#56D9CD", "#3AA1BF", "#FC4349", "#ec4911"];
 
     var renderer = {
         reset: function() {
@@ -66,6 +67,7 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
             var wordXStretch = widthScale($(window).width()); // % of window width taken up by words
 
             this.id = data.title;
+            this.guiltIndex = typeof data.guilt === 'undefined' ? 0.5 : data.guilt;
             length = data.length;
             this.canvasWidth = $(window).width() * wordXStretch * 2;
 
@@ -232,7 +234,7 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
                 counter = 0,
                 self = this;
 
-            canvas.css("background-color", colors[Math.floor(Math.random() * colors.length)]);
+            canvas.css("background-color", colors[Math.round((colors.length - 1) * this.guiltIndex)]);
 
             canvas[0].width = this.canvasWidth;
             canvas[0].height = this.canvasHeight;
