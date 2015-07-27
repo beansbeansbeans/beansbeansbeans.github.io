@@ -21,23 +21,66 @@
 			color: #888;
 			text-transform: lowercase;
 			font-style: italic;
-			font-size: 26px;
+			font-size: 18px;
 			display: inline-block;
 		}
 		.bar {
 			position: relative;
 			display: inline-block;
-		  width: 120px;
-		  @include background-image(linear-gradient(to right, rgba(#e1bee7, 0.2), rgba(#4a148c, 0.2)));
-		  background-image: rgba($orange, 0.1);
-		  height: 20px;
 		  vertical-align: top;
-		  margin-left: 5px;
-		  .highlight {
-		  	position: absolute;
-				width: 7px;
-				height: 100%;
-				background: $orange;
+		  .color {
+		  	border-radius: 50%;
+		  	width: 8px;
+		  	height: 8px;
+		  	display: inline-block;
+		  	margin-left: 5px;
+		  	position: relative;
+		  	&:not(.highlight) {
+		  		opacity: 0.5;
+		  	}
+		  	&.highlight {
+		  		&:before, &:after {
+						content: "";
+						position: absolute;
+						border-radius: 50%;
+						z-index: -1;
+		  		}
+					&:after {
+						background: white;
+						top: -2px;
+						right: -2px;
+						left: -2px;
+						bottom: -2px;
+					}
+					&:before {
+						background: $dark-blue;
+						top: -3px;
+						right: -3px;
+						left: -3px;
+						bottom: -3px;
+					}
+		  	}
+		  	&:nth-of-type(1n) {
+		  		background: #e1bee7;
+		  	}
+		  	&:nth-of-type(2n) {
+		  		background: #ce93d8;
+		  	}
+		  	&:nth-of-type(3n) {
+		  		background: #ba68c8;
+		  	}
+		  	&:nth-of-type(4n) {
+		  		background: #ab47bc;
+		  	}
+		  	&:nth-of-type(5n) {
+		  		background: #9c27b0;
+		  	}
+		  	&:nth-of-type(6n) {
+		  		background: #7b1fa2;
+		  	}
+		  	&:nth-of-type(7n) {
+		  		background: #4a148c;
+		  	}
 		  }
 		}
 	}

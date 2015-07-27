@@ -238,8 +238,8 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
                 barWidth = $(".bar").width();
 
             canvas.css("background-color", highlightColor);
-            $(".highlight").css("background-color", highlightColor)
-                .css("left", (this.guiltIndex * (barWidth - highlightWidth)) + "px");
+            $(".bar .color.highlight").removeClass("highlight");
+            $(".bar .color:eq(" + Math.round((colors.length - 1) * this.guiltIndex) + ")").addClass("highlight");
 
             canvas[0].width = this.canvasWidth;
             canvas[0].height = this.canvasHeight;
