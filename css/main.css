@@ -6355,6 +6355,7 @@
   position: relative;
   display: inline-block;
   vertical-align: top;
+  margin-left: 3px;
 }
 .log .slider .bar .color {
   border-radius: 50%;
