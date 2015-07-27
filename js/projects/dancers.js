@@ -7,7 +7,7 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			var data = {
 				identifier: "dancers",
 				title: "Dancers",
-				blurb: "Drag along the dancer's path to warp her figure.",
+				blurb: "Drag slowly along the dancer's path to warp her figure.",
 				projectContents: '',
 				caption: "Built with d3js and scalable vector graphics.",
 				description: "The longer you linger over the frames while dragging, the thicker, slacker, and bluer they become. I tried to cap the distortion at a point where the dancer was still nice looking."
@@ -144,16 +144,16 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				this.rafID = requestAnimationFrame(morph);
 			}.bind(this);
 
-			var tensionScale = d3.scale.pow().exponent(.6).domain([0, 25]).range([maxTension, minTension]),
-				colorScale = d3.scale.pow().exponent(.6).domain([0, 25]).interpolate(d3.interpolateRgb).range(['#7096ad', '#000000']),
-				strokeScale = d3.scale.pow().exponent(.6).domain([0, 25]).range([2, 7]);
+			var tensionScale = d3.scale.pow().exponent(.6).domain([0, 10]).range([maxTension, minTension]),
+				colorScale = d3.scale.pow().exponent(.6).domain([0, 10]).interpolate(d3.interpolateRgb).range(['#7096ad', '#000000']),
+				strokeScale = d3.scale.pow().exponent(.6).domain([0, 10]).range([2, 7]);
 
 			var update = function() {
 				var dancer = svg.selectAll(".dancer").data(progressData)
 					.attr("data-test", function(d, i) {
 						if(d3.select(this).attr("data-opacity") > 0) {
 							d3.select(this).selectAll("path")[0].forEach(function(path, index) {
-								d3.select(path).attr("d", d < 25 ? line.tension(tensionScale(d))(pathData[i][index]) : line.tension(tensionScale(25))(pathData[i][index])).style("stroke", d < 25 ? colorScale(d) : colorScale(25)).style("stroke-width", d < 50 ? strokeScale(d) : strokeScale(50));
+								d3.select(path).attr("d", d < 10 ? line.tension(tensionScale(d))(pathData[i][index]) : line.tension(tensionScale(10))(pathData[i][index])).style("stroke", d < 10 ? colorScale(d) : colorScale(10)).style("stroke-width", d < 20 ? strokeScale(d) : strokeScale(20));
 							});
 						}
 					});
