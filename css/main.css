@@ -6331,6 +6331,12 @@
   stroke-opacity: 1;
 }
 
+nav .explanation {
+  margin-bottom: 3.125em;
+  border: solid 2px #00303e;
+  padding: 15px;
+}
+
 .log .header {
   text-align: right;
 }
@@ -6517,14 +6523,14 @@ html {
   }
 }
 
-.medium-text, .log .back,
+.medium-text, nav .explanation, .log .back,
 .project .back,
 #homepage .back {
   font-size: 1.5em;
   line-height: 1.25em;
 }
 @media (max-width: 640px) {
-  .medium-text, .log .back,
+  .medium-text, nav .explanation, .log .back,
   .project .back,
   #homepage .back {
     font-size: 1.25em;

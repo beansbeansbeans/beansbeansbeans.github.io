@@ -1,3 +1,10 @@
+nav .explanation {
+	@extend .medium-text;
+	@include trailer($font-size: map-get(map-get($text-map, medium), font-size), $lines: 15);
+	border: solid 2px $dark-blue;
+	padding: 15px;
+}
+
 .log {
 	.header .blurb {
 		@extend .body-large-text;
