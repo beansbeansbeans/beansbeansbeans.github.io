@@ -8,6 +8,13 @@
 	.title {
 		text-transform: lowercase;
 	}
+	.date {
+		@extend .large-text;
+		font-weight: 600;
+		text-transform: capitalize;
+		@include leader($font-size: map-get(map-get($text-map, large), font-size), $lines: 2);
+		@include trailer($font-size: map-get(map-get($text-map, large), font-size), $lines: 6);
+	}
 	.slider {
 		.label {
 			font-family: Brandon;
@@ -47,7 +54,6 @@
 	}
 	#fft {
 		background: $orange;
-
 	}
 	.log-contents {
 		position: relative;

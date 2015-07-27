@@ -6337,6 +6337,12 @@
 .log .title {
   text-transform: lowercase;
 }
+.log .date {
+  font-weight: 600;
+  text-transform: capitalize;
+  margin-top: 0.27778em;
+  margin-bottom: 0.83333em;
+}
 .log .slider .label {
   font-family: Brandon;
   color: #888;
@@ -6495,12 +6501,12 @@ html {
   }
 }
 
-.large-text, #project-spinny #triptych #instructional .cta, #project-notes .canvas .text, nav li a .title {
+.large-text, #project-spinny #triptych #instructional .cta, #project-notes .canvas .text, .log .date, nav li a .title {
   font-size: 2.25em;
   line-height: 1.25em;
 }
 @media (max-width: 640px) {
-  .large-text, #project-spinny #triptych #instructional .cta, #project-notes .canvas .text, nav li a .title {
+  .large-text, #project-spinny #triptych #instructional .cta, #project-notes .canvas .text, .log .date, nav li a .title {
     font-size: 1.625em;
     line-height: 1.15385em;
   }
