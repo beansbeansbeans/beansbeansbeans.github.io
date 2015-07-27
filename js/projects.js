@@ -1,24 +1,24 @@
 define(['templates/project_index'], function(projectIndex) {
 	var data = [
 		{
-			title: "spinny",
-			description: "An interactive photograph."
-		},
-		{
-			title: "food",
-			description: "Words made of simplifiable paths."
-		},
-		{
-			title: "dancers",
-			description: "A ballet dancer with morphing frames."
-		},
-		{
 			title: "notes",
 			description: "A random melody maker."
 		},
 		{
 			title: "pixels",
 			description: "A face made of warpable pixels."
+		},
+		{
+			title: "spinny",
+			description: "An interactive photograph."
+		},
+		{
+			title: "dancers",
+			description: "A ballet dancer with morphing frames."
+		},
+		{
+			title: "food",
+			description: "Words made of simplifiable paths."
 		},
 		{
 			title: "straws",
