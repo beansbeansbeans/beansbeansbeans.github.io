@@ -6364,9 +6364,6 @@
   margin-left: 5px;
   position: relative;
 }
-.log .slider .bar .color:not(.highlight) {
-  opacity: 0.5;
-}
 .log .slider .bar .color.highlight:before, .log .slider .bar .color.highlight:after {
   content: "";
   position: absolute;

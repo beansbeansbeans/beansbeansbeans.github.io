@@ -35,9 +35,6 @@
 		  	display: inline-block;
 		  	margin-left: 5px;
 		  	position: relative;
-		  	&:not(.highlight) {
-		  		opacity: 0.5;
-		  	}
 		  	&.highlight {
 		  		&:before, &:after {
 						content: "";
