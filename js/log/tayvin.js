@@ -28,6 +28,7 @@ define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTem
                     }
                 ],
                 length: 42,
+                guilt: 0.8,
                 detail: "Two hours",
                 date: "July 13, 2015",
                 logContents: ""

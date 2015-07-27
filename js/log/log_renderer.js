@@ -49,8 +49,7 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
         audioCtx = window.webkitAudioContext ? new webkitAudioContext() : new AudioContext(),
         source,
         analyser = audioCtx.createAnalyser(),
-        colors = ["#e1bee7", "#ce93d8", "#ba68c8", "#ab47bc", "#9c27b0", "#7b1fa2", "#4a148c"];
-        // OLD colors (but i liked these, maybe try to revive) = ["#2BBFBD", "#F2B33D", "#F29B30", "#F22E2E", "#F2385A", "#F5A503", "#56D9CD", "#3AA1BF", "#FC4349", "#ec4911"];
+        colors = ["#1AB58A", "#EFE758", "#F5A503", "#E64C66", "#992337"];
 
     var renderer = {
         reset: function() {

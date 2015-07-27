@@ -29,9 +29,14 @@ define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTem
                     {
                         index: 6,
                         width: 1550
+                    },
+                    {
+                        index: 7,
+                        width: 1550
                     }
                 ],
                 length: 33,
+                guilt: 1,
                 detail: "coffee and an argument",
                 date: "June 22, 2015",
                 logContents: ""
