@@ -5,6 +5,12 @@ nav .explanation {
 	padding: 15px;
 }
 
+[data-log-entry="unapologetic"] {
+	#previous, #next, #menu, .back, .slider {
+		display: none !important;
+	}
+}
+
 .log {
 	.header .blurb {
 		@extend .body-large-text;

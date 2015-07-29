@@ -92,12 +92,14 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
 
             document.querySelector(".header").style.width = (wordXStretch * 100) + "%";
             document.querySelector(".header").style.paddingRight = (this.canvasWidth / 150) + 'px';
+            document.documentElement.setAttribute("data-log-entry", this.id);
 
             this.renderLetters();
             this.renderVis();
         },
         destroy: function() {
             window.cancelAnimationFrame(this.requestID);
+            document.documentElement.removeAttribute("data-log-entry");
             ticker.pause();
             ticker.reset();
             source.stop(0);

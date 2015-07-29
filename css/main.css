@@ -6337,6 +6337,10 @@ nav .explanation {
   padding: 15px;
 }
 
+[data-log-entry="unapologetic"] #previous, [data-log-entry="unapologetic"] #next, [data-log-entry="unapologetic"] #menu, [data-log-entry="unapologetic"] .back, [data-log-entry="unapologetic"] .slider {
+  display: none !important;
+}
+
 .log .header {
   text-align: right;
 }
