@@ -6070,7 +6070,7 @@
   display: inline-block;
 }
 #project-notes .icons {
-  margin-bottom: 1.66667em;
+  margin-bottom: 2.06897em;
 }
 @media (max-width: 640px) {
   #project-notes .icons {
@@ -6078,7 +6078,7 @@
     -ms-transform: scale(0.75);
     -webkit-transform: scale(0.75);
     transform: scale(0.75);
-    margin-bottom: 1.11111em;
+    margin-bottom: 1.37931em;
   }
 }
 #project-notes .icon {
@@ -6090,19 +6090,18 @@
   cursor: pointer;
   overflow: hidden;
   text-transform: uppercase;
-  width: 1.38889em;
-  height: 1.38889em;
+  width: 1.72414em;
+  height: 1.72414em;
   margin: 0 15px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
   text-align: center;
-  font-size: 2.25em;
-  line-height: 1.35417em;
+  font-size: 1.8125em;
+  line-height: 1.68103em;
 }
 #project-notes .icon.player svg {
-  margin-top: -8px;
-  margin-left: -7px;
+  margin-top: -5px;
 }
 #project-notes .icon.refresh svg {
   margin-top: 1px;
@@ -6332,9 +6331,15 @@
 }
 
 nav .explanation {
-  margin-bottom: 3.125em;
+  margin-bottom: 2.63158em;
   border: solid 2px #00303e;
   padding: 15px;
+}
+@media (max-width: 640px) {
+  nav .explanation {
+    padding: 10px;
+    margin-bottom: 2.10526em;
+  }
 }
 
 [data-log-entry="unapologetic"] #previous, [data-log-entry="unapologetic"] #next, [data-log-entry="unapologetic"] #menu, [data-log-entry="unapologetic"] .back, [data-log-entry="unapologetic"] .slider, [data-log-entry="unapologetic"] #signature {
@@ -6350,8 +6355,8 @@ nav .explanation {
 .log .date {
   font-weight: 600;
   text-transform: capitalize;
-  margin-top: 0.27778em;
-  margin-bottom: 0.83333em;
+  margin-top: 0.34483em;
+  margin-bottom: 1.03448em;
 }
 .log .slider .label {
   font-family: Brandon;
@@ -6460,8 +6465,8 @@ nav .explanation {
 .log #controls {
   margin-top: 1.5625em;
   text-transform: uppercase;
-  font-size: 1.5em;
-  line-height: 2.08333em;
+  font-size: 1.1875em;
+  line-height: 2.63158em;
 }
 .log #controls * {
   display: inline-block;
@@ -6517,104 +6522,104 @@ html {
 }
 
 .small-text, body, #menu_wrapper #menu .link {
-  font-size: 1.125em;
-  line-height: 1.11111em;
+  font-size: 0.9375em;
+  line-height: 1em;
 }
 @media (max-width: 640px) {
   .small-text, body, #menu_wrapper #menu .link {
-    font-size: 0.875em;
-    line-height: 1.42857em;
+    font-size: 0.6875em;
+    line-height: 1.36364em;
   }
 }
 
 .medium-text, nav .explanation, .log .back,
 .project .back,
 #homepage .back {
-  font-size: 1.5em;
-  line-height: 1.25em;
+  font-size: 1.1875em;
+  line-height: 1.05263em;
 }
 @media (max-width: 640px) {
   .medium-text, nav .explanation, .log .back,
   .project .back,
   #homepage .back {
-    font-size: 1.25em;
+    font-size: 1em;
     line-height: 1.25em;
   }
 }
 
 .large-text, #project-spinny #triptych #instructional .cta, #project-notes .canvas .text, .log .date, nav li a .title {
-  font-size: 2.25em;
-  line-height: 1.25em;
+  font-size: 1.8125em;
+  line-height: 1.2069em;
 }
 @media (max-width: 640px) {
   .large-text, #project-spinny #triptych #instructional .cta, #project-notes .canvas .text, .log .date, nav li a .title {
-    font-size: 1.625em;
-    line-height: 1.15385em;
+    font-size: 1.3125em;
+    line-height: 1.19048em;
   }
 }
 
 .extra-large-text, #loader .text, .log .header .title,
 .project .header .title,
 #homepage .header .title {
-  font-size: 3.375em;
-  line-height: 1.11111em;
+  font-size: 2.6875em;
+  line-height: 1.16279em;
 }
 @media (max-width: 640px) {
   .extra-large-text, #loader .text, .log .header .title,
   .project .header .title,
   #homepage .header .title {
-    font-size: 2.375em;
-    line-height: 1.18421em;
+    font-size: 1.875em;
+    line-height: 1.16667em;
   }
 }
 
 .body-small-text, .project .caption {
   font-family: Merriweather;
-  font-size: 0.875em;
-  line-height: 1.42857em;
+  font-size: 0.6875em;
+  line-height: 1.36364em;
 }
 @media (max-width: 640px) {
   .body-small-text, .project .caption {
-    font-size: 0.75em;
-    line-height: 1.25em;
+    font-size: 0.625em;
+    line-height: 1em;
   }
 }
 
 .body-medium-text, nav li a .description, .project .description, .project .header .blurb,
 #homepage .header .blurb {
   font-family: Merriweather;
-  font-size: 1.125em;
-  line-height: 1.66667em;
+  font-size: 0.875em;
+  line-height: 1.42857em;
 }
 @media (max-width: 640px) {
   .body-medium-text, nav li a .description, .project .description, .project .header .blurb,
   #homepage .header .blurb {
-    font-size: 1em;
-    line-height: 1.5625em;
+    font-size: 0.8125em;
+    line-height: 1.53846em;
   }
 }
 
 .body-large-text, .log .header .blurb {
   font-family: Merriweather;
-  font-size: 1.5em;
-  line-height: 1.66667em;
+  font-size: 1.1875em;
+  line-height: 1.84211em;
 }
 @media (max-width: 640px) {
   .body-large-text, .log .header .blurb {
-    font-size: 1.375em;
-    line-height: 1.81818em;
+    font-size: 1.125em;
+    line-height: 1.66667em;
   }
 }
 
 .body-extra-large-text {
   font-family: Merriweather;
-  font-size: 3.375em;
-  line-height: 1.2963em;
+  font-size: 2.6875em;
+  line-height: 1.16279em;
 }
 @media (max-width: 640px) {
   .body-extra-large-text {
-    font-size: 1.75em;
-    line-height: 1.78571em;
+    font-size: 1.375em;
+    line-height: 1.81818em;
   }
 }
 
@@ -6664,13 +6669,13 @@ body {
   color: #93939c;
   position: relative;
   display: inline-block;
-  margin-top: 8.33333em;
-  margin-bottom: 2.77778em;
+  margin-top: 10em;
+  margin-bottom: 3.33333em;
 }
 @media (max-width: 640px) {
   #signature {
-    margin-top: 7.14286em;
-    margin-bottom: 1.78571em;
+    margin-top: 9.09091em;
+    margin-bottom: 2.27273em;
   }
 }
 
@@ -6988,14 +6993,14 @@ body {
 }
 
 #menu_wrapper {
-  margin-bottom: 6.25em;
-  margin-top: 2.5em;
+  margin-bottom: 4.375em;
+  margin-top: 1.25em;
   display: inline-block;
 }
 @media (max-width: 640px) {
   #menu_wrapper {
-    margin-bottom: 3.125em;
-    margin-top: 1.25em;
+    margin-bottom: 2.5em;
+    margin-top: 0.625em;
   }
 }
 #menu_wrapper #menu {
@@ -7009,28 +7014,28 @@ body {
   display: inline-block;
   position: relative;
   font-weight: 500;
-  padding-top: 0.83333em;
-  padding-bottom: 0.83333em;
-  padding-left: 1.11111em;
-  padding-right: 1.11111em;
+  padding-top: 0.66667em;
+  padding-bottom: 0.66667em;
+  padding-left: 1em;
+  padding-right: 1em;
   outline: none !important;
 }
 @media (max-width: 640px) {
   #menu_wrapper #menu .link {
-    padding-top: 0.71429em;
-    padding-bottom: 0.71429em;
-    padding-left: 1.07143em;
-    padding-right: 1.07143em;
+    padding-top: 0.68182em;
+    padding-bottom: 0.68182em;
+    padding-left: 0.90909em;
+    padding-right: 0.90909em;
   }
 }
 #menu_wrapper #menu .link.active {
   color: white;
   background: #00303e;
-  margin: 0 0.55556em;
+  margin: 0 0.66667em;
 }
 @media (max-width: 640px) {
   #menu_wrapper #menu .link.active {
-    margin: 0 0.35714em;
+    margin: 0 0.45455em;
   }
 }
 
@@ -7044,7 +7049,7 @@ nav {
   }
 }
 nav li:not(:first-of-type) a {
-  padding-top: 4.6875em;
+  padding-top: 3.125em;
 }
 @media (max-width: 640px) {
   nav li:not(:first-of-type) a {
@@ -7055,7 +7060,7 @@ nav li a {
   border-bottom-color: #c8c8cd;
   border-bottom-width: 0.0625em;
   border-bottom-style: dotted;
-  padding-bottom: 4.625em;
+  padding-bottom: 3.0625em;
   border-bottom-width: 1px !important;
   display: inline-block;
   width: 100%;
@@ -7071,11 +7076,11 @@ nav li a .title {
   color: #00303e;
   font-weight: 600;
   text-transform: uppercase;
-  margin-bottom: 0.55556em;
+  margin-bottom: 0.34483em;
 }
 @media (max-width: 640px) {
   nav li a .title {
-    margin-bottom: 0.38462em;
+    margin-bottom: 0.2381em;
   }
 }
 nav li a .description {
@@ -7128,13 +7133,13 @@ nav li a .description {
   font-weight: 500;
   color: #93939c;
   display: inline-block;
-  margin-bottom: 0.625em;
+  margin-bottom: 0.78947em;
 }
 @media (max-width: 640px) {
   .log .back,
   .project .back,
   #homepage .back {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.625em;
   }
 }
 .log .back:before,
@@ -7148,13 +7153,13 @@ nav li a .description {
 .project .header .title,
 #homepage .header .title {
   font-weight: 600;
-  margin-bottom: 0.74074em;
+  margin-bottom: 0.5814em;
 }
 @media (max-width: 640px) {
   .log .header .title,
   .project .header .title,
   #homepage .header .title {
-    margin-bottom: 0.52632em;
+    margin-bottom: 0.33333em;
   }
 }
 .log .header .blurb,

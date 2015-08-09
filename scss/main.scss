@@ -1,76 +1,76 @@
 $text-map: (
 	small: (
-		font-size: 18px,
-		lines: 4
+		font-size: 15px,
+		lines: 3
 	),
 	medium: (
-		font-size: 24px,
-		lines: 6
+		font-size: 19px,
+		lines: 4
 	),
 	large: (
-		font-size: 36px,
-		lines: 9
+		font-size: 29px,
+		lines: 7
 	),
 	extra-large: (
-		font-size: 54px,
-		lines: 12
+		font-size: 43px,
+		lines: 10
 	)
 );
 
 $mobile-text-map: (
 	small: (
-		font-size: 14px,
-		lines: 4
+		font-size: 11px,
+		lines: 3
 	),
 	medium: (
-		font-size: 20px,
-		lines: 5
+		font-size: 16px,
+		lines: 4
 	),
 	large: (
-		font-size: 26px,
-		lines: 6
+		font-size: 21px,
+		lines: 5
 	),
 	extra-large: (
-		font-size: 38px,
-		lines: 9
+		font-size: 30px,
+		lines: 7
 	)
 );
 
 $body-text-map: (
 	small: (
+		font-size: 11px,
+		lines: 3
+	),
+	medium: (
 		font-size: 14px,
 		lines: 4
 	),
-	medium: (
-		font-size: 18px,
-		lines: 6
-	),
 	large: (
-		font-size: 24px,
-		lines: 8
+		font-size: 19px,
+		lines: 7
 	),
 	extra-large: (
-		font-size: 54px,
-		lines: 14
+		font-size: 43px,
+		lines: 10
 	)
 );
 
 $mobile-body-text-map: (
 	small: (
-		font-size: 12px,
-		lines: 3
+		font-size: 10px,
+		lines: 2
 	),
 	medium: (
-		font-size: 16px,
-		lines: 5
+		font-size: 13px,
+		lines: 4
 	),
 	large: (
-		font-size: 22px,
-		lines: 8
+		font-size: 18px,
+		lines: 6
 	),
 	extra-large: (
-		font-size: 28px,
-		lines: 10
+		font-size: 22px,
+		lines: 8
 	)
 );
 
@@ -248,11 +248,11 @@ body {
 }
 
 #menu_wrapper {
-	@include trailer(20);
-	@include leader(8);
+	@include trailer(14);
+	@include leader(4);
 	@include mobile-only {
-		@include trailer(10);
-		@include leader(4);
+		@include trailer(8);
+		@include leader(2);
 	}
 	display: inline-block;
 	#menu {
@@ -264,15 +264,15 @@ body {
 			position: relative;
 			@extend .small-text;
 			font-weight: 500;
-			@include padding-leader($lines: 3, $font-size: map-get(map-get($text-map, small), font-size));
-			@include padding-trailer($lines: 3, $font-size: map-get(map-get($text-map, small), font-size));
-			padding-left: rhythm($lines: 4, $font-size: map-get(map-get($text-map, small), font-size));
-			padding-right: rhythm($lines: 4, $font-size: map-get(map-get($text-map, small), font-size));
+			@include padding-leader($lines: 2, $font-size: map-get(map-get($text-map, small), font-size));
+			@include padding-trailer($lines: 2, $font-size: map-get(map-get($text-map, small), font-size));
+			padding-left: rhythm($lines: 3, $font-size: map-get(map-get($text-map, small), font-size));
+			padding-right: rhythm($lines: 3, $font-size: map-get(map-get($text-map, small), font-size));
 			@include mobile-only {
-				@include padding-leader($lines: 2, $font-size: map-get(map-get($mobile-text-map, small), font-size));
-				@include padding-trailer($lines: 2, $font-size: map-get(map-get($mobile-text-map, small), font-size));
-				padding-left: rhythm($lines: 3, $font-size: map-get(map-get($mobile-text-map, small), font-size));
-				padding-right: rhythm($lines: 3, $font-size: map-get(map-get($mobile-text-map, small), font-size));
+				@include padding-leader($lines: 1.5, $font-size: map-get(map-get($mobile-text-map, small), font-size));
+				@include padding-trailer($lines: 1.5, $font-size: map-get(map-get($mobile-text-map, small), font-size));
+				padding-left: rhythm($lines: 2, $font-size: map-get(map-get($mobile-text-map, small), font-size));
+				padding-right: rhythm($lines: 2, $font-size: map-get(map-get($mobile-text-map, small), font-size));
 			}
 			outline: none !important;
 			&.active {
@@ -292,14 +292,14 @@ nav {
 	margin: 0 auto;
 	li {
 		&:not(:first-of-type) a {
-			@include padding-leader(15);
+			@include padding-leader(10);
 			@include mobile-only {
 				@include padding-leader(6);
 			}
 		}
 		a {
 			border-bottom-color: lighten($gray, 20%);
-			@include trailing-border($lines: 15, $border-style: dotted);
+			@include trailing-border($lines: 10, $border-style: dotted);
 			@include mobile-only {
 				@include trailing-border($lines: 6, $border-style: dotted);
 			}
@@ -311,9 +311,9 @@ nav {
 				color: $dark-blue;
 				font-weight: 600;
 				text-transform: uppercase;
-				@include trailer($font-size: map-get(map-get($text-map, large), font-size), $lines: 4);
+				@include trailer($font-size: map-get(map-get($text-map, large), font-size), $lines: 2);
 				@include mobile-only {
-					@include trailer($font-size: map-get(map-get($mobile-text-map, large), font-size), $lines: 2);
+					@include trailer($font-size: map-get(map-get($mobile-text-map, large), font-size), $lines: 1);
 				}
 			}
 			.description {
@@ -361,9 +361,9 @@ nav {
 		.title {
 			@extend .extra-large-text;
 			font-weight: 600;
-			@include trailer($font-size: map-get(map-get($text-map, extra-large), font-size), $lines: 8);
+			@include trailer($font-size: map-get(map-get($text-map, extra-large), font-size), $lines: 5);
 			@include mobile-only {
-				@include trailer($font-size: map-get(map-get($mobile-text-map, extra-large), font-size), $lines: 4);
+				@include trailer($font-size: map-get(map-get($mobile-text-map, extra-large), font-size), $lines: 2);
 			}
 		}
 		.blurb {

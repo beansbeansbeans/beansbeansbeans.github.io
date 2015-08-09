@@ -1,8 +1,12 @@
 nav .explanation {
 	@extend .medium-text;
-	@include trailer($font-size: map-get(map-get($text-map, medium), font-size), $lines: 15);
+	@include trailer($font-size: map-get(map-get($text-map, medium), font-size), $lines: 10);
 	border: solid 2px $dark-blue;
 	padding: 15px;
+	@include mobile-only {
+		padding: 10px;
+		@include trailer($font-size: map-get(map-get($text-map, medium), font-size), $lines: 8);
+	}
 }
 
 [data-log-entry="unapologetic"] {

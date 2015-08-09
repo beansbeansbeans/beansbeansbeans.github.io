@@ -87,8 +87,7 @@
 		text-align: center;
 		@include adjust-font-size-to(map-get(map-get($text-map, large), font-size), $lines: 9.75);
 		&.player svg {
-			margin-top: -8px;
-			margin-left: -7px;
+			margin-top: -5px;
 		}
 		&.refresh svg {
 			margin-top: 1px;
