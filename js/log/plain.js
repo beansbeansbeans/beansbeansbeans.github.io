@@ -19,7 +19,7 @@ define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTem
 						width: 800
 					}
 				],
-				length: 48,
+				length: 19,
 				detail: "A decent day",
 				date: "August 2, 2014",
 				logContents: ""

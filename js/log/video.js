@@ -9,9 +9,18 @@ define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTem
                     {
                         index: 0,
                         width: 1520
+                    },
+                    {
+                        index: 1,
+                        width: 750
+                    },
+                    {
+                        index: 2,
+                        width: 1580
                     }
                 ],
-                length: 76,
+                guilt: 1,
+                length: 49,
                 detail: "A typical day",
                 date: "September 29, 2014",
                 logContents: ""
