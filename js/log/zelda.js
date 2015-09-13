@@ -12,10 +12,15 @@ define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTem
 					},
 					{
 						index: 2,
-						width: 1230
+						width: 1240
+					},
+					{
+						index: 3,
+						width: 1590
 					}
 				],
-				length: 61,
+				guilt: 0.6,
+				length: 14,
 				detail: "A decent day",
 				date: "August 11, 2014",
 				logContents: ""
