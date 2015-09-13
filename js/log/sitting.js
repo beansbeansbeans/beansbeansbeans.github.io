@@ -1,23 +1,28 @@
 define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTemplate, logRenderer, logData) {
-    var cruising = {
+    var sitting = {
         selfLoading: true,
         initialize: function() {
-            var title = "cruising",
+            var title = "sitting",
                 data = {
                 title: title,
                 overrides: [
                     {
-                        index: 0,
-                        width: 1350
+                        index: 3,
+                        width: 1180
                     },
                     {
-                        index: 1,
-                        width: 1500
+                        index: 4,
+                        width: 750
+                    },
+                    {
+                        index: 5,
+                        width: 1700
                     }
                 ],
-                length: 85,
+                length: 27,
+                guilt: 0.8,
                 detail: "An exciting week",
-                date: "March 22, 2015",
+                date: "May 20, 2015",
                 logContents: ""
             };
 
@@ -44,5 +49,5 @@ define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTem
             logRenderer.destroy();
         }
     }
-    return cruising;
+    return sitting;
 });
