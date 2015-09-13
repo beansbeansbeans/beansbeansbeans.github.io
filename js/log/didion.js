@@ -1,35 +1,20 @@
 define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTemplate, logRenderer, logData) {
-    var anxiety = {
+    var didion = {
         selfLoading: true,
         initialize: function() {
-            var title = "anxiety",
+            var title = "didion",
                 data = {
                 title: title,
                 overrides: [
                     {
-                        index: 0,
-                        width: 1560
-                    },
-                    {
                         index: 1,
-                        width: 1800
-                    },
-                    {
-                        index: 2,
-                        width: 1500
-                    },
-                    {
-                        index: 3,
-                        width: 700
-                    },
-                    {
-                        index: 5,
-                        width: 1350
+                        width: 800
                     }
                 ],
-                length: 57,
+                length: 13,
+                guilt: 0,
                 detail: "A boring day",
-                date: "September 12, 2014",
+                date: "March 2, 2014",
                 logContents: ""
             };
 
@@ -56,5 +41,5 @@ define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTem
             logRenderer.destroy();
         }
     }
-    return anxiety;
+    return didion;
 });
