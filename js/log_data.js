@@ -5,6 +5,10 @@ define([], function() {
       description: "September 14, 2015"
     },
     {
+      title: "trump",
+      description: "August 31, 2015"
+    },
+    {
       title: "calm",
       description: "August 2, 2015"
     },
