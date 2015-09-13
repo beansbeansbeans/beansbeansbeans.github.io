@@ -1,23 +1,28 @@
 define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTemplate, logRenderer, logData) {
-    var chess = {
+    var alec = {
         selfLoading: true,
         initialize: function() {
-            var title = "chess",
+            var title = "alec",
                 data = {
                 title: title,
                 overrides: [
                     {
-                        index: 2,
-                        width: 1300
+                        index: 0,
+                        width: 1570
                     },
                     {
-                        index: 3,
-                        width: 1300
+                        index: 1,
+                        width: 1200
+                    },
+                    {
+                        index: 2,
+                        width: 1150
                     }
                 ],
-                length: 91,
+                guilt: 0.8,
+                length: 35,
                 detail: "An unproductive day",
-                date: "April 15, 2015",
+                date: "February 2, 2015",
                 logContents: ""
             };
 
@@ -44,5 +49,5 @@ define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTem
             logRenderer.destroy();
         }
     }
-    return chess;
+    return alec;
 });

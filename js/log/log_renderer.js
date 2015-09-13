@@ -245,12 +245,12 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
             canvas[0].width = this.canvasWidth;
             canvas[0].height = this.canvasHeight;
 
-            ctx.shadowOffsetX = 10;
-            ctx.shadowOffsetY = 6;
-            ctx.shadowBlur = 12;
-            ctx.shadowColor = "rgba(0, 0, 0, 0.4)";
+            ctx.shadowOffsetX = 8;
+            ctx.shadowOffsetY = 5;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = "rgba(0, 0, 0, 0.3)";
 
-            ctx.lineWidth = 8;
+            ctx.lineWidth = 6;
             ctx.strokeStyle = "#fff9ef";
 
             $("#controls #toggler").on("click", function() {
