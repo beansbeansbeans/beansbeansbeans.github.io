@@ -1,41 +1,26 @@
 define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTemplate, logRenderer, logData) {
-    var birthday = {
+    var chairs = {
         selfLoading: true,
         initialize: function() {
-            var title = "birthday",
+            var title = "chairs",
                 data = {
                 title: title,
                 overrides: [
                     {
-                        index: 0,
-                        width: 1400
-                    },
-                    {
                         index: 1,
-                        width: 750
+                        width: 1720
                     },
                     {
                         index: 2,
-                        width: 1520
+                        width: 1570
                     },
                     {
                         index: 3,
-                        width: 1200
-                    },
-                    {
-                        index: 4,
-                        width: 1600
-                    },
-                    {
-                        index: 5,
-                        width: 1600
-                    },
-                    {
-                        index: 6,
-                        width: 1410
+                        width: 750
                     }
                 ],
-                length: 39,
+                guilt: 0,
+                length: 26,
                 detail: "A good day",
                 date: "March 27, 2015",
                 logContents: ""
@@ -64,5 +49,5 @@ define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTem
             logRenderer.destroy();
         }
     }
-    return birthday;
+    return chairs;
 });

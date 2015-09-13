@@ -21,6 +21,10 @@ define([], function() {
       description: "July 18, 2015"
     },
     {
+      title: "chairs",
+      description: "March 27, 2015"
+    },
+    {
       title: "toast",
       description: "December 8, 2014"
     },
