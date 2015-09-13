@@ -9,38 +9,6 @@ define([], function() {
       description: "July 18, 2015"
     },
     {
-      title: "tayvin",
-      description: "July 13, 2015"
-    },
-    {
-      title: "dolcezza",
-      description: "June 22, 2015"
-    },
-    {
-      title: "tubes",
-      description: "June 13, 2015"
-    },
-    {
-      title: "okcupid",
-      description: "May 8, 2015"
-    },
-    {
-      title: "weights",
-      description: "May 1, 2015"
-    },
-    {
-      title: "bridesmen",
-      description: "April 22, 2015"
-    },
-    {
-      title: "chess",
-      description: "April 15, 2015"
-    },
-    {
-      title: "easter",
-      description: "April 8, 2015"
-    },
-    {
       title: "birthday",
       description: "March 27, 2015"
     },
@@ -124,17 +92,9 @@ define([], function() {
       title: "boyhood",
       description: "September 22, 2014"
     },
-    // {
-    //  title: "shoes",
-    //  description: "September 20, 2014"
-    // },
     {
       title: "anxiety",
       description: "September 12, 2014"
-    },
-    {
-      title: "jack",
-      description: "September 4, 2014"
     },
     {
       title: "bacall",
