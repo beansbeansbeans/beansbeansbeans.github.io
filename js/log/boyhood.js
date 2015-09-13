@@ -5,7 +5,8 @@ define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTem
             var title = "boyhood",
                 data = {
                 title: title,
-                length: 82,
+                length: 41,
+                guilt: 0,
                 detail: "A regular day",
                 date: "September 22, 2014",
                 logContents: ""

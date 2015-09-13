@@ -11,6 +11,7 @@ define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTem
                         width: 1225
                     }
                 ],
+                guilt: 0.6,
                 length: 33,
                 detail: "An average day",
                 date: "November 5, 2014",
