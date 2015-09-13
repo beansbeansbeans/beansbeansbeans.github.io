@@ -1,27 +1,24 @@
 define(['templates/log_detail', 'log/log_renderer', 'log_data', 'underscore'], function(logTemplate, logRenderer, logData, _) {
-    var cara = {
+    var shower = {
         selfLoading: true,
         initialize: function() {
-            var title = "cara",
+            var title = "shower",
                 data = {
                 title: title,
                 overrides: [
                     {
                         index: 0,
-                        width: 1380
+                        width: 1265
                     },
                     {
-                        index: 1,
-                        width: 1550
-                    },
-                    {
-                        index: 2,
-                        width: 1675
+                        index: 3,
+                        width: 2100
                     }
                 ],
-                length: 90,
+                guilt: 0,
+                length: 18,
                 detail: "An unproductive day",
-                date: "November 17, 2014",
+                date: "December 25, 2014",
                 logContents: ""
             };
 
@@ -48,5 +45,5 @@ define(['templates/log_detail', 'log/log_renderer', 'log_data', 'underscore'], f
             logRenderer.destroy();
         }
     }
-    return cara;
+    return shower;
 });
