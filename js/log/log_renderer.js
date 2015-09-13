@@ -177,10 +177,10 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
             this.letterCanvas[0].width = this.canvasWidth;
             this.letterCanvas[0].height = this.canvasHeight;
 
-            this.letterCtx.shadowOffsetX = 12;
-            this.letterCtx.shadowOffsetY = 12;
-            this.letterCtx.shadowBlur = 20;
-            this.letterCtx.shadowColor = "rgba(0, 0, 0, 0.4)";
+            this.letterCtx.shadowOffsetX = 8;
+            this.letterCtx.shadowOffsetY = 8;
+            this.letterCtx.shadowBlur = 12;
+            this.letterCtx.shadowColor = "rgba(0, 0, 0, 0.3)";
 
             this.letterCtx.fillStyle = "white";
 
