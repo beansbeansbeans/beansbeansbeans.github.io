@@ -1,43 +1,27 @@
 define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTemplate, logRenderer, logData) {
-    var christmas = {
+    var ebola = {
         selfLoading: true,
         initialize: function() {
-            var title = "christmas",
+            var title = "ebola",
                 data = {
                 title: title,
                 overrides: [
                     {
-                        index: 1,
-                        width: 1620
-                    },
-                    {
                         index: 2,
-                        width: 1560
+                        width: 1700
                     },
                     {
                         index: 3,
-                        width: 885
+                        width: 1375
                     },
                     {
                         index: 4,
-                        width: 1350
-                    },
-                    {
-                        index: 5,
-                        width: 1200
-                    },
-                    {
-                        index: 6,
-                        width: 2260
-                    },
-                    {
-                        index: 7,
-                        width: 1700
+                        width: 1600
                     }
                 ],
-                length: 111,
+                length: 7,
                 detail: "An exciting day",
-                date: "December 5, 2014",
+                date: "June 20, 2014",
                 logContents: ""
             };
 
@@ -64,5 +48,5 @@ define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTem
             logRenderer.destroy();
         }
     }
-    return christmas;
+    return ebola;
 });
