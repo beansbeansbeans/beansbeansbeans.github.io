@@ -45,12 +45,12 @@ define([], function() {
       description: "August 11, 2014"
     },
     {
-      title: "plain",
-      description: "August 2, 2014"
-    },
-    {
       title: "plane",
       description: "July 20, 2014"
+    },
+    {
+      title: "plain",
+      description: "May 2, 2014"
     }
   ];
 });
