@@ -21,30 +21,6 @@ define([], function() {
       description: "July 18, 2015"
     },
     {
-      title: "birthday",
-      description: "March 27, 2015"
-    },
-    {
-      title: "cruising",
-      description: "March 22, 2015"
-    },
-    {
-      title: "pushpop",
-      description: "February 20, 2015"
-    },
-    {
-      title: "running",
-      description: "January 12, 2015"
-    },
-    {
-      title: "pops",
-      description: "December 15, 2014"
-    },
-    {
-      title: "yeye",
-      description: "December 10, 2014"
-    },
-    {
       title: "toast",
       description: "December 8, 2014"
     },
