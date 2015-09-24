@@ -33,16 +33,16 @@ define(['templates/project_index'], function(projectIndex) {
 			description: "An interactive photograph."
 		},
 		{
+			title: "spotlights",
+			description: "A light-sensitive bouncing ball."
+		},
+		{
 			title: "straws",
 			description: "Straws resting inside an unstable glass."
 		},
 		{
 			title: "leaves",
 			description: "Leaves floating on top of sliding panes."
-		},
-		{
-			title: "spotlights",
-			description: "A light-sensitive bouncing ball."
 		},
 		{
 			title: "hiveplot",
