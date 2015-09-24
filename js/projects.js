@@ -1,6 +1,18 @@
 define(['templates/project_index'], function(projectIndex) {
 	var data = [
 		{
+			title: "oughtness",
+			description: "A random melody maker."
+		},
+		{
+			title: "storiesof",
+			description: "A random melody maker."
+		},
+		{
+			title: "outloud",
+			description: "A random melody maker."
+		},
+		{
 			title: "notes",
 			description: "A random melody maker."
 		},
@@ -9,16 +21,16 @@ define(['templates/project_index'], function(projectIndex) {
 			description: "A face made of warpable pixels."
 		},
 		{
-			title: "spinny",
-			description: "An interactive photograph."
-		},
-		{
 			title: "dancers",
 			description: "A ballet dancer with morphing frames."
 		},
 		{
 			title: "food",
 			description: "Words made of simplifiable paths."
+		},
+		{
+			title: "spinny",
+			description: "An interactive photograph."
 		},
 		{
 			title: "straws",
