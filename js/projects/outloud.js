@@ -5,10 +5,10 @@ define(['templates/project_detail'], function(projectTemplate) {
       var data = {
         identifier: "outloud",
         title: "outloud",
-        blurb: "This is an animation of a turning head. Hover over any pixel within the animation to magnify it.",
+        blurb: "",
         projectContents: '<div id="border"><div id="movie"></div></div>',
-        caption: "Built with d3js, a fisheye distortion plugin for d3js, and scalable vector graphics.",
-        description: "I wanted to try to apply a <a href='http://bost.ocks.org/mike/fisheye/' target='_blank'>Cartesian distortion effect</a> to a pixellated image."
+        caption: "Ruby on the back-end, React and AWS on the front-end.",
+        description: "<p>Podcasting and voicemail are decades-old technologies, yet they are the technological frontier for sharing audio. At the same time, tools abound for sharing images and video on the internet.</p><p><a href='https://outloud.cc' target='_blank'>Outloud</a> is a website for people to create and share 20 second recordings. Recordings are organized by topic, e.g. 'Jokes', or 'In My Humble Opinion'. Users can record reactions to what they hear on the site, which are then appended to the seed post.</p>"
       };
 
       $("#view").html(projectTemplate(data));
