@@ -1,4 +1,5 @@
 #project-outloud {
+  @extend %linked-project-page;
   #screenshot {
     $image-width: 2555px;
     $image-height: 361px;
@@ -12,55 +13,6 @@
       margin-top: -0.5 * $image-height;
       margin-left: -0.5 * $image-width;
     }
-    width: 100%;
     height: 25vh;
-    position: relative;
-    overflow: hidden;
-    border-top: solid 1px #ccc;
-    border-bottom: solid 1px #ccc;
-    cursor: pointer;
-    display: block;
-    .cta {
-      opacity: 0;
-      position: absolute;
-      z-index: 1;
-      text-transform: uppercase;
-      font-size: 1.5rem;
-      top: 50%;
-      margin-top: -0.75rem;
-      left: 50%;
-      transform: translateX(-50%);
-      color: $dark-blue;
-      font-weight: 800;
-      text-decoration: underline;
-    }
-    #image, .cta {
-      @include transition(opacity 200ms);
-    }
-    &:hover {
-      .cta {
-        opacity: 1;
-      }
-      #image {
-        opacity: 0.35;
-      }
-    }
-  }
-  .project-contents {
-    @include leader(8);
-    @include trailer(4);
-  }
-  .caption {
-    @include trailer(14);
-  }
-  .cta-main {
-    font-family: Brandon;
-    text-align: center;
-    display: block;
-    margin-bottom: 3rem;
-    text-transform: uppercase;
-    font-size: 1.2rem;
-    text-decoration: underline;
-    color: $dark-blue;
   }
 }

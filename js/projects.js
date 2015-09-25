@@ -6,7 +6,7 @@ define(['templates/project_index'], function(projectIndex) {
 		},
 		{
 			title: "storiesof",
-			description: "Mood tracking."
+			description: "Sharing unhappiness."
 		},
 		{
 			title: "outloud",

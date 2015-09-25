@@ -54,6 +54,59 @@
   font-style: italic;
   src: url("/fonts/brandon_600_it.otf");
 }
+#project-outloud #screenshot, #project-storiesof #screenshot {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border-top: solid 1px #ccc;
+  border-bottom: solid 1px #ccc;
+  cursor: pointer;
+  display: block;
+}
+#project-outloud #screenshot .cta, #project-storiesof #screenshot .cta {
+  opacity: 0;
+  position: absolute;
+  z-index: 1;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  top: 50%;
+  margin-top: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #00303e;
+  font-weight: 800;
+  text-decoration: underline;
+}
+#project-outloud #screenshot #image, #project-storiesof #screenshot #image, #project-outloud #screenshot .cta, #project-storiesof #screenshot .cta {
+  -moz-transition: opacity 200ms;
+  -o-transition: opacity 200ms;
+  -webkit-transition: opacity 200ms;
+  transition: opacity 200ms;
+}
+#project-outloud #screenshot:hover .cta, #project-storiesof #screenshot:hover .cta {
+  opacity: 1;
+}
+#project-outloud #screenshot:hover #image, #project-storiesof #screenshot:hover #image {
+  opacity: 0.35;
+}
+#project-outloud .project-contents, #project-storiesof .project-contents {
+  margin-top: 2.5em;
+  margin-bottom: 1.25em;
+}
+#project-outloud .caption, #project-storiesof .caption {
+  margin-bottom: 4.375em;
+}
+#project-outloud .cta-main, #project-storiesof .cta-main {
+  font-family: Brandon;
+  text-align: center;
+  display: block;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  text-decoration: underline;
+  color: #00303e;
+}
+
 #project_index .image {
   width: 125px;
   height: 125px;
@@ -6211,14 +6264,7 @@
 }
 
 #project-outloud #screenshot {
-  width: 100%;
   height: 25vh;
-  position: relative;
-  overflow: hidden;
-  border-top: solid 1px #ccc;
-  border-bottom: solid 1px #ccc;
-  cursor: pointer;
-  display: block;
 }
 #project-outloud #screenshot #image {
   background-image: url("../images/project_outloud/hero.jpg");
@@ -6231,48 +6277,18 @@
   margin-top: -180.5px;
   margin-left: -1277.5px;
 }
-#project-outloud #screenshot .cta {
-  opacity: 0;
+
+#project-storiesof #screenshot {
+  padding-top: 8.2%;
+}
+#project-storiesof #screenshot #image {
   position: absolute;
-  z-index: 1;
-  text-transform: uppercase;
-  font-size: 1.5rem;
-  top: 50%;
-  margin-top: -0.75rem;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #00303e;
-  font-weight: 800;
-  text-decoration: underline;
-}
-#project-outloud #screenshot #image, #project-outloud #screenshot .cta {
-  -moz-transition: opacity 200ms;
-  -o-transition: opacity 200ms;
-  -webkit-transition: opacity 200ms;
-  transition: opacity 200ms;
-}
-#project-outloud #screenshot:hover .cta {
-  opacity: 1;
-}
-#project-outloud #screenshot:hover #image {
-  opacity: 0.35;
-}
-#project-outloud .project-contents {
-  margin-top: 2.5em;
-  margin-bottom: 1.25em;
-}
-#project-outloud .caption {
-  margin-bottom: 4.375em;
-}
-#project-outloud .cta-main {
-  font-family: Brandon;
-  text-align: center;
-  display: block;
-  margin-bottom: 3rem;
-  text-transform: uppercase;
-  font-size: 1.2rem;
-  text-decoration: underline;
-  color: #00303e;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url("../images/project_storiesof/hero.jpg");
+  background-size: cover;
 }
 
 nav .explanation {
