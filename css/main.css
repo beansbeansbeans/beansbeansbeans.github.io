@@ -6520,8 +6520,8 @@ html {
 
 .body-small-text, .project .caption {
   font-family: Merriweather;
-  font-size: 0.6875em;
-  line-height: 1.36364em;
+  font-size: 0.75em;
+  line-height: 1.25em;
 }
 @media (max-width: 640px) {
   .body-small-text, .project .caption {
@@ -6533,8 +6533,8 @@ html {
 .body-medium-text, nav li a .description, .project .description, .project .header .blurb,
 #homepage .header .blurb {
   font-family: Merriweather;
-  font-size: 0.875em;
-  line-height: 1.42857em;
+  font-size: 0.9375em;
+  line-height: 1.5em;
 }
 @media (max-width: 640px) {
   .body-medium-text, nav li a .description, .project .description, .project .header .blurb,
