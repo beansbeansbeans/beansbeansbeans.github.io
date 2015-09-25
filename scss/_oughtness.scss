@@ -1,15 +1,17 @@
 #project-oughtness {
   @extend %linked-project-page;
   #screenshot {
-    padding-top: 8.2%;
+    $image-width: 834px;
+    $image-height: 612px;
     #image {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-image: url('../images/project_storiesof/hero.jpg');
-      background-size: cover;
+      background-image: url('../images/project_oughtness/hero.jpg');
+      background-size: $image-width / 2 $image-height / 2;
+      @include size($image-width / 2, $image-height / 2);
+      margin-left: auto;
+      margin-right: auto;
     }
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background: #EFEFEF;
   }
 }
