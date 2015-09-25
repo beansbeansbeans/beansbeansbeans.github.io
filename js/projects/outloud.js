@@ -6,9 +6,9 @@ define(['templates/project_detail'], function(projectTemplate) {
         identifier: "outloud",
         title: "outloud",
         blurb: "",
-        projectContents: '<div id="border"><div id="movie"></div></div>',
+        projectContents: '<div id="screenshot"></div>',
         caption: "Ruby on the back-end, React and AWS on the front-end.",
-        description: "<p>Podcasting and voicemail are decades-old technologies, yet they are the technological frontier for sharing audio. At the same time, tools abound for sharing images and video on the internet.</p><p><a href='https://outloud.cc' target='_blank'>Outloud</a> is a website for people to create and share 20 second recordings. Recordings are organized by topic, e.g. 'Jokes', or 'In My Humble Opinion'. Users can record reactions to what they hear on the site, which are then appended to the seed post.</p>"
+        description: "<p>Podcasting and voicemail are decades-old technologies, yet they are the technological frontier for sharing audio. At the same time, tools abound for sharing images and video on the internet.</p><p>I built <a href='https://outloud.cc' target='_blank'>Outloud</a> to enable people to create and share 20 second recordings. Recordings are organized by topic, e.g. 'Jokes', or 'In My Humble Opinion'. Users can record reactions to what they hear on the site, which are then appended to the seed post.</p>"
       };
 
       $("#view").html(projectTemplate(data));
