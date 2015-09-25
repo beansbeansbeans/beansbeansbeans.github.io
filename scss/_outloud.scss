@@ -1,0 +1,26 @@
+#project-outloud {
+  #screenshot {
+    $image-width: 2555px;
+    $image-height: 361px;
+    #image {
+      background-image: url('../images/project_outloud/hero.jpg');
+      background-size: $image-width $image-height;
+      @include size($image-width, $image-height);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -0.5 * $image-height;
+      margin-left: -0.5 * $image-width;
+    }
+    width: 100%;
+    height: 25vh;
+    position: relative;
+    overflow: hidden;
+    border-top: solid 1px #ccc;
+    border-bottom: solid 1px #ccc;
+  }
+  .project-contents {
+    @include leader(8);
+    @include trailer(6);
+  }
+}
