@@ -6217,6 +6217,8 @@
   overflow: hidden;
   border-top: solid 1px #ccc;
   border-bottom: solid 1px #ccc;
+  cursor: pointer;
+  display: block;
 }
 #project-outloud #screenshot #image {
   background-image: url("../images/project_outloud/hero.jpg");
@@ -6228,6 +6230,32 @@
   left: 50%;
   margin-top: -180.5px;
   margin-left: -1277.5px;
+}
+#project-outloud #screenshot .cta {
+  opacity: 0;
+  position: absolute;
+  z-index: 1;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  top: 50%;
+  margin-top: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #00303e;
+  font-weight: 800;
+  text-decoration: underline;
+}
+#project-outloud #screenshot #image, #project-outloud #screenshot .cta {
+  -moz-transition: opacity 200ms;
+  -o-transition: opacity 200ms;
+  -webkit-transition: opacity 200ms;
+  transition: opacity 200ms;
+}
+#project-outloud #screenshot:hover .cta {
+  opacity: 1;
+}
+#project-outloud #screenshot:hover #image {
+  opacity: 0.35;
 }
 #project-outloud .project-contents {
   margin-top: 2.5em;
