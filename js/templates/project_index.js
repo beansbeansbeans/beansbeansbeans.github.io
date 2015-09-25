@@ -5,7 +5,9 @@ return Handlebars.template({"1":function(depth0,helpers,partials,data) {
     + escapeExpression(((helper = helpers.title || (depth0 && depth0.title)),(typeof helper === functionType ? helper.call(depth0, {"name":"title","hash":{},"data":data}) : helper)))
     + ">\n	    	<a href=\"#projects/"
     + escapeExpression(((helper = helpers.title || (depth0 && depth0.title)),(typeof helper === functionType ? helper.call(depth0, {"name":"title","hash":{},"data":data}) : helper)))
-    + "\">\n	    		<div class=\"image\"></div>\n	    		<div class=\"title\">\n	    			"
+    + "\">\n	    		<div style=\"background-image:url(../images/project_index/"
+    + escapeExpression(((helper = helpers.title || (depth0 && depth0.title)),(typeof helper === functionType ? helper.call(depth0, {"name":"title","hash":{},"data":data}) : helper)))
+    + ".jpg)\" class=\"image\"></div>\n	    		<div class=\"title\">\n	    			"
     + escapeExpression(((helper = helpers.title || (depth0 && depth0.title)),(typeof helper === functionType ? helper.call(depth0, {"name":"title","hash":{},"data":data}) : helper)))
     + "\n	    		</div>\n	    		<div class=\"description\">\n	    			"
     + escapeExpression(((helper = helpers.description || (depth0 && depth0.description)),(typeof helper === functionType ? helper.call(depth0, {"name":"description","hash":{},"data":data}) : helper)))

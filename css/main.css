@@ -54,135 +54,15 @@
   font-style: italic;
   src: url("/fonts/brandon_600_it.otf");
 }
-#project_index li .image {
-  background-image: url(../images/projects_sprite.jpg);
+#project_index .image {
+  width: 125px;
+  height: 125px;
+  background-size: cover;
+  border-radius: 50%;
+  border: solid 1px #00303e;
+  margin-bottom: 1.5rem;
   margin-left: auto;
   margin-right: auto;
-  position: relative;
-  margin-bottom: 1.5625em;
-}
-@media (max-width: 640px) {
-  #project_index li .image {
-    background-image: url(../images/projects_sprite_mobile.jpg);
-    margin-bottom: 1.25em;
-  }
-}
-#project_index li[data-project-id="spinny"] .image {
-  width: 125px;
-  height: 124px;
-  margin-bottom: 2.5em;
-}
-@media (max-width: 640px) {
-  #project_index li[data-project-id="spinny"] .image {
-    width: 76px;
-    height: 77px;
-    margin-bottom: 1.5625em;
-  }
-}
-#project_index li[data-project-id="food"] .image {
-  width: 166px;
-  height: 125px;
-  margin-bottom: 2.5em;
-  left: 5px;
-  background-position: 0 -126px;
-}
-@media (max-width: 640px) {
-  #project_index li[data-project-id="food"] .image {
-    background-position: 0 -75px;
-    width: 106px;
-    height: 78px;
-    margin-bottom: 1.5625em;
-    left: 6px;
-  }
-}
-#project_index li[data-project-id="dancers"] .image {
-  background-position: 0 -262px;
-  width: 178px;
-  height: 130px;
-  margin-bottom: 2.5em;
-}
-@media (max-width: 640px) {
-  #project_index li[data-project-id="dancers"] .image {
-    background-position: 0 -158px;
-    width: 106px;
-    height: 78px;
-    margin-bottom: 1.5625em;
-  }
-}
-#project_index li[data-project-id="notes"] .image {
-  background-position: 0 -715px;
-  width: 128px;
-  height: 174px;
-  margin-bottom: 2.1875em;
-}
-@media (max-width: 640px) {
-  #project_index li[data-project-id="notes"] .image {
-    background-position: 0 -432px;
-    width: 77px;
-    height: 104px;
-  }
-}
-#project_index li[data-project-id="pixels"] .image {
-  background-position: 0 -910px;
-  width: 158px;
-  height: 112px;
-}
-@media (max-width: 640px) {
-  #project_index li[data-project-id="pixels"] .image {
-    background-position: 0px -549px;
-    width: 95px;
-    height: 53px;
-  }
-}
-#project_index li[data-project-id="straws"] .image {
-  background-position: 0 -1172px;
-  width: 209px;
-  height: 128px;
-}
-@media (max-width: 640px) {
-  #project_index li[data-project-id="straws"] .image {
-    background-position: 0 -713px;
-    width: 120px;
-    height: 67px;
-  }
-}
-#project_index li[data-project-id="leaves"] .image {
-  background-position: 0 -540px;
-  width: 128px;
-  height: 169px;
-}
-@media (max-width: 640px) {
-  #project_index li[data-project-id="leaves"] .image {
-    background-position: 0 -326px;
-    width: 74px;
-    height: 96px;
-  }
-}
-#project_index li[data-project-id="hiveplot"] .image {
-  width: 128px;
-  height: 126px;
-  background-position: 0 -401px;
-  left: 14px;
-}
-@media (max-width: 640px) {
-  #project_index li[data-project-id="hiveplot"] .image {
-    width: 75px;
-    height: 73px;
-    background-position: 0 -243px;
-    left: 7px;
-  }
-}
-#project_index li[data-project-id="spotlights"] .image {
-  background-position: 0 -1024px;
-  width: 128px;
-  height: 142px;
-}
-@media (max-width: 640px) {
-  #project_index li[data-project-id="spotlights"] .image {
-    background-position: 0 -618px;
-    width: 76px;
-    height: 83px;
-  }
 }
 
 #project-fire {

@@ -1,115 +1,12 @@
 #project_index {
-	li {
-		.image {
-			background-image: url(../images/projects_sprite.jpg);
-			margin-left: auto;
-			margin-right: auto;
-			position: relative;
-			@include trailer(5);
-			@include mobile-only {
-				background-image: url(../images/projects_sprite_mobile.jpg);
-				@include trailer(4);
-			}
-		}
-		&[data-project-id="spinny"] .image {
-			width: 125px;
-			height: 124px;
-			@include trailer(8);
-			@include mobile-only {
-				width: 76px;
-				height: 77px;
-				@include trailer(5);
-			}
-		}
-		&[data-project-id="food"] .image {
-			width: 166px; 
-			height: 125px;
-			@include trailer(8);
-			left: 5px;
-			background-position: 0 -126px; 
-			@include mobile-only {
-				background-position: 0 -75px;
-				width: 106px;
-				height: 78px;
-				@include trailer(5);
-				left: 6px;
-			}
-		}
-		&[data-project-id="dancers"] .image {
-			background-position: 0 -262px; 
-			width: 178px; 
-			height: 130px;
-			@include trailer(8);
-			@include mobile-only {
-				background-position: 0 -158px;
-				width: 106px;
-				height: 78px;
-				@include trailer(5);
-			}
-		}
-		&[data-project-id="notes"] .image {
-			background-position: 0 -715px; 
-			width: 128px; 
-			height: 174px;
-			@include trailer(7);
-			@include mobile-only {
-				background-position: 0 -432px;
-				width: 77px;
-				height: 104px;
-			}
-		}
-		&[data-project-id="pixels"] .image {
-			background-position: 0 -910px; 
-			width: 158px; 
-			height: 112px;
-			@include mobile-only {
-				background-position: 0px -549px;
-				width: 95px;
-				height: 53px;
-			}
-		}
-		&[data-project-id="straws"] .image {
-			background-position: 0 -1172px; 
-			width: 209px; 
-			height: 128px;
-			@include mobile-only {
-				background-position: 0 -713px;
-				width: 120px;
-				height: 67px;
-			}
-		}
-		&[data-project-id="leaves"] .image {
-			background-position: 0 -540px; 
-			width: 128px; 
-			height: 169px;
-			@include mobile-only {
-				background-position: 0 -326px;
-				width: 74px;
-				height: 96px;
-			}
-		}
-		&[data-project-id="hiveplot"] .image {
-			width: 128px; 
-			height: 126px;
-			background-position: 0 -401px;
-			left: 14px;
-			@include mobile-only {
-				width: 75px;
-				height: 73px;
-				background-position: 0 -243px;
-				left: 7px;
-			}
-		}
-		&[data-project-id="spotlights"] .image {
-			background-position: 0 -1024px; 
-			width: 128px; 
-			height: 142px;
-			@include mobile-only {
-				background-position: 0 -618px;
-				width: 76px;
-				height: 83px;
-			}
-		}
+	.image {
+		@include square(125px);
+		background-size: cover;
+		border-radius: 50%;
+		border: solid 1px $dark-blue;
+		margin-bottom: 1.5rem;
+		margin-left: auto;
+		margin-right: auto;
 	}
 }
 
