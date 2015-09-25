@@ -13,12 +13,12 @@ define(['templates/project_index'], function(projectIndex) {
 			description: "Twitter for audio."
 		},
 		{
-			title: "notes",
-			description: "A random melody maker."
-		},
-		{
 			title: "pixels",
 			description: "A face made of warpable pixels."
+		},
+		{
+			title: "notes",
+			description: "A random melody maker."
 		},
 		{
 			title: "dancers",
