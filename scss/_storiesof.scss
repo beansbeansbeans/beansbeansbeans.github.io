@@ -1,15 +1,40 @@
 #project-storiesof {
   @extend %linked-project-page;
-  #screenshot {
-    padding-top: 8.2%;
-    #image {
+  .chrome {
+    border: solid 1px #ddd;
+    border-radius: 7px;
+    width: 65vw;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1000px;
+    min-width: 300px;
+    .chrome-controls {
+      padding: 0.3rem 0 0.4rem 0.5rem;
+      text-align: left;
+      background: #ddd;
+      .close, .min, .max {
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 0.5rem;
+        @include square(0.55rem);
+        background: rgba(white, 0.8);
+      }
+    }
+    .contents {
+      padding-top: 77%;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0 0 7px 7px;
+    }
+    video {
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
       left: 0;
-      background-image: url('../images/project_storiesof/hero.jpg');
-      background-size: cover;
+      width: 100%;
+      height: 100%;
     }
+    margin-bottom: 1rem;
   }
 }

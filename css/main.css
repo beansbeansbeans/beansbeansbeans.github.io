@@ -6278,17 +6278,43 @@
   margin-left: -1277.5px;
 }
 
-#project-storiesof #screenshot {
-  padding-top: 8.2%;
+#project-storiesof .chrome {
+  border: solid 1px #ddd;
+  border-radius: 7px;
+  width: 65vw;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1000px;
+  min-width: 300px;
+  margin-bottom: 1rem;
 }
-#project-storiesof #screenshot #image {
+#project-storiesof .chrome .chrome-controls {
+  padding: 0.3rem 0 0.4rem 0.5rem;
+  text-align: left;
+  background: #ddd;
+}
+#project-storiesof .chrome .chrome-controls .close, #project-storiesof .chrome .chrome-controls .min, #project-storiesof .chrome .chrome-controls .max {
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 0.5rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  background: rgba(255, 255, 255, 0.8);
+}
+#project-storiesof .chrome .contents {
+  padding-top: 77%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 7px 7px;
+}
+#project-storiesof .chrome video {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: url("../images/project_storiesof/hero.jpg");
-  background-size: cover;
+  width: 100%;
+  height: 100%;
 }
 
 #project-oughtness #screenshot {
