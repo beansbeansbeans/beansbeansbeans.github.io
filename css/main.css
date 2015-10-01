@@ -6316,6 +6316,79 @@
   width: 100%;
   height: 100%;
 }
+#project-storiesof .caption [class*="caption"] {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+#project-storiesof .caption[data-active-caption="0"] .caption-0 {
+  display: block;
+}
+#project-storiesof .caption[data-active-caption="0"] .loading {
+  display: none;
+}
+#project-storiesof .caption[data-active-caption="1"] .caption-1 {
+  display: block;
+}
+#project-storiesof .caption[data-active-caption="1"] .loading {
+  display: none;
+}
+#project-storiesof .caption[data-active-caption="2"] .caption-2 {
+  display: block;
+}
+#project-storiesof .caption[data-active-caption="2"] .loading {
+  display: none;
+}
+#project-storiesof .caption[data-active-caption="3"] .caption-3 {
+  display: block;
+}
+#project-storiesof .caption[data-active-caption="3"] .loading {
+  display: none;
+}
+#project-storiesof .caption[data-active-caption="4"] .caption-4 {
+  display: block;
+}
+#project-storiesof .caption[data-active-caption="4"] .loading {
+  display: none;
+}
+#project-storiesof .caption[data-active-caption="5"] .caption-5 {
+  display: block;
+}
+#project-storiesof .caption[data-active-caption="5"] .loading {
+  display: none;
+}
+#project-storiesof .caption[data-active-caption="6"] .caption-6 {
+  display: block;
+}
+#project-storiesof .caption[data-active-caption="6"] .loading {
+  display: none;
+}
+#project-storiesof .caption[data-active-caption="7"] .caption-7 {
+  display: block;
+}
+#project-storiesof .caption[data-active-caption="7"] .loading {
+  display: none;
+}
+#project-storiesof .caption[data-active-caption="8"] .caption-8 {
+  display: block;
+}
+#project-storiesof .caption[data-active-caption="8"] .loading {
+  display: none;
+}
+#project-storiesof .caption[data-active-caption="9"] .caption-9 {
+  display: block;
+}
+#project-storiesof .caption[data-active-caption="9"] .loading {
+  display: none;
+}
+#project-storiesof .caption[data-active-caption="10"] .caption-10 {
+  display: block;
+}
+#project-storiesof .caption[data-active-caption="10"] .loading {
+  display: none;
+}
 
 #project-oughtness #screenshot {
   padding-top: 3rem;

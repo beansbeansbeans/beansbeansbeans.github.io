@@ -37,4 +37,23 @@
     }
     margin-bottom: 1rem;
   }
+  .caption {
+    [class*="caption"] {
+      display: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+  }
+  @for $i from 0 through 10 { // 10 is max number of items that could exist in infobox
+    .caption[data-active-caption="#{$i}"] {
+      .caption-#{$i} {
+        display: block;
+      }
+      .loading {
+        display: none;
+      }
+    }
+  }
 }
