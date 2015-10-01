@@ -38,21 +38,26 @@
     margin-bottom: 1rem;
   }
   .caption {
-    [class*="caption"] {
-      display: none;
+    @extend .body-medium-text;
+    margin-bottom: 5rem;
+    .loading, [class*="caption"] {
+      @include transition(opacity $transition-duration);      
       position: absolute;
       left: 0;
       right: 0;
       text-align: center;
     }
+    [class*="caption"] {
+      opacity: 0;
+    }
   }
   @for $i from 0 through 10 { // 10 is max number of items that could exist in infobox
     .caption[data-active-caption="#{$i}"] {
       .caption-#{$i} {
-        display: block;
+        opacity: 1;
       }
       .loading {
-        display: none;
+        opacity: 0;
       }
     }
   }
