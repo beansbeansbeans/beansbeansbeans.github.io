@@ -45,7 +45,7 @@
   }
   .caption {
     @extend .body-medium-text;
-    margin-bottom: 5rem;
+    margin-bottom: 5.5rem;
     font-style: normal;
     .loading, [class*="caption"] {
       @include transition(opacity $transition-duration);      
