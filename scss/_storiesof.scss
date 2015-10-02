@@ -1,5 +1,11 @@
 #project-storiesof {
   @extend %linked-project-page;
+  .title a {
+    color: $dark-blue;
+    height: 2.5rem;
+    display: inline-block;
+    border-bottom: solid 1px $dark-blue;
+  }
   .chrome {
     border: solid 1px #ddd;
     border-radius: 7px;
@@ -9,7 +15,7 @@
     max-width: 1110px;
     min-width: 300px;
     .chrome-controls {
-      padding: 0.3rem 0 0.4rem 0.5rem;
+      padding: 0.25rem 0 0.45rem 0.5rem;
       text-align: left;
       background: #ddd;
       .close, .min, .max {
@@ -40,6 +46,7 @@
   .caption {
     @extend .body-medium-text;
     margin-bottom: 5rem;
+    font-style: normal;
     .loading, [class*="caption"] {
       @include transition(opacity $transition-duration);      
       position: absolute;

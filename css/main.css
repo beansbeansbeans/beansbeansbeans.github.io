@@ -6278,6 +6278,12 @@
   margin-left: -1277.5px;
 }
 
+#project-storiesof .title a {
+  color: #00303e;
+  height: 2.5rem;
+  display: inline-block;
+  border-bottom: solid 1px #00303e;
+}
 #project-storiesof .chrome {
   border: solid 1px #ddd;
   border-radius: 7px;
@@ -6289,7 +6295,7 @@
   margin-bottom: 1rem;
 }
 #project-storiesof .chrome .chrome-controls {
-  padding: 0.3rem 0 0.4rem 0.5rem;
+  padding: 0.25rem 0 0.45rem 0.5rem;
   text-align: left;
   background: #ddd;
 }
@@ -6318,6 +6324,7 @@
 }
 #project-storiesof .caption {
   margin-bottom: 5rem;
+  font-style: normal;
 }
 #project-storiesof .caption .loading, #project-storiesof .caption [class*="caption"] {
   -moz-transition: opacity 200ms;
