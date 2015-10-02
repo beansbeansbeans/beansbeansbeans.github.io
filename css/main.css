@@ -6284,7 +6284,7 @@
   width: 65vw;
   margin-left: auto;
   margin-right: auto;
-  max-width: 1000px;
+  max-width: 1110px;
   min-width: 300px;
   margin-bottom: 1rem;
 }
@@ -6302,7 +6302,7 @@
   background: rgba(255, 255, 255, 0.8);
 }
 #project-storiesof .chrome .contents {
-  padding-top: 77%;
+  padding-top: 51.7%;
   position: relative;
   overflow: hidden;
   border-radius: 0 0 7px 7px;
