@@ -14,4 +14,11 @@
     padding-bottom: 3rem;
     background: #EFEFEF;
   }
+  .caveat {
+    border-top: solid 1px $dark-blue;
+    padding-top: 1rem;
+    margin-top: 3rem;
+    font-size: 0.75rem;
+    line-height: 1.7;
+  }
 }
