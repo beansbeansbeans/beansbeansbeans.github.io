@@ -2,15 +2,15 @@ define(['templates/project_index'], function(projectIndex) {
 	var data = [
 		{
 			title: "oughtness",
-			description: "Prioritizing our problems."
-		},
-		{
-			title: "storiesof",
-			description: "Sharing unhappiness."
+			description: "Prioritizing problems."
 		},
 		{
 			title: "outloud",
 			description: "Twitter for audio."
+		},
+		{
+			title: "storiesof",
+			description: "Sharing unhappiness."
 		},
 		{
 			title: "pixels",
