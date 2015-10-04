@@ -1,18 +1,6 @@
 #project-outloud {
-  @extend %linked-project-page;
-  #screenshot {
-    $image-width: 2555px;
-    $image-height: 361px;
-    #image {
-      background-image: url('../images/project_outloud/hero.jpg');
-      background-size: $image-width $image-height;
-      @include size($image-width, $image-height);
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin-top: -0.5 * $image-height;
-      margin-left: -0.5 * $image-width;
-    }
-    height: 25vh;
+  @extend %video-project-page;
+  .contents {
+    padding-top: 47.2%;
   }
 }
