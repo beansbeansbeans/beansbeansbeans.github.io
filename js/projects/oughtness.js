@@ -4,7 +4,7 @@ define(['templates/project_detail'], function(projectTemplate) {
     initialize: function() {
       var data = {
         identifier: "oughtness",
-        title: "oughtness",
+        title: "<a href='https://oughtness.cc' target='_blank'>Oughtness</a>",
         blurb: "",
         projectContents: '<a href="https://oughtness.cc" target="_blank" id="screenshot"><div id="image"></div><div class="cta">View project</div></a>',
         caption: "Simplified version of <a href='https://oughtness.cc' target='_blank'>Oughtness's</a> voting page.",
