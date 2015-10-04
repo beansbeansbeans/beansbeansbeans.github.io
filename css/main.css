@@ -97,6 +97,7 @@
   margin-bottom: 4.375em;
 }
 #project-outloud .cta-main, #project-storiesof .cta-main, #project-oughtness .cta-main {
+  font-weight: 800;
   font-family: Brandon;
   text-align: center;
   display: block;
@@ -122,6 +123,7 @@
   max-width: 1110px;
   min-width: 300px;
   margin-bottom: 1rem;
+  position: relative;
 }
 #project-outloud .chrome .chrome-controls, #project-storiesof .chrome .chrome-controls {
   padding: 0.25rem 0 0.45rem 0.5rem;
@@ -150,6 +152,15 @@
   width: 100%;
   height: 100%;
 }
+#project-outloud .chrome:after, #project-storiesof .chrome:after {
+  content: "";
+  background: #ddd;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 1.8rem);
+  height: 1px;
+}
 #project-outloud .caption, #project-storiesof .caption {
   margin-bottom: 5.5rem;
   font-style: normal;
@@ -160,9 +171,15 @@
   -webkit-transition: opacity 200ms;
   transition: opacity 200ms;
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 50%;
+  display: inline-block;
   text-align: center;
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  padding: 0 1rem;
+  background-color: white;
 }
 #project-outloud .caption [class*="caption"], #project-storiesof .caption [class*="caption"] {
   opacity: 0;

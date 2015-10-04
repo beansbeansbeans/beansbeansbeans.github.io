@@ -41,6 +41,7 @@
     @include trailer(14);
   }
   .cta-main {
+    font-weight: 800;
     font-family: Brandon;
     text-align: center;
     display: block;
@@ -95,6 +96,16 @@
       height: 100%;
     }
     margin-bottom: 1rem;
+    position: relative;
+    &:after {
+      content: "";
+      background: #ddd;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(100% + 1.8rem);
+      height: 1px;
+    }
   }
   .caption {
     @extend .body-medium-text;
@@ -103,9 +114,12 @@
     .loading, [class*="caption"] {
       @include transition(opacity $transition-duration);      
       position: absolute;
-      left: 0;
-      right: 0;
+      left: 50%;
+      display: inline-block;
       text-align: center;
+      @include transform(translateX(-50%));
+      padding: 0 1rem;
+      background-color: white;
     }
     [class*="caption"] {
       opacity: 0;
