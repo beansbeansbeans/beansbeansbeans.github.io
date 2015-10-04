@@ -15,7 +15,7 @@ define(['templates/project_detail'], function(projectTemplate) {
       $("#view").html(projectTemplate(data));
 
       var video = $("video").get(0);
-      var script = [ 0, 3500, 12000, 15000 ];
+      var script = [ 0, 3500, 13000, 16500 ];
       var scriptIndex = 0;
       var hasPlayedOnce = false;
 
