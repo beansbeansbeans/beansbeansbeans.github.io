@@ -1,5 +1,8 @@
 #project-storiesof {
   @extend %video-project-page;
+  .chrome {
+    width: 60vw;
+  }
   .contents {
     padding-top: 58.5%;
   }

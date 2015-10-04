@@ -17,6 +17,7 @@ define(['templates/project_detail'], function(projectTemplate) {
       var video = $("video").get(0);
       var script = [ 0, 3500, 12000, 15000 ];
       var scriptIndex = 0;
+      var hasPlayedOnce = false;
 
       var loop = function() {
         video.play();
@@ -27,8 +28,16 @@ define(['templates/project_detail'], function(projectTemplate) {
         }.bind(this));
       }.bind(this);
 
-      video.addEventListener("canplaythrough", loop);
-      video.addEventListener("ended", loop);
+      video.addEventListener("canplaythrough", function() {
+        if(!hasPlayedOnce) {
+          loop();
+          hasPlayedOnce = true;
+        }
+      });
+      video.addEventListener("ended", function() {
+        video.load();
+        loop();
+      });
       
       },
       destroy: function() {
