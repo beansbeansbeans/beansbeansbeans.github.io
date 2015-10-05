@@ -24,9 +24,11 @@ define(['templates/project_detail'], function(projectTemplate) {
         if(sound) {
           $(".volume-on").addClass("hide");
           $(".volume-off").removeClass("hide");
+          video.muted = false;
         } else {
           $(".volume-on").removeClass("hide");
           $(".volume-off").addClass("hide");
+          video.muted = true;
         }
 
         sound = !sound;
