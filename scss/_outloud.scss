@@ -3,4 +3,23 @@
   .contents {
     padding-top: 47.2%;
   }
+  .volume {
+    position: absolute;
+    z-index: 1;
+    right: 1rem;
+    bottom: 1rem;
+    border-radius: 50%;
+    @include square(3rem);
+    border: solid 2px $dark-blue;
+    cursor: pointer;
+    .volume-on, .volume-off {
+      position: absolute;
+      @include square(100%);
+      text-align: center;
+      margin-top: 0.45rem;
+      &.hide {
+        opacity: 0;
+      }
+    }
+  }
 }
