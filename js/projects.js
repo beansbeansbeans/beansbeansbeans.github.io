@@ -25,12 +25,12 @@ define(['templates/project_index'], function(projectIndex) {
 			description: "A ballet dancer with morphing frames."
 		},
 		{
-			title: "food",
-			description: "Words made of simplifiable paths."
-		},
-		{
 			title: "spinny",
 			description: "An interactive photograph."
+		},
+		{
+			title: "food",
+			description: "Words made of simplifiable paths."
 		},
 		{
 			title: "spotlights",
