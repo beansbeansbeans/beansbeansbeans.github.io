@@ -1,7 +1,6 @@
 define(['templates/project_detail'], function(projectTemplate) {
   var storiesof = {
     intervalID: null,
-    scriptTimeouts: [],
     initialize: function() {
       var data = {
         identifier: "storiesof",
@@ -15,17 +14,13 @@ define(['templates/project_detail'], function(projectTemplate) {
       $("#view").html(projectTemplate(data));
 
       var video = $("video").get(0);
-      var script = [ 0, 3500, 13000, 16500 ];
+      var script = [ 0, 3.5, 13, 16.5 ];
       var scriptIndex = 0;
       var hasPlayedOnce = false;
 
       var loop = function() {
         video.play();
-        script.forEach(function(d, i) {
-          this.scriptTimeouts.push(setTimeout(function() {
-            $(".caption").attr("data-active-caption", i);
-          }, d));
-        }.bind(this));
+        scriptIndex = 0;
       }.bind(this);
 
       video.addEventListener("canplaythrough", function() {
@@ -38,11 +33,16 @@ define(['templates/project_detail'], function(projectTemplate) {
         video.load();
         loop();
       });
+      video.addEventListener("timeupdate", function() {
+        if(video.currentTime > script[scriptIndex]) {
+          $(".caption").attr("data-active-caption", scriptIndex);
+          scriptIndex++;
+        }
+      });
       
       },
       destroy: function() {
         window.clearInterval(this.intervalID);
-        this.scriptTimeouts.forEach(window.clearTimeout);
       }
     };
     return storiesof;

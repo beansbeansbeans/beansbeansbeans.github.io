@@ -1,7 +1,6 @@
 define(['templates/project_detail'], function(projectTemplate) {
   var outloud = {
     intervalID: null,
-    scriptTimeouts: [],
     initialize: function() {
       var data = {
         identifier: "outloud",
@@ -15,7 +14,7 @@ define(['templates/project_detail'], function(projectTemplate) {
       $("#view").html(projectTemplate(data));
 
       var video = $("video").get(0);
-      var script = [ 0, 13000, 20000 ];
+      var script = [ 0, 13, 20 ];
       var scriptIndex = 0;
       var hasPlayedOnce = false;
       var sound = true;
@@ -38,11 +37,7 @@ define(['templates/project_detail'], function(projectTemplate) {
 
       var loop = function() {
         video.play();
-        script.forEach(function(d, i) {
-          this.scriptTimeouts.push(setTimeout(function() {
-            $(".caption").attr("data-active-caption", i);
-          }, d));
-        }.bind(this));
+        scriptIndex = 0;
       }.bind(this);
 
       video.addEventListener("canplaythrough", function() {
@@ -55,13 +50,18 @@ define(['templates/project_detail'], function(projectTemplate) {
         video.load();
         loop();
       });
+      video.addEventListener("timeupdate", function() {
+        if(video.currentTime > script[scriptIndex]) {
+          $(".caption").attr("data-active-caption", scriptIndex);
+          scriptIndex++;
+        }
+      });
 
       $(".volume").get(0).addEventListener("click", toggleSound);
       
       },
       destroy: function() {
         window.clearInterval(this.intervalID);
-        this.scriptTimeouts.forEach(window.clearTimeout);
       }
     };
     return outloud;
