@@ -15,7 +15,7 @@ define(['fisheye', 'lib/d3', 'templates/project_detail'], function(fisheye, d3, 
 
 			var data,
 				svg,
-				widthScale = d3.scale.linear().domain([320, 2000]).range([0.9, 0.3]),
+				widthScale = d3.scale.linear().domain([320, 1800]).range([0.9, 0.3]),
 				size = ($(window).width() > 2000) ? 0.35 * $(window).width() : widthScale($(window).width()) * $(window).width(),
 				pixelWidth,
 				transitionDuration = 500;

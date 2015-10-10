@@ -769,6 +769,9 @@
     opacity: 0;
   }
 }
+#project-pixels .project-contents {
+  margin-top: 3rem;
+}
 #project-pixels #movie, #project-pixels #border {
   margin-left: auto;
   margin-right: auto;
