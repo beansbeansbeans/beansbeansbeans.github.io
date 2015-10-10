@@ -771,6 +771,7 @@
 }
 #project-pixels .project-contents {
   margin-top: 3rem;
+  margin-bottom: 1.5rem;
 }
 #project-pixels #movie, #project-pixels #border {
   margin-left: auto;
