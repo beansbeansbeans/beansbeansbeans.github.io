@@ -6439,18 +6439,11 @@
   padding-top: 58.5%;
 }
 
-#project-oughtness #screenshot {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  background: #EFEFEF;
+#project-oughtness .chrome {
+  width: 60vw;
 }
-#project-oughtness #screenshot #image {
-  background-image: url("../images/project_oughtness/hero.jpg");
-  background-size: 417px 306px;
-  width: 417px;
-  height: 306px;
-  margin-left: auto;
-  margin-right: auto;
+#project-oughtness .contents {
+  padding-top: 66.7%;
 }
 #project-oughtness .caveat {
   border-top: solid 1px #00303e;

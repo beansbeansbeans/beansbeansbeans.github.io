@@ -1,18 +1,10 @@
 #project-oughtness {
   @extend %video-project-page;
-  #screenshot {
-    $image-width: 834px;
-    $image-height: 612px;
-    #image {
-      background-image: url('../images/project_oughtness/hero.jpg');
-      background-size: $image-width / 2 $image-height / 2;
-      @include size($image-width / 2, $image-height / 2);
-      margin-left: auto;
-      margin-right: auto;
-    }
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-    background: #EFEFEF;
+  .chrome {
+    width: 60vw;
+  }
+  .contents {
+    padding-top: 66.7%;
   }
   .caveat {
     border-top: solid 1px $dark-blue;
