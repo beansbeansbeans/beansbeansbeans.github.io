@@ -294,14 +294,14 @@ nav {
 	margin: 0 auto;
 	li {
 		&:not(:first-of-type) a {
-			@include padding-leader(10);
+			@include padding-leader(8);
 			@include mobile-only {
 				@include padding-leader(6);
 			}
 		}
 		a {
 			border-bottom-color: lighten($gray, 20%);
-			@include trailing-border($lines: 10, $border-style: dotted);
+			@include trailing-border($lines: 8, $border-style: dotted);
 			@include mobile-only {
 				@include trailing-border($lines: 6, $border-style: dotted);
 			}
@@ -310,16 +310,18 @@ nav {
 			width: 100%;
 			.title {
 				@extend .large-text;
+				font-size: 23px;
 				color: $dark-blue;
 				font-weight: 600;
 				text-transform: uppercase;
-				@include trailer($font-size: map-get(map-get($text-map, large), font-size), $lines: 2);
+				@include trailer($font-size: map-get(map-get($text-map, large), font-size), $lines: 1);
 				@include mobile-only {
 					@include trailer($font-size: map-get(map-get($mobile-text-map, large), font-size), $lines: 1);
 				}
 			}
 			.description {
 				@extend .body-medium-text;
+				font-size: 14px;
 				color: $color-body-text-gray;
 				font-weight: 300;
 				font-style: italic;

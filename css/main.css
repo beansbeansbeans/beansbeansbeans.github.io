@@ -252,12 +252,12 @@
 }
 
 #project_index .image {
-  width: 125px;
-  height: 125px;
+  width: 100px;
+  height: 100px;
   background-size: cover;
   border-radius: 50%;
   border: solid 1px #00303e;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -7177,7 +7177,7 @@ nav {
   }
 }
 nav li:not(:first-of-type) a {
-  padding-top: 3.125em;
+  padding-top: 2.5em;
 }
 @media (max-width: 640px) {
   nav li:not(:first-of-type) a {
@@ -7188,7 +7188,7 @@ nav li a {
   border-bottom-color: #c8c8cd;
   border-bottom-width: 0.0625em;
   border-bottom-style: dotted;
-  padding-bottom: 3.0625em;
+  padding-bottom: 2.4375em;
   border-bottom-width: 1px !important;
   display: inline-block;
   width: 100%;
@@ -7201,10 +7201,11 @@ nav li a {
   }
 }
 nav li a .title {
+  font-size: 23px;
   color: #00303e;
   font-weight: 600;
   text-transform: uppercase;
-  margin-bottom: 0.34483em;
+  margin-bottom: 0.17241em;
 }
 @media (max-width: 640px) {
   nav li a .title {
@@ -7212,6 +7213,7 @@ nav li a .title {
   }
 }
 nav li a .description {
+  font-size: 14px;
   color: #a0a0a8;
   font-weight: 300;
   font-style: italic;
