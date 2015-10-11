@@ -262,6 +262,13 @@
   margin-left: auto;
   margin-right: auto;
 }
+@media (max-width: 640px) {
+  #project_index .image {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 0.75rem;
+  }
+}
 
 #project-fire {
   text-align: center;
@@ -7210,6 +7217,7 @@ nav li a .title {
 }
 @media (max-width: 640px) {
   nav li a .title {
+    font-size: 16px;
     margin-bottom: 0.2381em;
   }
 }
@@ -7218,6 +7226,11 @@ nav li a .description {
   color: #a0a0a8;
   font-weight: 300;
   font-style: italic;
+}
+@media (max-width: 640px) {
+  nav li a .description {
+    font-size: 10px;
+  }
 }
 
 .log,
