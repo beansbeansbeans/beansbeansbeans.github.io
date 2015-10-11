@@ -110,7 +110,6 @@
 
 #project-outloud .title a, #project-storiesof .title a, #project-oughtness .title a {
   color: #00303e;
-  height: 2.5rem;
   display: inline-block;
   border-bottom: solid 1px #00303e;
 }
