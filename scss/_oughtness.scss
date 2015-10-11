@@ -2,6 +2,7 @@
   @extend %video-project-page;
   .chrome {
     width: 60vw;
+    max-width: 1080px;
   }
   .contents {
     padding-top: 66.7%;

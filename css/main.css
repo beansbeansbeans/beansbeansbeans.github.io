@@ -6445,6 +6445,7 @@
 
 #project-oughtness .chrome {
   width: 60vw;
+  max-width: 1080px;
 }
 #project-oughtness .contents {
   padding-top: 66.7%;
