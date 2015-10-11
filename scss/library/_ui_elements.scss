@@ -1,38 +1,4 @@
 %linked-project-page {
-  #screenshot {
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    border-top: solid 1px #ccc;
-    border-bottom: solid 1px #ccc;
-    cursor: pointer;
-    display: block;
-    .cta {
-      opacity: 0;
-      position: absolute;
-      z-index: 1;
-      text-transform: uppercase;
-      font-size: 1.5rem;
-      top: 50%;
-      margin-top: -0.75rem;
-      left: 50%;
-      transform: translateX(-50%);
-      color: $dark-blue;
-      font-weight: 800;
-      text-decoration: underline;
-    }
-    #image, .cta {
-      @include transition(opacity 200ms);
-    }
-    &:hover {
-      .cta {
-        opacity: 1;
-      }
-      #image {
-        opacity: 0.35;
-      }
-    }
-  }
   .project-contents {
     @include leader(8);
     @include trailer(4);
@@ -69,7 +35,8 @@
     max-width: 1110px;
     min-width: 300px;
     .chrome-controls {
-      padding: 0.25rem 0 0.45rem 0.5rem;
+      line-height: 0;
+      padding: 0.5rem 0 0.55rem 0.5rem;
       text-align: left;
       background: #ddd;
       .close, .min, .max {
@@ -106,6 +73,15 @@
       height: 1px;
       @include mobile-only {
         top: calc(100% + 1.4rem);
+      }
+    }
+    @include mobile-only {
+      .chrome-controls {
+        padding: 0.25rem 0 0.3rem 0.35rem;
+        .close, .min, .max {
+          margin-right: 0.35rem;
+          @include square(0.3rem);
+        }
       }
     }
   }
