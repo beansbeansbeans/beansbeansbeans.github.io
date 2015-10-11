@@ -72,6 +72,12 @@
   text-decoration: underline;
   color: #00303e;
 }
+@media (max-width: 640px) {
+  #project-outloud .cta-main, #project-storiesof .cta-main, #project-oughtness .cta-main {
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+}
 
 #project-outloud .title a, #project-storiesof .title a, #project-oughtness .title a {
   color: #00303e;
@@ -173,6 +179,11 @@
 }
 #project-outloud .caption [class*="caption"], #project-storiesof .caption [class*="caption"], #project-oughtness .caption [class*="caption"] {
   opacity: 0;
+}
+@media (max-width: 640px) {
+  #project-outloud .caption, #project-storiesof .caption, #project-oughtness .caption {
+    margin-bottom: 3.5rem;
+  }
 }
 #project-outloud .caption[data-active-caption="0"] .caption-0, #project-storiesof .caption[data-active-caption="0"] .caption-0, #project-oughtness .caption[data-active-caption="0"] .caption-0 {
   opacity: 1;

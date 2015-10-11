@@ -16,6 +16,10 @@
     font-size: 1.2rem;
     text-decoration: underline;
     color: $dark-blue;
+    @include mobile-only {
+      font-size: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
   }
 }
 
@@ -110,6 +114,9 @@
     }
     [class*="caption"] {
       opacity: 0;
+    }
+    @include mobile-only {
+      margin-bottom: 3.5rem;
     }
   }
   @for $i from 0 through 10 { // 10 is max number of items that could exist in infobox
