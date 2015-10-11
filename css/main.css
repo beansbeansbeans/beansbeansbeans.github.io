@@ -7309,6 +7309,15 @@ nav li a .description {
   margin-bottom: 1.5rem;
   padding-top: 0.5rem;
 }
+@media (max-width: 640px) {
+  .log .section-header,
+  .project .section-header,
+  #homepage .section-header {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    padding-top: 0;
+  }
+}
 
 .project .project-contents {
   margin-top: 4.6875em;
