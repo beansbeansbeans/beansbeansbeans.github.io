@@ -7,8 +7,8 @@ define(['fisheye', 'lib/d3', 'templates/project_detail'], function(fisheye, d3, 
 				title: "Pixels",
 				blurb: "This is an animation of a turning head. Hover over any pixel within the animation to magnify it.",
 				projectContents: '<div id="border"><div id="movie"></div></div>',
-				caption: "Built with d3js, a fisheye distortion plugin for d3js, and scalable vector graphics.",
-				description: "I wanted to try to apply a <a href='http://bost.ocks.org/mike/fisheye/' target='_blank'>Cartesian distortion effect</a> to a pixellated image."
+				caption: "Built with d3js and scalable vector graphics.",
+				description: "This is an experiment in using <a target='_blank' href='http://d3js.org/'>d3</a>, a data visualization API, with visual 'data' - specifically, arrays of RGB values representing the eighteen frames of an animation of a turning head. I wanted to see how a <a href='http://bost.ocks.org/mike/fisheye/' target='_blank'>Cartesian distortion effect</a> would transform a series of pixellated images."
 			};
 
 			$("#view").html(projectTemplate(data));
