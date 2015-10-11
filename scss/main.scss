@@ -397,7 +397,7 @@ nav {
 		font-weight: 300;
 		color: $color-body-text-gray;
 		font-style: italic;
-		@include trailer(20);
+		@include trailer(15);
 		@include mobile-only {
 			@include trailer(10);
 		}

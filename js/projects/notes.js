@@ -65,7 +65,7 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 				blurb: "Color represents frequency and width represents duration. Drag back and forth to create new melodies.",
 				projectContents: '',
 				caption: "Built with d3js and CSS transforms.",
-				description: "I had an idea for an effect where you would scrub forward and backward along a track of music and then be able to play back your scrubbing exactly as it had happened, allowing you to hear the points where you had lingered on a note or blazed through a section, which might be a cool piece of music in itself. The other half of the effect would be that you could then scrub through the outcome of your original scrubbing, and you could repeat this cycle as many times as you wanted, ending up with an extremely distorted version of the original track. <br/><br/>I ended up implementing the effect with a randomly generated sequence of frequencies (from the Javanese pentatonic scale) rather than a track of music because I thought it would make for a simpler visualization."
+				description: "<p>This project came out of an idea I had for remixing songs: I thought it would be cool if you could scrub back and forth along a track and then be able to play back your scrubbing exactly as it had happened, allowing you to hear the points where you had lingered on a note or blazed through a section.</p><p>I ended up implementing the effect with a randomly generated sequence of frequencies rather than a real song. The user can create increasingly distorted melodies by remixing the frequencies over and over again.</p>"
 			},
 			widthScale = d3.scale.linear().domain([320, 2000]).range([0.75, 0.35]),
 			bufferScale = d3.scale.linear().domain([300, 1000]).range([4, 12]),
