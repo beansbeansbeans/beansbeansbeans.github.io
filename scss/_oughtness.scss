@@ -13,5 +13,9 @@
     margin-top: 3rem;
     font-size: 0.75rem;
     line-height: 1.7;
+    @include mobile-only {
+      font-size: 8px;
+      margin-top: 2rem;
+    }
   }
 }

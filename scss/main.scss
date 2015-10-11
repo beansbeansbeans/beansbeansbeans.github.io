@@ -344,10 +344,18 @@ nav {
 		@include padding-trailer($lines: 10);
 	}
 	.header,
-	.caption,
-	.description {
+	.caption {
 		@include content-width();
 		margin: 0 auto;
+	}
+	.description {
+		margin: 0 auto;
+		width: 50%;
+		min-width: 600px;
+		@include mobile-only {
+			width: 80%;
+			min-width: 250px;
+		}
 	}
 	.back {
 		@extend .medium-text;
@@ -384,11 +392,10 @@ nav {
 		font-weight: 800;
     font-family: Brandon;
     font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    padding-top: 0.5rem;
+    margin-bottom: 1rem;
     @include mobile-only {
     	font-size: 1rem;
-    	margin-bottom: 1rem;
+    	margin-bottom: 0.25rem;
     	padding-top: 0;
     }
 	}
@@ -414,6 +421,7 @@ nav {
 	.description {
 		@extend .body-medium-text;
 		text-align: left;
+		line-height: 1.7;
 		a {
 			color: $blue;
 			@include transition(all 250ms);

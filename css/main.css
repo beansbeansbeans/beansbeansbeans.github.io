@@ -6465,6 +6465,12 @@
   font-size: 0.75rem;
   line-height: 1.7;
 }
+@media (max-width: 640px) {
+  #project-oughtness .caveat {
+    font-size: 8px;
+    margin-top: 2rem;
+  }
+}
 
 nav .explanation {
   margin-bottom: 2.63158em;
@@ -7247,27 +7253,36 @@ nav li a .description {
 }
 .log .header,
 .log .caption,
-.log .description,
 .project .header,
 .project .caption,
-.project .description,
 #homepage .header,
-#homepage .caption,
-#homepage .description {
+#homepage .caption {
   width: 40%;
   margin: 0 auto;
 }
 @media (max-width: 640px) {
   .log .header,
   .log .caption,
-  .log .description,
   .project .header,
   .project .caption,
-  .project .description,
   #homepage .header,
-  #homepage .caption,
+  #homepage .caption {
+    width: 80%;
+  }
+}
+.log .description,
+.project .description,
+#homepage .description {
+  margin: 0 auto;
+  width: 50%;
+  min-width: 600px;
+}
+@media (max-width: 640px) {
+  .log .description,
+  .project .description,
   #homepage .description {
     width: 80%;
+    min-width: 250px;
   }
 }
 .log .back,
@@ -7319,15 +7334,14 @@ nav li a .description {
   font-weight: 800;
   font-family: Brandon;
   font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  padding-top: 0.5rem;
+  margin-bottom: 1rem;
 }
 @media (max-width: 640px) {
   .log .section-header,
   .project .section-header,
   #homepage .section-header {
     font-size: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.25rem;
     padding-top: 0;
   }
 }
@@ -7349,6 +7363,7 @@ nav li a .description {
 }
 .project .description {
   text-align: left;
+  line-height: 1.7;
 }
 .project .description a {
   color: #7096ad;
