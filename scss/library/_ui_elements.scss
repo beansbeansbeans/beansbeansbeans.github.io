@@ -104,6 +104,9 @@
       right: 0;
       top: calc(100% + 1.8rem);
       height: 1px;
+      @include mobile-only {
+        top: calc(100% + 1.4rem);
+      }
     }
   }
   .caption {
@@ -111,14 +114,23 @@
     margin-bottom: 5.5rem;
     font-style: normal;
     .loading, [class*="caption"] {
-      @include transition(opacity $transition-duration);      
-      position: absolute;
+      @include transition(opacity $transition-duration); position: absolute;
       left: 50%;
       display: inline-block;
       text-align: center;
       @include transform(translateX(-50%));
-      padding: 0 1rem;
       background-color: white;
+      &:before {
+        content: "";
+        z-index: -1;
+        background: white;
+        left: -1rem;
+        right: -1rem;
+        top: 0;
+        bottom: 0;
+        display: block;
+        position: absolute;
+      }
     }
     [class*="caption"] {
       opacity: 0;

@@ -160,6 +160,11 @@
   top: calc(100% + 1.8rem);
   height: 1px;
 }
+@media (max-width: 640px) {
+  #project-outloud .chrome:after, #project-storiesof .chrome:after, #project-oughtness .chrome:after {
+    top: calc(100% + 1.4rem);
+  }
+}
 #project-outloud .caption, #project-storiesof .caption, #project-oughtness .caption {
   margin-bottom: 5.5rem;
   font-style: normal;
@@ -177,8 +182,18 @@
   -ms-transform: translateX(-50%);
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
-  padding: 0 1rem;
   background-color: white;
+}
+#project-outloud .caption .loading:before, #project-storiesof .caption .loading:before, #project-oughtness .caption .loading:before, #project-outloud .caption [class*="caption"]:before, #project-storiesof .caption [class*="caption"]:before, #project-oughtness .caption [class*="caption"]:before {
+  content: "";
+  z-index: -1;
+  background: white;
+  left: -1rem;
+  right: -1rem;
+  top: 0;
+  bottom: 0;
+  display: block;
+  position: absolute;
 }
 #project-outloud .caption [class*="caption"], #project-storiesof .caption [class*="caption"], #project-oughtness .caption [class*="caption"] {
   opacity: 0;
