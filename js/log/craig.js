@@ -1,30 +1,31 @@
 define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTemplate, logRenderer, logData) {
-    var miranda = {
+    var craig = {
         selfLoading: true,
         initialize: function() {
-            var title = "miranda",
+            var title = "craig",
                 data = {
                 title: title,
                 overrides: [
                     {
+                        index: 0,
+                        width: 1275
+                    },
+                    {
                         index: 1,
-                        width: 775
+                        width: 1680
                     },
                     {
                         index: 2,
-                        width: 1700
+                        width: 1560
                     },
                     {
                         index: 3,
-                        width: 1575
-                    },
-                    {
-                        index: 4,
-                        width: 1700
+                        width: 765
                     }
                 ],
-                length: 41,
-                date: "October 10, 2015",
+                guilt: 0.8,
+                length: 30,
+                date: "October 1, 2015",
                 logContents: ""
             };
 
@@ -51,5 +52,5 @@ define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTem
             logRenderer.destroy();
         }
     }
-    return miranda;
+    return craig;
 });
