@@ -7371,14 +7371,14 @@ nav li a .description {
 }
 .project #next {
   text-align: right;
-  right: 2rem;
+  right: 1.5rem;
 }
 .project #next:after {
   content: "→";
 }
 .project #previous {
   text-align: left;
-  left: 2rem;
+  left: 1.5rem;
 }
 .project #previous:after {
   content: "←";
