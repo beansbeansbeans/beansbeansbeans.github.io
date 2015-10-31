@@ -1,4 +1,4 @@
-define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
+define(['lib/d3', 'templates/project_detail', 'project_data'], function(d3, projectTemplate, projectData) {
 	var food = {
 		timers: [],
 		initialize: function() {
@@ -10,6 +10,25 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				caption: "Built with d3js and scalable vector graphics.",
 				description: "This is built with three SVG path elements that transition between shapes representing the words 'food', 'not', and 'friend'. The dots represent the cubic bezier control points that dictate the shapes of the paths through sets of SVG curveto commands. If you click on a control point, the path will transition into the simplified shape created by removing that control point from the path's set of curveto commands."
 			};
+
+			var indexOfProject = -1;
+			for(var i=0; i<projectData.length; i++) {
+			    if(projectData[i].title === data.identifier) {
+			        indexOfProject = i;
+			        break;
+			    }
+			}
+
+			if(indexOfProject !== 0) {
+			    data.previous = projectData[indexOfProject - 1].title;
+			} else {
+			  data.previousActive = "false";
+			}
+			if(indexOfProject !== (projectData.length - 1)) {
+			    data.next = projectData[indexOfProject + 1].title;
+			} else {
+			  data.nextActive = "false";
+			}
 
 			$("#view").html(projectTemplate(data));
 

@@ -1,4 +1,4 @@
-define(['lib/d3', 'underscore', 'templates/project_detail'], function(d3, _, projectTemplate) {
+define(['lib/d3', 'underscore', 'templates/project_detail', 'project_data'], function(d3, _, projectTemplate, projectData) {
 	var hiveplot = {
 		initialize: function() {
 			var data = {
@@ -9,6 +9,25 @@ define(['lib/d3', 'underscore', 'templates/project_detail'], function(d3, _, pro
 				caption: "Built with d3js, a hiveplot graph plugin for d3js, and scalable vector graphics.",
 				description: "This visualization is based on <a href='http://bost.ocks.org/mike/hive/' target='_blank'>Mike Bostock's implementation</a>.<br/><br/>Each node represents a variable, mixin, or class, and each line represents a dependency. You can hover over any node to see its name and dependencies. Nodes on the vertical axis have no dependents, nodes on the lower left-hand axis have no dependencies, and nodes on the lower right-hand axes have both. <br/><br/>By default, nodes are listed in the order of their appearance in the library. You can change this by selecting 'Import count' in the 'Sort nodes' dropdown menu, which will list nodes in the order of their dependencies count.<br/><br/>By default, nodes representing all stylistic categories (font-size, color, etc.) are shown. You can change this by unchecking categories in the 'Filter nodes' dropdown menu."
 			};
+
+			var indexOfProject = -1;
+			for(var i=0; i<projectData.length; i++) {
+			    if(projectData[i].title === data.identifier) {
+			        indexOfProject = i;
+			        break;
+			    }
+			}
+
+			if(indexOfProject !== 0) {
+			    data.previous = projectData[indexOfProject - 1].title;
+			} else {
+			  data.previousActive = "false";
+			}
+			if(indexOfProject !== (projectData.length - 1)) {
+			    data.next = projectData[indexOfProject + 1].title;
+			} else {
+			  data.nextActive = "false";
+			}
 
 			$("#view").html(projectTemplate(data));
 

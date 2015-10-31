@@ -1,4 +1,4 @@
-define(['lib/d3', 'underscore', 'templates/project_detail'], function(d3, _, projectTemplate) {
+define(['lib/d3', 'underscore', 'templates/project_detail', 'project_data'], function(d3, _, projectTemplate, projectData) {
 	var spotlights = {
 		intervalID: null,
 		initialize: function() {
@@ -11,8 +11,26 @@ define(['lib/d3', 'underscore', 'templates/project_detail'], function(d3, _, pro
 				description: "I thought it would be cool to represent overlapping regions of light with arbitrary colors. In this scene I chose different shades of blue and gray to represent one, two, three, or four overlapping regions of light."
 			}
 
-			$("#view").html(projectTemplate(data));
+			var indexOfProject = -1;
+			for(var i=0; i<projectData.length; i++) {
+			    if(projectData[i].title === data.identifier) {
+			        indexOfProject = i;
+			        break;
+			    }
+			}
 
+			if(indexOfProject !== 0) {
+			    data.previous = projectData[indexOfProject - 1].title;
+			} else {
+			  data.previousActive = "false";
+			}
+			if(indexOfProject !== (projectData.length - 1)) {
+			    data.next = projectData[indexOfProject + 1].title;
+			} else {
+			  data.nextActive = "false";
+			}
+
+			$("#view").html(projectTemplate(data));
 
 			var svg = d3.select("#scene").append("svg")
 			.attr("width", 960)

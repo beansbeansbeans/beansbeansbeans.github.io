@@ -1,6 +1,6 @@
 // the problem here is if the user drags their mouse out of the photo, release is not called
 
-define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
+define(['lib/d3', 'templates/project_detail', 'project_data'], function(d3, projectTemplate, projectData) {
 	var spinny = {
 		needsLoading: true,
 		preloadAssets: [
@@ -71,9 +71,28 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 			fileSuffix = "";
 
 			if($(window).width() <= mobile_landscape) {
-                fileSuffix = "_mobile";
-                nativePaneWidth = 600;
-            }
+        fileSuffix = "_mobile";
+        nativePaneWidth = 600;
+      }
+
+      var indexOfProject = -1;
+      for(var i=0; i<projectData.length; i++) {
+          if(projectData[i].title === data.identifier) {
+              indexOfProject = i;
+              break;
+          }
+      }
+
+      if(indexOfProject !== 0) {
+          data.previous = projectData[indexOfProject - 1].title;
+      } else {
+        data.previousActive = "false";
+      }
+      if(indexOfProject !== (projectData.length - 1)) {
+          data.next = projectData[indexOfProject + 1].title;
+      } else {
+        data.nextActive = "false";
+      }
 
 			$("#view").html(projectTemplate(data));
 

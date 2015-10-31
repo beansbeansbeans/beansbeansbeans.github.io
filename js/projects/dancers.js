@@ -1,4 +1,4 @@
-define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
+define(['lib/d3', 'templates/project_detail', 'project_data'], function(d3, projectTemplate, projectData) {
 	var dancers = {
 		rafID: null,
 		timeoutID: null,
@@ -12,6 +12,25 @@ define(['lib/d3', 'templates/project_detail'], function(d3, projectTemplate) {
 				caption: "Built with d3js and scalable vector graphics.",
 				description: "The longer you linger over the frames while dragging, the thicker, slacker, and bluer they become. I tried to cap the distortion at a point where the dancer was still nice looking."
 			};
+
+			var indexOfProject = -1;
+			for(var i=0; i<projectData.length; i++) {
+			    if(projectData[i].title === data.identifier) {
+			        indexOfProject = i;
+			        break;
+			    }
+			}
+
+			if(indexOfProject !== 0) {
+			    data.previous = projectData[indexOfProject - 1].title;
+			} else {
+			  data.previousActive = "false";
+			}
+			if(indexOfProject !== (projectData.length - 1)) {
+			    data.next = projectData[indexOfProject + 1].title;
+			} else {
+			  data.nextActive = "false";
+			}
 
 			$("#view").html(projectTemplate(data));
 

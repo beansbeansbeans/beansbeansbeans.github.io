@@ -1,4 +1,4 @@
-define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
+define(['templates/project_detail', 'lib/d3', 'project_data'], function(projectTemplate, d3, projectData) {
 	var notes = {
 		notesKey: [
 			{
@@ -72,6 +72,25 @@ define(['templates/project_detail', 'lib/d3'], function(projectTemplate, d3) {
 			iconScale = d3.scale.linear().domain([300, 1000]).range([1, 1.5]),
 			particleSizeScale = d3.scale.linear().domain([300, 1000]).range([20, 45]),
 			particleIncrementScale = d3.scale.linear().domain([300, 1000]).range([14, 38]);
+
+			var indexOfProject = -1;
+			for(var i=0; i<projectData.length; i++) {
+			    if(projectData[i].title === data.identifier) {
+			        indexOfProject = i;
+			        break;
+			    }
+			}
+
+			if(indexOfProject !== 0) {
+			    data.previous = projectData[indexOfProject - 1].title;
+			} else {
+			  data.previousActive = "false";
+			}
+			if(indexOfProject !== (projectData.length - 1)) {
+			    data.next = projectData[indexOfProject + 1].title;
+			} else {
+			  data.nextActive = "false";
+			}
 
 			$("#view").html(projectTemplate(data));
 			

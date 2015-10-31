@@ -1,4 +1,4 @@
-define(['templates/project_detail'], function(projectTemplate) {
+define(['templates/project_detail', 'project_data'], function(projectTemplate, projectData) {
 	var leaves = {
 		initialize: function() {
 			var data = {
@@ -9,6 +9,25 @@ define(['templates/project_detail'], function(projectTemplate) {
 				caption: "Built with JavaScript and the canvas element.",
 				description: "I thought it would be cool to manipulate screens - as in, the rectangles inside of which videos or animations play. I thought if you broke a screen into pieces you might still be able to process the video or animation as a whole, but depending on the content each piece of the screen might be interesting to look at by itself."
 			};
+
+			var indexOfProject = -1;
+			for(var i=0; i<projectData.length; i++) {
+			    if(projectData[i].title === data.identifier) {
+			        indexOfProject = i;
+			        break;
+			    }
+			}
+
+			if(indexOfProject !== 0) {
+			    data.previous = projectData[indexOfProject - 1].title;
+			} else {
+			  data.previousActive = "false";
+			}
+			if(indexOfProject !== (projectData.length - 1)) {
+			    data.next = projectData[indexOfProject + 1].title;
+			} else {
+			  data.nextActive = "false";
+			}
 
 			$("#view").html(projectTemplate(data));
 

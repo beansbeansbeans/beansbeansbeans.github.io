@@ -1,4 +1,4 @@
-define(['templates/project_detail'], function(projectTemplate) {
+define(['templates/project_detail', 'project_data'], function(projectTemplate, projectData) {
   var outloud = {
     intervalID: null,
     initialize: function() {
@@ -10,6 +10,17 @@ define(['templates/project_detail'], function(projectTemplate) {
         caption: "<div class='loading'>Loading video...</div><div class='caption-0'>Explore sounds.</div><div class='caption-1'>Create a live recording.</div><div class='caption-2'>Publish and share.</div>",
         description: "<a class='cta-main' href='https://outloud.cc' target='_blank'>View project</a><p>Podcasting and voicemail are decades-old technologies, yet they are the technological frontier for sharing audio. At the same time, tools abound for sharing images and video on the internet.</p><p>I built <a href='https://outloud.cc' target='_blank'>Outloud</a> with a friend to enable people to create and share audio recordings. Recordings are capped at 20 seconds. Users can tag their recordings by topic, e.g. <a href='https://outloud.cc/streams/18' target='_blank'>'Jokes'</a>, or <a href='https://outloud.cc/streams/21' target='_blank'>'In My Humble Opinion'</a>. Users can also publish <a href='https://outloud.cc/posts/320' target='_blank'>reactions</a> to what they hear.</p><br/><div class='section-header'>Technology</div><p>Outloud is built with <a target='_blank' href='https://facebook.github.io/react/'>React</a> and <a target='_blank' href='http://rubyonrails.org/'>Rails</a>.</p>"
       };
+
+      if(indexOfProject !== 0) {
+          data.previous = projectData[indexOfProject - 1].title;
+      } else {
+        data.previousActive = "false";
+      }
+      if(indexOfProject !== (projectData.length - 1)) {
+          data.next = projectData[indexOfProject + 1].title;
+      } else {
+        data.nextActive = "false";
+      }
 
       $("#view").html(projectTemplate(data));
 

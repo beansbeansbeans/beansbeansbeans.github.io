@@ -1,4 +1,4 @@
-define(['fisheye', 'lib/d3', 'templates/project_detail'], function(fisheye, d3, projectTemplate) {
+define(['fisheye', 'lib/d3', 'templates/project_detail', 'project_data'], function(fisheye, d3, projectTemplate, projectData) {
 	var pixels = {
 		intervalID: null,
 		initialize: function() {
@@ -10,6 +10,26 @@ define(['fisheye', 'lib/d3', 'templates/project_detail'], function(fisheye, d3, 
 				caption: "Built with d3js and scalable vector graphics.",
 				description: "This is an experiment in using <a target='_blank' href='http://d3js.org/'>d3</a>, a data visualization library, with visual data - specifically, arrays of RGB values representing the eighteen frames of an animation of a turning head. I wanted to see how a <a href='http://bost.ocks.org/mike/fisheye/' target='_blank'>Cartesian distortion effect</a> would transform a series of pixellated images."
 			};
+
+			var indexOfProject = -1;
+			for(var i=0; i<projectData.length; i++) {
+			    if(projectData[i].title === data.identifier) {
+			        indexOfProject = i;
+			        break;
+			    }
+			}
+
+			if(indexOfProject !== 0) {
+			    data.previous = projectData[indexOfProject - 1].title;
+			} else {
+			  data.previousActive = "false";
+			}
+			if(indexOfProject !== (projectData.length - 1)) {
+			    data.next = projectData[indexOfProject + 1].title;
+			} else {
+			  data.nextActive = "false";
+			}
+
 
 			$("#view").html(projectTemplate(data));
 

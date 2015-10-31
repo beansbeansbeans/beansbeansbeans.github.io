@@ -7354,6 +7354,7 @@ nav li a .description {
   top: 50vh;
   margin-top: -1rem;
   text-transform: uppercase;
+  z-index: 10;
 }
 .project #next[data-active="false"], .project #previous[data-active="false"] {
   display: none;

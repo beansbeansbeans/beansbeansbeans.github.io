@@ -1,4 +1,4 @@
-define(['templates/project_detail'], function(projectTemplate) {
+define(['templates/project_detail', 'project_data'], function(projectTemplate, projectData) {
 	var straws = {
 		needsLoading: true,
 		preloadAssets: [
@@ -159,6 +159,25 @@ define(['templates/project_detail'], function(projectTemplate) {
 			self = this,
 			strawWidth = 25,
 			strawHeight = 615;
+
+			var indexOfProject = -1;
+			for(var i=0; i<projectData.length; i++) {
+			    if(projectData[i].title === data.identifier) {
+			        indexOfProject = i;
+			        break;
+			    }
+			}
+
+			if(indexOfProject !== 0) {
+			    data.previous = projectData[indexOfProject - 1].title;
+			} else {
+			  data.previousActive = "false";
+			}
+			if(indexOfProject !== (projectData.length - 1)) {
+			    data.next = projectData[indexOfProject + 1].title;
+			} else {
+			  data.nextActive = "false";
+			}
 
 			$("#view").html(projectTemplate(data));
 
