@@ -37,16 +37,16 @@ define([], function() {
       description: "A light-sensitive bouncing ball."
     },
     {
-      title: "straws",
-      description: "Straws resting inside an unstable glass."
-    },
-    {
       title: "leaves",
       description: "Leaves floating on top of sliding panes."
     },
     {
       title: "hiveplot",
       description: "A dependency graph visualization."
+    },
+    {
+      title: "straws",
+      description: "Straws resting inside an unstable glass."
     }
   ];
 });
