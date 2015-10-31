@@ -7346,6 +7346,42 @@ nav li a .description {
   }
 }
 
+.project #next, .project #previous {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #93939c;
+  position: fixed;
+  top: 50vh;
+  margin-top: -1rem;
+  text-transform: uppercase;
+}
+.project #next[data-active="false"], .project #previous[data-active="false"] {
+  display: none;
+}
+.project #next:after, .project #previous:after {
+  display: block;
+  font-size: 1.25rem;
+  margin-top: 0.5rem;
+}
+@media (max-width: 640px) {
+  .project #next, .project #previous {
+    display: none !important;
+  }
+}
+.project #next {
+  text-align: right;
+  right: 2rem;
+}
+.project #next:after {
+  content: "→";
+}
+.project #previous {
+  text-align: left;
+  left: 2rem;
+}
+.project #previous:after {
+  content: "←";
+}
 .project .project-contents {
   margin-top: 4.6875em;
   margin-bottom: 3.125em;

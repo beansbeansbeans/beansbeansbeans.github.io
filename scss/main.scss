@@ -404,6 +404,40 @@ nav {
 // project detail
 
 .project {
+	#next, #previous {
+		font-size: 1rem;
+		font-weight: 500;
+		color: $gray;
+		position: fixed;
+		top: 50vh;
+		margin-top: -1rem;
+		text-transform: uppercase;
+		&[data-active="false"] {
+			display: none;
+		}
+		&:after {
+			display: block;
+			font-size: 1.25rem;
+			margin-top: 0.5rem;
+		}
+		@include mobile-only {
+			display: none !important;
+		}
+	}
+	#next {
+		text-align: right;
+		right: 2rem;
+		&:after {
+			content: "→";
+		}
+	}
+	#previous {
+		text-align: left;
+		left: 2rem;
+		&:after {
+			content: "←";
+		}
+	}
 	.project-contents {
 		@include leader(15);
 		@include trailer(10);
