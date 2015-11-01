@@ -33,7 +33,7 @@ define(['templates/project_detail', 'project_data'], function(projectTemplate, p
       $("#view").html(projectTemplate(data));
 
       var video = $("video").get(0);
-      var script = [ 0, 7, 11, 17 ];
+      var script = [ 0, 5.5, 9, 14 ];
       var scriptIndex = 0;
       var hasPlayedOnce = false;
 
