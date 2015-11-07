@@ -1,6 +1,14 @@
 define([], function() {
   return [
     {
+      title: "toby",
+      description: "November 7, 2015"
+    },
+    {
+      title: "kard",
+      description: "November 1, 2015"
+    },
+    {
       title: "miranda",
       description: "October 10, 2015"
     },
