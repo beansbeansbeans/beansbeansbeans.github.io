@@ -7352,36 +7352,61 @@ nav li a .description {
   color: #93939c;
   position: fixed;
   top: 50vh;
-  margin-top: -1rem;
+  margin-top: -2.5rem;
   text-transform: uppercase;
   z-index: 10;
 }
 .project #next[data-active="false"], .project #previous[data-active="false"] {
   display: none;
 }
-.project #next:after, .project #previous:after {
-  display: block;
-  font-size: 1.25rem;
-  margin-top: 0.5rem;
-}
 @media (max-width: 640px) {
   .project #next, .project #previous {
     display: none !important;
   }
 }
+.project #next svg, .project #previous svg {
+  -moz-transform: scale(1.25);
+  -ms-transform: scale(1.25);
+  -webkit-transform: scale(1.25);
+  transform: scale(1.25);
+  margin-top: 0.5rem;
+  width: 30px;
+  height: 30px;
+}
+.project #next svg path, .project #previous svg path {
+  -moz-transition: all 200ms;
+  -o-transition: all 200ms;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+  fill: #dcdcdc;
+}
+.project #next:hover .project-preview, .project #previous:hover .project-preview {
+  opacity: 1;
+}
+.project #next:hover path, .project #previous:hover path {
+  fill: #00303e;
+}
+.project #next .project-preview, .project #previous .project-preview {
+  opacity: 0;
+  color: #00303e;
+  -moz-transition: opacity 200ms;
+  -o-transition: opacity 200ms;
+  -webkit-transition: opacity 200ms;
+  transition: opacity 200ms;
+}
 .project #next {
   text-align: right;
-  right: 1.5rem;
+  right: 1rem;
 }
-.project #next:after {
-  content: "→";
+.project #next .project-preview {
+  padding-right: 0.35rem;
 }
 .project #previous {
   text-align: left;
-  left: 1.5rem;
+  left: 1rem;
 }
-.project #previous:after {
-  content: "←";
+.project #previous .project-preview {
+  padding-left: 0.35rem;
 }
 .project .project-contents {
   margin-top: 4.6875em;

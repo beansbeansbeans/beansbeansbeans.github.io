@@ -410,33 +410,50 @@ nav {
 		color: $gray;
 		position: fixed;
 		top: 50vh;
-		margin-top: -1rem;
+		margin-top: -2.5rem;
 		text-transform: uppercase;
 		z-index: 10;
 		&[data-active="false"] {
 			display: none;
 		}
-		&:after {
-			display: block;
-			font-size: 1.25rem;
-			margin-top: 0.5rem;
-		}
 		@include mobile-only {
 			display: none !important;
+		}
+		svg {
+			@include transform(scale(1.25));
+			margin-top: 0.5rem;
+			@include square(30px);
+			path {
+				@include transition(all $transition-duration);
+				fill: #dcdcdc;
+			}
+		}
+		&:hover {
+			.project-preview {
+				opacity: 1;
+			}
+			path {
+				fill: $dark-blue;
+			}
+		}
+		.project-preview {
+			opacity: 0;
+			color: $dark-blue;
+			@include transition(opacity $transition-duration);
 		}
 	}
 	#next {
 		text-align: right;
-		right: 1.5rem;
-		&:after {
-			content: "→";
+		right: 1rem;
+		.project-preview {
+			padding-right: 0.35rem;
 		}
 	}
 	#previous {
 		text-align: left;
-		left: 1.5rem;
-		&:after {
-			content: "←";
+		left: 1rem;
+		.project-preview {
+			padding-left: 0.35rem;
 		}
 	}
 	.project-contents {
