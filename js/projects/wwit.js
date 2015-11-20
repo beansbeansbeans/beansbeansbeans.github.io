@@ -7,7 +7,7 @@ define(['templates/project_detail', 'project_data'], function(projectTemplate, p
         title: "<a href='http://whatwouldittake.cc' target='_blank'>wwit</a>",
         blurb: "What would it take to change your mind?",
         projectContents: '<div class="chrome"><div class="chrome-controls"><div class="close"></div><div class="min"></div><div class="max"></div></div><div class="contents"><video src="/video/wwit.mp4"></video></div></div>',
-        caption: "<div class='loading'>Loading video...</div><div class='caption-0'>Express your belief.</div><div class='caption-1'>Ask yourself what it would take to change your mind.</div><div class='caption-2'>Consider opposing evidence.</div><div class='caption-3'>Change your belief.</div>",
+        caption: "<div class='loading'>Loading video...</div><div class='caption-0'>State your belief.</div><div class='caption-1'>Ask yourself what it would take to change your mind.</div><div class='caption-2'>Consider opposing evidence.</div><div class='caption-3'>Change your belief.</div>",
         description: "<a class='cta-main' href='http://whatwouldittake.cc' target='_blank'>View project</a><p>Project overview contents.</p><br/><div class='section-header'>What's the point?</div><p>The point.</p><br/><div class='section-header'>Technology</div><p>WWIT is built with <a target='_blank' href='https://github.com/Matt-Esch/virtual-dom'>virtual dom</a>, <a target='_blank' href='http://d3js.org/'>d3</a>, <a target='_blank' href='https://nodejs.org/en/'>Node</a>, and <a target='_blank' href='https://mongodb.com'>MongoDB</a>.</p>"
       };
 
@@ -33,7 +33,7 @@ define(['templates/project_detail', 'project_data'], function(projectTemplate, p
       $("#view").html(projectTemplate(data));
 
       var video = $("video").get(0);
-      var script = [ 0, 2.5, 8, 11.2 ];
+      var script = [ 0, 2, 8.7, 13 ];
       var scriptIndex = 0;
       var hasPlayedOnce = false;
 
