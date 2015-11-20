@@ -1,0 +1,10 @@
+#project-wwit {
+  @extend %video-project-page;
+  .chrome {
+    width: 60vw;
+    max-width: 870px;
+  }
+  .contents {
+    padding-top: 62.5%;
+  }
+}

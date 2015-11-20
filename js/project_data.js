@@ -5,6 +5,10 @@ define([], function() {
       description: "Prioritizing problems."
     },
     {
+      title: "wwit",
+      description: "What would it take to change your mind?"
+    },
+    {
       title: "outloud",
       description: "Twitter for audio."
     },
