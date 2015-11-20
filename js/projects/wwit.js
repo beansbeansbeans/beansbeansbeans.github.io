@@ -4,7 +4,7 @@ define(['templates/project_detail', 'project_data'], function(projectTemplate, p
     initialize: function() {
       var data = {
         identifier: "wwit",
-        title: "<a href='https://whatwouldittake.cc' target='_blank'>wwit</a>",
+        title: "<a href='http://whatwouldittake.cc' target='_blank'>wwit</a>",
         blurb: "What would it take to change your mind?",
         projectContents: '<div class="chrome"><div class="chrome-controls"><div class="close"></div><div class="min"></div><div class="max"></div></div><div class="contents"><video src="/video/wwit.mp4"></video></div></div>',
         caption: "<div class='loading'>Loading video...</div><div class='caption-0'>Vote on the most critical causes.</div><div class='caption-1'>See how others have voted.</div><div class='caption-2'>See priorities change depending on how you weight criticalness versus tractability.</div><div class='caption-3'>Drill down to see how causes compare against each other.</div>",
