@@ -13,7 +13,7 @@ define([], function() {
       description: "Twitter for audio."
     },
     {
-      title: "storiesof",
+      title: "stories",
       description: "Sharing unhappiness."
     },
     {
