@@ -85,6 +85,7 @@
   border-bottom: solid 1px #00303e;
 }
 #project-outloud .chrome, #project-stories .chrome, #project-oughtness .chrome, #project-wwit .chrome {
+  display: inline-block;
   border: solid 1px #ddd;
   border-radius: 7px;
   width: 65vw;
