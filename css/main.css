@@ -56,7 +56,7 @@
 }
 #project-outloud .project-contents, #project-stories .project-contents, #project-oughtness .project-contents, #project-wwit .project-contents {
   margin-top: 2.5em;
-  margin-bottom: 1.25em;
+  margin-bottom: 0.1rem;
 }
 #project-outloud .caption, #project-stories .caption, #project-oughtness .caption, #project-wwit .caption {
   margin-bottom: 4.375em;
