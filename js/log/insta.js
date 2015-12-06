@@ -1,32 +1,36 @@
 define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTemplate, logRenderer, logData) {
-    var lobster = {
+    var insta = {
         selfLoading: true,
         initialize: function() {
-            var title = "lobster",
+            var title = "insta",
                 data = {
                 title: title,
                 overrides: [
                     {
                         index: 0,
-                        width: 1250
+                        width: 800
+                    },
+                    {
+                        index: 1,
+                        width: 1750
                     },
                     {
                         index: 2,
-                        width: 1510
+                        width: 1325
                     },
                     {
                         index: 3,
-                        width: 1320
+                        width: 1120
                     },
                     {
                         index: 4,
-                        width: 1235
+                        width: 1570
                     }
                 ],
-                guilt: 0.05,
-                length: 38,
+                guilt: 0.75,
+                length: 34,
                 detail: "More than an hour",
-                date: "November 27, 2015",
+                date: "December 2, 2015",
                 logContents: ""
             };
 
@@ -53,5 +57,5 @@ define(['templates/log_detail', 'log/log_renderer', 'log_data'], function(logTem
             logRenderer.destroy();
         }
     }
-    return lobster;
+    return insta;
 });
