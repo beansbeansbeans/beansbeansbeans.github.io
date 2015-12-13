@@ -7384,8 +7384,10 @@ nav li a .description {
   margin-top: 0.5rem;
   width: 30px;
   height: 30px;
+  position: relative !important;
 }
 .project #next svg path, .project #previous svg path {
+  stroke: none !important;
   -moz-transition: all 200ms;
   -o-transition: all 200ms;
   -webkit-transition: all 200ms;

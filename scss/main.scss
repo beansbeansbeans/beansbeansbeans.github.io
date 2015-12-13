@@ -424,7 +424,9 @@ nav {
 			@include transform(scale(1.25));
 			margin-top: 0.5rem;
 			@include square(30px);
+			position: relative !important;
 			path {
+				stroke: none !important;
 				@include transition(all $transition-duration);
 				fill: #dcdcdc;
 			}
