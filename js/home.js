@@ -10,7 +10,7 @@ define([], function() {
 			"shadow_mobile.png"
 		],
 		initialize: function() {
-			$("#view").html("<div id='homepage'><div class='header'><div class='title'>Hello</div><div class='blurb'>Radish top, from Etsy.</div></div><div id='top-container'><div id='top'></div><div id='shadow'></div></div></div>");
+			$("#view").html("<div id='homepage'><div class='header'><div class='title'>Hello</div><div class='blurb'></div></div><div id='top-container'><div id='top'></div><div id='shadow'></div></div></div>");
 
 			var counter = 0,
 				frameCount = 25,
@@ -18,6 +18,12 @@ define([], function() {
 				shadowWidth = 362,
 				frameInterval = 4,
 				self = this;
+
+			var dayMap = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+			var today = new Date();
+			var day = today.getDay();
+
+			$("#view .blurb").html("Happy " + dayMap[day] + '.');
 
 			if($(window).width() <= mobile_landscape) {
 				frameWidth = 179;
