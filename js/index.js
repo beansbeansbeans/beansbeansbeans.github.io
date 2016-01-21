@@ -28,7 +28,7 @@ define("d3.global", ["d3"], function(_) {
 });
 
 var request = new XMLHttpRequest();
-request.open('GET', 'https://oughtness-49671.onmodulus.net/causes', true);
+request.open('GET', '//oughtness-49671.onmodulus.net/causes', true);
 
 request.setRequestHeader("Accept", "application/json");
 
