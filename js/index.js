@@ -27,18 +27,6 @@ define("d3.global", ["d3"], function(_) {
 	d3 = _;
 });
 
-var request = new XMLHttpRequest();
-request.open('GET', '//oughtness-49671.onmodulus.net/causes', true);
-
-request.setRequestHeader("Accept", "application/json");
-
-request.onload = function() {
-  console.log("hi");
-  console.log(request.response);
-};
-
-request.send();
-
 require(['jquery', 'router', 'loader'], function($, Router, Loader) {
 
     var router = new Router(),
