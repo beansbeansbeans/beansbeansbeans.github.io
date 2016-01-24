@@ -61,6 +61,9 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
             if(data.overrides) {
                 this.overrides = data.overrides;
             }
+            if(data.initialBuffer) {
+                this.initialBuffer = data.initialBuffer;
+            }
 
             var widthScale = d3.scale.linear().domain([400, 2000]).range([0.95, 0.6]).clamp(true);
             var wordXStretch = widthScale($(window).width()); // % of window width taken up by words
@@ -145,6 +148,10 @@ define(['log/glyphs', 'lib/d3'], function(glyphs, d3) {
                         }
                     } else {
                         this.letterCtx.translate(glyphs.letters[lettersArr[i-1]].width, 0);
+                    }
+                } else {
+                    if(this.initialBuffer) {
+                        this.letterCtx.translate(this.initialBuffer, 0);
                     }
                 }
 
