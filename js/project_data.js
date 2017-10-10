@@ -5,6 +5,10 @@ define([], function() {
       description: "Image denoising."
     },
     {
+      title: "vista",
+      description: "Visualizing semantic embeddings of Tweets in 3-D."
+    },
+    {
       title: "schelling",
       description: "Experiments with cellular automata."
     },

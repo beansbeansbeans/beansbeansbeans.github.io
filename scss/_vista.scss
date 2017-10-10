@@ -1,0 +1,16 @@
+#project-vista {
+  @extend %video-project-page;
+  .chrome {
+    width: 60vw;
+    max-width: 1280px;
+    &:after {
+      display: none !important;
+    }
+  }
+  .contents {
+    padding-top: 55.6%;
+  }
+  .caption {
+    display: none;
+  }
+}
