@@ -6170,6 +6170,34 @@ nav .explanation {
   display: none;
 }
 
+#project-diffusion .caption {
+  display: none;
+}
+#project-diffusion .iterations {
+  margin: 2rem;
+  font-size: 1.5rem;
+}
+#project-diffusion .buttons {
+  margin-bottom: 3rem;
+}
+#project-diffusion button {
+  -webkit-appearance: none;
+  background: none;
+  border: solid 2px #00303e;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: Brandon;
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 1.75;
+  padding: 0.1rem 0.5rem 0 0.5rem;
+  cursor: pointer;
+  outline: none;
+}
+#project-diffusion button:not(:last-of-type) {
+  margin-right: 1rem;
+}
+
 html {
   font-size: 100%;
   line-height: 0.3125em;

@@ -1,13 +1,15 @@
-define(['templates/project_detail', 'project_data'], function(projectTemplate, projectData) {
+define(['templates/project_detail', 'project_data', 'lib/diffusion'], function(projectTemplate, projectData, diffusionLibrary) {
+  window.diffusionLibrary = diffusionLibrary
+  
   var diffusion = {
     intervalID: null,
     initialize: function() {
       var data = {
         identifier: "diffusion",
         title: "<a href='http://fab.cba.mit.edu/classes/MAS.864/people/annyuan/project.html' target='_blank'>diffusion</a>",
-        blurb: "",
-        projectContents: "<div class='demo'><canvas id='anisotropic' width='500' height='500'></canvas><div class='iterations' id='anisotropic_iteration_count'>iterations</div><div class='buttons'><button onclick='anisotropic.play()'>play</button><button onclick='anisotropic.pause()'>pause</button><button onclick='anisotropic.reset()'>reset</button></div></div>",
-        caption: "Click to inject ink into the image.",
+        blurb: "Click to inject ink into the image.",
+        projectContents: "<div class='demo'><canvas id='anisotropic' width='500' height='500'></canvas><div class='iterations' id='anisotropic_iteration_count'>iterations</div><div class='buttons'><button onclick='diffusionLibrary.play()'>play</button><button onclick='diffusionLibrary.pause()'>pause</button><button onclick='diffusionLibrary.reset()'>reset</button></div></div>",
+        caption: "",
         description: "<a class='cta-main' href='http://fab.cba.mit.edu/classes/MAS.864/people/annyuan/project.html' target='_blank'>View project</a><p>This is a project I completed for <a href='http://fab.cba.mit.edu/classes/864.17/' target='_blank'>The Nature of Mathematical Modeling</a>, which I took with Neil Gershenfeld in the spring of 2017. It demonstrates an image processing technique known as anisotropic diffusion, which denoises images while preserving structure and important details.</p>"
       };
 
@@ -32,32 +34,38 @@ define(['templates/project_detail', 'project_data'], function(projectTemplate, p
 
       $("#view").html(projectTemplate(data));
 
-      var video = $("video").get(0);
-      var script = [ 0, 2, 8.7, 13 ];
-      var scriptIndex = 0;
-      var hasPlayedOnce = false;
+      var canvases = [500].map(function(size) {
+        var canvas = document.createElement("canvas")
+        var ctx = canvas.getContext("2d")
+        canvas.setAttribute("width",size)
+        canvas.setAttribute("height",size)
 
-      var loop = function() {
-        video.play();
-        scriptIndex = 0;
-      }.bind(this);
+        return {
+          canvas: canvas,
+          ctx: ctx,
+          size: size
+        }
+      })
 
-      video.addEventListener("canplaythrough", function() {
-        if(!hasPlayedOnce) {
-          loop();
-          hasPlayedOnce = true;
-        }
-      });
-      video.addEventListener("ended", function() {
-        video.load();
-        loop();
-      });
-      video.addEventListener("timeupdate", function() {
-        if(video.currentTime > script[scriptIndex]) {
-          $(".caption").attr("data-active-caption", scriptIndex);
-          scriptIndex++;
-        }
-      });
+      var imageData = {
+        color: {}
+      }
+
+      var lenaColor = new Image()
+      lenaColor.src = "images/project_diffusion/lena_color.jpg"
+
+      lenaColor.onload = function(d) {
+        canvases.forEach(function(obj) {
+          obj.ctx.drawImage(lenaColor, 0, 0, obj.size, obj.size)
+
+          var data = obj.ctx.getImageData(0, 0, obj.size, obj.size)
+          imageData.color[obj.size] = data.data
+        })
+
+        diffusionLibrary.loaded(
+          document.querySelector("#anisotropic"),
+          imageData)
+      }
       
       },
       destroy: function() {

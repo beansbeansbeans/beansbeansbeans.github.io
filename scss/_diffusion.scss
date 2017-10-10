@@ -1,3 +1,30 @@
 #project-diffusion {
   @extend %video-project-page;
+  .caption {
+    display: none;
+  }
+  .iterations {
+    margin: 2rem;
+    font-size: 1.5rem;
+  }
+  .buttons {
+    margin-bottom: 3rem;
+  }
+  button {
+    -webkit-appearance: none;
+    background: none;
+    border: solid 2px $dark-blue;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: Brandon;
+    text-transform: uppercase;
+    font-weight: 800;
+    line-height: 1.75;
+    padding: 0.1rem 0.5rem 0 0.5rem;
+    cursor: pointer;
+    outline: none;
+    &:not(:last-of-type) {
+      margin-right: 1rem;
+    }
+  }
 }
