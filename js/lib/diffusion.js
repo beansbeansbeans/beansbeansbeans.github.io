@@ -223,6 +223,12 @@ define(['lib/THREE', 'lib/gpucomputationrenderer'], function(THREE, GPUComputati
       iterationCounter.innerHTML = "0 iterations"
       initialize()
       render()
+    },
+    destroy: function() {
+      playing = false
+      window.cancelAnimationFrame(rafID)
+
+      delete gpuCompute
     }
   }
 })

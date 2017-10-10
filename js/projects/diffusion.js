@@ -1,6 +1,6 @@
 define(['templates/project_detail', 'project_data', 'lib/diffusion'], function(projectTemplate, projectData, diffusionLibrary) {
   window.diffusionLibrary = diffusionLibrary
-  
+
   var diffusion = {
     intervalID: null,
     initialize: function() {
@@ -69,6 +69,7 @@ define(['templates/project_detail', 'project_data', 'lib/diffusion'], function(p
       
       },
       destroy: function() {
+        diffusionLibrary.destroy()
         window.clearInterval(this.intervalID);
       }
     };

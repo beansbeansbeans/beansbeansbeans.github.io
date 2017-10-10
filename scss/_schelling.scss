@@ -1,0 +1,14 @@
+#project-schelling {
+  @extend %video-project-page;
+  img {
+    width: 50%;
+    min-width: 600px;
+    margin-bottom: 1.5rem;
+  }
+  .description {
+    img {
+      width: 100% !important;
+      margin-bottom: 1rem !important;
+    }
+  }
+}
