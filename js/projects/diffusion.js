@@ -10,7 +10,7 @@ define(['templates/project_detail', 'project_data', 'lib/diffusion'], function(p
         blurb: "Click to inject ink into the image.",
         projectContents: "<div class='demo'><canvas id='anisotropic' width='500' height='500'></canvas><div class='iterations' id='anisotropic_iteration_count'>iterations</div><div class='buttons'><button onclick='diffusionLibrary.play()'>play</button><button onclick='diffusionLibrary.pause()'>pause</button><button onclick='diffusionLibrary.reset()'>reset</button></div></div>",
         caption: "",
-        description: "<a class='cta-main' href='http://fab.cba.mit.edu/classes/MAS.864/people/annyuan/project.html' target='_blank'>View project</a><p>This is a project I completed for <a href='http://fab.cba.mit.edu/classes/864.17/' target='_blank'>The Nature of Mathematical Modeling</a>, which I took with Neil Gershenfeld in the spring of 2017. It demonstrates an image processing technique known as anisotropic diffusion, which denoises images while preserving structure and important details.</p>"
+        description: "<a class='cta-main' href='http://fab.cba.mit.edu/classes/MAS.864/people/annyuan/project.html' target='_blank'>View project</a><p>This is a project I completed for <a href='http://fab.cba.mit.edu/classes/864.17/' target='_blank'>The Nature of Mathematical Modeling</a>, which I took with Neil Gershenfeld in the spring of 2017. It demonstrates an image processing technique known as anisotropic diffusion, which denoises images while preserving structure and important details.</p><p>Click the image to inject dye into the diffusion process.</p><br/><div class='section-header'>Technology</div><p>WebGL.</p>"
       };
 
       var indexOfProject = -1;

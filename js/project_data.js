@@ -9,6 +9,10 @@ define([], function() {
       description: "Experiments with cellular automata."
     },
     {
+      title: "mirror",
+      description: "Exploring social media echo chambers."
+    },
+    {
       title: "oughtness",
       description: "Prioritizing problems."
     },

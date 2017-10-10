@@ -1,0 +1,19 @@
+#project-mirror {
+  @extend %video-project-page;
+  .chrome {
+    width: 60vw;
+    max-width: 1000px;
+    &:after {
+      display: none !important;
+    }
+  }
+  .contents {
+    padding-top: 54.6%;
+  }
+  .quote {
+    margin-bottom: 3rem;
+  }
+  .caption {
+    display: none;
+  }
+}
