@@ -30,7 +30,7 @@ define([], function() {
     },
     {
       title: "stories",
-      description: "Sharing unhappiness."
+      description: "Sharing experiences."
     },
     {
       title: "pixels",
