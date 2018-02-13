@@ -21,6 +21,10 @@ define([], function() {
       description: "Visualizing election-related conversation."
     },
     {
+      title: "retweets",
+      description: "Visualizing retweet chains of Change.org petitions."
+    },
+    {
       title: "mirror",
       description: "Exploring social media echo chambers."
     },
