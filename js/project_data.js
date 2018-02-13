@@ -1,6 +1,10 @@
 define([], function() {
   return [
     {
+      title: "som",
+      description: "A self-organizing map of morality."
+    },
+    {
       title: "diffusion",
       description: "Image denoising."
     },
