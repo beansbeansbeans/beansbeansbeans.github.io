@@ -18,7 +18,7 @@ define(['lib/d3', 'templates/project_detail', 'project_data'], function(d3, proj
 				blurb: "Spin the globe.",
 				projectContents: '<div id="triptych"><div id="spinny_globe"></div><div id="phone_mask"></div><div id="globe_mask"></div><div id="instructional"><div class="cta">spin</div><svg id="svg_left"><path d="M69.4,71.9C-38.3,10.3,0.1-10.2,46.3,4.6"/></svg><svg id="svg_right"><path d="M91.2,0c42.3,34.6,58.3,96.2-84.1,16.2c-18.8-10.5,5.8,19.9,5.8,25.6S-0.3,16.7,4.5,13c2.6-1.9,16,0,26.3,0"/></svg></div></div>',
 				caption: "Built with JavaScript.",
-				description: "I wanted to make an interactive photorealistic scene. In this scene the globe is interactive - the user can spin it by dragging over it. I thought the presence of other animated elements (the candle and the phone) would enhance the scene by making the user feel like they were interacting with a video."
+				description: "I wanted to make an interactive photorealistic scene. In this scene the globe is interactive - the user can spin it by dragging over it."
 			},
 			nativePaneWidth = 850,
 			windowWidth = $(window).width(),
@@ -106,7 +106,7 @@ define(['lib/d3', 'templates/project_detail', 'project_data'], function(d3, proj
 
 			globe.css({
 				backgroundImage: "url(../images/project_spinny/globe_sprite" + fileSuffix + ".jpg)",
-				backgroundSize: ((paneWidth / nativePaneWidth) * (globeConfig.width * nativePaneWidth) * globeConfig.length) + "px auto",
+				backgroundSize: "cover",
 				width: 100 * ((globeConfig.width * nativePaneWidth) / nativePaneWidth) + "%",
 				height: 100 * (((globeConfig.width * nativePaneWidth) * globeConfig.heightRatio) / (nativePaneWidth * paneHeightRatio)) + "%",
 				top: (globeConfig.top * 100) + "%",
@@ -269,14 +269,14 @@ define(['lib/d3', 'templates/project_detail', 'project_data'], function(d3, proj
 			}
 
 			if (typeof window.ontouchstart !== 'undefined') {
-	            container[0].addEventListener('touchstart', tap);
-	            container[0].addEventListener('touchmove', drag);
-	            window.addEventListener('touchend', this.release);
-	        } else {
-		        container[0].addEventListener('mousedown', tap);
-		        container[0].addEventListener('mousemove', drag);
-		        window.addEventListener('mouseup', this.release);
-	        }
+        container[0].addEventListener('touchstart', tap);
+        container[0].addEventListener('touchmove', drag);
+        window.addEventListener('touchend', this.release);
+      } else {
+        container[0].addEventListener('mousedown', tap);
+        container[0].addEventListener('mousemove', drag);
+        window.addEventListener('mouseup', this.release);
+      }
 		},
 		destroy: function() {
 			window.cancelAnimationFrame(this.rafID);
