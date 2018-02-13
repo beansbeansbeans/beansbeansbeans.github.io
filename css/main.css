@@ -54,14 +54,14 @@
   font-style: italic;
   src: url("/fonts/brandon_600_it.otf");
 }
-#project-outloud .project-contents, #project-stories .project-contents, #project-oughtness .project-contents, #project-schelling .project-contents, #project-mirror .project-contents, #project-vista .project-contents, #project-wwit .project-contents, #project-diffusion .project-contents {
+#project-outloud .project-contents, #project-stories .project-contents, #project-oughtness .project-contents, #project-schelling .project-contents, #project-mirror .project-contents, #project-vista .project-contents, #project-wwit .project-contents, #project-electome .project-contents, #project-diffusion .project-contents {
   margin-top: 2.5em;
   margin-bottom: 0.1rem;
 }
-#project-outloud .caption, #project-stories .caption, #project-oughtness .caption, #project-schelling .caption, #project-mirror .caption, #project-vista .caption, #project-wwit .caption, #project-diffusion .caption {
+#project-outloud .caption, #project-stories .caption, #project-oughtness .caption, #project-schelling .caption, #project-mirror .caption, #project-vista .caption, #project-wwit .caption, #project-electome .caption, #project-diffusion .caption {
   margin-bottom: 4.375em;
 }
-#project-outloud .cta-main, #project-stories .cta-main, #project-oughtness .cta-main, #project-schelling .cta-main, #project-mirror .cta-main, #project-vista .cta-main, #project-wwit .cta-main, #project-diffusion .cta-main {
+#project-outloud .cta-main, #project-stories .cta-main, #project-oughtness .cta-main, #project-schelling .cta-main, #project-mirror .cta-main, #project-vista .cta-main, #project-wwit .cta-main, #project-electome .cta-main, #project-diffusion .cta-main {
   font-weight: 800;
   font-family: Brandon;
   text-align: center;
@@ -73,18 +73,18 @@
   color: #00303e;
 }
 @media (max-width: 640px) {
-  #project-outloud .cta-main, #project-stories .cta-main, #project-oughtness .cta-main, #project-schelling .cta-main, #project-mirror .cta-main, #project-vista .cta-main, #project-wwit .cta-main, #project-diffusion .cta-main {
+  #project-outloud .cta-main, #project-stories .cta-main, #project-oughtness .cta-main, #project-schelling .cta-main, #project-mirror .cta-main, #project-vista .cta-main, #project-wwit .cta-main, #project-electome .cta-main, #project-diffusion .cta-main {
     font-size: 0.8rem;
     margin-bottom: 1.5rem;
   }
 }
 
-#project-outloud .title a, #project-stories .title a, #project-oughtness .title a, #project-schelling .title a, #project-mirror .title a, #project-vista .title a, #project-wwit .title a, #project-diffusion .title a {
+#project-outloud .title a, #project-stories .title a, #project-oughtness .title a, #project-schelling .title a, #project-mirror .title a, #project-vista .title a, #project-wwit .title a, #project-electome .title a, #project-diffusion .title a {
   color: #00303e;
   display: inline-block;
   border-bottom: solid 1px #00303e;
 }
-#project-outloud .chrome, #project-stories .chrome, #project-oughtness .chrome, #project-schelling .chrome, #project-mirror .chrome, #project-vista .chrome, #project-wwit .chrome, #project-diffusion .chrome {
+#project-outloud .chrome, #project-stories .chrome, #project-oughtness .chrome, #project-schelling .chrome, #project-mirror .chrome, #project-vista .chrome, #project-wwit .chrome, #project-electome .chrome, #project-diffusion .chrome {
   display: inline-block;
   border: solid 1px #ddd;
   border-radius: 7px;
@@ -96,13 +96,13 @@
   margin-bottom: 1rem;
   position: relative;
 }
-#project-outloud .chrome .chrome-controls, #project-stories .chrome .chrome-controls, #project-oughtness .chrome .chrome-controls, #project-schelling .chrome .chrome-controls, #project-mirror .chrome .chrome-controls, #project-vista .chrome .chrome-controls, #project-wwit .chrome .chrome-controls, #project-diffusion .chrome .chrome-controls {
+#project-outloud .chrome .chrome-controls, #project-stories .chrome .chrome-controls, #project-oughtness .chrome .chrome-controls, #project-schelling .chrome .chrome-controls, #project-mirror .chrome .chrome-controls, #project-vista .chrome .chrome-controls, #project-wwit .chrome .chrome-controls, #project-electome .chrome .chrome-controls, #project-diffusion .chrome .chrome-controls {
   line-height: 0;
   padding: 0.5rem 0 0.55rem 0.5rem;
   text-align: left;
   background: #ddd;
 }
-#project-outloud .chrome .chrome-controls .close, #project-stories .chrome .chrome-controls .close, #project-oughtness .chrome .chrome-controls .close, #project-schelling .chrome .chrome-controls .close, #project-mirror .chrome .chrome-controls .close, #project-vista .chrome .chrome-controls .close, #project-wwit .chrome .chrome-controls .close, #project-diffusion .chrome .chrome-controls .close, #project-outloud .chrome .chrome-controls .min, #project-stories .chrome .chrome-controls .min, #project-oughtness .chrome .chrome-controls .min, #project-schelling .chrome .chrome-controls .min, #project-mirror .chrome .chrome-controls .min, #project-vista .chrome .chrome-controls .min, #project-wwit .chrome .chrome-controls .min, #project-diffusion .chrome .chrome-controls .min, #project-outloud .chrome .chrome-controls .max, #project-stories .chrome .chrome-controls .max, #project-oughtness .chrome .chrome-controls .max, #project-schelling .chrome .chrome-controls .max, #project-mirror .chrome .chrome-controls .max, #project-vista .chrome .chrome-controls .max, #project-wwit .chrome .chrome-controls .max, #project-diffusion .chrome .chrome-controls .max {
+#project-outloud .chrome .chrome-controls .close, #project-stories .chrome .chrome-controls .close, #project-oughtness .chrome .chrome-controls .close, #project-schelling .chrome .chrome-controls .close, #project-mirror .chrome .chrome-controls .close, #project-vista .chrome .chrome-controls .close, #project-wwit .chrome .chrome-controls .close, #project-electome .chrome .chrome-controls .close, #project-diffusion .chrome .chrome-controls .close, #project-outloud .chrome .chrome-controls .min, #project-stories .chrome .chrome-controls .min, #project-oughtness .chrome .chrome-controls .min, #project-schelling .chrome .chrome-controls .min, #project-mirror .chrome .chrome-controls .min, #project-vista .chrome .chrome-controls .min, #project-wwit .chrome .chrome-controls .min, #project-electome .chrome .chrome-controls .min, #project-diffusion .chrome .chrome-controls .min, #project-outloud .chrome .chrome-controls .max, #project-stories .chrome .chrome-controls .max, #project-oughtness .chrome .chrome-controls .max, #project-schelling .chrome .chrome-controls .max, #project-mirror .chrome .chrome-controls .max, #project-vista .chrome .chrome-controls .max, #project-wwit .chrome .chrome-controls .max, #project-electome .chrome .chrome-controls .max, #project-diffusion .chrome .chrome-controls .max {
   border-radius: 50%;
   display: inline-block;
   margin-right: 0.5rem;
@@ -110,12 +110,12 @@
   height: 0.55rem;
   background: rgba(255, 255, 255, 0.8);
 }
-#project-outloud .chrome .contents, #project-stories .chrome .contents, #project-oughtness .chrome .contents, #project-schelling .chrome .contents, #project-mirror .chrome .contents, #project-vista .chrome .contents, #project-wwit .chrome .contents, #project-diffusion .chrome .contents {
+#project-outloud .chrome .contents, #project-stories .chrome .contents, #project-oughtness .chrome .contents, #project-schelling .chrome .contents, #project-mirror .chrome .contents, #project-vista .chrome .contents, #project-wwit .chrome .contents, #project-electome .chrome .contents, #project-diffusion .chrome .contents {
   position: relative;
   overflow: hidden;
   border-radius: 0 0 7px 7px;
 }
-#project-outloud .chrome video, #project-stories .chrome video, #project-oughtness .chrome video, #project-schelling .chrome video, #project-mirror .chrome video, #project-vista .chrome video, #project-wwit .chrome video, #project-diffusion .chrome video {
+#project-outloud .chrome video, #project-stories .chrome video, #project-oughtness .chrome video, #project-schelling .chrome video, #project-mirror .chrome video, #project-vista .chrome video, #project-wwit .chrome video, #project-electome .chrome video, #project-diffusion .chrome video {
   position: absolute;
   top: 0;
   right: 0;
@@ -124,7 +124,7 @@
   width: 100%;
   height: 100%;
 }
-#project-outloud .chrome:after, #project-stories .chrome:after, #project-oughtness .chrome:after, #project-schelling .chrome:after, #project-mirror .chrome:after, #project-vista .chrome:after, #project-wwit .chrome:after, #project-diffusion .chrome:after {
+#project-outloud .chrome:after, #project-stories .chrome:after, #project-oughtness .chrome:after, #project-schelling .chrome:after, #project-mirror .chrome:after, #project-vista .chrome:after, #project-wwit .chrome:after, #project-electome .chrome:after, #project-diffusion .chrome:after {
   content: "";
   background: #ddd;
   position: absolute;
@@ -134,25 +134,25 @@
   height: 1px;
 }
 @media (max-width: 640px) {
-  #project-outloud .chrome:after, #project-stories .chrome:after, #project-oughtness .chrome:after, #project-schelling .chrome:after, #project-mirror .chrome:after, #project-vista .chrome:after, #project-wwit .chrome:after, #project-diffusion .chrome:after {
+  #project-outloud .chrome:after, #project-stories .chrome:after, #project-oughtness .chrome:after, #project-schelling .chrome:after, #project-mirror .chrome:after, #project-vista .chrome:after, #project-wwit .chrome:after, #project-electome .chrome:after, #project-diffusion .chrome:after {
     top: calc(100% + 1.4rem);
   }
 }
 @media (max-width: 640px) {
-  #project-outloud .chrome .chrome-controls, #project-stories .chrome .chrome-controls, #project-oughtness .chrome .chrome-controls, #project-schelling .chrome .chrome-controls, #project-mirror .chrome .chrome-controls, #project-vista .chrome .chrome-controls, #project-wwit .chrome .chrome-controls, #project-diffusion .chrome .chrome-controls {
+  #project-outloud .chrome .chrome-controls, #project-stories .chrome .chrome-controls, #project-oughtness .chrome .chrome-controls, #project-schelling .chrome .chrome-controls, #project-mirror .chrome .chrome-controls, #project-vista .chrome .chrome-controls, #project-wwit .chrome .chrome-controls, #project-electome .chrome .chrome-controls, #project-diffusion .chrome .chrome-controls {
     padding: 0.25rem 0 0.3rem 0.35rem;
   }
-  #project-outloud .chrome .chrome-controls .close, #project-stories .chrome .chrome-controls .close, #project-oughtness .chrome .chrome-controls .close, #project-schelling .chrome .chrome-controls .close, #project-mirror .chrome .chrome-controls .close, #project-vista .chrome .chrome-controls .close, #project-wwit .chrome .chrome-controls .close, #project-diffusion .chrome .chrome-controls .close, #project-outloud .chrome .chrome-controls .min, #project-stories .chrome .chrome-controls .min, #project-oughtness .chrome .chrome-controls .min, #project-schelling .chrome .chrome-controls .min, #project-mirror .chrome .chrome-controls .min, #project-vista .chrome .chrome-controls .min, #project-wwit .chrome .chrome-controls .min, #project-diffusion .chrome .chrome-controls .min, #project-outloud .chrome .chrome-controls .max, #project-stories .chrome .chrome-controls .max, #project-oughtness .chrome .chrome-controls .max, #project-schelling .chrome .chrome-controls .max, #project-mirror .chrome .chrome-controls .max, #project-vista .chrome .chrome-controls .max, #project-wwit .chrome .chrome-controls .max, #project-diffusion .chrome .chrome-controls .max {
+  #project-outloud .chrome .chrome-controls .close, #project-stories .chrome .chrome-controls .close, #project-oughtness .chrome .chrome-controls .close, #project-schelling .chrome .chrome-controls .close, #project-mirror .chrome .chrome-controls .close, #project-vista .chrome .chrome-controls .close, #project-wwit .chrome .chrome-controls .close, #project-electome .chrome .chrome-controls .close, #project-diffusion .chrome .chrome-controls .close, #project-outloud .chrome .chrome-controls .min, #project-stories .chrome .chrome-controls .min, #project-oughtness .chrome .chrome-controls .min, #project-schelling .chrome .chrome-controls .min, #project-mirror .chrome .chrome-controls .min, #project-vista .chrome .chrome-controls .min, #project-wwit .chrome .chrome-controls .min, #project-electome .chrome .chrome-controls .min, #project-diffusion .chrome .chrome-controls .min, #project-outloud .chrome .chrome-controls .max, #project-stories .chrome .chrome-controls .max, #project-oughtness .chrome .chrome-controls .max, #project-schelling .chrome .chrome-controls .max, #project-mirror .chrome .chrome-controls .max, #project-vista .chrome .chrome-controls .max, #project-wwit .chrome .chrome-controls .max, #project-electome .chrome .chrome-controls .max, #project-diffusion .chrome .chrome-controls .max {
     margin-right: 0.35rem;
     width: 0.3rem;
     height: 0.3rem;
   }
 }
-#project-outloud .caption, #project-stories .caption, #project-oughtness .caption, #project-schelling .caption, #project-mirror .caption, #project-vista .caption, #project-wwit .caption, #project-diffusion .caption {
+#project-outloud .caption, #project-stories .caption, #project-oughtness .caption, #project-schelling .caption, #project-mirror .caption, #project-vista .caption, #project-wwit .caption, #project-electome .caption, #project-diffusion .caption {
   margin-bottom: 5.5rem;
   font-style: normal;
 }
-#project-outloud .caption .loading, #project-stories .caption .loading, #project-oughtness .caption .loading, #project-schelling .caption .loading, #project-mirror .caption .loading, #project-vista .caption .loading, #project-wwit .caption .loading, #project-diffusion .caption .loading, #project-outloud .caption [class*="caption"], #project-stories .caption [class*="caption"], #project-oughtness .caption [class*="caption"], #project-schelling .caption [class*="caption"], #project-mirror .caption [class*="caption"], #project-vista .caption [class*="caption"], #project-wwit .caption [class*="caption"], #project-diffusion .caption [class*="caption"] {
+#project-outloud .caption .loading, #project-stories .caption .loading, #project-oughtness .caption .loading, #project-schelling .caption .loading, #project-mirror .caption .loading, #project-vista .caption .loading, #project-wwit .caption .loading, #project-electome .caption .loading, #project-diffusion .caption .loading, #project-outloud .caption [class*="caption"], #project-stories .caption [class*="caption"], #project-oughtness .caption [class*="caption"], #project-schelling .caption [class*="caption"], #project-mirror .caption [class*="caption"], #project-vista .caption [class*="caption"], #project-wwit .caption [class*="caption"], #project-electome .caption [class*="caption"], #project-diffusion .caption [class*="caption"] {
   -moz-transition: opacity 200ms;
   -o-transition: opacity 200ms;
   -webkit-transition: opacity 200ms;
@@ -167,7 +167,7 @@
   transform: translateX(-50%);
   background-color: white;
 }
-#project-outloud .caption .loading:before, #project-stories .caption .loading:before, #project-oughtness .caption .loading:before, #project-schelling .caption .loading:before, #project-mirror .caption .loading:before, #project-vista .caption .loading:before, #project-wwit .caption .loading:before, #project-diffusion .caption .loading:before, #project-outloud .caption [class*="caption"]:before, #project-stories .caption [class*="caption"]:before, #project-oughtness .caption [class*="caption"]:before, #project-schelling .caption [class*="caption"]:before, #project-mirror .caption [class*="caption"]:before, #project-vista .caption [class*="caption"]:before, #project-wwit .caption [class*="caption"]:before, #project-diffusion .caption [class*="caption"]:before {
+#project-outloud .caption .loading:before, #project-stories .caption .loading:before, #project-oughtness .caption .loading:before, #project-schelling .caption .loading:before, #project-mirror .caption .loading:before, #project-vista .caption .loading:before, #project-wwit .caption .loading:before, #project-electome .caption .loading:before, #project-diffusion .caption .loading:before, #project-outloud .caption [class*="caption"]:before, #project-stories .caption [class*="caption"]:before, #project-oughtness .caption [class*="caption"]:before, #project-schelling .caption [class*="caption"]:before, #project-mirror .caption [class*="caption"]:before, #project-vista .caption [class*="caption"]:before, #project-wwit .caption [class*="caption"]:before, #project-electome .caption [class*="caption"]:before, #project-diffusion .caption [class*="caption"]:before {
   content: "";
   z-index: -1;
   background: white;
@@ -178,78 +178,78 @@
   display: block;
   position: absolute;
 }
-#project-outloud .caption [class*="caption"], #project-stories .caption [class*="caption"], #project-oughtness .caption [class*="caption"], #project-schelling .caption [class*="caption"], #project-mirror .caption [class*="caption"], #project-vista .caption [class*="caption"], #project-wwit .caption [class*="caption"], #project-diffusion .caption [class*="caption"] {
+#project-outloud .caption [class*="caption"], #project-stories .caption [class*="caption"], #project-oughtness .caption [class*="caption"], #project-schelling .caption [class*="caption"], #project-mirror .caption [class*="caption"], #project-vista .caption [class*="caption"], #project-wwit .caption [class*="caption"], #project-electome .caption [class*="caption"], #project-diffusion .caption [class*="caption"] {
   opacity: 0;
 }
 @media (max-width: 640px) {
-  #project-outloud .caption, #project-stories .caption, #project-oughtness .caption, #project-schelling .caption, #project-mirror .caption, #project-vista .caption, #project-wwit .caption, #project-diffusion .caption {
+  #project-outloud .caption, #project-stories .caption, #project-oughtness .caption, #project-schelling .caption, #project-mirror .caption, #project-vista .caption, #project-wwit .caption, #project-electome .caption, #project-diffusion .caption {
     margin-bottom: 3.5rem;
   }
 }
-#project-outloud .caption[data-active-caption="0"] .caption-0, #project-stories .caption[data-active-caption="0"] .caption-0, #project-oughtness .caption[data-active-caption="0"] .caption-0, #project-schelling .caption[data-active-caption="0"] .caption-0, #project-mirror .caption[data-active-caption="0"] .caption-0, #project-vista .caption[data-active-caption="0"] .caption-0, #project-wwit .caption[data-active-caption="0"] .caption-0, #project-diffusion .caption[data-active-caption="0"] .caption-0 {
+#project-outloud .caption[data-active-caption="0"] .caption-0, #project-stories .caption[data-active-caption="0"] .caption-0, #project-oughtness .caption[data-active-caption="0"] .caption-0, #project-schelling .caption[data-active-caption="0"] .caption-0, #project-mirror .caption[data-active-caption="0"] .caption-0, #project-vista .caption[data-active-caption="0"] .caption-0, #project-wwit .caption[data-active-caption="0"] .caption-0, #project-electome .caption[data-active-caption="0"] .caption-0, #project-diffusion .caption[data-active-caption="0"] .caption-0 {
   opacity: 1;
 }
-#project-outloud .caption[data-active-caption="0"] .loading, #project-stories .caption[data-active-caption="0"] .loading, #project-oughtness .caption[data-active-caption="0"] .loading, #project-schelling .caption[data-active-caption="0"] .loading, #project-mirror .caption[data-active-caption="0"] .loading, #project-vista .caption[data-active-caption="0"] .loading, #project-wwit .caption[data-active-caption="0"] .loading, #project-diffusion .caption[data-active-caption="0"] .loading {
+#project-outloud .caption[data-active-caption="0"] .loading, #project-stories .caption[data-active-caption="0"] .loading, #project-oughtness .caption[data-active-caption="0"] .loading, #project-schelling .caption[data-active-caption="0"] .loading, #project-mirror .caption[data-active-caption="0"] .loading, #project-vista .caption[data-active-caption="0"] .loading, #project-wwit .caption[data-active-caption="0"] .loading, #project-electome .caption[data-active-caption="0"] .loading, #project-diffusion .caption[data-active-caption="0"] .loading {
   opacity: 0;
 }
-#project-outloud .caption[data-active-caption="1"] .caption-1, #project-stories .caption[data-active-caption="1"] .caption-1, #project-oughtness .caption[data-active-caption="1"] .caption-1, #project-schelling .caption[data-active-caption="1"] .caption-1, #project-mirror .caption[data-active-caption="1"] .caption-1, #project-vista .caption[data-active-caption="1"] .caption-1, #project-wwit .caption[data-active-caption="1"] .caption-1, #project-diffusion .caption[data-active-caption="1"] .caption-1 {
+#project-outloud .caption[data-active-caption="1"] .caption-1, #project-stories .caption[data-active-caption="1"] .caption-1, #project-oughtness .caption[data-active-caption="1"] .caption-1, #project-schelling .caption[data-active-caption="1"] .caption-1, #project-mirror .caption[data-active-caption="1"] .caption-1, #project-vista .caption[data-active-caption="1"] .caption-1, #project-wwit .caption[data-active-caption="1"] .caption-1, #project-electome .caption[data-active-caption="1"] .caption-1, #project-diffusion .caption[data-active-caption="1"] .caption-1 {
   opacity: 1;
 }
-#project-outloud .caption[data-active-caption="1"] .loading, #project-stories .caption[data-active-caption="1"] .loading, #project-oughtness .caption[data-active-caption="1"] .loading, #project-schelling .caption[data-active-caption="1"] .loading, #project-mirror .caption[data-active-caption="1"] .loading, #project-vista .caption[data-active-caption="1"] .loading, #project-wwit .caption[data-active-caption="1"] .loading, #project-diffusion .caption[data-active-caption="1"] .loading {
+#project-outloud .caption[data-active-caption="1"] .loading, #project-stories .caption[data-active-caption="1"] .loading, #project-oughtness .caption[data-active-caption="1"] .loading, #project-schelling .caption[data-active-caption="1"] .loading, #project-mirror .caption[data-active-caption="1"] .loading, #project-vista .caption[data-active-caption="1"] .loading, #project-wwit .caption[data-active-caption="1"] .loading, #project-electome .caption[data-active-caption="1"] .loading, #project-diffusion .caption[data-active-caption="1"] .loading {
   opacity: 0;
 }
-#project-outloud .caption[data-active-caption="2"] .caption-2, #project-stories .caption[data-active-caption="2"] .caption-2, #project-oughtness .caption[data-active-caption="2"] .caption-2, #project-schelling .caption[data-active-caption="2"] .caption-2, #project-mirror .caption[data-active-caption="2"] .caption-2, #project-vista .caption[data-active-caption="2"] .caption-2, #project-wwit .caption[data-active-caption="2"] .caption-2, #project-diffusion .caption[data-active-caption="2"] .caption-2 {
+#project-outloud .caption[data-active-caption="2"] .caption-2, #project-stories .caption[data-active-caption="2"] .caption-2, #project-oughtness .caption[data-active-caption="2"] .caption-2, #project-schelling .caption[data-active-caption="2"] .caption-2, #project-mirror .caption[data-active-caption="2"] .caption-2, #project-vista .caption[data-active-caption="2"] .caption-2, #project-wwit .caption[data-active-caption="2"] .caption-2, #project-electome .caption[data-active-caption="2"] .caption-2, #project-diffusion .caption[data-active-caption="2"] .caption-2 {
   opacity: 1;
 }
-#project-outloud .caption[data-active-caption="2"] .loading, #project-stories .caption[data-active-caption="2"] .loading, #project-oughtness .caption[data-active-caption="2"] .loading, #project-schelling .caption[data-active-caption="2"] .loading, #project-mirror .caption[data-active-caption="2"] .loading, #project-vista .caption[data-active-caption="2"] .loading, #project-wwit .caption[data-active-caption="2"] .loading, #project-diffusion .caption[data-active-caption="2"] .loading {
+#project-outloud .caption[data-active-caption="2"] .loading, #project-stories .caption[data-active-caption="2"] .loading, #project-oughtness .caption[data-active-caption="2"] .loading, #project-schelling .caption[data-active-caption="2"] .loading, #project-mirror .caption[data-active-caption="2"] .loading, #project-vista .caption[data-active-caption="2"] .loading, #project-wwit .caption[data-active-caption="2"] .loading, #project-electome .caption[data-active-caption="2"] .loading, #project-diffusion .caption[data-active-caption="2"] .loading {
   opacity: 0;
 }
-#project-outloud .caption[data-active-caption="3"] .caption-3, #project-stories .caption[data-active-caption="3"] .caption-3, #project-oughtness .caption[data-active-caption="3"] .caption-3, #project-schelling .caption[data-active-caption="3"] .caption-3, #project-mirror .caption[data-active-caption="3"] .caption-3, #project-vista .caption[data-active-caption="3"] .caption-3, #project-wwit .caption[data-active-caption="3"] .caption-3, #project-diffusion .caption[data-active-caption="3"] .caption-3 {
+#project-outloud .caption[data-active-caption="3"] .caption-3, #project-stories .caption[data-active-caption="3"] .caption-3, #project-oughtness .caption[data-active-caption="3"] .caption-3, #project-schelling .caption[data-active-caption="3"] .caption-3, #project-mirror .caption[data-active-caption="3"] .caption-3, #project-vista .caption[data-active-caption="3"] .caption-3, #project-wwit .caption[data-active-caption="3"] .caption-3, #project-electome .caption[data-active-caption="3"] .caption-3, #project-diffusion .caption[data-active-caption="3"] .caption-3 {
   opacity: 1;
 }
-#project-outloud .caption[data-active-caption="3"] .loading, #project-stories .caption[data-active-caption="3"] .loading, #project-oughtness .caption[data-active-caption="3"] .loading, #project-schelling .caption[data-active-caption="3"] .loading, #project-mirror .caption[data-active-caption="3"] .loading, #project-vista .caption[data-active-caption="3"] .loading, #project-wwit .caption[data-active-caption="3"] .loading, #project-diffusion .caption[data-active-caption="3"] .loading {
+#project-outloud .caption[data-active-caption="3"] .loading, #project-stories .caption[data-active-caption="3"] .loading, #project-oughtness .caption[data-active-caption="3"] .loading, #project-schelling .caption[data-active-caption="3"] .loading, #project-mirror .caption[data-active-caption="3"] .loading, #project-vista .caption[data-active-caption="3"] .loading, #project-wwit .caption[data-active-caption="3"] .loading, #project-electome .caption[data-active-caption="3"] .loading, #project-diffusion .caption[data-active-caption="3"] .loading {
   opacity: 0;
 }
-#project-outloud .caption[data-active-caption="4"] .caption-4, #project-stories .caption[data-active-caption="4"] .caption-4, #project-oughtness .caption[data-active-caption="4"] .caption-4, #project-schelling .caption[data-active-caption="4"] .caption-4, #project-mirror .caption[data-active-caption="4"] .caption-4, #project-vista .caption[data-active-caption="4"] .caption-4, #project-wwit .caption[data-active-caption="4"] .caption-4, #project-diffusion .caption[data-active-caption="4"] .caption-4 {
+#project-outloud .caption[data-active-caption="4"] .caption-4, #project-stories .caption[data-active-caption="4"] .caption-4, #project-oughtness .caption[data-active-caption="4"] .caption-4, #project-schelling .caption[data-active-caption="4"] .caption-4, #project-mirror .caption[data-active-caption="4"] .caption-4, #project-vista .caption[data-active-caption="4"] .caption-4, #project-wwit .caption[data-active-caption="4"] .caption-4, #project-electome .caption[data-active-caption="4"] .caption-4, #project-diffusion .caption[data-active-caption="4"] .caption-4 {
   opacity: 1;
 }
-#project-outloud .caption[data-active-caption="4"] .loading, #project-stories .caption[data-active-caption="4"] .loading, #project-oughtness .caption[data-active-caption="4"] .loading, #project-schelling .caption[data-active-caption="4"] .loading, #project-mirror .caption[data-active-caption="4"] .loading, #project-vista .caption[data-active-caption="4"] .loading, #project-wwit .caption[data-active-caption="4"] .loading, #project-diffusion .caption[data-active-caption="4"] .loading {
+#project-outloud .caption[data-active-caption="4"] .loading, #project-stories .caption[data-active-caption="4"] .loading, #project-oughtness .caption[data-active-caption="4"] .loading, #project-schelling .caption[data-active-caption="4"] .loading, #project-mirror .caption[data-active-caption="4"] .loading, #project-vista .caption[data-active-caption="4"] .loading, #project-wwit .caption[data-active-caption="4"] .loading, #project-electome .caption[data-active-caption="4"] .loading, #project-diffusion .caption[data-active-caption="4"] .loading {
   opacity: 0;
 }
-#project-outloud .caption[data-active-caption="5"] .caption-5, #project-stories .caption[data-active-caption="5"] .caption-5, #project-oughtness .caption[data-active-caption="5"] .caption-5, #project-schelling .caption[data-active-caption="5"] .caption-5, #project-mirror .caption[data-active-caption="5"] .caption-5, #project-vista .caption[data-active-caption="5"] .caption-5, #project-wwit .caption[data-active-caption="5"] .caption-5, #project-diffusion .caption[data-active-caption="5"] .caption-5 {
+#project-outloud .caption[data-active-caption="5"] .caption-5, #project-stories .caption[data-active-caption="5"] .caption-5, #project-oughtness .caption[data-active-caption="5"] .caption-5, #project-schelling .caption[data-active-caption="5"] .caption-5, #project-mirror .caption[data-active-caption="5"] .caption-5, #project-vista .caption[data-active-caption="5"] .caption-5, #project-wwit .caption[data-active-caption="5"] .caption-5, #project-electome .caption[data-active-caption="5"] .caption-5, #project-diffusion .caption[data-active-caption="5"] .caption-5 {
   opacity: 1;
 }
-#project-outloud .caption[data-active-caption="5"] .loading, #project-stories .caption[data-active-caption="5"] .loading, #project-oughtness .caption[data-active-caption="5"] .loading, #project-schelling .caption[data-active-caption="5"] .loading, #project-mirror .caption[data-active-caption="5"] .loading, #project-vista .caption[data-active-caption="5"] .loading, #project-wwit .caption[data-active-caption="5"] .loading, #project-diffusion .caption[data-active-caption="5"] .loading {
+#project-outloud .caption[data-active-caption="5"] .loading, #project-stories .caption[data-active-caption="5"] .loading, #project-oughtness .caption[data-active-caption="5"] .loading, #project-schelling .caption[data-active-caption="5"] .loading, #project-mirror .caption[data-active-caption="5"] .loading, #project-vista .caption[data-active-caption="5"] .loading, #project-wwit .caption[data-active-caption="5"] .loading, #project-electome .caption[data-active-caption="5"] .loading, #project-diffusion .caption[data-active-caption="5"] .loading {
   opacity: 0;
 }
-#project-outloud .caption[data-active-caption="6"] .caption-6, #project-stories .caption[data-active-caption="6"] .caption-6, #project-oughtness .caption[data-active-caption="6"] .caption-6, #project-schelling .caption[data-active-caption="6"] .caption-6, #project-mirror .caption[data-active-caption="6"] .caption-6, #project-vista .caption[data-active-caption="6"] .caption-6, #project-wwit .caption[data-active-caption="6"] .caption-6, #project-diffusion .caption[data-active-caption="6"] .caption-6 {
+#project-outloud .caption[data-active-caption="6"] .caption-6, #project-stories .caption[data-active-caption="6"] .caption-6, #project-oughtness .caption[data-active-caption="6"] .caption-6, #project-schelling .caption[data-active-caption="6"] .caption-6, #project-mirror .caption[data-active-caption="6"] .caption-6, #project-vista .caption[data-active-caption="6"] .caption-6, #project-wwit .caption[data-active-caption="6"] .caption-6, #project-electome .caption[data-active-caption="6"] .caption-6, #project-diffusion .caption[data-active-caption="6"] .caption-6 {
   opacity: 1;
 }
-#project-outloud .caption[data-active-caption="6"] .loading, #project-stories .caption[data-active-caption="6"] .loading, #project-oughtness .caption[data-active-caption="6"] .loading, #project-schelling .caption[data-active-caption="6"] .loading, #project-mirror .caption[data-active-caption="6"] .loading, #project-vista .caption[data-active-caption="6"] .loading, #project-wwit .caption[data-active-caption="6"] .loading, #project-diffusion .caption[data-active-caption="6"] .loading {
+#project-outloud .caption[data-active-caption="6"] .loading, #project-stories .caption[data-active-caption="6"] .loading, #project-oughtness .caption[data-active-caption="6"] .loading, #project-schelling .caption[data-active-caption="6"] .loading, #project-mirror .caption[data-active-caption="6"] .loading, #project-vista .caption[data-active-caption="6"] .loading, #project-wwit .caption[data-active-caption="6"] .loading, #project-electome .caption[data-active-caption="6"] .loading, #project-diffusion .caption[data-active-caption="6"] .loading {
   opacity: 0;
 }
-#project-outloud .caption[data-active-caption="7"] .caption-7, #project-stories .caption[data-active-caption="7"] .caption-7, #project-oughtness .caption[data-active-caption="7"] .caption-7, #project-schelling .caption[data-active-caption="7"] .caption-7, #project-mirror .caption[data-active-caption="7"] .caption-7, #project-vista .caption[data-active-caption="7"] .caption-7, #project-wwit .caption[data-active-caption="7"] .caption-7, #project-diffusion .caption[data-active-caption="7"] .caption-7 {
+#project-outloud .caption[data-active-caption="7"] .caption-7, #project-stories .caption[data-active-caption="7"] .caption-7, #project-oughtness .caption[data-active-caption="7"] .caption-7, #project-schelling .caption[data-active-caption="7"] .caption-7, #project-mirror .caption[data-active-caption="7"] .caption-7, #project-vista .caption[data-active-caption="7"] .caption-7, #project-wwit .caption[data-active-caption="7"] .caption-7, #project-electome .caption[data-active-caption="7"] .caption-7, #project-diffusion .caption[data-active-caption="7"] .caption-7 {
   opacity: 1;
 }
-#project-outloud .caption[data-active-caption="7"] .loading, #project-stories .caption[data-active-caption="7"] .loading, #project-oughtness .caption[data-active-caption="7"] .loading, #project-schelling .caption[data-active-caption="7"] .loading, #project-mirror .caption[data-active-caption="7"] .loading, #project-vista .caption[data-active-caption="7"] .loading, #project-wwit .caption[data-active-caption="7"] .loading, #project-diffusion .caption[data-active-caption="7"] .loading {
+#project-outloud .caption[data-active-caption="7"] .loading, #project-stories .caption[data-active-caption="7"] .loading, #project-oughtness .caption[data-active-caption="7"] .loading, #project-schelling .caption[data-active-caption="7"] .loading, #project-mirror .caption[data-active-caption="7"] .loading, #project-vista .caption[data-active-caption="7"] .loading, #project-wwit .caption[data-active-caption="7"] .loading, #project-electome .caption[data-active-caption="7"] .loading, #project-diffusion .caption[data-active-caption="7"] .loading {
   opacity: 0;
 }
-#project-outloud .caption[data-active-caption="8"] .caption-8, #project-stories .caption[data-active-caption="8"] .caption-8, #project-oughtness .caption[data-active-caption="8"] .caption-8, #project-schelling .caption[data-active-caption="8"] .caption-8, #project-mirror .caption[data-active-caption="8"] .caption-8, #project-vista .caption[data-active-caption="8"] .caption-8, #project-wwit .caption[data-active-caption="8"] .caption-8, #project-diffusion .caption[data-active-caption="8"] .caption-8 {
+#project-outloud .caption[data-active-caption="8"] .caption-8, #project-stories .caption[data-active-caption="8"] .caption-8, #project-oughtness .caption[data-active-caption="8"] .caption-8, #project-schelling .caption[data-active-caption="8"] .caption-8, #project-mirror .caption[data-active-caption="8"] .caption-8, #project-vista .caption[data-active-caption="8"] .caption-8, #project-wwit .caption[data-active-caption="8"] .caption-8, #project-electome .caption[data-active-caption="8"] .caption-8, #project-diffusion .caption[data-active-caption="8"] .caption-8 {
   opacity: 1;
 }
-#project-outloud .caption[data-active-caption="8"] .loading, #project-stories .caption[data-active-caption="8"] .loading, #project-oughtness .caption[data-active-caption="8"] .loading, #project-schelling .caption[data-active-caption="8"] .loading, #project-mirror .caption[data-active-caption="8"] .loading, #project-vista .caption[data-active-caption="8"] .loading, #project-wwit .caption[data-active-caption="8"] .loading, #project-diffusion .caption[data-active-caption="8"] .loading {
+#project-outloud .caption[data-active-caption="8"] .loading, #project-stories .caption[data-active-caption="8"] .loading, #project-oughtness .caption[data-active-caption="8"] .loading, #project-schelling .caption[data-active-caption="8"] .loading, #project-mirror .caption[data-active-caption="8"] .loading, #project-vista .caption[data-active-caption="8"] .loading, #project-wwit .caption[data-active-caption="8"] .loading, #project-electome .caption[data-active-caption="8"] .loading, #project-diffusion .caption[data-active-caption="8"] .loading {
   opacity: 0;
 }
-#project-outloud .caption[data-active-caption="9"] .caption-9, #project-stories .caption[data-active-caption="9"] .caption-9, #project-oughtness .caption[data-active-caption="9"] .caption-9, #project-schelling .caption[data-active-caption="9"] .caption-9, #project-mirror .caption[data-active-caption="9"] .caption-9, #project-vista .caption[data-active-caption="9"] .caption-9, #project-wwit .caption[data-active-caption="9"] .caption-9, #project-diffusion .caption[data-active-caption="9"] .caption-9 {
+#project-outloud .caption[data-active-caption="9"] .caption-9, #project-stories .caption[data-active-caption="9"] .caption-9, #project-oughtness .caption[data-active-caption="9"] .caption-9, #project-schelling .caption[data-active-caption="9"] .caption-9, #project-mirror .caption[data-active-caption="9"] .caption-9, #project-vista .caption[data-active-caption="9"] .caption-9, #project-wwit .caption[data-active-caption="9"] .caption-9, #project-electome .caption[data-active-caption="9"] .caption-9, #project-diffusion .caption[data-active-caption="9"] .caption-9 {
   opacity: 1;
 }
-#project-outloud .caption[data-active-caption="9"] .loading, #project-stories .caption[data-active-caption="9"] .loading, #project-oughtness .caption[data-active-caption="9"] .loading, #project-schelling .caption[data-active-caption="9"] .loading, #project-mirror .caption[data-active-caption="9"] .loading, #project-vista .caption[data-active-caption="9"] .loading, #project-wwit .caption[data-active-caption="9"] .loading, #project-diffusion .caption[data-active-caption="9"] .loading {
+#project-outloud .caption[data-active-caption="9"] .loading, #project-stories .caption[data-active-caption="9"] .loading, #project-oughtness .caption[data-active-caption="9"] .loading, #project-schelling .caption[data-active-caption="9"] .loading, #project-mirror .caption[data-active-caption="9"] .loading, #project-vista .caption[data-active-caption="9"] .loading, #project-wwit .caption[data-active-caption="9"] .loading, #project-electome .caption[data-active-caption="9"] .loading, #project-diffusion .caption[data-active-caption="9"] .loading {
   opacity: 0;
 }
-#project-outloud .caption[data-active-caption="10"] .caption-10, #project-stories .caption[data-active-caption="10"] .caption-10, #project-oughtness .caption[data-active-caption="10"] .caption-10, #project-schelling .caption[data-active-caption="10"] .caption-10, #project-mirror .caption[data-active-caption="10"] .caption-10, #project-vista .caption[data-active-caption="10"] .caption-10, #project-wwit .caption[data-active-caption="10"] .caption-10, #project-diffusion .caption[data-active-caption="10"] .caption-10 {
+#project-outloud .caption[data-active-caption="10"] .caption-10, #project-stories .caption[data-active-caption="10"] .caption-10, #project-oughtness .caption[data-active-caption="10"] .caption-10, #project-schelling .caption[data-active-caption="10"] .caption-10, #project-mirror .caption[data-active-caption="10"] .caption-10, #project-vista .caption[data-active-caption="10"] .caption-10, #project-wwit .caption[data-active-caption="10"] .caption-10, #project-electome .caption[data-active-caption="10"] .caption-10, #project-diffusion .caption[data-active-caption="10"] .caption-10 {
   opacity: 1;
 }
-#project-outloud .caption[data-active-caption="10"] .loading, #project-stories .caption[data-active-caption="10"] .loading, #project-oughtness .caption[data-active-caption="10"] .loading, #project-schelling .caption[data-active-caption="10"] .loading, #project-mirror .caption[data-active-caption="10"] .loading, #project-vista .caption[data-active-caption="10"] .loading, #project-wwit .caption[data-active-caption="10"] .loading, #project-diffusion .caption[data-active-caption="10"] .loading {
+#project-outloud .caption[data-active-caption="10"] .loading, #project-stories .caption[data-active-caption="10"] .loading, #project-oughtness .caption[data-active-caption="10"] .loading, #project-schelling .caption[data-active-caption="10"] .loading, #project-mirror .caption[data-active-caption="10"] .loading, #project-vista .caption[data-active-caption="10"] .loading, #project-wwit .caption[data-active-caption="10"] .loading, #project-electome .caption[data-active-caption="10"] .loading, #project-diffusion .caption[data-active-caption="10"] .loading {
   opacity: 0;
 }
 
@@ -6008,10 +6008,10 @@
   display: none !important;
 }
 #project-vista .contents {
-  padding-top: 54.6%;
+  padding-top: 56%;
 }
-#project-vista .quote {
-  margin-bottom: 3rem;
+#project-vista .cta-main {
+  margin-top: 20px;
 }
 #project-vista .caption {
   display: none;
@@ -6214,6 +6214,34 @@ nav .explanation {
   display: none;
 }
 
+#project-electome .contents {
+  padding-top: 56%;
+}
+#project-electome .cta-main {
+  margin-top: 40px;
+}
+#project-electome .project-contents {
+  margin-top: 50px;
+}
+#project-electome .iframe_wrapper {
+  width: 60%;
+  min-width: 600px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 34.5%;
+}
+#project-electome .iframe_wrapper iframe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+#project-electome .caption {
+  display: none;
+}
+
 #project-diffusion .caption {
   display: none;
 }
@@ -6311,14 +6339,14 @@ html {
   }
 }
 
-.body-medium-text, #project-outloud .caption, #project-stories .caption, #project-oughtness .caption, #project-schelling .caption, #project-mirror .caption, #project-vista .caption, #project-wwit .caption, #project-diffusion .caption, nav li a .description, .project .description, .project .header .blurb,
+.body-medium-text, #project-outloud .caption, #project-stories .caption, #project-oughtness .caption, #project-schelling .caption, #project-mirror .caption, #project-vista .caption, #project-wwit .caption, #project-electome .caption, #project-diffusion .caption, nav li a .description, .project .description, .project .header .blurb,
 #homepage .header .blurb {
   font-family: Merriweather;
   font-size: 0.9375em;
   line-height: 1.5em;
 }
 @media (max-width: 640px) {
-  .body-medium-text, #project-outloud .caption, #project-stories .caption, #project-oughtness .caption, #project-schelling .caption, #project-mirror .caption, #project-vista .caption, #project-wwit .caption, #project-diffusion .caption, nav li a .description, .project .description, .project .header .blurb,
+  .body-medium-text, #project-outloud .caption, #project-stories .caption, #project-oughtness .caption, #project-schelling .caption, #project-mirror .caption, #project-vista .caption, #project-wwit .caption, #project-electome .caption, #project-diffusion .caption, nav li a .description, .project .description, .project .header .blurb,
   #homepage .header .blurb {
     font-size: 0.8125em;
     line-height: 1.53846em;

@@ -1,0 +1,30 @@
+#project-electome {
+  @extend %video-project-page;
+  .contents {
+    padding-top: 56%;
+  }
+  .cta-main {
+    margin-top: 40px;
+  }
+  .project-contents {
+    margin-top: 50px;
+  }
+  .iframe_wrapper {
+    width: 60%;
+    min-width: 600px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 34.5%;
+    iframe {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .caption {
+    display: none;
+  }
+}

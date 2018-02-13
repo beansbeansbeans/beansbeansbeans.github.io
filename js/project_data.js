@@ -13,6 +13,10 @@ define([], function() {
       description: "Experiments with cellular automata."
     },
     {
+      title: "electome",
+      description: "Visualizing election-related conversation."
+    },
+    {
       title: "mirror",
       description: "Exploring social media echo chambers."
     },
