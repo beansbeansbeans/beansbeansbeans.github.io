@@ -8,7 +8,7 @@ define(['templates/project_detail', 'project_data'], function(projectTemplate, p
         blurb: "Visualizing retweet chains of Change.org petitions.",
         projectContents: '<a href="http://web.media.mit.edu/~annyuan/" target="_blank" class="chrome"><div class="chrome-controls"><div class="close"></div><div class="min"></div><div class="max"></div></div><div class="contents"><video src="/video/retweets.mp4"></video></div></a>',
         caption: "",
-        description: "<a class='cta-main' href='http://web.media.mit.edu/~annyuan/' target='_blank'>View project</a><p></p><br/><div class='section-header'>Technology</div><p>WebGL.</p>"
+        description: "<a class='cta-main' href='http://web.media.mit.edu/~annyuan/' target='_blank'>View project</a><p>This visualization shows retweet activity involving certain <a href='https://www.change.org/' target='_blank'>Change.org</a> petitions. To create this visualization we first obtained a network of politically active users on Twitter and colored then red or blue depending on their inferred political ideology. We drew links between nodes if one follows the other. Then we gathered data on retweet activity involving Change.org petitions within this network. By clicking on the petition names in the left-hand sidebar, one can watch how news of different petitions propagates through the network.</p><br/><div class='section-header'>Technology</div><p>WebGL.</p>"
       };
 
       var indexOfProject = -1;
