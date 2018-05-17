@@ -104,6 +104,12 @@ require(['jquery', 'router', 'loader'], function($, Router, Loader) {
         });
     });
 
+    router.registerRoute('clips', function() {
+        require(["clips"], function(clips) {
+            initialize(clips);
+        });
+    });
+
     router.registerRoute('', function() {
         require(["home"], function(home) {
             initialize(home);

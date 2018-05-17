@@ -6332,6 +6332,17 @@ nav .explanation {
   margin-right: 1rem;
 }
 
+#clips_sig {
+  font-size: 36px;
+  margin-top: 50px;
+  font-weight: bold;
+}
+
+#clips .clip_label {
+  font-size: 22px;
+  margin: 50px 0 30px 0px;
+}
+
 html {
   font-size: 100%;
   line-height: 0.3125em;
